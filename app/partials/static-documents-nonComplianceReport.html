@@ -1,0 +1,114 @@
+<div class="row-fluid">
+	<div class="span12 header bg-nonCompliantReport bg-generic">
+		<h1 class="borders">Non-compliance report</h1>
+	</div>
+</div>
+
+<div class="row-fluid borders border-top">
+    <div class="span3">
+    	<div class="row-fluid">
+    		<div class="filet">
+    			<h6>order reference</h6>
+    			<h2><span class="label label-order">{{doc.related.order.reference}}</span> <a class="btn" ng-href="#/detail/order/{{doc.related.order.id}}" alt="Order details"><i class="fa fa-external-link"></i></a></h2>
+    		</div>
+    	</div>
+    	<div class="row-fluid border-top">
+    		<div class="filet">
+    			<h6>shipment reference</h6>
+    			<h2><span class="label label-shipment">{{doc.related.shipment.reference}}</span> <a class="btn" ng-href="#/detail/shipment/{{doc.related.shipment.id}}" alt="Shipment details"><i class="fa fa-external-link"></i></a></h2>
+    		</div>
+    	</div>
+    </div>
+	<div class="span3">
+		<div class="row-fluid">
+			<div class="filet">
+				<h6>location</h6>
+				<h2 class="type-bold">{{doc.location}}</h2>
+			</div>
+		</div>
+		<div class="row-fluid border-top">
+			<div class="filet">
+				<h6>user</h6>
+				<h2 class="type-bold">{{doc.user}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="span3">
+		<div class="row-fluid">
+			<div class="filet">
+				<h6>created</h6>
+				<h2 class="type-bold">{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+			</div>
+		</div>
+		<div class="row-fluid border-top">
+			<div class="filet">
+				<h6>modified</h6>
+				<h2 class="type-bold">{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+			</div>
+		</div>
+	</div>
+	<div class="span3">
+	    <div class="row-fluid">
+	    	<div class="filet">
+	    		<h6>status</h6>
+	    		<h2 class="type-bold"><i class="fa fa-circle" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]"></i></h2>
+	    	</div>
+	    </div>
+		<div class="row-fluid border-top">
+			<div class="filet">
+				<h6>cause</h6>
+				<h2 class="type-bold">{{doc.cause}}</h2>
+			</div>
+		</div>
+	</div>		
+</div>
+
+<div class="row-fluid borders border-top">
+	<div class="span12">
+		<h3>document</h3>
+		<table class="table table-condensed">
+			<thead>
+			<tr>
+				<th>type </th><th>name</th><th>info</th><th></th>
+			</tr>
+			</thead>
+			<tr>
+				<td><i class="lead fa fa-file"></i>&nbsp;&nbsp;<small>{{doc.document.type}}</small></td>
+				<td><strong>{{doc.document.name}}</strong></td>
+				<td><span class="label">{{doc.document.info}}</span></td>
+				<td><a ng-href="{{doc.document.url}}" class='btn btn-small' target="_blank">Download</a></td>
+			</tr>
+		</table>			
+	</div>
+</div>
+
+<div class="row-fluid borders border-top">
+	<div class="span12">
+		<h3>Non-compliant element</h3>
+		<div class="row-fluid group-elements">
+		    <div class="span6 element">
+		    	<h6>reference</h6>
+		    	<h2><span class="label" ng-class="{shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.element.type]">{{doc.element.reference}}</span> <a class="btn" ng-href="#/detail/{{doc.element.type}}/{{doc.element.id}}" alt="Item details"><i class="fa fa-external-link"></i></a></h2>
+		    	<h6>description</h6>
+		    	<p>{{doc.element.description}}</p>
+		    	<h6>photo</h6>
+		    	<div><img ng-src="{{doc.element.image.url}}" alt="{{doc.element.image.name}}" /></div>
+		    </div>
+		    <div class="span6">
+		        <table class="table table-condensed">
+		        	<thead>
+		        	<tr>
+		        		<th> </th><th>date</th><th>comment</th><th></th>
+		        	</tr>
+		        	</thead>
+		        	<tr ng-repeat="comment in doc.comments">
+		        		<td><i class="fa fa-circle" ng-class="{late:'important', open:'warning', closed:'success'}[comment.status]"></i></td>
+		        		<td nowrap>{{comment.date * 1000 | date:'dd.MM.yy, HH:mm'}}</td>
+		        		<td>{{comment.message}}</td>
+		        	</tr>
+		        </table>
+		        <span ng-hide="doc.status=='closed'"><a class='btn' target="_blank" ng-click="open(doc, 'open')">Add a comment</a> <a class='btn' target="_blank" ng-click="open(doc, 'closed')">Close report</a></span>
+		    </div>
+		</div>			
+	</div>
+</div>

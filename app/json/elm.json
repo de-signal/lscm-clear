@@ -1,0 +1,604 @@
+{
+    "type": "order",
+    "id": 12,
+    "reference": "0101010109292",
+	"_comment 0" : "bloc info depend on element type. demo with order.info. display only one infos bloc.",
+	"_comment 1" : "rename 'infos' if element.type == order",
+    "infos": [ 
+    	{ "vendor": "HYUNDAI HEAVY INDUSTRIES CO.,LTD." },
+    	{ "country": "South Korea" },
+    	{ "incoterm": "EXW" },
+    	{ "supplier address": "BEESTON, LEEDS, UK" } 
+    ],
+    "_comment 2": "rename 'infos' if element.type == shipment",
+    "_infos shipment": [ 
+    	{ "client reference": "12345678" },
+    	{ "transport mode": "air" },
+    	{ "collection_address": "50, sesam street, Houston USA" },
+    	{ "contact_name": "John Doe" }, 
+    	{ "contact_email": "john.doe@email.com" }, 
+    	{ "contact_phone": "+441234567890" }
+    ],
+    "_comment 3": "rename 'infos' if element.type == box",
+    "_infos box": [ 
+    	{ "dimensions": "10 x 25 x 32 cm" },
+    	{ "weight": "50 Kg" }
+    ],
+    "_comment 4": "rename 'infos' if element.type == item",
+    "_infos item": [ 
+    	{ "PO item": 5 },
+    	{ "material": "169858" },
+    	{ "description": "ACCELEROMETER, 10.2 MV/M/S2" },
+    	{ "supplier": "BENTLY NEVADA" }, 
+    	{ "supplier material": "455825LMP" }
+    ], 
+    "tracking": true,
+    "milestone": "Departed",
+    "delay": -5,
+    "charts": { 
+    	"daily_production_value": {
+			"name": "daily production value", 
+			"value": 66 
+		},
+        "production_completion": { 
+    		"name": "production completion", 
+    		"value": 32 
+    	},
+    	"production_ratio": { 
+			"name": "production ratio", 
+			"value": 90 
+		}
+    },
+    "status": "upcoming",
+    "required": [
+        {
+            "id": 1234,
+            "type": "upload",
+            "name": "document name",
+            "value": "5256869855",
+            "message": "Waiting for upload",
+            "editable": true,
+            "completed": true
+        },
+        {
+            "id": 5664,
+            "type": "checkbox",
+            "name": "draft pick up request",
+            "value": true,
+            "message": "Validated",
+            "editable": true,
+            "completed": false
+        },
+        {
+            "id": 7854,
+            "type": "date",
+            "name": "date request",
+            "value": 1375907474,
+            "message": "Select date",
+            "editable": true,
+            "completed": true
+        },
+        {
+            "id": 1234,
+            "type": "date",
+            "name": "date 2",
+            "message": "Select date",
+            "editable": true,
+            "completed": true
+        },
+        {
+            "id": 4234,
+            "type": "text",
+            "name": "input request name",
+            "value": "text blah",
+            "message": "Fill the field",
+            "editable": true,
+            "completed": false
+        },
+        {
+            "id": 4634,
+            "type": "text",
+            "name": "input request 2",
+            "value": "text blah 2",
+            "message": "Fill the field",
+            "editable": false,
+            "completed": false
+        },
+        {
+            "id": 1234,
+            "type": "email",
+            "name": "validation request",
+            "value": "name@domain.com",
+            "message": "Waiting for response",
+            "editable": true,
+            "completed": true
+        },
+        {
+            "id": 1234,
+            "type": "link",
+            "name": "Items Update",
+            "value": "order",
+            "message": "125 items to update",
+            "editable": true,
+            "completed": true
+        }
+    ],
+    "milestones": [
+        {
+            "name": "Customs Released",
+            "step": "future",
+            "statuses": [
+                [
+                    "intial",
+                    1371984183,
+                    "default"
+                ],
+                [
+                    "forecasted",
+                    1372243383,
+                    "default"
+                ],
+                [
+                    "revised",
+                    1372502583,
+                    "late"
+                ],
+                [
+                    "actual",
+                    null,
+                    "none"
+                ]
+            ]
+        },
+        {
+            "name": "Arrived",
+            "step": "next",
+            "statuses": [
+                [
+                    "intial",
+                    1371811383,
+                    "default"
+                ],
+                [
+                    "forecasted",
+                    1371811383,
+                    "default"
+                ],
+                [
+                    "revised",
+                    1372329783,
+                    "late"
+                ],
+                [
+                    "actual",
+                    null,
+                    "none"
+                ]
+            ]
+        },
+        {
+            "name": "Departed",
+            "step": "current",
+            "statuses": [
+                [
+                    "intial",
+                    1371638583,
+                    "default"
+                ],
+                [
+                    "forecasted",
+                    1371638583,
+                    "default"
+                ],
+                [
+                    "revised",
+                    1372070583,
+                    "late"
+                ],
+                [
+                    "actual",
+                    1372070583,
+                    "late"
+                ]
+            ]
+        },
+        {
+            "name": "Marshalled",
+            "step": "previous",
+            "statuses": [
+                [
+                    "intial",
+                    1371465783,
+                    "default"
+                ],
+                [
+                    "forecasted",
+                    1371552183,
+                    "default"
+                ],
+                [
+                    "revised",
+                    1371552183,
+                    "processing"
+                ],
+                [
+                    "actual",
+                    1371552183,
+                    "processing"
+                ]
+            ]
+        },
+        {
+            "name": "Ready for green light",
+            "step": "past",
+            "statuses": [
+                [
+                    "intial",
+                    1371292983,
+                    "default"
+                ],
+                [
+                    "forecasted",
+                    1371292983,
+                    "default"
+                ],
+                [
+                    "revised",
+                    1371292983,
+                    "processing"
+                ],
+                [
+                    "actual",
+                    1371292983,
+                    "processing"
+                ]
+            ]
+        }
+    ],
+    "properties": [
+        {
+            "name": "Scope and delay",
+            "id": "group_1",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus auctor fringilla."
+                },
+                {
+                    "type": "text",
+                    "name": "control stamp",
+                    "value": "started",
+                    "editable": true,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                },
+                {
+                    "type": "date",
+                    "name": "Date",
+                    "value": 1371292983,
+                    "editable": true,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                },
+                {
+                    "type": "date",
+                    "name": "test",
+                    "value": null,
+                    "editable": false,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                },
+                {
+                    "type": "select",
+                    "name": "type service",
+                    "value": 2,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true,
+                    "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
+                }
+            ]
+        },
+        {
+            "name": "Location",
+            "id": "group_2",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Quality assurance / Quality control",
+            "id": "group_3",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Shipping",
+            "id": "group_4",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Transport",
+            "id": "group_5",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Repacking",
+            "id": "group_6",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Catalogue",
+            "id": "group_7",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Procurement",
+            "id": "group_8",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        }
+    ],
+    "related": [
+        {
+            "name": "orders",
+            "type": "order",
+            "quantity": 2
+        },
+        {
+            "name": "shipments",
+            "type": "shipment",
+            "quantity": 5
+        },
+        {
+            "name": "items",
+            "type": "item",
+            "quantity": 320
+        }
+    ],
+    "documents": [
+        {
+            "name": "proof of delivery",
+            "type": "pdf",
+            "url": "/app/docs/pod.pdf",
+            "info": "Donec ullamcorper nulla non"
+        },
+        {
+            "name": "an excell document",
+            "type": "xls",
+            "url": "/app/docs/test.xls",
+            "info": "Aenean lacinia bibendum"
+        }
+    ]
+}

@@ -1,0 +1,1170 @@
+[
+	{
+		"step": 1,
+		"name": "Add order",
+		"location": "Location n/a",
+		"location_id": "na",
+		"interactions": [
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Client",
+					"type": "backoffice"
+				},
+				"name": "Send an email",
+				"conditions": [
+					{
+						"name": "BW.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"order": {
+				"conditions": [
+					{
+						"name": "BW.xls",
+						"type": "upload",
+						"guideline": {
+							"name": "How to upload a \"BW.xls\" file?",
+							"url": "guidelines/backoffice#vpl-draft-download"
+						},
+						"description": "Click on Add order to upload the file."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 1.1,
+		"name": "Consolidation",
+		"location": "Location n/a", 
+		"location_id": "na",
+		"description": "Request the client to dispatch items which parts quantity is greater than 30.",
+		"downloads": {
+			"order": {
+				"documents": [
+					{
+						"name": "Consolidation.xls",
+						"type": "upload",
+						"description": "This file contains all items which parts quantity is greater than 30.",
+						"guideline": {
+							"name": "How to download the \"Consolidation.xls\" file?",
+							"url": "consolidation-file-download"
+						}
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Consolidation.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Client",
+					"type": "backoffice",
+					"id": "client"
+				},
+				"name": "Fill in the file and send email",
+				"conditions": [
+					{
+						"name": "Consolidation.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"order": {
+				"conditions": [
+					{
+						"name": "Consolidation.xls",
+						"type": "upload",
+						"guideline": {
+							"name": "How to upload the \"Consolidation.xls\" file?",
+							"url": "consolidation-file-upload", 
+							"description": "Upload the file"
+						}
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 2,
+		"name": "Order placed",
+		"location": "Location n/a",
+		"location_id": "na",
+		"processing": {
+			"order": {
+				"parent": true,
+				"milestone": {
+					"name": "Placed",
+					"description": "Order created when uploading BW.xls."
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Ordered",
+					"description": "All items from the BW are created."
+				}
+			}
+		},
+		"downloads": {
+			"order": {
+				"documents": [
+					{
+						"name": "Stickers.pdf",
+						"description": "A single file containing informations for every items: QR code, description, material number, quantity and supplier name. Ready to be printed on stickers.",
+						"type": "upload"
+					},
+					{
+						"name": "VPL-draft.xls",
+						"description": "Vendor Packing List containing all items.",
+						"type": "upload"
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice",
+					"id": "lscm"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Vendor-instructions.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "VPL-draft.xls",
+						"type": "upload"
+					}
+				]
+			}, 
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice",
+					"id": "lscm"
+				},
+				"name": "Send by mail",
+				"conditions": [
+					{
+						"name": "Printed vendor instructions",
+						"type": "upload"
+					},
+					{
+						"name": "Printed stickers",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Vendor",
+					"type": "backoffice"
+				},
+				"name": "Fill in the file and send email",
+				"conditions": [
+					{
+						"name": "VPL-draft.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice",
+					"id": "lscm"
+				}
+			}
+		],
+		"updates": {
+			"order": {
+				"conditions": [
+					{
+						"name": "VPL-draft.xls",
+						"type": "upload",
+						"description": "Upload file." 
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 3,
+		"name": "Order in preparation",
+		"location": "At the vendor",
+		"location_id": "vendor",
+		"description": "Automatic milestone update one day after order was placed.",
+		"processing": {
+			"order": {
+				"milestone": {
+					"name": "In preparation"
+				}
+			}
+		}
+	},
+	{
+		"step": 4,
+		"name": "Order completed",
+		"location": "At the vendor",
+		"location_id": "vendor",
+		"processing": {
+			"order": {
+				"milestone": {
+					"name": "Order completed",
+					"description": "After every item's milestone is updated to manufactured."
+				}
+			},
+			"shipment": {
+				"milestone": {
+					"name": "Planned",
+					"description": "Shipment created by VPL-draft.xls upload."
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "In construction",
+					"description": "Box created by VPL-draft.xls upload."
+				}
+			}, 
+			"item": {
+				"parent": true,
+				"milestone": {
+					"name": "Manufactured",
+					"description": "Milestone updated by VPL-draft.xls upload."
+				}
+			}
+		},
+		"downloads": {
+			"shipment": {
+				"documents": [
+					{
+						"name": "RFC-draft.xls",
+						"type": "upload"
+					}, 
+					{
+						"name": "Quotation.pdf",
+						"type": "upload"
+					}
+				]
+			}, 
+			"box": {
+				"documents": [
+					{
+						"name": "Shipping-marks.pdf",
+						"type": "upload"
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"name": "Send email",
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"conditions": [
+					{
+						"name": "Shipping-marks.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "RFC-draft.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Vendor",
+					"type": "backoffice"
+				},
+				"name": "Fill in the file and send email",
+				"conditions": [
+					{
+						"name": "RFC-draft.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"name": "Send email",
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"conditions": [
+					{
+						"name": "Quotation.pdf",
+						"type": "upload"
+					}
+				]
+			}, 
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Client",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "PO service"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "RFC-draft.xls",
+						"type": "upload", 
+						"description": "Upload file."
+					}, 
+					{
+						"name": "PO service",
+						"type": "text",
+						"description": "Fill in the input."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 5,
+		"name": "Box ready for collection",
+		"location": "At the vendor",
+		"location_id": "vendor",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Forcasted in"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Ready for collection"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "Ready for collection"
+				}
+			}
+		},
+		"downloads": {
+			"shipment": {
+				"documents": [
+					{
+						"name": "RFC-freight-forwarder.xls",
+						"type": "upload"
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "RFC-freight-forwarder.xls",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "3PL",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Booking date"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "Booking date",
+						"type": "date"
+					}, 
+					{
+						"name": "ETA",
+						"type": "date"
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 6,
+		"name": "Shipment booked in",
+		"location": "At the vendor",
+		"location_id": "vendor",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Booked in"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "ext",
+				"origin": {
+					"company": "3PL",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "Vendor",
+						"type": "checkbox",
+						"description": "From mobile app: scan shipping marks and confirm."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 7,
+		"name": "Shipment collected",
+		"location": "Transport to the hub",
+		"location_id": "tohub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Collected"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Collected"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "Collected"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "At the hub",
+						"type": "checkbox",
+						"description": "From mobile app: scan shipping marks and confirm."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 8,
+		"name": "Shipment received",
+		"location": "At the hub",
+		"location_id": "hub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Received"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Received"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "Received"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "Storage cell",
+						"type": "text",
+						"description": "From mobile app: scan shipping marks and fill in the cell ID."
+					}, 
+					{
+						"name": "OSD",
+						"type": "checkbox",
+						"description": "From mobile app: scan shipping marks and check if OSD."
+					}, 
+					{
+						"name": "Inspection required",
+						"type": "checkbox",
+						"description": "From mobile app: scan shipping marks and check if inspection is required (default to yes)."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 8.1,
+		"name": "Box OSD",
+		"location": "At the hub", 
+		"location_id": "hub",
+		"description": "If \"OSD\" box property is true.",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Dispatched"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "OSD"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "OSD"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "Storage cell",
+						"type": "text",
+						"description": "From mobile app: scan shipping mark and fill in the cell ID."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 8.2,
+		"name": "Box ready for inspection",
+		"description": "If \"Inspection required\" box property is true.",
+		"location": "At the hub",
+		"location_id": "hub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Programmed"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Ready for inspection"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "Ready for inspection"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "int",
+				"origin": {
+					"company": "Inspector",
+					"type": "inspector"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "Inspection report",
+						"type": "text",
+						"description": "From mobile app: scan shipping marks and make an inspection report."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 9,
+		"name": "Ready for green light",
+		"location": "At the hub",
+		"location_id": "hub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Forecasted out"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Ready for green light"
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Ready for green light"
+				},
+				"parent": true
+			}
+		}, 
+		"downloads": {
+			"shipment": {
+				"documents": [
+					{
+						"name": "Packing List.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Commercial-invoice.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Form-C16.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "CCVO.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Draft-MAWB-BL.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Export-kit.zip",
+						"type": "upload"
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"name": "Send email and request for green light",
+				"conditions": [
+					{
+						"name": "Export-kit.zip",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "Client",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "MF"
+					},
+					{
+						"name": "BA"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "MF",
+						"type": "text", 
+						"description": "fill in the input."
+					},
+					{
+						"name": "BA",
+						"type": "text", 
+						"description": "fill in the input."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 10,
+		"name": "Green light approved",
+		"location": "At the hub",
+		"location_id": "hub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Green light approved"
+				},
+				"parent": true
+			},
+			"box": {
+				"milestone": {
+					"name": "Marshalled"
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Marshalled"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Request for quotation"
+					}
+				]
+			},
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "3PL",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Quotation"
+					}, 
+					{
+						"name": "Booking date"
+					}
+				]
+			},
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "Booking date",
+						"type": "date"
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 11,
+		"name": "Pre-alert",
+		"location": "At the hub",
+		"location_id": "hub", 
+		"downloads": {
+			"shipment": {
+				"documents": [
+					{
+						"name": "Packing List.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Commercial-invoice.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Form-C16.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "CCVO.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Draft-MAWB-BL.pdf",
+						"type": "upload"
+					},
+					{
+						"name": "Export-kit.zip",
+						"type": "upload"
+					}
+				]
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				},
+				"name": "Send email",
+				"conditions": [
+					{
+						"name": "Export-kit.zip",
+						"type": "upload"
+					}
+				]
+			},
+			{
+				"type": "ext",
+				"origin": {
+					"company": "3PL",
+					"type": "backoffice"
+				}
+			}
+		]
+	},
+	{
+		"step": 12,
+		"name": "Shipment booked out",
+		"location": "At the hub",
+		"location_id": "hub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Booked out"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"box": {
+				"conditions": [
+					{
+						"name": "ATD",
+						"type": "date", 
+						"description": "From mobile app: scan shipping mark and confirm date."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 13,
+		"name": "Shipment departed",
+		"location": "Transport from the hub",
+		"location_id": "fromhub",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Departed"
+				}
+			},
+			"box": {
+				"milestone": {
+					"name": "Departed"
+				},
+				"parent": true
+			},
+			"item": {
+				"milestone": {
+					"name": "Departed"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "ext_to",
+				"origin": {
+					"company": "3PL",
+					"type": "backoffice"
+				},
+				"name": "Send an email",
+				"conditions": [
+					{
+						"name": "ATA"
+					}
+				]
+			}, 
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "ATA",
+						"type": "date"
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 14,
+		"name": "Shipment arrived",
+		"location": "At the port / airport",
+		"location_id": "port",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Arrived"
+				},
+				"parent": true
+			},
+			"box": {
+				"milestone": {
+					"name": "Arrived"
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Arrived"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"origin": {
+					"company": "LSCM",
+					"type": "backoffice"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "Custom released",
+						"type": "checkbox"
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 15,
+		"name": "Shipment custom released",
+		"location": "Transport to the client",
+		"location_id": "toclient",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Custom released"
+				},
+				"parent": true
+			},
+			"box": {
+				"milestone": {
+					"name": "Custom released"
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Custom released"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "int_to",
+				"origin": {
+					"company": "LSCM",
+					"type": "operator"
+				},
+				"name": "Proof of delivery"
+			},
+			{
+				"type": "ext",
+				"origin": {
+					"company": "Client",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"shipment": {
+				"conditions": [
+					{
+						"name": "Proof of delivery",
+						"type": "text", 
+						"description": "From mobile app: scan waybill and sign."
+					}
+				]
+			}
+		}
+	},
+	{
+		"step": 16,
+		"name": "Shipment delivered",
+		"location": "At the client",
+		"location_id": "client",
+		"processing": {
+			"shipment": {
+				"milestone": {
+					"name": "Delivered"
+				},
+				"documents": [
+					{
+						"name": "Proof of delivery",
+						"type": "upload"
+					}
+				],
+				"parent": true
+			},
+			"box": {
+				"milestone": {
+					"name": "Delivered"
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "Delivered"
+				}
+			}
+		},
+		"interactions": [
+			{
+				"type": "ext",
+				"origin": {
+					"company": "Client",
+					"type": "operator"
+				}
+			}
+		],
+		"updates": {
+			"item": {
+				"conditions": [
+					{
+						"name": "In stock",
+						"type": "checkbox", 
+						"description": "From mobile app: scan item's sticker and confirm."
+					}
+				]
+			}
+		}
+	}, 
+	{
+		"step": 17, 
+		"name": "Order closed", 
+		"location": "At the client",
+		"location_id": "client",
+		"processing": {
+			"order": {
+				"milestone": {
+					"name": "Closed", 
+					"description": "Milestone updated when every items are In stock."
+				}
+			},
+			"item": {
+				"milestone": {
+					"name": "In stock"
+				},
+				"parent": true
+			}
+		}
+	}
+]

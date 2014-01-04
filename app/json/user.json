@@ -1,0 +1,40 @@
+[{
+	"name": "Robert",
+	"first_name": "Henri",
+	"preferences": {	
+		"search": [
+			{	"name": "type", 
+				"filters": [
+					{ "name": "order", "value": true }, 
+					{ "name": "shipment", "value": true }, 
+					{ "name": "box", "value": true }, 
+					{ "name": "item", "value": true }
+				]
+			}, 
+			{	"name": "status", 
+				"filters": [
+					{ "name": "late", "value": true }, 
+					{ "name": "upcoming", "value": true }, 
+					{ "name": "processing", "value": false }
+				]
+			}, 
+			{	"name": "tracking", 
+				"filters": [
+					{ "name": "tracked", "value": true }, 
+					{ "name": "untracked", "value": false }
+				]
+			}
+		], 
+		"tracking": [
+			{	"name": "type", 
+				"filters": [
+					{ "name": "order", "value": true }, 
+					{ "name": "shipment", "value": true }, 
+					{ "name": "box", "value": true }, 
+					{ "name": "item", "value": true }
+				]
+			}
+		], 
+		"details": "test"
+	}
+}]

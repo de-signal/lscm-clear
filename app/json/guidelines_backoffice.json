@@ -1,0 +1,132 @@
+{ 
+	"title": "Instructions for the backoffice operator", 
+	"instructions": [
+		{
+			"name": "How to upload a BW ?",
+			"id": "BW-upload",
+			"description": "To ulpoad a BW file, follow these steps.", 
+			"steps": [
+				{
+					"description": "Click the 'Add order' button.", 
+					"img": "backoffice-bw-upload-01.jpg"
+				}, 
+				{
+					"description": "On the \"Add Order\" page, click the \"Choose file\" button.", 
+					"img": "backoffice-bw-upload-02.jpg"
+				}, 
+				{
+					"description": "Select a file on your computer and click \"Open\".", 
+					"img": "backoffice-bw-upload-03.jpg"
+				},
+				{
+					"description": "Click the \"Send\" button and wait for the upload to process (up to 1 minute).", 
+					"img": "backoffice-bw-upload-04.jpg"
+				}, 
+				{
+					"description": "When the file is processed, you are redirected on the newly created order", 
+					"img": "backoffice-bw-upload-05.jpg"
+				}
+			]
+		}, 
+		{
+			"name": "How to download the consolidation.xls file ?",
+			"id": "consolidation-download",
+			"description": " ", 
+			"steps": [
+				{
+					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu.", 
+					"img": ""
+				}, 
+				{
+					"description": "Check that the current order milestone is <i>Placed</i>", 
+					"img": ""
+				}, 
+				{
+					"description": "In the <i>Documents</i> section of the page, find <i>consolidation.xls</i> and click on the <i>download</i> button on the same line. ", 
+					"img": ""
+				},
+				{
+					"description": "In the <i>Documents</i> section of the page, find <i>consolidation.xls</i> and click on the <i>download</i> button on the same line. ", 
+					"img": ""
+				}
+			]
+		}, 
+		{
+			"name": "How to upload the consolidation file ?",
+			"id": "consolidation-upload",
+			"description": " ", 
+			"steps": [
+				{
+					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu.", 
+					"img": ""
+				}, 
+				{
+					"description": "Check that the current order milestone is <i>Placed</i>", 
+					"img": ""
+				}, 
+				{
+					"description": "In the <i>conditions</i> section of the page, find <i>Consolidation</i> and click on the <i>update</i> button on the same line. ", 
+					"img": ""
+				},
+				{
+					"description": "A modal window pops up. ", 
+					"img": ""
+				},
+				{
+					"description": "Click on the 'Choose file' button and then select a file on your computer. ", 
+					"img": ""
+				},
+				{
+					"description": "Click on the 'Upload' button", 
+					"img": ""
+				},
+				{
+					"description": "Click on the 'Save' button to complete.", 
+					"img": ""
+				}
+			]
+		}, 
+		{
+			"name": "How to download the stickers ?",
+			"id": "stickers-download",
+			"description": " ", 
+			"steps": [
+				{
+					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu. ", 
+					"img": ""
+				}, 
+				{
+					"description": "Check that the current order milestone is <i>Placed</i>", 
+					"img": ""
+				},
+				{
+					"description": "Check that the current order milestone is <i>Placed</i>", 
+					"img": ""
+				},
+				{
+					"description": "In the <i>Documents</i> section of the page, find <i>Stickers.pdf</i> and click on the <i>download</i> button on the same line. ", 
+					"img": ""
+				}
+			]
+		}, 
+		{
+			"name": "How to download the VPL draft ?",
+			"id": "vpl-draft-download",
+			"description": " ", 
+			"steps": [
+				{
+					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu. ", 
+					"img": ""
+				}, 
+				{
+					"description": "Check that the current order milestone is <i>Placed</i>", 
+					"img": ""
+				},
+				{
+					"description": "In the <i>Documents</i> section of the page, find <i>VPL_draft.xls</i> and click on the <i>download</i> button on the same line. ", 
+					"img": ""
+				}
+			]
+		}
+	]	
+}

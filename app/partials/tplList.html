@@ -1,0 +1,28 @@
+<table class="table table-condensed" ng-show="elementsCount">
+	<thead>
+		<tr>
+			<th class="span3">reference</th><th class="span3">milestone</th><th class="span1">status</th><th ng-class="trackingShow ? 'span4' : 'span5'">required</th><th class="span1" ng-show="trackingShow">tracking</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr  ng-repeat="elm in list" ng-click="go(elm.type, elm.id)" class="pointer over">
+			<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
+			<td><small>{{elm.milestone}}</small></td>
+			<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
+			<td><ul class="inline">
+			<li ng-repeat="required in elm.required">
+			<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="fa" required-icon tooltip="{{required.name}}"></i></span></span>
+			</li>
+			</ul></td>
+			<td ng-show="trackingShow"><i class="pointer fa" ng-class="{true:'fa\-star', false:'fa\-star\-o'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
+		</tr>
+	</tbody>
+	<tfoot ng-show="pagesCount>1">
+		<tr>
+			<td colspan="{{trackingShow ? '5' : '4'}}">
+			<pagination total-items="elementsCount" page="currentPage" max-size="10" items-per-page="itemsPerPage" boundary-links="true" direction-links="false" on-select-page="loadPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+		</tr>
+	</tfoot>
+</table>
+
+<p ng-show="noResults">No results.</p>

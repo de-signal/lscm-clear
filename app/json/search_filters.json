@@ -1,0 +1,53 @@
+{	
+	"types": ["order", "shipment", "box",  "item" ], 
+	"plannings": [ "intial", "forecasted", "revised", "actual" ], 
+	"statuses": [ "default", "late", "upcoming"],
+	"milestones": {
+		"order": [ "planned o", "forecasted in o", "booked in", "collected", "received", "dispatched" ], 
+		"shipment": [ "planned sh", "forecasted in sh", "booked in sh", "collected sh", "received sh", "dispatched sh" ], 
+		"box": [ "planned b", "forecasted in b", "booked in b", "collected b", "received b", "dispatched b" ], 
+		"item": [ "planned i", "forecasted in i", "booked in i", "collected i", "received i", "dispatched i" ]
+	}, 
+	"properties": {
+		"order": [ 
+			{ "type": "text", "name": "control time stamp", "group": "group 1" }, 
+			{ "type": "checkbox", "name": "associated", "group": "group 1"   },
+			{ "type": "date", "name": "Date", "group": "group 1"   },
+			{ "type": "select", "name": "type service", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 1"  }, 
+			{ "type": "text", "name": "control time stampo", "group": "group 2"  }, 
+			{ "type": "checkbox", "name": "associatedo", "group": "group 2"   },
+			{ "type": "date", "name": "Dateo", "group": "group 2"   },
+			{ "type": "select", "name": "type serviceo", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 2" } 	
+		], 
+		"shipment": [ 
+			{ "type": "text", "name": "control time stamp", "group": "group 1" }, 
+			{ "type": "checkbox", "name": "associated", "group": "group 1"   },
+			{ "type": "date", "name": "Date", "group": "group 1"   },
+			{ "type": "select", "name": "type service", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 1"  }, 
+			{ "type": "text", "name": "control time stampo", "group": "group 2"  }, 
+			{ "type": "checkbox", "name": "associatedo", "group": "group 2"   },
+			{ "type": "date", "name": "Dateo", "group": "group 2"   },
+			{ "type": "select", "name": "type serviceo", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 2" } 	
+		], 
+		"box": [ 
+			{ "type": "text", "name": "control time stamp", "group": "group 1" }, 
+			{ "type": "checkbox", "name": "associated", "group": "group 1"   },
+			{ "type": "date", "name": "Date", "group": "group 1"   },
+			{ "type": "select", "name": "type service", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 1"  }, 
+			{ "type": "text", "name": "control time stampo", "group": "group 2"  }, 
+			{ "type": "checkbox", "name": "associatedo", "group": "group 2"   },
+			{ "type": "date", "name": "Dateo", "group": "group 2"   },
+			{ "type": "select", "name": "type serviceo", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 2" } 	
+		], 
+		"item": [ 
+			{ "type": "text", "name": "control time stamp", "group": "group 1" }, 
+			{ "type": "checkbox", "name": "associated", "group": "group 1"   },
+			{ "type": "date", "name": "Date", "group": "group 1"   },
+			{ "type": "select", "name": "type service", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 1"  }, 
+			{ "type": "text", "name": "control time stampo", "group": "group 2"  }, 
+			{ "type": "checkbox", "name": "associatedo", "group": "group 2"   },
+			{ "type": "date", "name": "Dateo", "group": "group 2"   },
+			{ "type": "select", "name": "type serviceo", "values": [ "Door to Door", "Door to Airport/port", "Clearance & Delivery", "Consolidation hub Inspection"], "group": "group 2" } 	
+		]
+	}			
+}

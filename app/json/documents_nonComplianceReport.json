@@ -1,0 +1,68 @@
+{
+	"id": 5,
+	"location": "waarehouse", 
+	"user": "Henri Robert",
+	"dates": {
+	    "created": 1375907474, 
+	    "modified": 1379907474
+	},
+	"status": "open",
+	"cause": "Non compliant",
+	"comments": [ 
+		{
+			"date": 1375907474,
+			"status": "open",
+			"message": "NCR cause: message automatically created when ncr is opened"
+		}, 
+		{
+			"date": 1376907474,
+			"status": "late",
+			"message": "Status changed to \"late\". Message automatically created after x days of inactivity"
+		}, 
+		{
+			"date": 1377907474,
+			"status": "open",
+			"message": "Message created by user, and status automatically modified to \"open\"."
+		}, 
+		{
+			"date": 1378907474,
+			"status": "open",
+			"message": "Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla."
+		}, 
+		{
+			"date": 1379907474,
+			"status": "closed",
+			"message": "Non-compliant report closed by user."
+		} 			
+	],
+	"related": {
+		"order": {
+			"id": 1, 
+			"reference": "5465654656"
+		}, 
+		"shipment": {
+			"id": 1, 
+			"reference": "5465654656"
+		}, 
+		"inspection_report": {
+			"id": 1
+		}
+	},
+	"document": {
+		"name": "130930_ref_NCR", 
+		"type": "pdf", 
+		"url": "/url/to/the/file/filename.ext", 
+		"info": "Maecenas sed diam eget risus varius blandit sit amet non magna." 
+	},
+	"element": {	
+		"type": "item", 
+		"id": 12, 
+		"reference": "54656",
+		"description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.", 
+		"image": {
+			"name": "130930_ref_NCR_photo", 
+			"type": "jpg", 
+			"url": "/app/img/temp_horiz.jpg"
+		}
+	}
+}

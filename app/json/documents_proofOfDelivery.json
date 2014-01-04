@@ -1,0 +1,129 @@
+{
+    "id": 5,
+    "date": 1375907474,
+    "user": "Henri Robert",
+    "collection": {
+        "contact": {
+            "name": "M. Riebsell / M. Seltman",
+            "phone": "+49 40/75207-269"
+        },
+        "company": {
+            "name": "Contitech Beattie Corporation Wallmann & Co",
+            "address": "Pollhornweg 31-39",
+            "city": "Hamburg",
+            "zipcode": "21107",
+            "country": "Germany"
+        },
+        "reference": "E+S 79279-281"
+    },
+    "delivery": {
+        "contact": {
+            "name": "Nick Elphinstone",
+            "phone": "+234 (0) 807 309 09 49"
+        },
+        "company": {
+            "name": "Total Nigeria, PHC",
+            "address": " ",
+            "city": " ",
+            "zipcode": " ",
+            "country": "Nigeria"
+        }
+    },
+    "document": {
+        "name": "130930_ref_POD",
+        "type": "pdf",
+        "url": "/url/to/the/file/filename.ext",
+        "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
+    },
+    "signature": {
+    	"name": "Delivery Guy",
+        "comment": "Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.",
+        "image": {
+            "name": "130930_ref_POD_signature",
+            "type": "jpg",
+            "url": "/app/img/temp_pod_signature.jpg"
+        }
+    },
+    "related": {
+        "order": {
+            "id": 1,
+            "reference": "5465654656"
+        },
+        "shipment": {
+            "id": 1,
+            "reference": "CHR72"
+        },
+        "boxes": [
+            {
+                "id": 12,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 13,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 14,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 15,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 16,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 17,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            },
+            {
+                "id": 18,
+                "reference": "54656",
+                "weight": 170,
+                "dimensions": [
+                    120,
+                    120,
+                    60
+                ]
+            }
+        ]
+    }
+}

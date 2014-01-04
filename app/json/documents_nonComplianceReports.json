@@ -1,0 +1,86 @@
+[
+	{
+		"id": "static",
+		"location": "warehouse", 
+		"user": "Henri Robert",
+		"dates": {
+		    "created": 1375907474, 
+		    "modified": 1379907474
+		},
+		"status": "closed",
+		"related": {
+			"order": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"shipment": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"inspection_report": {
+				"id": 1
+			}
+		},
+		"element": {	
+			"type": "item", 
+			"id": 12, 
+			"reference": "54656"
+		}
+	},
+	{
+		"id": "static",
+		"location": "warehouse", 
+		"user": "Henri Robert",
+		"dates": {
+		    "created": 1375907474, 
+		    "modified": 1379907474
+		},
+		"status": "closed",
+		"related": {
+			"order": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"shipment": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"inspection_report": {
+				"id": 1
+			}
+		},
+		"element": {	
+			"type": "item", 
+			"id": 12, 
+			"reference": "54656"
+		}
+	},
+	{
+		"id": "static",
+		"location": "warehouse", 
+		"user": "Henri Robert",
+		"dates": {
+		    "created": 1375907474, 
+		    "modified": 1379907474
+		},
+		"status": "closed",
+		"related": {
+			"order": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"shipment": {
+				"id": 1, 
+				"reference": "5465654656"
+			}, 
+			"inspection_report": {
+				"id": 1
+			}
+		},
+		"element": {	
+			"type": "item", 
+			"id": 12, 
+			"reference": "54656"
+		}
+	}
+]

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="Calque_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
+	 viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+<switch>
+	<g i:extraneous="self">
+		<g>
+			<g>
+				<path fill="#FFFFFF" d="M31.281,24.667L26.57,27.81v4.715l4.711,3.143L36,32.524V27.81L31.281,24.667z M31.281,30.784
+					l-3.438-2.293l3.438-2.293l3.441,2.293L31.281,30.784z"/>
+				<path fill="#FFFFFF" d="M34.285,13.858V8.144L28.57,4.333l-5.715,3.811v5.715l5.715,3.809L34.285,13.858z M28.57,6.19
+					l4.168,2.777l-4.168,2.779l-4.168-2.779L28.57,6.19z"/>
+				<path fill="#FFFFFF" d="M4,19.237v9.859l9.855,6.57l9.855-6.57v-9.859l-9.855-6.57L4,19.237z M13.855,25.456l-7.188-4.793
+					l7.188-4.793l7.188,4.793L13.855,25.456z"/>
+			</g>
+		</g>
+	</g>
+</switch>
+</svg>

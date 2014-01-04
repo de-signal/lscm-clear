@@ -1,0 +1,9 @@
+**/.DS_store
+logs/*
+!.gitkeep
+config/
+logs/
+scripts/
+test/
+app/lscm-clear.com.esproj/
+app/components/

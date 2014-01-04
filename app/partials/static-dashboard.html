@@ -1,0 +1,43 @@
+<div class="row-fluid">
+	<div class="span12 header bg-shipment">
+		<h1 class="borders">Shipments</h1>
+	</div>
+</div>
+
+<div class="row-fluid borders border-top">
+	<div class="span12">			
+			<table class="table table-condensed" >
+				<thead>
+					<tr>
+						<th>reference</th><th>mode</th><th>milestone</th><th>status</th><th>required</th><th>departure</th><th>ETD</th><th>arrival</th><th>ETA</th>
+					</tr>
+				</thead>
+				<tbody ng-controller="DetailCtrl">
+					<tr  ng-repeat="elm in list" ng-click="go('shipment', elm.id)" class="pointer over">
+						<td><span class="label label-shipment">{{elm.reference}}</span></td>
+						<td><small><i class="transportation\-icon" ng-class="{express:'transportation\-icon\-plane', air:'transportation\-icon\-plane', sea:'transportation\-icon\-boat', haulage:'transportation\-icon\-truck'}[elm.mode]">{{elm.mode}}</i></small></td>
+						<td><small>{{elm.milestone}}</small></td>
+						<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
+						<td><ul class="inline">
+						<li ng-repeat="required in elm.required">
+						<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="fa" required-icon tooltip="{{required.name}}"></i></span></span>
+						</li>
+						</ul></td>
+						<td><small>{{elm.departure.location}}</small></td>
+						<td><small>{{elm.departure.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td><small>{{elm.arrival.location}}</small></td>
+						<td><small>{{elm.arrival.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+					</tr>
+				</tbody>
+				<tfoot ng-show="pagesCount>1">
+					<tr>
+						<td colspan="4">
+						<pagination total-items="elementsCount" page="currentPage" max-size="10" boundary-links="true" direction-links="false" on-select-page="loadList(listType, {page: page})" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+					</tr>
+				</tfoot>
+			</table>
+			
+			
+		</div>
+   	
+</div>

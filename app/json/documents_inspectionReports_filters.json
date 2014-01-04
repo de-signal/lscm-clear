@@ -1,0 +1,29 @@
+{
+	"related": {
+	    "type": {
+    	    "type": "select", 
+    	    "values": ["order", "shipment"]
+	    },
+	    "reference": {
+    	    "type": "text", 
+    	    "value": "Reference"
+	    }    
+	}, 
+	"locations": {
+	    "type": "select", 
+	    "values": ["warehouse", "somewhere", "anywhere", "nowhere", "eslewhere", "somewhere else", "here"]
+	}, 
+	"users": {
+	    "type": "select", 
+	    "values": ["Henri Robert", "User 2", "User 3", "User 4", "User 5"]
+	}, 
+	"dates": {
+        "from": {
+            "type": "date"
+        }, 
+        "to": {
+            "type": "date"
+        }
+	}
+}
+

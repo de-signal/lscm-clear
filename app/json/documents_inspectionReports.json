@@ -1,0 +1,122 @@
+[
+	{
+	    "id": "static",
+	    "location": "warehouse",
+	    "user": "Henri Robert",
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "75654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "72"
+	        }
+	    },
+	    "dates": {
+	        "created": 1375907474,
+	        "closed": 1375908474
+	    },
+	    "conformity": {
+	    	"true": 3, 
+	    	"false": 3
+	    },
+	    "boxes": [
+	        {
+	            "id": 12,
+	            "reference": "54656",
+	            "compliance": true
+	        },
+	        {
+	            "id": 9,
+	            "reference": "54656",
+	            "compliance": false
+	        },
+	        {
+	            "id": 4,
+	            "reference": "54656",
+	            "compliance": true
+	        }
+	    ]
+	}, 
+	{
+	    "id": "static",
+	    "location": "warehouse",
+	    "user": "Henri Robert",
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "75654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "72"
+	        }
+	    },
+	    "dates": {
+	        "created": 1375907474,
+	        "closed": 1375908474
+	    },
+	    "conformity": {
+	    	"true": 3, 
+	    	"false": 3
+	    },
+	    "boxes": [
+	        {
+	            "id": 12,
+	            "reference": "54656",
+	            "compliance": true
+	        },
+	        {
+	            "id": 9,
+	            "reference": "54656",
+	            "compliance": false
+	        },
+	        {
+	            "id": 4,
+	            "reference": "54656",
+	            "compliance": true
+	        }
+	    ]
+	}, 
+	{
+	    "id": "static",
+	    "location": "warehouse",
+	    "user": "Henri Robert",
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "75654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "72"
+	        }
+	    },
+	    "dates": {
+	        "created": 1375907474,
+	        "closed": 1375908474
+	    },
+	    "conformity": {
+	    	"true": 3, 
+	    	"false": 3
+	    },
+	    "boxes": [
+	        {
+	            "id": 12,
+	            "reference": "54656",
+	            "compliance": true
+	        },
+	        {
+	            "id": 9,
+	            "reference": "54656",
+	            "compliance": false
+	        },
+	        {
+	            "id": 4,
+	            "reference": "54656",
+	            "compliance": true
+	        }
+	    ]
+	}
+]

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Calque_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+        <circle fill="#9F9F8F" cx="13" cy="29" r="3"/>
+        <circle fill="#9F9F8F" cx="23" cy="29" r="3"/>
+        <path fill="#9F9F8F" d="M30.742 10.143c-1.029-0.408-2.189 0.09-2.6 1.115L24.645 20H13.507L9.921 7.449C9.677 6.592 8.892 6 8 6H2C0.894 6 0 6.895 0 8s0.895 2 2 2h4.49l3.586 12.551C10.322 23.408 11.107 24 12 24h14c0.816 0 1.553-0.498 1.857-1.258l4-10C32.268 11.717 31.768 10.555 30.742 10.143z"/>
+        <polygon fill="#9F9F8F" points="26,6 22,6 22,0 18,0 18,6 14,6 20,14    "/>
+      <rect fill="none" width="32" height="32"/>
+</svg>

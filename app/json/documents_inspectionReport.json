@@ -1,0 +1,229 @@
+{
+    "id": 5,
+    "location": "warehouse",
+    "user": "Henri Robert",
+    "related": {
+        "order": {
+            "id": 1,
+            "reference": "75654656"
+        },
+        "shipment": {
+            "id": 1,
+            "reference": "72"
+        }
+    },
+    "dates": {
+        "created": 1375907474,
+        "closed": 1375908474
+    },
+    "document": {
+        "name": "130930_ref_ir",
+        "type": "pdf",
+        "url": "/app/img/temp_vert.jpg",
+        "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
+    },
+    "non_compliance_reports": {
+    	"closed": 3, 
+    	"late": 3, 
+    	"open": 1
+    },
+    "conformity": {
+    	"true": 3, 
+		"false": 3
+    },
+    "boxes": [
+        {
+            "id": 12,
+            "reference": "54656",
+                       "items": [
+                {
+                    "id": 4,
+                    "reference": "S029-B015-I0015",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_horiz.jpg"
+                    }, 
+                    "non_compliance": true,
+                    "non_compliance_report": {
+                    	"id": 6,
+                    	"status": "open",
+                    	"document": {
+                    	    "name": "130930_ref_ncr",
+                    	    "type": "pdf",
+                    	    "url": "/app/img/temp_vert.jpg",
+                    	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
+                    	}
+                    }, 
+                    "conform": false
+                },
+                {
+                    "id": 5,
+                    "reference": "S029-B015-I0015",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": false
+                },
+                {
+                    "id": 6,
+                    "reference": "S029-B015-I0015",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_horiz.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 6,
+                    "reference": "654646",
+                    "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+                    "material": "Condimentum Nibh Vulputate",
+                    "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 6,
+                    "reference": "654646",
+                    "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+                    "material": "Condimentum Nibh Vulputate",
+                    "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "reference": "54656",
+            "non_compliance": true,
+            "non_compliance_report": {
+            	"id": 6,
+            	"status": "open",
+            	"document": {
+            	    "name": "130930_ref_ncr",
+            	    "type": "pdf",
+            	    "url": "/app/img/temp_vert.jpg",
+            	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
+            	}
+            },
+            "items": [
+                {
+                    "id": 9,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 10,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 11,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "reference": "54656",
+                       "items": [
+                {
+                    "id": 13,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 15,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                   "conform": true
+                },
+                {
+                    "id": 16,
+                    "reference": "654646",
+	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+	                "material": "Condimentum Nibh Vulputate",
+	                "material_supplier": "Condimentum Justo",
+                    "image": {
+                        "name": "130930_ref_NCR_photo",
+                        "type": "jpg",
+                        "url": "/app/img/temp_vert.jpg"
+                    }, 
+                    "non_compliance": true,
+                    "non_compliance_report": {
+                    	"id": 6,
+                    	"status": "late",
+                    	"document": {
+                    	    "name": "130930_ref_ncr",
+                    	    "type": "pdf",
+                    	    "url": "/app/img/temp_vert.jpg",
+                    	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
+                    	}
+                    }
+                }
+            ]
+        }
+    ]
+}

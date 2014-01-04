@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="Calque_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
+	 viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+<switch>
+	<g i:extraneous="self">
+		<g>
+			<g>
+				<path fill="#FFFFFF" d="M27.415,4H6.001v32h28V10.586L27.415,4z M28.001,7.414L30.587,10h-2.586V7.414z M32.001,34h-24V6h18v6h6
+					V34z"/>
+				<rect x="10.001" y="14" fill="#FFFFFF" width="4" height="4"/>
+				<rect x="16.001" y="14" fill="#FFFFFF" width="12" height="4"/>
+				<rect x="10.001" y="20" fill="#FFFFFF" width="4" height="4"/>
+				<rect x="16.001" y="20" fill="#FFFFFF" width="12" height="4"/>
+				<rect x="10.001" y="26" fill="#FFFFFF" width="4" height="4"/>
+				<rect x="16.001" y="26" fill="#FFFFFF" width="12" height="4"/>
+			</g>
+		</g>
+	</g>
+</switch>
+</svg>

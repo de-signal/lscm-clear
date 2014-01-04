@@ -1,0 +1,437 @@
+[	
+	{	
+		"id": "figuresOfTheDay", 
+		"name": "figures of the day",
+		"datas": [
+			{
+				"key": "Orders in progress", 
+				"value": 79
+			}, 
+			{
+				"key": "Deliveries in progress", 
+				"value": 14
+			}, 
+			{
+				"key": "Collected items", 
+				"value": 2504
+			}, 
+			{
+				"key": "Items in production", 
+				"value": 19852
+			}
+		]
+	},
+	{	
+		"id": "currentLogisticsExecutionPlan",
+	    "name": "current logistics execution plan",
+	    "datas": [
+	        {
+	            "key": "on time",
+	            "value": 25
+	        },
+	        {
+	            "key": "late if no change",
+	            "value": 15
+	        },
+	        {
+	            "key": "late",
+	            "value": 10
+	        }
+	    ]
+	}, 
+	{	
+		"id": "changedLogisticsExecutionPlan",
+	    "name": "changed logistics execution plan",
+	    "datas": [
+	        {
+	            "key": "on time",
+	            "value": 40
+	        },
+	        {
+	            "key": "late if no change",
+	            "value": 0
+	        },
+	        {
+	            "key": "late",
+	            "value": 10
+	        }
+	    ]
+	},
+	{	
+		"id": "budgetAdjustement",
+	    "name": "budget adjustement",
+	    "datas": [
+	    	{
+	    	    "key": "current",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "budget ($)", 
+	    	    		"value": 200000
+	    	    	}
+	    	    ]
+	    	}, 
+	    	{
+	    	    "key": "extra",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "budget ($)", 
+	    	    		"value": 60000
+	    	    	}
+	    	    ]
+	    	}
+	    ]
+	},
+	{	
+		"id": "ordersMilestonesDistribution",
+	    "name": "orders milestones distribution",
+	    "datas": [
+	        {
+				"key": "placed",
+				"values": [
+					{
+						"key": "planned", 
+						"value": 28
+					}, 
+					{
+						"key": "actual", 
+						"value": 28
+					}
+				]
+	        },
+	        {
+	            "key": "in preparation",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 50
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 68
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "completed",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 46
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 56
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "delivered",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 28
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 28
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "closed",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 28
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 28
+	            	}
+	            ]
+	        }
+	    ]
+	},
+	{	
+		"id": "shipmentsMilestonesDistribution",
+	    "name": "shipments milestones distribution",
+	    "datas": [
+	        {
+	            "key": "departed",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 28
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 28
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "arrived",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 50
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 68
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "custom released",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 46
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 56
+	            	}
+	            ]
+	        },
+	        {
+	            "key": "delivered",
+	            "values": [
+	            	{
+	            		"key": "planned", 
+	            		"value": 76
+	            	}, 
+	            	{
+	            		"key": "actual", 
+	            		"value": 56
+	            	}
+	            ]
+	        }
+		]
+	},
+	{	
+		"id": "ordersScopeOfResponsability",
+	    "name": "orders scope of responsability",
+	    "datas": [
+	        {
+	            "key": "client",
+	            "value": 5
+	        },
+	        {
+	            "key": "vendor",
+	            "value": 3
+	        },
+	        {
+	            "key": "3PL/4PL",
+	            "value": 2
+	        },
+	        {
+	            "key": "LSCM",
+	            "value": 5
+	        }
+	    ]
+	},
+    {	
+    	"id": "ordersEvolution",
+        "name": "orders evolution",
+        "datas": [
+            {
+                "key": "preparation",
+                "value": 5
+            },
+            {
+                "key": "consolidation",
+                "value": 3
+            },
+            {
+                "key": "collection",
+                "value": 2
+            },
+            {
+                "key": "delivery",
+                "value": 5
+            }
+        ]
+    },
+    {	
+    	"id": "ordersMilestones",
+        "name": "orders milestones",
+        "datas": [
+            {
+                "key": "placed",
+                "value": 15
+            },
+            {
+                "key": "in preparation",
+                "value": 7
+            },
+            {
+                "key": "completed",
+                "value": 9
+            },
+            {
+                "key": "delivered",
+                "value": 10
+            },
+            {
+                "key": "closed",
+                "value": 32
+            }
+        ]
+    },
+    {	
+        "id": "flowsBreakdown",
+        "name": "flows breakdown",
+        "datas": [
+            {
+                "key": "OSP",
+                "value": 14
+            },
+            {
+                "key": "DCD",
+                "value": 1
+            },
+            {
+                "key": "Field Ops",
+                "value": 11
+            }
+        ]
+    },
+    {	
+    	"id": "transportMode",
+        "name": "transport mode",
+        "datas": [
+            {
+                "key": "Air",
+                "value": 9
+            },
+            {
+                "key": "Sea",
+                "value": 2
+            },
+            {
+                "key": "Express",
+                "value": 12
+            },
+            {
+                "key": "Haulage",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "id": "greenlightActivity",
+        "name": "greenlight activity",
+        "datas": [
+        	{
+        	    "key": "actual",
+        	    "values": [
+        	    	{
+        	    		"key": "upcoming", 
+        	    		"value": 13
+        	    	}, 
+        	    	{
+        	    		"key": "ready", 
+        	    		"value": 10
+        	    	}, 
+        	    	{
+        	    		"key": "approved", 
+        	    		"value": 6
+        	    	}
+        	    ]
+        	}, 
+        	{
+        	    "key": "actual",
+        	    "values": [
+        	    	{
+        	    		"key": "upcoming", 
+        	    		"value": 15
+        	    	}, 
+        	    	{
+        	    		"key": "ready", 
+        	    		"value": 9
+        	    	}, 
+        	    	{
+        	    		"key": "approved", 
+        	    		"value": 7
+        	    	}
+        	    ]
+        	}
+        ]
+    },
+    {
+        "id": "transitPlace",
+        "name": "transit place",
+        "datas": [
+            {
+                "key": "FCA",
+                "value": 7
+            },
+            {
+                "key": "KCA",
+                "value": 1
+            },
+            {
+                "key": "NRA",
+                "value": 9
+            }
+        ]
+    },
+	{
+        "id": "inspectionActivity",
+        "name": "inspection activity",
+        "datas": [
+        	{
+        	    "key": "actual",
+        	    "values": [
+        	    	{
+        	    		"key": "week 25", 
+        	    		"value": 13
+        	    	}, 
+        	    	{
+        	    		"key": "week 26", 
+        	    		"value": 6
+        	    	}, 
+        	    	{
+        	    		"key": "current", 
+        	    		"value": 5
+        	    	}, 
+        	    	{
+        	    		"key": "week 28", 
+        	    		"value": 0
+        	    	}, 
+        	    	{
+        	    		"key": "week 29", 
+        	    		"value": 0
+        	    	}
+        	    ]
+        	}, 
+        	{
+        	    "key": "planned",
+        	    "values": [
+        	    	{
+        	    		"key": "week 25", 
+        	    		"value": 15
+        	    	}, 
+        	    	{
+        	    		"key": "week 26", 
+        	    		"value": 7
+        	    	}, 
+        	    	{
+        	    		"key": "current", 
+        	    		"value": 9
+        	    	}, 
+        	    	{
+        	    		"key": "week 28", 
+        	    		"value": 10
+        	    	}, 
+        	    	{
+        	    		"key": "week 29", 
+        	    		"value": 5
+        	    	}
+        	    ]
+        	}
+        ]
+    }
+]

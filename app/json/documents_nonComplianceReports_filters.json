@@ -1,0 +1,43 @@
+{
+	"related": {
+	    "type": {
+		    "type": "select", 
+		    "values": ["order", "shipment"]
+	    },
+	    "reference": {
+		    "type": "text", 
+		    "value": "reference"
+	    }    
+	},
+	"element": {
+	    "type": {
+		    "type": "select", 
+		    "values": ["shipment", "box", "item"]
+	    },
+	    "reference": {
+		    "type": "text", 
+		    "value": "reference"
+	    }    
+	},  
+	"locations": {
+	    "type": "select", 
+	    "values": ["warehouse", "somewhere", "anywhere", "nowhere", "eslewhere", "somewhere else", "here"]
+	},
+	"statuses": {
+	    "type": "select", 
+	    "values": ["late", "open", "closed"]
+	}, 
+	"users": {
+	    "type": "select", 
+	    "values": ["Henri Robert", "User 2", "User 3", "User 4", "User 5"]
+	}, 
+	"dates": {
+        "from": {
+            "type": "date"
+        }, 
+        "to": {
+            "type": "date"
+        }
+	}
+}
+

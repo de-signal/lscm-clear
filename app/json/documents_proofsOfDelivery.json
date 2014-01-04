@@ -1,0 +1,80 @@
+[
+	{
+	    "id": "static",
+	    "date": 1375907474,
+	    "user": "Henri Robert",
+	    "collection": {
+	       "company": {
+	            "name": "Contitech Beattie Corporation Wallmann & Co"
+	        },
+	        "reference": "E+S 79279-281"
+	    },
+	    "delivery": {
+	        "company": {
+	            "name": "Total Nigeria, PHC"
+	        }
+	    },
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "5465654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "CHR72"
+	        }
+	    }
+	},
+	{
+	    "id": "static",
+	    "date": 1375907474,
+	    "user": "Henri Robert",
+	    "collection": {
+	       "company": {
+	            "name": "Contitech Beattie Corporation Wallmann & Co"
+	        },
+	        "reference": "E+S 79279-281"
+	    },
+	    "delivery": {
+	        "company": {
+	            "name": "Total Nigeria, PHC"
+	        }
+	    },
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "5465654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "CHR72"
+	        }
+	    }
+	},
+	{
+	    "id": "static",
+	    "date": 1375907474,
+	    "user": "Henri Robert",
+	    "collection": {
+	       "company": {
+	            "name": "Contitech Beattie Corporation Wallmann & Co"
+	        },
+	        "reference": "E+S 79279-281"
+	    },
+	    "delivery": {
+	        "company": {
+	            "name": "Total Nigeria, PHC"
+	        }
+	    },
+	    "related": {
+	        "order": {
+	            "id": 1,
+	            "reference": "5465654656"
+	        },
+	        "shipment": {
+	            "id": 1,
+	            "reference": "CHR72"
+	        }
+	    }
+	}
+]

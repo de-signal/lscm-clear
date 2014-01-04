@@ -1,0 +1,32 @@
+<div class="row-fluid">
+	<div class="span12 header bg-generic">
+		<h1 class="borders">Guidelines</h1>
+	</div>
+</div>
+<div class="row-fluid borders border-top">
+	<div class="span12">
+		<h1>{{elm.title}}</h1>
+	</div>
+</div>
+
+<div class="row-fluid borders border-top" ng-repeat="instruction in elm.instructions">
+	<div class="span12" id="{{instruction.id}}">
+		<div class="group-elements">
+	
+			<h4>{{instruction.name}}</h4>
+			
+			<p>{{instruction.description}}</p>
+			
+			<div class="row-fluid" ng-repeat="stepGroup in instruction.stepsGroupBy2">
+				<div class="span6 element" ng-repeat="step in stepGroup">
+					<h4>{{($parent.$index)*2+($index+1)}}. </h4>
+					<p>{{step.description}}</p>
+					<img ng-src="img/guidelines/{{step.img}}" class="img-polaroid">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

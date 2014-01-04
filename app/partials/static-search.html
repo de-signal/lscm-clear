@@ -1,0 +1,42 @@
+<div class="row-fluid">
+    <div class="span3">
+    
+      <div class="sidebar-nav">
+        <ul class="nav nav-list">
+          <li><form class="navbar-search">
+          <input type="text" class="search-query" placeholder="Search" ng-model="query">
+          </form>
+          </li>
+        </ul>
+        <ul class="nav nav-list" ng-repeat="category in users[0].preferences.search">
+          <li class="nav-header">{{category.name}}</li>
+          <li ng-repeat="filter in category.filters"><label class="checkbox"><input type="checkbox" ng-checked="filter.value" ng-model="filter.value"> {{filter.name}}</label></li>
+        </ul>
+      </div>
+      
+    </div><!--/span-->
+    <div class="span9">
+   		<table class="table">
+          <thead>
+            <tr>
+              <th>typo</th><th>reference</th><th>milestone</th><th>status</th><th>required</th><th>tracked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  ng-repeat="elm in elms | filter:{type:''} | filter:query | checkboxFilter:users[0].preferences.search:query | orderBy:'delay'"  ng-click="go(elm)" class="pointer over">
+              <td>{{elm.type}}</td>
+              <td>{{elm.reference}}</td>
+              <td>{{elm.milestone}}</td>
+              <td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
+              <td><ul class="inline-list">
+              	<li ng-repeat="required in elm.required">
+              		<span class="label" status="{{elm.status}}" required-status editable="{{required.editable}}" completed="{{required.completed}}"><i required-icon tooltip="{{required.name}}"></i></span>
+				</li>
+              </ul></td>
+              <td><input type="checkbox" ng-model="elm.tracking" ng-false-value="untracked" ng-true-value="tracked"></td>
+            </tr>
+          </tbody>
+        </table>
+   		           
+    </div><!--/span-->
+  </div><!--/row-->
