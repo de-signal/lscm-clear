@@ -630,6 +630,7 @@ angular.module('clearApp.controllers', [])
 						}
 					}
 			});
+			$scope.elementsCount = 20;
 			$scope.list = list;
 		}
 		
@@ -638,13 +639,24 @@ angular.module('clearApp.controllers', [])
 	.controller('StaticSearchCtrl', ['$scope', 'Elms', function($scope, Elms) {
 		$scope.elms = Elms.query();	
 	}])
-	.controller('GuidelinesCtrl', ['$scope', 'GuidelinesOverview', function($scope, GuidelinesOverview) {
-		$scope.elms = GuidelinesOverview.query();	
+	.controller('GuidelinesCtrl', ['$scope', 'GuidelinesBackoffice', 'GuidelinesMobile', function($scope, GuidelinesBackoffice, GuidelinesMobile) {
+		GuidelinesBackoffice.get(function(elm) {
+			$scope.elmBackoffice = elm;
+		});
+		GuidelinesMobile.get(function(elm) {
+			$scope.elmMobile = elm; 
+		});
 	}])
 	.controller('GuidelinesProcessCtrl', ['$scope', 'GuidelinesProcess', function($scope, GuidelinesProcess) {
 		GuidelinesProcess.query(function(elms) {
 			$scope.elms = elms;
 		});
+		
+		$scope.scrollTo = function(page, anchor) {
+			$location.path('/guidelines/' + page).hash(anchor);
+		}
+		$scope.types = ["order", "shipment", "box", "item"];
+		
 		
 		$scope.display = {
 			"downloads": true,
@@ -673,23 +685,31 @@ angular.module('clearApp.controllers', [])
 	}])
 	.controller('GuidelinesBackofficeCtrl', ['$scope', '$filter', '$location', '$anchorScroll', '$timeout', 'GuidelinesBackoffice', function($scope, $filter, $location, $anchorScroll, $timeout, GuidelinesBackoffice) {
 		GuidelinesBackoffice.get(function(elm) {
-				
-			for (var i=0, elm_len=elm.instructions.length; i<elm_len; i++) {
-				console.log('group', elm.instructions[i]);
-				elm.instructions[i].stepsGroupBy2 = $filter('groupBy')(elm.instructions[i].steps, 2);
-				console.log('group', elm.instructions);
-			}
-			
 			$scope.elm = elm; 
-			
 			$timeout(function() {
 				$anchorScroll();
-				console.log('scroll: ', $location.hash());
 			}, 500);
-		});	
+		});
+		
+		$scope.scrollTo = function(anchor) {
+			$location.hash(anchor);
+			console.log('anchor: ', anchor);
+			$anchorScroll();
+		}
 	}])
-	.controller('GuidelinesOperatorCtrl', ['$scope', 'GuidelinesOperator', function($scope, GuidelinesOperator) {
-		$scope.elms = GuidelinesOperator.query();	
+	.controller('GuidelinesMobileCtrl', ['$scope', '$filter', '$location', '$anchorScroll', '$timeout', 'GuidelinesMobile', function($scope, $filter, $location, $anchorScroll, $timeout, GuidelinesMobile) {
+		GuidelinesMobile.get(function(elm) {
+			$scope.elm = elm; 
+			$timeout(function() {
+				$anchorScroll();
+			}, 500);
+		});
+		
+		$scope.scrollTo = function(anchor) {
+			$location.hash(anchor);
+			console.log('anchor: ', anchor);
+			$anchorScroll();
+		}	
 	}])
 	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', 'Elm', '$modal', 'ClearFn', 'ChartsConfig', '$timeout', 'Utils', function($scope, $location, $anchorScroll, Elm, $modal, ClearFn, ChartsConfig, $timeout, Utils) {
 	

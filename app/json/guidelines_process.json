@@ -33,8 +33,11 @@
 						"name": "BW.xls",
 						"type": "upload",
 						"guideline": {
-							"name": "How to upload a \"BW.xls\" file?",
-							"url": "guidelines/backoffice#vpl-draft-download"
+							"name": "Add a new order",
+							"url": {
+								"page": "backoffice",
+								"anchor": "add-order"
+							}
 						},
 						"description": "Click on Add order to upload the file."
 					}
@@ -56,8 +59,11 @@
 						"type": "upload",
 						"description": "This file contains all items which parts quantity is greater than 30.",
 						"guideline": {
-							"name": "How to download the \"Consolidation.xls\" file?",
-							"url": "consolidation-file-download"
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
 						}
 					}
 				]
@@ -107,9 +113,11 @@
 						"name": "Consolidation.xls",
 						"type": "upload",
 						"guideline": {
-							"name": "How to upload the \"Consolidation.xls\" file?",
-							"url": "consolidation-file-upload", 
-							"description": "Upload the file"
+							"name": "Upload a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "upload-file"
+							}
 						}
 					}
 				]
@@ -142,12 +150,26 @@
 					{
 						"name": "Stickers.pdf",
 						"description": "A single file containing informations for every items: QR code, description, material number, quantity and supplier name. Ready to be printed on stickers.",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "VPL-draft.xls",
 						"description": "Vendor Packing List containing all items.",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}
@@ -219,7 +241,14 @@
 					{
 						"name": "VPL-draft.xls",
 						"type": "upload",
-						"description": "Upload file." 
+						"description": "Upload file.",
+						"guideline": {
+							"name": "Upload a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "upload-file"
+							}
+						} 
 					}
 				]
 			}
@@ -247,7 +276,7 @@
 		"processing": {
 			"order": {
 				"milestone": {
-					"name": "Order completed",
+					"name": "Completed",
 					"description": "After every item's milestone is updated to manufactured."
 				}
 			},
@@ -276,11 +305,25 @@
 				"documents": [
 					{
 						"name": "RFC-draft.xls",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}, 
 					{
 						"name": "Quotation.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}, 
@@ -288,7 +331,14 @@
 				"documents": [
 					{
 						"name": "Shipping-marks.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}
@@ -366,12 +416,26 @@
 					{
 						"name": "RFC-draft.xls",
 						"type": "upload", 
-						"description": "Upload file."
+						"description": "Upload file.",
+						"guideline": {
+							"name": "Upload a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "upload-file"
+							}
+						}
 					}, 
 					{
 						"name": "PO service",
 						"type": "text",
-						"description": "Fill in the input."
+						"description": "Fill in the input.",
+						"guideline": {
+							"name": "Fill in an input",
+							"url": {
+								"page": "backoffice",
+								"anchor": "fill-input"
+							}
+						}
 					}
 				]
 			}
@@ -405,7 +469,14 @@
 				"documents": [
 					{
 						"name": "RFC-freight-forwarder.xls",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}
@@ -450,11 +521,25 @@
 				"conditions": [
 					{
 						"name": "Booking date",
-						"type": "date"
+						"type": "date",
+						"guideline": {
+							"name": "Select a date",
+							"url": {
+								"page": "backoffice",
+								"anchor": "select-date"
+							}
+						}
 					}, 
 					{
 						"name": "ETA",
-						"type": "date"
+						"type": "date",
+						"guideline": {
+							"name": "Select a date",
+							"url": {
+								"page": "backoffice",
+								"anchor": "select-date"
+							}
+						}
 					}
 				]
 			}
@@ -485,9 +570,16 @@
 			"box": {
 				"conditions": [
 					{
-						"name": "Vendor",
+						"name": "At vendor",
 						"type": "checkbox",
-						"description": "From mobile app: scan shipping marks and confirm."
+						"description": "From mobile app: scan shipping marks and confirm.",
+						"guideline": {
+							"name": "Check a condition from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "check-condition"
+							}
+						}
 					}
 				]
 			}
@@ -530,7 +622,14 @@
 					{
 						"name": "At the hub",
 						"type": "checkbox",
-						"description": "From mobile app: scan shipping marks and confirm."
+						"description": "From mobile app: scan shipping marks and confirm.",
+						"guideline": {
+							"name": "Check a condition from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "check-condition"
+							}
+						}
 					}
 				]
 			}
@@ -573,17 +672,38 @@
 					{
 						"name": "Storage cell",
 						"type": "text",
-						"description": "From mobile app: scan shipping marks and fill in the cell ID."
+						"description": "From mobile app: scan shipping marks and fill in the cell ID.",
+						"guideline": {
+							"name": "Fill in an input from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "fill-input"
+							}
+						}
 					}, 
 					{
 						"name": "OSD",
 						"type": "checkbox",
-						"description": "From mobile app: scan shipping marks and check if OSD."
+						"description": "From mobile app: scan shipping marks and check if OSD.",
+						"guideline": {
+							"name": "Check a condition from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "check-condition"
+							}
+						}
 					}, 
 					{
 						"name": "Inspection required",
 						"type": "checkbox",
-						"description": "From mobile app: scan shipping marks and check if inspection is required (default to yes)."
+						"description": "From mobile app: scan shipping marks and check if inspection is required (default to yes).",
+						"guideline": {
+							"name": "Check a condition from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "check-condition"
+							}
+						}
 					}
 				]
 			}
@@ -627,7 +747,14 @@
 					{
 						"name": "Storage cell",
 						"type": "text",
-						"description": "From mobile app: scan shipping mark and fill in the cell ID."
+						"description": "From mobile app: scan shipping mark and fill in the cell ID.",
+						"guideline": {
+							"name": "Fill in an input from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "fill-input"
+							}
+						}
 					}
 				]
 			}
@@ -672,7 +799,14 @@
 					{
 						"name": "Inspection report",
 						"type": "text",
-						"description": "From mobile app: scan shipping marks and make an inspection report."
+						"description": "From mobile app: scan shipping marks and make an inspection report.",
+						"guideline": {
+							"name": "Create an inspection report from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "create-inspection_report"
+							}
+						}
 					}
 				]
 			}
@@ -706,27 +840,69 @@
 				"documents": [
 					{
 						"name": "Packing List.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Commercial-invoice.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Form-C16.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "CCVO.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Draft-MAWB-BL.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Export-kit.zip",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}
@@ -775,12 +951,26 @@
 					{
 						"name": "MF",
 						"type": "text", 
-						"description": "fill in the input."
+						"description": "fill in the input.",
+						"guideline": {
+							"name": "Fill an input",
+							"url": {
+								"page": "backoffice",
+								"anchor": "fill-input"
+							}
+						}
 					},
 					{
 						"name": "BA",
 						"type": "text", 
-						"description": "fill in the input."
+						"description": "fill in the input.",
+						"guideline": {
+							"name": "Fill an input",
+							"url": {
+								"page": "backoffice",
+								"anchor": "fill-input"
+							}
+						}
 					}
 				]
 			}
@@ -851,7 +1041,14 @@
 				"conditions": [
 					{
 						"name": "Booking date",
-						"type": "date"
+						"type": "date",
+						"guideline": {
+							"name": "Select a date",
+							"url": {
+								"page": "backoffice",
+								"anchor": "select-date"
+							}
+						}
 					}
 				]
 			}
@@ -867,27 +1064,69 @@
 				"documents": [
 					{
 						"name": "Packing List.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Commercial-invoice.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Form-C16.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "CCVO.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Draft-MAWB-BL.pdf",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					},
 					{
 						"name": "Export-kit.zip",
-						"type": "upload"
+						"type": "upload",
+						"guideline": {
+							"name": "Download a file",
+							"url": {
+								"page": "backoffice",
+								"anchor": "download-file"
+							}
+						}
 					}
 				]
 			}
@@ -942,7 +1181,14 @@
 					{
 						"name": "ATD",
 						"type": "date", 
-						"description": "From mobile app: scan shipping mark and confirm date."
+						"description": "From mobile app: scan shipping mark and confirm date.",
+						"guideline": {
+							"name": "Select a date from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "select-date"
+							}
+						}
 					}
 				]
 			}
@@ -997,7 +1243,14 @@
 				"conditions": [
 					{
 						"name": "ATA",
-						"type": "date"
+						"type": "date",
+						"guideline": {
+							"name": "Select a date",
+							"url": {
+								"page": "backoffice",
+								"anchor": "select-date"
+							}
+						}
 					}
 				]
 			}
@@ -1039,7 +1292,14 @@
 				"conditions": [
 					{
 						"name": "Custom released",
-						"type": "checkbox"
+						"type": "checkbox",
+						"guideline": {
+							"name": "check a condition",
+							"url": {
+								"page": "backoffice",
+								"anchor": "check-condition"
+							}
+						}
 					}
 				]
 			}
@@ -1091,7 +1351,14 @@
 					{
 						"name": "Proof of delivery",
 						"type": "text", 
-						"description": "From mobile app: scan waybill and sign."
+						"description": "From mobile app: scan waybill and sign.",
+						"guideline": {
+							"name": "Create a proof of delivery from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "create-proof_of_delivery"
+							}
+						}
 					}
 				]
 			}
@@ -1141,7 +1408,14 @@
 					{
 						"name": "In stock",
 						"type": "checkbox", 
-						"description": "From mobile app: scan item's sticker and confirm."
+						"description": "From mobile app: scan item's sticker and confirm.",
+						"guideline": {
+							"name": "Check a condition from the mobile app",
+							"url": {
+								"page": "mobile",
+								"anchor": "check-condition"
+							}
+						}
 					}
 				]
 			}

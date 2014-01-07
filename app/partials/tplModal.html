@@ -1,8 +1,9 @@
 <div>
 	<div class="modal-header">
-		<h4><i class="lead fa" required-icon></i> {{required.name}}</h4>
+		<h3>condition</h3>
 	</div>
 	<div class="modal-body">
+		<h4><i class="lead fa" required-icon></i> {{required.name}}</h4>
 		<div ng-switch on="required.type">
 			<label class="form-horizontal" ng-switch-when="text">
 				{{required.name}} <input type="text" ng-model="required.value">
@@ -27,7 +28,7 @@
 	             <button class='btn' upload-submit="results(content, completed)">Upload</button>
 	             <p>{{uploadMessage}}</p>
 	         </form>
-	         <div ng-switch-when="link"><a href="" ng-click="go(elm.type, elm.id, required.value); requiredClose()">{{required.name}}</a></div>
+	         <div ng-switch-when="link"><a class="btn btn-large" href="" ng-click="go(elm.type, elm.id, required.value); requiredClose()">View</a></div>
 	         
 		</div>
 	</div>

@@ -82,11 +82,11 @@ angular.module('clearApp.directives', [])
 	.directive('requiredIcon', function() {
 		return function(scope, elem, attr) {
 			switch (scope.required.type) {
-	        	case 'upload': elem.addClass('fa\-file'); break; 
+	        	case 'upload': elem.addClass('fa\-file\-text\-o'); break; 
 	          	case 'checkbox': elem.addClass('fa\-check\-square\-o'); break;
 	          	case 'date': elem.addClass('fa\-calendar'); break;
 				case 'text': elem.addClass('fa\-pencil\-square\-o'); break;
-				case 'email': elem.addClass('fa\-envelope'); break;
+				case 'email': elem.addClass('fa\-envelope\-o'); break;
 				case 'link': elem.addClass('fa\-link'); break;
 				case 'scan': elem.addClass('fa\-qrcode'); break;
 			}

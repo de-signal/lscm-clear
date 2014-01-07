@@ -448,8 +448,8 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('GuidelinesBackoffice', function($resource){
 		return $resource('json/guidelines_backoffice.json');
 	})
-	.factory('GuidelinesOperator', function($resource){
-		return $resource('json/guidelines_operator.json');
+	.factory('GuidelinesMobile', function($resource){
+		return $resource('json/guidelines_mobile.json');
 	})
 	.factory('News', function($resource){
 		return $resource('json/news.json');

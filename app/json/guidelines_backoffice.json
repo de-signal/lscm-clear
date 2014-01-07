@@ -1,130 +1,322 @@
 { 
-	"title": "Instructions for the backoffice operator", 
+	"title": "Backoffice operations", 
 	"instructions": [
 		{
-			"name": "How to upload a BW ?",
-			"id": "BW-upload",
+			"name": "Add a new order",
+			"id": "add-order",
 			"description": "To ulpoad a BW file, follow these steps.", 
 			"steps": [
 				{
-					"description": "Click the 'Add order' button.", 
-					"img": "backoffice-bw-upload-01.jpg"
+					"from": "From the main menu", 
+					"description": "Click the 'Add order' button. You are redirected to the \"Add Order\" page. ", 
+					"img": "backoffice-add_order-01.jpg"
 				}, 
 				{
-					"description": "On the \"Add Order\" page, click the \"Choose file\" button.", 
-					"img": "backoffice-bw-upload-02.jpg"
+					"from": "From the \"Add Order\" page",
+					"description": "Click the \"Choose file\" button. A modal window of the browser opens up.", 
+					"img": "backoffice-add_order-02.jpg"
 				}, 
 				{
-					"description": "Select a file on your computer and click \"Open\".", 
-					"img": "backoffice-bw-upload-03.jpg"
+					"from": "From the browser modal window", 
+					"description": "Select your BW.xls file from your computer and click \"Open\". The modal window of the browser closes.", 
+					"img": "backoffice-add_order-03.jpg"
 				},
 				{
-					"description": "Click the \"Send\" button and wait for the upload to process (up to 1 minute).", 
-					"img": "backoffice-bw-upload-04.jpg"
+					"from": "From the \"Add Order\" page",
+					"description": "Click the \"Upload\" button and wait for the upload to be processed (up to 1 minute). Don't close the window or quit the page while the upload is processing.", 
+					"img": "backoffice-add_order-04.jpg"
 				}, 
 				{
-					"description": "When the file is processed, you are redirected on the newly created order", 
-					"img": "backoffice-bw-upload-05.jpg"
+					"from": "From the \"Add Order\" page",
+					"description": "When the file is processed, you are automatically redirected on the newly created order.", 
+					"img": "backoffice-add_order-05.jpg"
 				}
 			]
 		}, 
 		{
-			"name": "How to download the consolidation.xls file ?",
-			"id": "consolidation-download",
-			"description": " ", 
+			"name": "Download a file",
+			"type": "upload",
+			"id": "download-file",
+			"description": "", 
 			"steps": [
 				{
-					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu.", 
-					"img": ""
-				}, 
-				{
-					"description": "Check that the current order milestone is <i>Placed</i>", 
-					"img": ""
-				}, 
-				{
-					"description": "In the <i>Documents</i> section of the page, find <i>consolidation.xls</i> and click on the <i>download</i> button on the same line. ", 
-					"img": ""
+					"from": "From the main menu", 
+					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the file you want to download.", 
+					"img": "backoffice-download_file-01.jpg", 
+					"elements_required_txt": "Page types and their belonging files to download", 
+					"elements_required": [
+						{
+							"type": "order", 
+							"requireds": [
+								{
+									"type": "upload",
+									"name": "Consolidation.xls"
+								}, 
+								{
+									"type": "upload",
+									"name": "Stickers.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "VPL-draft.xls"
+								}
+							]
+						},
+						{
+							"type": "shipment", 
+							"requireds": [ 
+								{
+									"type": "upload",
+									"name": "RFC-draft.xls"
+								}, 
+								{
+									"type": "upload",
+									"name": "Quotation.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "RFC-freight-forwarder.xls"
+								}, 
+								{
+									"type": "upload",
+									"name": "Packing-list.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "Commercial-invoice.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "Form-C16.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "CCVO.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "Draft-MAWB-BL.pdf"
+								}, 
+								{
+									"type": "upload",
+									"name": "Export-kit.zip"
+								}
+							]
+						},
+						{
+							"type": "box", 
+							"requireds": [ 
+								{
+									"type": "upload",
+									"name": "Shipping-marks.pdf"
+								}
+							]
+						}
+					]
 				},
 				{
-					"description": "In the <i>Documents</i> section of the page, find <i>consolidation.xls</i> and click on the <i>download</i> button on the same line. ", 
-					"img": ""
+					"from": "From the element's page", 
+					"description": "Scroll to the \"Documents\" section of the page and find the file you want to download. Click on the \"Download\" button on the same line.", 
+					"img": "backoffice-download_file-02.jpg"
 				}
 			]
 		}, 
 		{
-			"name": "How to upload the consolidation file ?",
-			"id": "consolidation-upload",
+			"name": "Upload a file",
+			"type": "upload",
+			"id": "upload-file",
 			"description": " ", 
 			"steps": [
 				{
-					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu.", 
-					"img": ""
+					"from": "From the main menu", 
+					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the file you want to upload.", 
+					"elements_required_txt": "Page types and their belonging files to upload", 
+					"elements_required": [
+						{
+							"type": "order", 
+							"requireds": [
+								{
+									"type": "upload",
+									"name": "Consolidation.xls"
+								},
+								{
+									"type": "upload",
+									"name": "VPL-draft.xls"
+								}
+							]
+						},
+						{
+							"type": "shipment", 
+							"requireds": [ 
+								{
+									"type": "upload",
+									"name": "RFC-draft.xls"
+								}
+							]
+						}
+					],  
+					"img": "backoffice-upload_file-01.jpg"
 				}, 
 				{
-					"description": "Check that the current order milestone is <i>Placed</i>", 
-					"img": ""
+					"from": "From the element's page", 
+					"description": "Scroll to the \"Conditions\" section of the page and find the file you want to upload. Click on the \"update\" button on the same line. A \"Condition\" modal window opens up.", 
+					"img": "backoffice-upload_file-02.jpg"
 				}, 
 				{
-					"description": "In the <i>conditions</i> section of the page, find <i>Consolidation</i> and click on the <i>update</i> button on the same line. ", 
-					"img": ""
+					"from": "From the \"Condition\" modal window", 
+					"description": "Click the \"Choose file\" button. A modal window of the browser opens up.", 
+					"img": "backoffice-upload_file-03.jpg"
+				}, 
+				{
+					"from": "From the browser modal window", 
+					"description": "Select your file from your computer and click \"Open\". The modal window of the browser closes.", 
+					"img": "backoffice-upload_file-04.jpg"
 				},
 				{
-					"description": "A modal window pops up. ", 
-					"img": ""
-				},
+					"from": "From the \"Condition\" modal window", 
+					"description": "Click the \"Upload\" button. A message \"Please wait…\" is displayed while the upload is processing.", 
+					"img": "backoffice-upload_file-05.jpg"
+				}, 
 				{
-					"description": "Click on the 'Choose file' button and then select a file on your computer. ", 
-					"img": ""
-				},
-				{
-					"description": "Click on the 'Upload' button", 
-					"img": ""
-				},
-				{
-					"description": "Click on the 'Save' button to complete.", 
-					"img": ""
+					"from": "From the \"Condition\" modal window", 
+					"description": "When the message \"File uploaded. Save to complete.\" is displayed,  click on the \"Save\" button.", 
+					"img": "backoffice-upload_file-06.jpg"
 				}
 			]
 		}, 
 		{
-			"name": "How to download the stickers ?",
-			"id": "stickers-download",
+			"name": "Fill in an input",
+			"type": "text",
+			"id": "fill-input",
 			"description": " ", 
 			"steps": [
 				{
-					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu. ", 
-					"img": ""
+					"from": "From the main menu", 
+					"description": "Click on \"Tracking\" or \"Search\" the page to which belongs the input you want to fill in.", 
+					"img": "backoffice-fill_input-01.jpg", 
+					"elements_required_txt": "Page types and their belonging input fields to fill in", 
+					"elements_required": [
+						{
+							"type": "shipment", 
+							"requireds": [
+								{
+									"type": "text",
+									"name": "PO service"
+								},
+								{
+									"type": "text",
+									 "name": "MF"
+								},
+								{
+									"type": "text",
+									 "name": "BA"
+								}
+							]
+						}
+					]
 				}, 
 				{
-					"description": "Check that the current order milestone is <i>Placed</i>", 
-					"img": ""
-				},
+					"from": "From the element's page", 
+					"description": "Scroll to the \"Conditions\" section of the page and find the name of the input you want to fill in. Click on the \"update\" button on the same line. A \"Condition\" modal window opens up.", 
+					"img": "backoffice-fill_input-02.jpg"
+				}, 
 				{
-					"description": "Check that the current order milestone is <i>Placed</i>", 
-					"img": ""
-				},
+					"from": "From the \"Condition\" modal window", 
+					"description": "Fill in the field.", 
+					"img": "backoffice-fill_input-03.jpg"
+				}, 
 				{
-					"description": "In the <i>Documents</i> section of the page, find <i>Stickers.pdf</i> and click on the <i>download</i> button on the same line. ", 
-					"img": ""
+					"from": "From the \"Condition\" modal window", 
+					"description": "Click on the \"Save\" button.", 
+					"img": "backoffice-fill_input-04.jpg"
 				}
 			]
 		}, 
 		{
-			"name": "How to download the VPL draft ?",
-			"id": "vpl-draft-download",
+			"name": "Check a condition",
+			"type": "checkbox",
+			"id": "check-condition",
 			"description": " ", 
 			"steps": [
 				{
-					"description": "Go to the page of the related order. (You can access the order page through <i>Tracking</i> or <i>Search</i> in the main menu. ", 
-					"img": ""
+					"from": "From the main menu", 
+					"description": "Click on \"Tracking\" or \"Search\" the page to which belongs the checkbox you want to check.", 
+					"img": "backoffice-check_condition-01.jpg", 
+					"elements_required_txt": "Page types and their belonging checkbox", 
+					"elements_required": [
+						{
+							"type": "shipment", 
+							"requireds": [
+								{
+									"type": "checkbox",
+									"name": "Custom released"
+								}
+							]
+						}
+					]
 				}, 
 				{
-					"description": "Check that the current order milestone is <i>Placed</i>", 
-					"img": ""
-				},
+					"from": "From the element's page", 
+					"description": "Scroll to the \"Conditions\" section of the page and find the name of the input you want to fill in. Click on the \"update\" button on the same line. A \"Condition\" modal window opens up.", 
+					"img": "backoffice-check_condition-02.jpg"
+				}, 
 				{
-					"description": "In the <i>Documents</i> section of the page, find <i>VPL_draft.xls</i> and click on the <i>download</i> button on the same line. ", 
-					"img": ""
+					"from": "From the \"Condition\" modal window", 
+					"description": "Fill in the field.", 
+					"img": "backoffice-check_condition-03.jpg"
+				}, 
+				{
+					"from": "From the \"Condition\" modal window", 
+					"description": "Click on the \"Save\" button.", 
+					"img": "backoffice-check_condition-04.jpg"
+				}
+			]
+		},
+		{
+			"name": "Select a date",
+			"type": "date",
+			"id": "select-date",
+			"description": " ", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the date you want to select.", 
+					"img": "backoffice-select_date-01.jpg", 
+					"elements_required_txt": "Page types and their belonging dates fields", 
+					"elements_required": [
+						{
+							"type": "shipment", 
+							"requireds": [
+								{
+									"type": "date",
+									"name": "Booking date"
+								},
+								{
+									"type": "date",
+									"name": "ETA"
+								},
+								{
+									"type": "date",
+									"name": "ATA"
+								}
+							]
+						}
+					]
+				}, 
+				{
+					"from": "From the element's page", 
+					"description": "Scroll to the \"Conditions\" section of the page and find the name of the date you want to select. Click on the \"update\" button on the same line. A \"Condition\" modal window opens up.", 
+					"img": "backoffice-select_date-02.jpg"
+				}, 
+				{
+					"from": "From the \"Condition\" modal window", 
+					"description": "Select the \"Booking date\" date with the datepicker.", 
+					"img": "backoffice-select_date-03.jpg"
+				}, 
+				{
+					"from": "From the \"Condition\" modal window", 
+					"description": "Click on the \"Save\" button.", 
+					"img": "backoffice-select_date-04.jpg"
 				}
 			]
 		}

@@ -11,7 +11,9 @@ body {
 	color: #1f1f00;
 	overflow-y: scroll;
 }
-
+.capitalize { 
+	text-transform:capitalize;
+}
 /* sticky footer -------------------------------------------------- */
 html, body {
 	height: 100%;
@@ -99,6 +101,12 @@ thead .fa {
 
 a {
 	color: #1f1f00;
+}
+
+ul, ul ul {
+	margin-bottom: 10px;
+	list-style: none;
+	margin-left: 0;
 }
 
 /*.hide {

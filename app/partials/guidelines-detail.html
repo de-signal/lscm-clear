@@ -1,0 +1,59 @@
+<div class="row-fluid" id="top">
+	<div class="span12 header bg-generic">
+		<h1 class="borders">Guidelines</h1>
+	</div>
+</div>
+<div class="row-fluid borders border-top">
+	<div class="span12">
+		<h1>{{elm.title}}</h1>
+	</div>
+</div>
+<div class="row-fluid borders border-top">
+	<div class="span12">
+		<ul>
+			<li ng-repeat="instruction in elm.instructions"><a ng-click="scrollTo(instruction.id)"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="row-fluid borders border-top" ng-repeat="instruction in elm.instructions">
+	<div class="span12">
+		<div class="group-elements">
+	
+			<h1 class="border-bottom">{{$index+1 + '. ' + instruction.name}}</h1>
+			
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="row-fluid element" ng-repeat="step in instruction.steps">
+						<div class="span6">
+							<h4>{{($parent.$index+1) + '.' + ($index+1)}} </h4>
+							<p><strong>{{step.from}},</strong></p>
+							<p>{{step.description}}</p>
+							<p ng-if="step.elements_required_txt">{{step.elements_required_txt}}: </p>
+							<ul ng-if="step.elements_required">
+								<li ng-repeat="element in step.elements_required">
+									<div class="row-fluid">
+										<div class="span6">
+											<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[element.type]">{{element.type}}</span> </span>
+										</div>
+										<div class="span6">
+											<ul><li ng-repeat="required in element.requireds"><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span></li></ul>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="span6">
+							<img ng-src="img/guidelines/{{step.img}}" class="img-polaroid">
+						</div>
+					</div>
+					<p><a ng-click="scrollTo('top')" id="{{elm.instructions[$index+1].id}}">Back to top</a></p>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+	</div>
+</div>
+

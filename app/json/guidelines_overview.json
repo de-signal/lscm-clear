@@ -34,7 +34,10 @@
 				"guideline": 
 					{
 						"name": "How to upload a BW?", 
-						"url": "upload-bw"
+						"url": {
+							"page": "backoffice",
+							"anchor": "bw-upload"
+						}
 					}
 			}
 		]

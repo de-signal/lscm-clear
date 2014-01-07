@@ -66,6 +66,14 @@
     	    </accordion-group>
         </accordion>
 		
+		<div class="row-fluid border-bottom">
+			<div class="span4">
+				<p>This diagram shows the whole process, step by step, from the creation of an order to the delivery at the client.</p>
+			</div>
+			<div class="span4">	
+				<p>You can use the filters above to select the informations displayed in this page. </p>
+			</div>
+		</div>
 		<div ng-repeat="elm in elms | filter:filterFn">
 			
 			<div class="row-fluid">
@@ -93,46 +101,13 @@
 							
 							<div class="row-fluid">
 												
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.processing.order]">
-									<div class="element" ng-if="!!elm.processing.order">
-										<h5><span class="label label-order">Order </span> <span class="badge badge-parent" ng-if="elm.order.parent">Parent</span></h5>
-										<div ng-if="!!elm.processing.order.milestone" class="border-top">
+								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.processing[type]]" ng-repeat="type in types">
+									<div class="element" ng-if="!!elm.processing[type]">
+										<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span> <span class="badge badge-parent" ng-if="elm[type].parent">Parent</span></h5>
+										<div ng-if="!!elm.processing[type].milestone" class="border-top">
 											<h6>milestone</h6>
-											<h2>{{elm.processing.order.milestone.name}}</h2>
-											<p><small>{{elm.processing.order.milestone.description}}</small></p>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.processing.shipment]">
-									<div class="element" ng-if="!!elm.processing.shipment">
-										<h5><span class="label label-shipment">Shipment </span> <span class="badge badge-parent" ng-if="elm.processing.shipment.parent">Parent</span></h5>
-										<div ng-if="!!elm.processing.shipment.milestone" class="border-top">
-											<h6>milestone</h6>
-											<h2>{{elm.processing.shipment.milestone.name}}</h2>
-											<p><small>{{elm.processing.shipment.milestone.description}}</small></p>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.processing.box]">
-									<div class="element" ng-if="!!elm.processing.box">
-										<h5><span class="label label-box">Box </span> <span class="badge badge-parent" ng-if="elm.processing.box.parent">Parent</span></h5>
-										<div ng-if="!!elm.processing.box.milestone" class="border-top">
-											<h6>milestone</h6>
-											<h2>{{elm.processing.box.milestone.name}}</h2>
-											<p><small>{{elm.processing.box.milestone.description}}</small></p>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.processing.item]">
-									<div class="element" ng-if="!!elm.processing.item">
-										<h5><span class="label label-item">Item</span> <span class="badge badge-parent" ng-if="elm.processing.item.parent">Parent</span></h5>
-										<div ng-if="!!elm.processing.item.milestone" class="border-top">
-											<h6>milestone</h6>
-											<h2>{{elm.processing.item.milestone.name}}</h2>
-											<p><small>{{elm.processing.item.milestone.description}}</small></p>
+											<h2>{{elm.processing[type].milestone.name}}</h2>
+											<p><small>{{elm.processing[type].milestone.description}}</small></p>
 										</div>
 									</div>
 								</div>
@@ -152,52 +127,13 @@
 							
 							<div class="row-fluid">
 								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.downloads.order]">
-									<div class="element" ng-if="!!elm.downloads.order">
-										<h5><span class="label label-order">Order </span></h5>
-										<div ng-if="!!elm.downloads.order.documents" class="border-top">
+								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.downloads[type]]" ng-repeat="type in types">
+									<div class="element" ng-if="!!elm.downloads[type]">
+										<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
+										<div ng-if="!!elm.downloads[type].documents" class="border-top">
 											<h6>documents</h6>
-											<div ng-repeat="required in elm.downloads.order.documents">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.downloads.shipment]">
-									<div class="element" ng-if="!!elm.downloads.shipment">
-										<h5><span class="label label-shipment">Shipment </span></h5>
-										<div ng-if="!!elm.downloads.shipment.documents" class="border-top">
-											<h6>documents</h6>
-											<div ng-repeat="required in elm.downloads.shipment.documents">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.downloads.box]">
-									<div class="element" ng-if="!!elm.downloads.box">
-										<h5><span class="label label-box">Box </span></h5>
-										<div ng-if="!!elm.downloads.box.documents" class="border-top">
-											<h6>documents</h6>
-											<div ng-repeat="required in elm.downloads.box.documents">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.downloads.item]">
-									<div class="element" ng-if="!!elm.downloads.item">
-										<h5><span class="label label-item">Item</span></h5>
-										<div ng-if="!!elm.downloads.item.documents" class="border-top">
-											<h6>documents</h6>
-											<div ng-repeat="required in elm.downloads.item.documents">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<div ng-repeat="required in elm.downloads[type].documents">
+												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 												<p><small>{{required.description}}</small></p>
 											</div>
 										</div>
@@ -249,52 +185,13 @@
 							
 							<div class="row-fluid">
 								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.updates.order]">
-									<div class="element" ng-if="!!elm.updates.order">
-										<h5><span class="label label-order">Order </span></h5>
-										<div ng-if="!!elm.updates.order.conditions" class="border-top">
+								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.updates[type]]" ng-repeat="type in types">
+									<div class="element" ng-if="!!elm.updates[type]">
+										<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
+										<div ng-if="!!elm.updates[type].conditions" class="border-top">
 											<h6>conditions</h6>
-											<div ng-repeat="required in elm.updates.order.conditions">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.updates.shipment]">
-									<div class="element" ng-if="!!elm.updates.shipment">
-										<h5><span class="label label-shipment">Shipment </span></h5>
-										<div ng-if="!!elm.updates.shipment.conditions" class="border-top">
-											<h6>conditions</h6>
-											<div ng-repeat="required in elm.updates.shipment.conditions">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.updates.box]">
-									<div class="element" ng-if="!!elm.updates.box">
-										<h5><span class="label label-box">Box </span></h5>
-										<div ng-if="!!elm.updates.box.conditions" class="border-top">
-											<h6>conditions</h6>
-											<div ng-repeat="required in elm.updates.box.conditions">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
-												<p><small>{{required.description}}</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="span3" ng-class="{false:'mobile\-hide'}[!!elm.updates.item]">
-									<div class="element" ng-if="!!elm.updates.item">
-										<h5><span class="label label-item">Item</span></h5>
-										<div ng-if="!!elm.updates.item.conditions" class="border-top">
-											<h6>conditions</h6>
-											<div ng-repeat="required in elm.updates.item.conditions">
-												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="{{required.guideline.url}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<div ng-repeat="required in elm.updates[type].conditions">
+												<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 												<p><small>{{required.description}}</small></p>
 											</div>
 										</div>
