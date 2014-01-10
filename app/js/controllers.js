@@ -487,7 +487,7 @@ angular.module('clearApp.controllers', [])
 		$scope.list = StaticDashboardList.query();
 		$scope.go = ClearFn.go;
 	}])
-	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
+	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', '$filter', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, $filter, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
 		
 		var date = { from: {}, to: {} };
 		var query = $location.search();

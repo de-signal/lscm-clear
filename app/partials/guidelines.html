@@ -1,29 +1,29 @@
-<div class="row-fluid">
-	<div class="span12 header bg-generic">
-		<h1 class="borders">Guidelines</h1>
-	</div>
+<div class="header bg-generic">
+	<h1 class="container">Guidelines</h1>
 </div>
 
-<div class="row-fluid borders border-top">
-	<div class="span12">
-		<h4><a href="/app/guidelines/process">Process Overview</a></h4>
+<div class="container">
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h4><a href="/app/guidelines/process">Process Overview</a></h4>
+		</div>
 	</div>
-</div>
-
-<div class="row-fluid borders border-top">
-	<div class="span12">
-		<h4><a href="/app/guidelines/backoffice">{{elmBackoffice.title}}</a></h4>
-		<ul>
-			<li ng-repeat="instruction in elmBackoffice.instructions"><a ng-href="/app/guidelines/backoffice#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
-		</ul>
+	
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h4><a href="/app/guidelines/backoffice">{{elmBackoffice.title}}</a></h4>
+			<ul>
+				<li ng-repeat="instruction in elmBackoffice.instructions"><a ng-href="/app/guidelines/backoffice#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
+			</ul>
+		</div>
 	</div>
-</div>
-
-<div class="row-fluid borders border-top">
-	<div class="span12">
-		<h4><a href="/app/guidelines/mobile">{{elmMobile.title}}</a></h4>
-		<ul>
-			<li ng-repeat="instruction in elmMobile.instructions"><a ng-href="/app/guidelines/mobile#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
-		</ul>
+	
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h4><a href="/app/guidelines/mobile">{{elmMobile.title}}</a></h4>
+			<ul>
+				<li ng-repeat="instruction in elmMobile.instructions"><a ng-href="/app/guidelines/mobile#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
+			</ul>
+		</div>
 	</div>
 </div>

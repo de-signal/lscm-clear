@@ -43,7 +43,7 @@ angular.module('clearApp.directives', [])
 	    	switch (attrs.status) {
 	        	case 'processing': elem.addClass('label\-success'); break; 
 	          	case 'upcoming': elem.addClass('label\-warning'); break;
-	          	case 'late': elem.addClass('label\-important'); break;
+	          	case 'late': elem.addClass('label\-danger'); break;
 				case 'none': elem.addClass('hide'); break;
 			}
 		}
@@ -55,7 +55,7 @@ angular.module('clearApp.directives', [])
 	    	}
 	    	if (!scope.required.editable) {
 	    		elem.removeClass('label\-warning');
-	    		elem.removeClass('label\-important');
+	    		elem.removeClass('label\-danger');
 	    	}
 		}
 	})

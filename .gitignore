@@ -7,3 +7,4 @@ scripts/
 test/
 app/lscm-clear.com.esproj/
 app/components/
+app/.sass-cache

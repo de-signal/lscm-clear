@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CLEAR | LSCM</title>
   <link rel="stylesheet" href="/app/lib/css/bootstrap.css"/>
-  <link rel="stylesheet" href="/app/lib/css/bootstrap-responsive.css"/>
   <link rel="stylesheet" href="/app/lib/css/font-awesome.min.css">
   <link rel="stylesheet" href="/app/lib/css/nv.d3.css"/>
   <link rel="stylesheet" href="/app/css/app.css"/>
@@ -22,103 +21,106 @@
 			<div class="login-logo">
 				<img src="/app/img/clear_logo_type.svg" alt="Cloud Logistics Extranet Application Resource"/>
 			</div>
-			<form ng-submit="login()" class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label">Username</label>
-					<div class="controls">
-						<input type="text" class="login-inp" ng-model="username">
+			<form ng-submit="login()" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Username</label>
+					<div class="controls col-sm-8">
+						<input type="text" class="form-control" ng-model="username">
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label">Password</label>
-					<div class="controls">
-						<input type="password" ng-model="password">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Password</label>
+					<div class="controls col-sm-8">
+						<input type="password" ng-model="password" class="form-control">
 					</div>
 				</div>
-				<div class="control-group">
-					<div class="controls">
+				<div class="form-group">
+					<div class="controls col-sm-offset-4 col-sm-8">
 						<label class="checkbox">
 							<input type="checkbox" ng-model="remember">Remember me
 						</label>
-						<input type="submit" class="btn" value="Log In"/>
 					</div>
-				</div>			
+				</div>
+				<div class="form-group">
+					<div class="controls col-sm-offset-4 col-sm-8">
+						<input type="submit" class="btn btn-lg btn-default" value="Log In"/>
+					</div>
+				</div>		
 			</form>
 		</div>
 		
 		<div ng-show="loggedIn">
 			
-			<div class="navbar navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen">
-				<div class="navbar-inner">
-					<div class="borders">
-						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" ng-click="isCollapsed = !isCollapsed">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="brand" href="dashboard"><img src="/app/img/clear_logo_type.svg" alt="Clear" /></a>
-						<div class="nav-collapse collapse" collapse="isCollapsed">
-							<ul class="nav pull-right">
-								<li><a class="dropdown-toggle" href="#"><i class="fa fa-user"></i> <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="profile">{{user.first_name}} {{user.name}}</a></li>
-										<li><a ng-click="logout()">Logout</a></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="nav pull-right">
-								<li><a href="guidelines" alt="Guidelines" title="Guidelines"><i class="fa fa-question-circle"></i></a>
-								</li>
-							</ul>
-							<ul class="nav">
-								<li><a href="tracking">Tracking</a></li>
-								<li><a href="indicators">Indicators</a></li>
-								<li><a href="search">Search</a></li>
-								<li><a class="dropdown-toggle">Documents <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="inspection-report">Inspection reports</a></li>
-										<li><a href="non-compliance-report">Non-compliance reports</a></li>
-										<li><a href="proof-of-delivery">Proofs of delivery</a></li>
-									</ul>
-								</li>
-								<li><a href="add-order">Add order</a>
-								</li>
-							</ul>
-						</div><!--/.nav-collapse -->
+			<div class="navbar navbar-default navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen"  role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse" ng-click="isCollapsed = !isCollapsed">
+						      <span class="sr-only">Toggle navigation</span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						    </button>
+						<a class="navbar-brand" href="dashboard"><img src="/app/img/clear_logo_type.svg" alt="Clear" /></a>
 					</div>
+					<div class="navbar-collapse collapse" collapse="isCollapsed">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="guidelines" alt="Guidelines" title="Guidelines"><i class="fa fa-question-circle"></i></a>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" href="#"><i class="fa fa-user"></i> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="profile">{{user.first_name}} {{user.name}}</a></li>
+									<li><a ng-click="logout()">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav">
+							<li><a href="tracking">Tracking</a></li>
+							<li><a href="indicators">Indicators</a></li>
+							<li><a href="search">Search</a></li>
+							<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="inspection-report">Inspection reports</a></li>
+									<li><a href="non-compliance-report">Non-compliance reports</a></li>
+									<li><a href="proof-of-delivery">Proofs of delivery</a></li>
+								</ul>
+							</li>
+							<li><a href="add-order">Add order</a>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
 				</div>
 			</div>
 	
-			<div class="container-fluid content">
+			<div class="content">
 				<div ng-view></div>
 				<div id="push"></div>
-			</div> <!--/.fluid-container-->
+			</div>
 		
-		</div>
+		</div> <!--/loggedIn-->
 				
 	</div> <!--/#wrap-->
 	    
 	<footer>
-		<div class="row-fluid borders footer-content">
-			<div class="span6">
-				<img src="/app/img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
-				
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<img src="/app/img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
+				</div>
+				<div class="col-md-3">
+					<p class="static-links margin-top"><small>Static: <a href="/app/static-dashboard">Dashboard</a> / 
+						<a href="/app/static-tracking">Tracking</a> / 
+						<a href="/app/static-detail">Detail</a> / 
+						<a href="/app/static-indicators">Indicators</a><br />
+						<a href="/app/static-inspection-reports">Inspection reports</a> / 
+						<a href="/app/static-non-compliance-reports">Non-compliance reports</a> / 
+						<a href="/app/static-proofs-of-delivery">Proofs of delivery</a></small></p>
+				</div>
+				<div class="col-md-3">
+					<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>
+					<p class="margin-top"><img src="/app/img/lscm_logo.png" alt="" /></p>
+				</div>
 			</div>
-			<div class="span3 border-top-l">
-				<p class="static-links"><small>Static: <a href="/app/static-dashboard">Dashboard</a> / 
-					<a href="/app/static-tracking">Tracking</a> / 
-					<a href="/app/static-detail">Detail</a> / 
-					<a href="/app/static-indicators">Indicators</a><br />
-					<a href="/app/static-inspection-reports">Inspection reports</a> / 
-					<a href="/app/static-non-compliance-reports">Non-compliance reports</a> / 
-					<a href="/app/static-proofs-of-delivery">Proofs of delivery</a></small></p>
-			</div>
-			<div class="span3 border-top-l">
-				<p><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>
-				<p><img src="/app/img/lscm_logo.png" alt="" /></p>
-			</div>
-			
-			
 		</div>
 	</footer>
 	
@@ -136,7 +138,7 @@
   <script src="/app/lib/angular-1.2.7/angular-cookies.min.js"></script>
   <script src="/app/lib/directives/http-auth-interceptor.js"></script>
   <script src="/app/lib/directives/nvd3-directives.js"></script>
-  <script src="/app/lib/directives/ui-bootstrap-tpls-0.8.0.js"></script>
+  <script src="/app/lib/directives/ui-bootstrap-tpls.min.js"></script>
   <script src="/app/lib/directives/ng-upload-0.4.min.js"></script>
   <script src="/app/lib/directives/toaster.js"></script>
   

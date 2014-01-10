@@ -1,33 +1,32 @@
-<div class="row-fluid">
-	<div class="span12 header" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
-		<h1 class="borders">{{elm.type}}<i class="tracking pull-right pointer fa" ng-class="{true:'fa\-star', false:'fa\-star\-o'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></h1>
-	</div>
+<div class="header"  ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
+	<h1 class="container"><i class="tracking pull-right pointer fa" ng-class="{true:'fa\-star', false:'fa\-star\-o'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i>{{elm.type}}</h1>
 </div>
 
-<div class="row-fluid borders border-top">
-	<div class="span3 filet">
+<div class="container margin-top">
+	<div class="row">
+	<div class="col-md-3 filet">
 		<h6>reference</h6>
 		<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
 		
 	</div>
-	<div class="span6 filet">
+	<div class="col-md-6 filet">
 		<h6>milestone</h6>
 		<h2>{{elm.milestone}}</h2>
 		<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'">
 		<i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i> </span>
 	</div>
-	<div class="span3 filet">
+	<div class="col-md-3 filet">
 		<h6>status</h6>
-		<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-important', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
+		<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
 	</div>
 </div>
-<div class="row-fluid borders border-top">
-	<div class="span3 filet">
+<div class="row margin-top">
+	<div class="col-md-3 filet">
 		<h6>description</h6>
 		<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
 		<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
 	</div>
-	<div class="span3 filet">
+	<div class="col-md-3 filet">
 		<h6>daily production value</h6>
 		<p class="type-fat" ng-style="charts.daily_production_value.typeColor">{{charts.daily_production_value.value}} %</p>
 		<nvd3-pie-chart 
@@ -48,7 +47,7 @@
 		<progress percent="elm.daily_production_value" class="hide"></progress>
 		
 	</div>
-	<div class="span3 filet">
+	<div class="col-md-3 filet">
 		<h6>production completion</h6>
 		<p class="type-fat" ng-style="charts.production_completion.typeColor">{{charts.production_completion.value}} %</p>
 		<nvd3-pie-chart 
@@ -68,7 +67,7 @@
 		</nvd3-pie-chart>
 		<progress percent="charts.production_completion" class="hide"></progress>
 	</div>
-	<div class="span3 filet">
+	<div class="col-md-3 filet">
 		<h6>production ratio</h6>
 		<p class="type-fat"  ng-style="charts.production_ratio.typeColor">{{charts.production_ratio.textLabel}}</p>
 		<nvd3-pie-chart 
@@ -90,88 +89,90 @@
 	</div>
 	</div>
 	
-	<div class="row-fluid borders" ng-show="elm.required">
-		<div class="span12">
+	<div class="row" ng-show="elm.required">
+		<div class="col-md-12">
 			<h3>conditions</h3>
 			<table class="table table-condensed">
 				<thead>
 				<tr>
-					<th>type </th><th>name</th><th>status</th><th> </th>
+					<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>status</h6></th><th><h6> </h6></th>
 				</tr>
 				</thead>
 				<tr ng-repeat="required in elm.required">
 					<td><i class="lead fa" required-icon></i></td>
 					<td><strong>{{required.name}}</strong></td>
 					<td><span class="label" status="{{elm.status}}"  required-status editable="{{required.editable}}" completed="{{required.completed}}">{{required.message}}</span></td>
-					<td><button class='btn btn-small' ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
+					<td><button class='btn btn-sm' ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
 				</tr>
 			</table>			
 		</div>
 	</div>
 	
 	
-	<div class="row-fluid borders" ng-show="elm.documents">
-		<div class="span12">
+	<div class="row" ng-show="elm.documents">
+		<div class="col-md-12">
 			<h3>documents</h3>
 			<table class="table table-condensed">
 				<thead>
 				<tr>
-					<th>type </th><th>name</th><th>info</th><th></th>
+					<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>info</h6></th><th><h6></h6></th>
 				</tr>
 				</thead>
 				<tr ng-repeat="document in elm.documents">
 					<td><i class="lead fa fa-file-text-o"></i>&nbsp;&nbsp;{{document.type}}</td>
 					<td><strong>{{document.name}}</strong></td>
-					<td><span class="label">{{document.info}}</span></td>
-					<td><a ng-href="{{document.url}}" class='btn btn-small'>Download</a></td>
+					<td><span class="label label-default">{{document.info}}</span></td>
+					<td><a ng-href="{{document.url}}" class='btn btn-sm'>Download</a></td>
 				</tr>
 			</table>			
 		</div>
 	</div>
 	
-	<div class="row-fluid borders">
-		<div class="span12">
+	<div class="row">
+		<div class="col-md-12">
 			<h3>schedule</h3>
 			<table class="table table-condensed" ng-init="showCalendar=false">
 				<thead>
 					<tr>
-						<th><a href="" ng-click="showCalendar=!showCalendar" class="btn btn-mini"><i class="fa" ng-class="{true:'fa\-caret\-down', false:'fa\-caret\-right'}[showCalendar]"></i></a></th><th>milestone </th><th>initial</th><th>forecast</th><th>revised</th><th>actual</th>
+						<th><a href="" ng-click="showCalendar=!showCalendar" class="btn btn-mini"><i class="fa" ng-class="{true:'fa\-caret\-down', false:'fa\-caret\-right'}[showCalendar]"></i></a></th><th><h6>milestone </h6></th><th><h6>initial</h6></th><th><h6>forecast</h6></th><th><h6>revised</h6></th><th><h6>actual</h6></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'" ng-class="{highlite: milestone.step=='current'}" ng-show="milestone.step=='previous' || milestone.step=='next' || milestone.step=='current' || showCalendar">
 						<td>&nbsp;<i class="fa" step-icon></i></td>
 						<td><span ng-class="{previous:'light', past:'light', next:'ultralight', future:'ultralight', current:'bold'}[milestone.step]">{{$index + 1}}. {{milestone.name}}</span></td>
-						<td ng-repeat="status in milestone.statuses"><span class="label" status="{{status[2]}}">{{status[1]*1000 | date:'dd.MM.yy' }}</span></td>
+						<td ng-repeat="status in milestone.statuses"><span class="label label-default" status="{{status[2]}}">{{status[1]*1000 | date:'dd.MM.yy' }}</span></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	
-	<div class="row-fluid borders">
-		<div class="span12">
+	<div class="row">
+		<div class="col-md-12">
 			<h3>properties</h3>
 			<accordion close-others="false">
 			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup">
 			    	<accordion-heading>
-			    		<h4 ng-class="[group.id, 'group']">{{group.name}}</h4>
+			    		<span ng-class="[group.id, 'group']">{{group.name}}</span>
 			    	</accordion-heading>
 					<div class="form-horizontal">
-						<div class="control-group" ng-repeat="prop in group.set">
-							<label class="control-label" for="inputEmail">{{prop.name}}</label> 
-							<div class="controls" ng-switch on="prop.type">
-								<div class="input-append" ng-switch-when="text">
-								  <input type="text" ng-model="prop.value" ng-disabled="!prop.editable">
-								  <button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, 'property', group.name)">Save</button>
+						<div class="form-group" ng-repeat="prop in group.set">
+							<label class="col-sm-4 control-label" for="inputEmail">{{prop.name}}</label> 
+							<span class="col-sm-4" ng-switch on="prop.type">
+								<div class="input-group" ng-switch-when="text">
+								  <input type="text" class="form-control" ng-model="prop.value" ng-disabled="!prop.editable">
+								  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, 'property', group.name)">Save</button></span>
 								</div>
-								<input ng-switch-when="checkbox" type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)">
-								<select ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)" ng-switch-when="select">
+								<div class="checkbox" ng-switch-when="checkbox">
+									<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)"></label>
+								</div>
+								<select ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)" ng-switch-when="select" class="form-control">
 									<option ng-repeat="i in prop.values" value="{{$index}}" ng-selected="$index == prop.value">{{i}}</option>
 								</select>
 								
-								<div class="input-append" ng-switch-when="date">
-									<input type="text" 
+								<div class="input-group" ng-switch-when="date">
+									<input type="text" class="form-control" 
 										datepicker-popup="dd.MM.yy HH:mm" 
 										ng-model="date[prop.name].value" 
 										is-open="date[prop.name].opened" 
@@ -180,11 +181,13 @@
 										ng-disabled="!prop.editable" 
 										show-weeks="false"
 										ng-change="prop.value = dateToTimestamp(date[prop.name].value); propertySave(elm, 'property', group.name)">
-									<button class="btn" ng-click="calOpen(prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button>
+									<span class="input-group-btn"><button class="btn" ng-click="calOpen(prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button></span>
 								</div>
-								
-								&nbsp;<i class="fa fa-info-circle" tooltip="{{prop.info}}" tooltip-placement="right" ng-show="prop.info"></i>
-							</div>
+							</span>
+							<span class="col-sm-4">
+								<i class="fa fa-info-circle" tooltip="{{prop.info}}" tooltip-placement="right" ng-show="prop.info"></i>
+							</span>
+							
 				    	</div>
 					</div>
 			    </accordion-group>
@@ -192,8 +195,8 @@
 		</div><!--/span-->
 	</div><!--/row-->
 	
-	<div class="row-fluid borders" ng-show="elm.related" id="related">
-		<div class="span12">
+	<div class="row margin-top" ng-show="elm.related" id="related">
+		<div class="col-md-12">
 			<h3>related</h3>
 			<tabset>
 			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
@@ -205,3 +208,4 @@
             </tabset>			
 		</div>
 	</div>
+</div>

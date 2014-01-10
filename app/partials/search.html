@@ -1,129 +1,157 @@
-<div class="row-fluid">
-	<div class="span12 header bg-generic">
-		<h1 class="borders">Search</h1>
-	</div>
+<div class="header bg-generic">
+	<h1 class="container">Search</h1>
 </div>
 
-<div class="row-fluid borders border-top">
-	<div class="span12 outline">
-		
-		<div class="row-fluid">
-		
-			<div class="span4">
-				<fieldset>
-					<legend>Type </legend>
-					<label class="control-label radio" ng-repeat="type in filters.types">
-						<input type="radio" ng-model="query.type" value="{{type}}" ng-change="queryInit(query.type)"> {{type}}
-					</label>
-				</fieldset>
-				<fieldset ng-show="query.type">
-					<legend>Reference </legend>
-					<input type="text" ng-model="query.reference">
-				</fieldset>
-			</div>
+<div class="container margin-top">
+	<div class="row">
+		<div class="col-md-12 outline">
 			
-			<div class="span4">
-				<fieldset ng-show="query.type">
-					<legend>Milestone </legend>
-					<label class="control-label">Name</label>
-					<select ng-model="query.milestone_name" ng-options="name for name in filters.milestones[query.type]"><option value="">---</option></select>
-					<fieldset ng-show="query.milestone_name">
-						<label class="control-label">Planning</label>
-						<select ng-model="query.milestone_planning" ng-options="planning for planning in filters.plannings"><option value="">---</option></select>
-						<span ng-show="query.milestone_planning == 'actual' || query.milestone_planning == 'revised'">
-							<label class="control-label">Status</label>
-							<select ng-model="query.milestone_status" ng-options="status for status in filters.statuses"><option value="">---</option></select>
-						</span>
-						<span ng-show="query.milestone_planning">
-							<label class="control-label">From</label>
-							<div class="input-append">
-								<input type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
-								<button class="btn" ng-click="open('milestone_start')"><i class="fa fa-calendar"></i></button>
+			<div class="row">
+			
+				<div class="col-md-4">
+					<fieldset class="hack-top">
+						<legend>Type </legend>
+						<div class="radio" ng-repeat="type in filters.types">
+							<label class="control-label">
+								<input type="radio" ng-model="query.type" value="{{type}}" ng-change="queryInit(query.type)"> {{type}}
+							</label>
+						</div>
+					</fieldset>
+					<fieldset ng-show="query.type">
+						<div class="form-group">
+							<label>Reference </label>
+							<input type="text" ng-model="query.reference" class="form-control">
+						</div>
+					</fieldset>
+				</div>
+				
+				<div class="col-md-4">
+					<fieldset ng-show="query.type">
+						<legend>Milestone </legend>
+						<div class="form-group">
+							<label class="control-label">Name</label>
+							<select class="form-control" ng-model="query.milestone_name" ng-options="name for name in filters.milestones[query.type]"><option value="">---</option></select>
+						</div>
+						<fieldset ng-show="query.milestone_name">
+							<div class="form-group">
+								<label class="control-label">Planning</label>
+								<select ng-model="query.milestone_planning" ng-options="planning for planning in filters.plannings" class="form-control"><option value="">---</option></select>
 							</div>
-							<label class="control-label">To</label>
-							<div class="input-append">
-								<input type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
-								<button class="btn" ng-click="open('milestone_end')"><i class="fa fa-calendar"></i></button>
+							<span ng-show="query.milestone_planning == 'actual' || query.milestone_planning == 'revised'">
+								<div class="form-group">
+									<label class="control-label">Status</label>
+									<select ng-model="query.milestone_status" ng-options="status for status in filters.statuses" class="form-control"><option value="">---</option></select>
+								</div>
+							</span>
+							<span ng-show="query.milestone_planning">
+								<div class="form-group">
+									<label class="control-label">From</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('milestone_start')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">To</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('milestone_end')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+							</span>
+						</fieldset>
+					</fieldset>
+				</div>
+				
+				<div class="col-md-4">
+					<fieldset ng-show="query.type">
+						<legend>Property </legend>
+						<div class="form-group">
+							<label class="control-label">Name</label>
+							<select class="form-control" ng-model="selected.property" ng-options="prop.name group by prop.group for prop in filters.properties[query.type]" ng-change="query.property_name=selected.property.name; query.property_id=IndxOf(filters.properties[query.type], selected.property.name, 'name')">
+								<option value="">---</option>
+							</select>
+						</div>
+						<span ng-switch="selected.property.type">
+							<div class="form-group" ng-switch-when="text">
+								<label class="control-label">{{query.property_name}}</label>
+								<input class="form-control" type="text" ng-model="query.property_value">
 							</div>
+							<span ng-switch-when="date">
+								<div class="form-group">
+									<label class="control-label">From</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('property_start')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">To</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('property_end')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+							</span>
 						</span>
 					</fieldset>
-				</fieldset>
+				</div>
+				
 			</div>
 			
-			<div class="span4">
-				<fieldset ng-show="query.type">
-					<legend>Property </legend>
-					<label class="control-label">Name</label>
-					<select ng-model="selected.property" ng-options="prop.name group by prop.group for prop in filters.properties[query.type]" ng-change="query.property_name=selected.property.name; query.property_id=IndxOf(filters.properties[query.type], selected.property.name, 'name')">
-						<option value="">---</option>
-					</select>
-					<span ng-switch="selected.property.type">
-						<div class="control-group" ng-switch-when="text">
-							<label class="control-label">{{query.property_name}}</label>
-							<input type="text" ng-model="query.property_value">
-						</div>
-						<span ng-switch-when="date">
-							<label class="control-label">From</label>
-							<div class="input-append">
-								<input type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
-								<button class="btn" ng-click="open('property_start')"><i class="fa fa-calendar"></i></button>
-							</div>
-							<label class="control-label">To</label>
-							<div class="input-append">
-								<input type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
-								<button class="btn" ng-click="open('property_end')"><i class="fa fa-calendar"></i></button>
-							</div>
-						</span>
-					</span>
-				</fieldset>
+			<div class="row">
+			    <div class="col-md-12">
+					<button class="btn btn-block btn-lg btn-default" type="button" ng-click="search(query)" ng-disabled="!query.type">Search</button>
+				</div>
 			</div>
 			
 		</div>
-		
-		<div class="row-fluid">
-		    <div class="span12">
-				<button class="btn btn-block btn-large btn-generic" type="button" ng-click="search(query)" ng-disabled="!query.type">Search</button>
-			</div>
-		</div>
-		
-	</div>
-</div><!--/row-->
-
-
-
-<div class="row-fluid borders" ng-controller="ListCtrl" >
-    <div class="span12" ng-if="showList">
-   		<h3><i class="fa fa-search lead"></i> search results</h3>
-   		<span ng-include="'partials/tplList.html'" onload="loadList(query)"></span> 
-    </div><!--/span-->
-</div><!--/row-->
-
-<div class="row-fluid borders hide">
-    <div class="span6">
-    	<pre><small>date: {{date}}
-type: {{query.type}}
-reference: {{query.reference}}
-milestone_name: {{query.milestone_name}}
-milestone_planning: {{query.milestone_planning}}
-milestone_status: {{query.milestone_status}}
-milestone_date_start: {{query.milestone_date_start}}
-milestone_date_end: {{query.milestone_date_end}}
-property_name: {{query.property_name}}
-property_value: {{query.property_value}}
-property_type: {{query.property_type}}
-property_group: {{query.property_group}}
-property_date_start: {{query.property_date_start}}
-property_date_end: {{query.property_date_end}}
-property_id: {{query.property_id}}
-limit: {{query.limit}}
-query: {{query}}
-listInit: {{listInit}}
-property: {{searchParams.property}}
-selected: {{selected}}
-</small></pre>
-    </div>
-    <div class="span6">
-    </div><!--/span-->
-</div><!--/row-->
+	</div><!--/row-->
+	
+	
+	
+	<div class="row" ng-controller="ListCtrl" >
+	    <div class="col-md-12" ng-if="showList">
+	   		<h3><i class="fa fa-search lead"></i> search results</h3>
+	   		<span ng-include="'partials/tplList.html'" onload="loadList(query)"></span> 
+	    </div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row hide">
+	    <div class="col-md-6">
+	    	<pre><small>date: {{date}}
+	type: {{query.type}}
+	reference: {{query.reference}}
+	milestone_name: {{query.milestone_name}}
+	milestone_planning: {{query.milestone_planning}}
+	milestone_status: {{query.milestone_status}}
+	milestone_date_start: {{query.milestone_date_start}}
+	milestone_date_end: {{query.milestone_date_end}}
+	property_name: {{query.property_name}}
+	property_value: {{query.property_value}}
+	property_type: {{query.property_type}}
+	property_group: {{query.property_group}}
+	property_date_start: {{query.property_date_start}}
+	property_date_end: {{query.property_date_end}}
+	property_id: {{query.property_id}}
+	limit: {{query.limit}}
+	query: {{query}}
+	listInit: {{listInit}}
+	property: {{searchParams.property}}
+	selected: {{selected}}
+	</small></pre>
+	    </div>
+	    <div class="col-md-6">
+	    </div><!--/span-->
+	</div><!--/row-->
+</div><!--/container-->
 
 

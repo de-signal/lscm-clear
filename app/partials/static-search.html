@@ -1,42 +1,157 @@
-<div class="row-fluid">
-    <div class="span3">
-    
-      <div class="sidebar-nav">
-        <ul class="nav nav-list">
-          <li><form class="navbar-search">
-          <input type="text" class="search-query" placeholder="Search" ng-model="query">
-          </form>
-          </li>
-        </ul>
-        <ul class="nav nav-list" ng-repeat="category in users[0].preferences.search">
-          <li class="nav-header">{{category.name}}</li>
-          <li ng-repeat="filter in category.filters"><label class="checkbox"><input type="checkbox" ng-checked="filter.value" ng-model="filter.value"> {{filter.name}}</label></li>
-        </ul>
-      </div>
-      
-    </div><!--/span-->
-    <div class="span9">
-   		<table class="table">
-          <thead>
-            <tr>
-              <th>typo</th><th>reference</th><th>milestone</th><th>status</th><th>required</th><th>tracked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr  ng-repeat="elm in elms | filter:{type:''} | filter:query | checkboxFilter:users[0].preferences.search:query | orderBy:'delay'"  ng-click="go(elm)" class="pointer over">
-              <td>{{elm.type}}</td>
-              <td>{{elm.reference}}</td>
-              <td>{{elm.milestone}}</td>
-              <td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
-              <td><ul class="inline-list">
-              	<li ng-repeat="required in elm.required">
-              		<span class="label" status="{{elm.status}}" required-status editable="{{required.editable}}" completed="{{required.completed}}"><i required-icon tooltip="{{required.name}}"></i></span>
-				</li>
-              </ul></td>
-              <td><input type="checkbox" ng-model="elm.tracking" ng-false-value="untracked" ng-true-value="tracked"></td>
-            </tr>
-          </tbody>
-        </table>
-   		           
-    </div><!--/span-->
-  </div><!--/row-->
+<div class="header bg-generic">
+	<h1 class="container">Search</h1>
+</div>
+
+<div class="container margin-top">
+	<div class="row">
+		<div class="col-md-12 outline">
+			
+			<div class="row">
+			
+				<div class="col-md-4">
+					<fieldset class="hack-top">
+						<legend>Type </legend>
+						<div class="radio" ng-repeat="type in filters.types">
+							<label class="control-label">
+								<input type="radio" ng-model="query.type" value="{{type}}" ng-change="queryInit(query.type)"> {{type}}
+							</label>
+						</div>
+					</fieldset>
+					<fieldset ng-show="query.type">
+						<div class="form-group">
+							<label>Reference </label>
+							<input type="text" ng-model="query.reference" class="form-control">
+						</div>
+					</fieldset>
+				</div>
+				
+				<div class="col-md-4">
+					<fieldset ng-show="query.type">
+						<legend>Milestone </legend>
+						<div class="form-group">
+							<label class="control-label">Name</label>
+							<select class="form-control" ng-model="query.milestone_name" ng-options="name for name in filters.milestones[query.type]"><option value="">---</option></select>
+						</div>
+						<fieldset ng-show="query.milestone_name">
+							<div class="form-group">
+								<label class="control-label">Planning</label>
+								<select ng-model="query.milestone_planning" ng-options="planning for planning in filters.plannings" class="form-control"><option value="">---</option></select>
+							</div>
+							<span ng-show="query.milestone_planning == 'actual' || query.milestone_planning == 'revised'">
+								<div class="form-group">
+									<label class="control-label">Status</label>
+									<select ng-model="query.milestone_status" ng-options="status for status in filters.statuses" class="form-control"><option value="">---</option></select>
+								</div>
+							</span>
+							<span ng-show="query.milestone_planning">
+								<div class="form-group">
+									<label class="control-label">From</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('milestone_start')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">To</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('milestone_end')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+							</span>
+						</fieldset>
+					</fieldset>
+				</div>
+				
+				<div class="col-md-4">
+					<fieldset ng-show="query.type">
+						<legend>Property </legend>
+						<div class="form-group">
+							<label class="control-label">Name</label>
+							<select class="form-control" ng-model="selected.property" ng-options="prop.name group by prop.group for prop in filters.properties[query.type]" ng-change="query.property_name=selected.property.name; query.property_id=IndxOf(filters.properties[query.type], selected.property.name, 'name')">
+								<option value="">---</option>
+							</select>
+						</div>
+						<span ng-switch="selected.property.type">
+							<div class="form-group" ng-switch-when="text">
+								<label class="control-label">{{query.property_name}}</label>
+								<input class="form-control" type="text" ng-model="query.property_value">
+							</div>
+							<span ng-switch-when="date">
+								<div class="form-group">
+									<label class="control-label">From</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('property_start')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">To</label>
+									<div class="input-group">
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
+										<span class="input-group-btn">
+											<button class="btn" ng-click="open('property_end')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+								</div>
+							</span>
+						</span>
+					</fieldset>
+				</div>
+				
+			</div>
+			
+			<div class="row">
+			    <div class="col-md-12">
+					<button class="btn btn-block btn-lg btn-default" type="button" ng-click="search(query)" ng-disabled="!query.type">Search</button>
+				</div>
+			</div>
+			
+		</div>
+	</div><!--/row-->
+	
+	
+	
+	<div class="row" ng-controller="ListCtrl" >
+	    <div class="col-md-12" ng-if="showList">
+	   		<h3><i class="fa fa-search lead"></i> search results</h3>
+	   		<span ng-include="'partials/tplList.html'" onload="loadList(query)"></span> 
+	    </div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row hide">
+	    <div class="col-md-6">
+	    	<pre><small>date: {{date}}
+	type: {{query.type}}
+	reference: {{query.reference}}
+	milestone_name: {{query.milestone_name}}
+	milestone_planning: {{query.milestone_planning}}
+	milestone_status: {{query.milestone_status}}
+	milestone_date_start: {{query.milestone_date_start}}
+	milestone_date_end: {{query.milestone_date_end}}
+	property_name: {{query.property_name}}
+	property_value: {{query.property_value}}
+	property_type: {{query.property_type}}
+	property_group: {{query.property_group}}
+	property_date_start: {{query.property_date_start}}
+	property_date_end: {{query.property_date_end}}
+	property_id: {{query.property_id}}
+	limit: {{query.limit}}
+	query: {{query}}
+	listInit: {{listInit}}
+	property: {{searchParams.property}}
+	selected: {{selected}}
+	</small></pre>
+	    </div>
+	    <div class="col-md-6">
+	    </div><!--/span-->
+	</div><!--/row-->
+</div><!--/container-->
+
+
