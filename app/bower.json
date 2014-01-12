@@ -2,10 +2,10 @@
   "name": "lscm-clear",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.7",
-    "angular-route": "~1.2.7",
-    "angular-cookies": "~1.2.7",
-    "angular-animate": "~1.2.7",
+    "angular": "~1.2.8",
+    "angular-route": "~1.2.8",
+    "angular-cookies": "~1.2.8",
+    "angular-animate": "~1.2.8",
     "ngUpload": "~0.5.5",
     "angularjs-nvd3-directives": "~0.0.5-beta",
     "components-font-awesome": "~4.0.3",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "angular": "1.2.7",
-    "d3": "3.3.11"
+    "angular": "~1.2.8",
+    "d3": "~3.3.11"
   }
 }

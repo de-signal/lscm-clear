@@ -225,18 +225,14 @@ angular.module('clearApp.controllers', [])
 	    switch (required.type) {
 	    	case 'upload': 
 	    		// ngUpload
-				$scope.uploadUrl = '/index_rest.php/api/clear/v2/'+ elm.type + '/' + elm.id + '?required=' + required.id;	    		
-				$scope.results = function(content, completed) {
-					if (completed && content.length > 0) {
-						console.log('done / content: ', content, 'completed: ', completed); // process content
-					} else { 
-						console.log('in progress / content: ', content, 'completed: ', completed);
-						if (completed) $scope.uploadMessage = 'File uploaded. Save to complete.' ;
-						else $scope.uploadMessage = 'Please wait…' ;
-						// 1. ignore content and adjust your model to show/hide UI snippets; or
-						// 2. show content as an _operation progress_ information
-					};
-				}
+				$scope.uploadUrl = '/index_rest.php/api/clear/v2/'+ elm.type + '/' + elm.id + '?required=' + required.id;
+				$scope.startUploading = function() {
+					$scope.uploadMessage = "Uploading in progress, please wait…";
+				};
+				
+				$scope.complete = function (content, completed) {
+					$scope.uploadMessage = 'File uploaded. Save to complete.'
+				};
 	    	break; 
 	    	case 'checkbox': 
 	    	
