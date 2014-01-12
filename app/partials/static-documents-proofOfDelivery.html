@@ -77,9 +77,9 @@
 				</tr>
 				</thead>
 				<tr>
-					<td><i class="lead fa fa-file"></i>&nbsp;&nbsp;{{doc.document.type}}</td>
+					<td><i class="lead fa fa-file-text-o"></i>&nbsp;&nbsp;{{doc.document.type}}</td>
 					<td><strong>{{doc.document.name}}</strong></td>
-					<td><span class="label">{{doc.document.info}}</span></td>
+					<td><span class="label label-default">{{doc.document.info}}</span></td>
 					<td><a ng-href="{{doc.document.url}}" class='btn btn-small' target="_blank">Download</a></td>
 				</tr>
 			</table>			
@@ -117,7 +117,7 @@
 						<h6>name</h6>
 						<p>{{doc.signature.name}}</p>
 						<h6>signature</h6>
-						<p><img ng-src="{{doc.signature.image.url}}" alt="doc.signature.image.name" /></p>
+						<p><img class="img-responsive" ng-src="{{doc.signature.image.url}}" alt="doc.signature.image.name" /></p>
 					</div>
 				</div>
 			</div>				

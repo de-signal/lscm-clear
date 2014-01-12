@@ -55,6 +55,17 @@ angular.module('clearApp.controllers', [])
 				});
             
 		}
+		$scope.logoutTest = function () {
+			$cookieStore.remove("token");
+			$http.defaults.headers.common['Authorization'] = ''; 
+			$route.reload();
+			console.log('logout');
+		}
+	}])
+	.controller('ProfileCtrl', ['Elements_v1', function(Elements_v1) {
+		Elements_v1.get({'type': 'user'}, function(user) { 
+			$scope.user = user;
+		});
 	}])
 	.controller('DashboardCtrl', ['$location', '$scope', '$q', 'Elements_v1', 'ClearFn', function($location, $scope, $q, Elements_v1, ClearFn) {
 		Elements_v1.query({'type': 'dashboard'}, function(list) {
@@ -199,7 +210,6 @@ angular.module('clearApp.controllers', [])
     		}
 		    
 		    $scope.date = ClearFn.propertiesDate(elm);
-		    console.log('charts: ', elm.charts);
 		});	
 		
 		$scope.relatedActiveTab = {};
@@ -209,8 +219,6 @@ angular.module('clearApp.controllers', [])
         $scope.trackingToggle = ClearFn.trackingToggle;
         $scope.propertySave = ClearFn.propertySave;
         $scope.dateToTimestamp = Utils.dateToTimestamp;
-        
-		$scope.calDisabled = ClearFn.calDisabled;
 		
 		$scope.calOpen = function(param) {
 			$timeout(function() {

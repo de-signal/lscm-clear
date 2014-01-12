@@ -7,6 +7,8 @@
         "milestone": "planned",
         "delay": -5,
         "status": "late",
+        "shipment_type": "in",
+        "chrono": "456789",
         "departure": {
             "location": "Aberdeen",
             "date": 1375907474

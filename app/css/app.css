@@ -266,6 +266,12 @@ h3.doubleLineTitle {
 .type-bold {
 	font-weight: bold;
 }
+.ultralight {
+	color: #adadad;
+}
+.light {
+	color: gray;
+}
 
 .type-fat, .type-superfat {
 	font-weight: 300; 
@@ -280,6 +286,15 @@ h3.doubleLineTitle {
 	font-size:60px;
 	margin-bottom: 0px;
 	margin-top: 0;
+}
+.success {
+	color: #468847;
+}
+.important {
+	color: #b94a48;
+}
+.warning {
+	color: #f89406;
 }
 
 .type-order {

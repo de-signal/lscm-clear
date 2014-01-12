@@ -36,10 +36,17 @@
 					"elements_required": [
 						{
 							"type": "order", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "upload",
-									"name": "BW.xls"
+									"name": "BW.xls",
+									"guideline": {
+										"name": "1. Add order",
+										"url": {
+											"page": "process",
+											"anchor": "add-order"
+										}
+									}
 								}
 							]
 						}
@@ -61,68 +68,159 @@
 					"elements_required": [
 						{
 							"type": "order", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "upload",
-									"name": "Consolidation.xls"
+									"name": "Consolidation.xls",
+									"guideline": {
+										"name": "1.1 Consolidation",
+										"url": {
+											"page": "process",
+											"anchor": "consolidation"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Stickers.pdf"
+									"name": "Stickers.pdf",
+									"guideline": {
+										"name": "2. Order placed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "VPL-draft.xls"
+									"name": "VPL-draft.xls",
+									"guideline": {
+										"name": "2. Order placed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}
 							]
 						},
 						{
 							"type": "shipment", 
-							"requireds": [ 
+							"conditions": [ 
 								{
 									"type": "upload",
-									"name": "RFC-draft.xls"
+									"name": "RFC-draft.xls",
+									"guideline": {
+										"name": "4. Order completed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Quotation.pdf"
+									"name": "Quotation.pdf",
+									"guideline": {
+										"name": "4. Order completed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "RFC-freight-forwarder.xls"
+									"name": "RFC-freight-forwarder.xls",
+									"guideline": {
+										"name": "5. Box ready for collection",
+										"url": {
+											"page": "process",
+											"anchor": "box-ready-for-collection"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Packing-list.pdf"
+									"name": "Packing-list.pdf",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Commercial-invoice.pdf"
+									"name": "Commercial-invoice.pdf",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Form-C16.pdf"
+									"name": "Form-C16.pdf",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "CCVO.pdf"
+									"name": "CCVO.pdf",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Draft-MAWB-BL.pdf"
+									"name": "Draft-MAWB-BL.pdf",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}, 
 								{
 									"type": "upload",
-									"name": "Export-kit.zip"
+									"name": "Export-kit.zip",
+									"guideline": {
+										"name": "9. Ready for green light",
+										"url": {
+											"page": "process",
+											"anchor": "ready-for-green-light"
+										}
+									}
 								}
 							]
 						},
 						{
 							"type": "box", 
-							"requireds": [ 
+							"conditions": [ 
 								{
 									"type": "upload",
-									"name": "Shipping-marks.pdf"
+									"name": "Shipping-marks.pdf",
+									"guideline": {
+										"name": "4. Order completed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}
 							]
 						}
@@ -148,23 +246,44 @@
 					"elements_required": [
 						{
 							"type": "order", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "upload",
-									"name": "Consolidation.xls"
+									"name": "Consolidation.xls",
+									"guideline": {
+										"name": "1.1. Consolidation",
+										"url": {
+											"page": "process",
+											"anchor": "consolidation"
+										}
+									}
 								},
 								{
 									"type": "upload",
-									"name": "VPL-draft.xls"
+									"name": "VPL-draft.xls",
+									"guideline": {
+										"name": "2. Order placed",
+										"url": {
+											"page": "process",
+											"anchor": "order-placed"
+										}
+									}
 								}
 							]
 						},
 						{
 							"type": "shipment", 
-							"requireds": [ 
+							"conditions": [ 
 								{
 									"type": "upload",
-									"name": "RFC-draft.xls"
+									"name": "RFC-draft.xls",
+									"guideline": {
+										"name": "4. Order completed",
+										"url": {
+											"page": "process",
+											"anchor": "order-completed"
+										}
+									}
 								}
 							]
 						}
@@ -212,18 +331,39 @@
 					"elements_required": [
 						{
 							"type": "shipment", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "text",
-									"name": "PO service"
+									"name": "PO service",
+									"guideline": {
+										"name": "4. Order completed",
+										"url": {
+											"page": "process",
+											"anchor": "order-completed"
+										}
+									}
 								},
 								{
 									"type": "text",
-									 "name": "MF"
+									 "name": "MF",
+									 "guideline": {
+									 	"name": "9. Ready for green light",
+									 	"url": {
+									 		"page": "process",
+									 		"anchor": "ready-for-green-light"
+									 	}
+									 }
 								},
 								{
 									"type": "text",
-									 "name": "BA"
+									 "name": "BA",
+									 "guideline": {
+									 	"name": "9. Ready for green light",
+									 	"url": {
+									 		"page": "process",
+									 		"anchor": "ready-for-green-light"
+									 	}
+									 }
 								}
 							]
 						}
@@ -260,10 +400,17 @@
 					"elements_required": [
 						{
 							"type": "shipment", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "checkbox",
-									"name": "Custom released"
+									"name": "Custom released",
+									"guideline": {
+										"name": "14. Shipment arrived",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-arrived"
+										}
+									}
 								}
 							]
 						}
@@ -300,18 +447,50 @@
 					"elements_required": [
 						{
 							"type": "shipment", 
-							"requireds": [
+							"conditions": [
 								{
 									"type": "date",
-									"name": "Booking date"
+									"name": "Booking date",
+									"guideline": {
+										"name": "5. Box ready for collection",
+										"url": {
+											"page": "process",
+											"anchor": "box-ready-for-collection"
+										}
+									}
 								},
 								{
 									"type": "date",
-									"name": "ETA"
+									"name": "ETA",
+									"guideline": {
+										"name": "5. Box ready for collection",
+										"url": {
+											"page": "process",
+											"anchor": "box-ready-for-collection"
+										}
+									}
+								}, 
+								{
+									"type": "date",
+									"name": "Booking date",
+									"guideline": {
+										"name": "10. Green light approved",
+										"url": {
+											"page": "process",
+											"anchor": "green_light_approved"
+										}
+									}
 								},
 								{
 									"type": "date",
-									"name": "ATA"
+									"name": "ATA",
+									"guideline": {
+										"name": "13. Shipment departed",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-departed"
+										}
+									}
 								}
 							]
 						}

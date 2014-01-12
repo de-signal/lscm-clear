@@ -56,7 +56,7 @@
 	</div>
 	</div>
 	
-	<div class="row" ng-show="elm.required">
+	<div class="row margin-top" ng-show="elm.required">
 		<div class="col-md-12">
 			<h3>conditions</h3>
 			<table class="table table-condensed">
@@ -68,7 +68,7 @@
 				<tr ng-repeat="required in elm.required">
 					<td><i class="lead fa" required-icon></i></td>
 					<td><strong>{{required.name}}</strong></td>
-					<td><span class="label" status="{{elm.status}}"  required-status editable="{{required.editable}}" completed="{{required.completed}}">{{required.message}}</span></td>
+					<td><span class="label label-default" status="{{elm.status}}"  required-status editable="{{required.editable}}" completed="{{required.completed}}">{{required.message}}</span></td>
 					<td><button class='btn btn-sm' ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
 				</tr>
 			</table>			

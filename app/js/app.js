@@ -3,10 +3,11 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('clearApp', [ 'http-auth-interceptor', 'ngRoute', 'ngAnimate', 'ngCookies', 'clearApp.filters', 'clearApp.services', 'clearApp.directives', 'clearApp.controllers', 'ui.bootstrap', 'ngUpload', 'nvd3ChartDirectives', 'toaster' ])
-	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 	
 		$locationProvider.html5Mode(true);
 		$locationProvider.hashPrefix('!');
+		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		
 //		Static pages 
 		$routeProvider.when('/static-dashboard', {templateUrl: '/app/partials/static-dashboard.html', controller: 'StaticDashboardCtrl'});
@@ -27,8 +28,7 @@ angular.module('clearApp', [ 'http-auth-interceptor', 'ngRoute', 'ngAnimate', 'n
 		$routeProvider.when('/guidelines/web', {templateUrl: '/app/partials/guidelines-detail.html', controller: 'GuidelinesWebCtrl'});
 		$routeProvider.when('/guidelines/mobile', {templateUrl: '/app/partials/guidelines-detail.html', controller: 'GuidelinesMobileCtrl'});
 		
-		$routeProvider.when('/login', {templateUrl: '/app/partials/login.html', controller: 'Login'});
-		$routeProvider.when('/news', {templateUrl: '/app/partials/news.html', controller: 'News'});
+		$routeProvider.when('/profile', {templateUrl: '/app/partials/profile.html', controller: 'ProfileCtrl'});
 		$routeProvider.when('/dashboard', {templateUrl: '/app/partials/dashboard.html', controller: 'DashboardCtrl'});
 		$routeProvider.when('/tv', {templateUrl: '/app/partials/tv.html', controller: 'TvCtrl'});
 		$routeProvider.when('/tracking', {templateUrl: '/app/partials/tracking.html', controller: 'TrackingCtrl'});

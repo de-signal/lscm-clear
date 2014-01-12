@@ -2,7 +2,7 @@
 	{
 		"step": 1,
 		"name": "Add order",
-		"id": "add_order",
+		"id": "add-order",
 		"location": "Location n/a",
 		"location_id": "na",
 		"interactions": [
@@ -39,8 +39,7 @@
 								"page": "web",
 								"anchor": "add-order"
 							}
-						},
-						"description": "Click on Add order to upload the file."
+						}
 					}
 				]
 			}
@@ -129,7 +128,7 @@
 	{
 		"step": 2,
 		"name": "Order placed",
-		"id": "order_placed",
+		"id": "order-placed",
 		"location": "Location n/a",
 		"location_id": "na",
 		"processing": {
@@ -244,7 +243,6 @@
 					{
 						"name": "VPL-draft.xls",
 						"type": "upload",
-						"description": "Upload file.",
 						"guideline": {
 							"name": "Upload a file",
 							"url": {
@@ -260,7 +258,7 @@
 	{
 		"step": 3,
 		"name": "Order in preparation",
-		"id": "order_in_preparation",
+		"id": "order-in-preparation",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"description": "Automatic milestone update one day after order was placed.",
@@ -275,7 +273,7 @@
 	{
 		"step": 4,
 		"name": "Order completed",
-		"id": "order_completed",
+		"id": "order-completed",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -420,8 +418,7 @@
 				"conditions": [
 					{
 						"name": "RFC-draft.xls",
-						"type": "upload", 
-						"description": "Upload file.",
+						"type": "upload",
 						"guideline": {
 							"name": "Upload a file",
 							"url": {
@@ -433,7 +430,6 @@
 					{
 						"name": "PO service",
 						"type": "text",
-						"description": "Fill in the input.",
 						"guideline": {
 							"name": "Fill in an input",
 							"url": {
@@ -449,7 +445,7 @@
 	{
 		"step": 5,
 		"name": "Box ready for collection",
-		"id": "box_ready_for_collection",
+		"id": "box-ready-for-collection",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -554,7 +550,7 @@
 	{
 		"step": 6,
 		"name": "Shipment booked in",
-		"id": "shipment_booked_in",
+		"id": "shipment-booked-in",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -595,7 +591,7 @@
 	{
 		"step": 7,
 		"name": "Shipment collected",
-		"id": "shipment_collected",
+		"id": "shipment-collected",
 		"location": "Transport to the hub",
 		"location_id": "tohub",
 		"processing": {
@@ -646,7 +642,7 @@
 	{
 		"step": 8,
 		"name": "Shipment received",
-		"id": "shipment_received",
+		"id": "shipment-received",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -721,7 +717,7 @@
 	{
 		"step": 8.1,
 		"name": "Box OSD",
-		"id": "box_osd",
+		"id": "box-osd",
 		"location": "At the hub", 
 		"location_id": "hub",
 		"description": "If \"OSD\" box property is true.",
@@ -773,7 +769,7 @@
 	{
 		"step": 8.2,
 		"name": "Box ready for inspection",
-		"id": "box_ready_for_inspection",
+		"id": "box-ready-for-inspection",
 		"description": "If \"Inspection required\" box property is true.",
 		"location": "At the hub",
 		"location_id": "hub",
@@ -826,7 +822,7 @@
 	{
 		"step": 9,
 		"name": "Ready for green light",
-		"id": "ready_for_green_light",
+		"id": "ready-for-green-light",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -962,8 +958,7 @@
 				"conditions": [
 					{
 						"name": "MF",
-						"type": "text", 
-						"description": "fill in the input.",
+						"type": "text",
 						"guideline": {
 							"name": "Fill an input",
 							"url": {
@@ -974,8 +969,7 @@
 					},
 					{
 						"name": "BA",
-						"type": "text", 
-						"description": "fill in the input.",
+						"type": "text",
 						"guideline": {
 							"name": "Fill an input",
 							"url": {
@@ -991,7 +985,7 @@
 	{
 		"step": 10,
 		"name": "Green light approved",
-		"id": "green_light_approved",
+		"id": "green-light-approved",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -1070,7 +1064,7 @@
 	{
 		"step": 11,
 		"name": "Pre-alert",
-		"id": "pre_alert",
+		"id": "pre-alert",
 		"location": "At the hub",
 		"location_id": "hub", 
 		"downloads": {
@@ -1172,7 +1166,7 @@
 	{
 		"step": 12,
 		"name": "Shipment booked out",
-		"id": "shipment_booked_out",
+		"id": "shipment-booked-out",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -1212,7 +1206,7 @@
 	{
 		"step": 13,
 		"name": "Shipment departed",
-		"id": "shipment_departed",
+		"id": "shipment-departed",
 		"location": "Transport from the hub",
 		"location_id": "fromhub",
 		"processing": {
@@ -1275,7 +1269,7 @@
 	{
 		"step": 14,
 		"name": "Shipment arrived",
-		"id": "shipment_arrived",
+		"id": "shipment-arrived",
 		"location": "At the port / airport",
 		"location_id": "port",
 		"processing": {
@@ -1325,7 +1319,7 @@
 	{
 		"step": 15,
 		"name": "Shipment custom released",
-		"id": "shipment_custom_released",
+		"id": "shipment-custom-released",
 		"location": "Transport to the client",
 		"location_id": "toclient",
 		"processing": {
@@ -1385,7 +1379,7 @@
 	{
 		"step": 16,
 		"name": "Shipment delivered",
-		"id": "shipment_delivered",
+		"id": "shipment-delivered",
 		"location": "At the client",
 		"location_id": "client",
 		"processing": {
@@ -1443,7 +1437,7 @@
 	{
 		"step": 17, 
 		"name": "Order closed",
-		"id": "order_closed", 
+		"id": "order-closed", 
 		"location": "At the client",
 		"location_id": "client",
 		"processing": {

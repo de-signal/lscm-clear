@@ -225,9 +225,6 @@ angular.module('clearApp.services', ['ngResource'])
 	            	console.log('saved-> elm: ', elm,'/ type: required / update_id: ', id); 
 	            });
 	        }, 
-	        calDisabled: function(date, mode) {
-	        	return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-	        }, 
 	        go: function (type, id, related) {
 	        	$rootScope.tvScreen = false;
 	        	$location.$$search = {};
