@@ -1,5 +1,7 @@
 { 
-	"title": "Mobile app operations", 
+	"title": "Mobile app operations",
+	"type": "mobile", 
+	"description": "Instructions for each type of operation which can be done from the mobile app.", 
 	"instructions": [
 		{
 			"name": "Check a condition",

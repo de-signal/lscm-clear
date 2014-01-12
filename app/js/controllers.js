@@ -639,21 +639,28 @@ angular.module('clearApp.controllers', [])
 	.controller('StaticSearchCtrl', ['$scope', 'Elms', function($scope, Elms) {
 		$scope.elms = Elms.query();	
 	}])
-	.controller('GuidelinesCtrl', ['$scope', 'GuidelinesBackoffice', 'GuidelinesMobile', function($scope, GuidelinesBackoffice, GuidelinesMobile) {
-		GuidelinesBackoffice.get(function(elm) {
-			$scope.elmBackoffice = elm;
+	.controller('GuidelinesCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
+		GuidelinesProcess.query(function(elms) {
+			$scope.elmsProcess = elms;
+		});
+		GuidelinesWeb.get(function(elm) {
+			$scope.elmWeb = elm;
 		});
 		GuidelinesMobile.get(function(elm) {
 			$scope.elmMobile = elm; 
 		});
 	}])
-	.controller('GuidelinesProcessCtrl', ['$scope', 'GuidelinesProcess', function($scope, GuidelinesProcess) {
+	.controller('GuidelinesProcessCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesProcess', function($scope, $location, $anchorScroll, $timeout, GuidelinesProcess) {
 		GuidelinesProcess.query(function(elms) {
 			$scope.elms = elms;
+			$timeout(function() {
+				$anchorScroll();
+			}, 500);
 		});
 		
-		$scope.scrollTo = function(page, anchor) {
-			$location.path('/guidelines/' + page).hash(anchor);
+		$scope.scrollTo = function(anchor) {
+			$location.hash(anchor);
+			$anchorScroll();
 		}
 		$scope.types = ["order", "shipment", "box", "item"];
 		
@@ -683,8 +690,8 @@ angular.module('clearApp.controllers', [])
 			return false; 
 		};
 	}])
-	.controller('GuidelinesBackofficeCtrl', ['$scope', '$filter', '$location', '$anchorScroll', '$timeout', 'GuidelinesBackoffice', function($scope, $filter, $location, $anchorScroll, $timeout, GuidelinesBackoffice) {
-		GuidelinesBackoffice.get(function(elm) {
+	.controller('GuidelinesWebCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesWeb', function($scope, $location, $anchorScroll, $timeout, GuidelinesWeb) {
+		GuidelinesWeb.get(function(elm) {
 			$scope.elm = elm; 
 			$timeout(function() {
 				$anchorScroll();
@@ -697,7 +704,7 @@ angular.module('clearApp.controllers', [])
 			$anchorScroll();
 		}
 	}])
-	.controller('GuidelinesMobileCtrl', ['$scope', '$filter', '$location', '$anchorScroll', '$timeout', 'GuidelinesMobile', function($scope, $filter, $location, $anchorScroll, $timeout, GuidelinesMobile) {
+	.controller('GuidelinesMobileCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, GuidelinesMobile) {
 		GuidelinesMobile.get(function(elm) {
 			$scope.elm = elm; 
 			$timeout(function() {
@@ -707,7 +714,6 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.scrollTo = function(anchor) {
 			$location.hash(anchor);
-			console.log('anchor: ', anchor);
 			$anchorScroll();
 		}	
 	}])

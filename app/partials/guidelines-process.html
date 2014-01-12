@@ -4,104 +4,117 @@
 
 <div class="container">
 
-<div class="row margin-top">
-	<div class="col-md-12">
-		<h3>process overview</h3>
-		
-	    <accordion close-others="false">
-    	    <accordion-group>
-    	    	<accordion-heading>
-    	    		Filters
-    	    	</accordion-heading>
-    			<div class="row">
-    				<div class="col-md-4">
-	    				<fieldset>
-	    					<legend>Informations type </legend>
-	    					<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="display.processing"> Milestones
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="display.downloads"> Downloads
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="display.interactions"> Interactions
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="display.updates"> Updates
-		    					</label>
-	    				</fieldset>
-    				</div>
-    				
-    				<div class="col-md-4">
-    					<fieldset>
-	    					<legend>Locations</legend>
-	    					<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.na"> Location n/a
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.vendor"> At the vendor
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.tohub"> Transport to the hub
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.hub"> At the hub
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.fromhub"> Transport from the hub
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.port"> At the port / airport
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.toclient"> Transport to the client
-		    					</label>
-		    				</div>
-		    				<div class="checkbox">
-		    					<label>
-		    						<input type="checkbox" ng-model="location.client"> At the client
-		    					</label>
-		    				</div>
-    				</div>
-    				
-    				<div class="col-md-4">
-    					
-    					
-    				</div>
-    			</div><!--/row-->
-    	    </accordion-group>
-        </accordion>
-		
-		<div class="row margin-top">
-			<div class="col-md-4">
-				<p>This diagram shows the whole process, step by step, from the creation of an order to the delivery at the client.</p>
-			</div>
-			<div class="col-md-4">	
-				<p>You can use the filters above to select the informations displayed in this page. </p>
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h1>Process overview</h1>
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-4">
+			<p>This diagram shows the whole logistics process, step by step, from the creation of an order to the delivery at the client.</p>
+			<p>Use the filters below to select the informations displayed in this page. </p>
+		</div>
+		<div class="col-md-8">
+			<div class="row" ng-repeat="elm in elms">
+				<div class="col-md-12">
+					<a ng-click="scrollTo(elm.id)"><h4>{{elm.step}}. {{elm.name}}</h4></a>
+				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="row margin-top" id="{{elms[0].id}}">
+		<div class="col-md-12">	
+			<accordion close-others="false">
+				<accordion-group>
+					<accordion-heading>
+						Filters
+					</accordion-heading>
+					<div class="row">
+						<div class="col-md-4">
+							<fieldset>
+								<legend>Informations type </legend>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="display.processing"> Milestones
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="display.downloads"> Downloads
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="display.interactions"> Interactions
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="display.updates"> Updates
+									</label>
+								</div>
+							</fieldset>
+						</div>
+						
+						<div class="col-md-4">
+							<fieldset>
+								<legend>Locations</legend>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.na"> Location n/a
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.vendor"> At the vendor
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.tohub"> Transport to the hub
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.hub"> At the hub
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.fromhub"> Transport from the hub
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.port"> At the port / airport
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.toclient"> Transport to the client
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="location.client"> At the client
+									</label>
+								</div>
+							</fieldset>
+						</div>
+						
+						<div class="col-md-4">
+							
+							
+						</div>
+					</div><!--/row-->
+				</accordion-group>
+			</accordion>
+		</div>
+	</div>
 
-		<div class="row margin-top" ng-repeat="elm in elms | filter:filterFn">
+	<div class="row margin-top" ng-repeat="elm in elms | filter:filterFn">
 			<div class="col-md-12">
 				<div class="elements-group">
 				
@@ -118,16 +131,16 @@
 					<!-- Step milestones -->
 					
 					<div class="bg-stripped elements-group-bg margin-top border-top" ng-if="!!elm.processing" ng-show="display.processing">
-						<div class="row margin-bottom-s">
+						<div class="row">
 							<div class="col-md-12">
-								<h6>Milestones</h6>
+								<h6 class="margin-no">Milestones</h6>
 							</div>
 						</div>
 						
 						<div class="row">
 											
 							<div class="col-md-3" ng-class="{false:'mobile\-hide'}[!!elm.processing[type]]" ng-repeat="type in types">
-								<div class="element" ng-if="!!elm.processing[type]">
+								<div class="element margin-top" ng-if="!!elm.processing[type]">
 									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span> <span class="badge badge-parent" ng-if="elm[type].parent">Parent</span></h5>
 									<div ng-if="!!elm.processing[type].milestone" class="margin-top">
 										<h6>milestone</h6>
@@ -144,16 +157,16 @@
 					
 					<div class="elements-group-bg border-top elements-download margin-top" ng-if="!!elm.downloads" ng-show="display.downloads">
 					
-						<div class="row margin-bottom-s">
+						<div class="row">
 							<div class="col-md-12">
-								<h6>Downloads</h6>
+								<h6 class="margin-no">Downloads</h6>
 							</div>
 						</div>
 						
 						<div class="row">
 							
 							<div class="col-md-3" ng-class="{false:'mobile\-hide'}[!!elm.downloads[type]]" ng-repeat="type in types">
-								<div class="element" ng-if="!!elm.downloads[type]">
+								<div class="element margin-top" ng-if="!!elm.downloads[type]">
 									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
 									<div ng-if="!!elm.downloads[type].documents" class="margin-top">
 										<h6>documents</h6>
@@ -202,16 +215,16 @@
 					
 					<div class="border-top elements-group-bg elements-update margin-top" ng-if="!!elm.updates" ng-show="display.updates">
 					
-						<div class="row margin-bottom-s">
+						<div class="row">
 							<div class="col-md-12">
-								<h6>Updates</h6>
+								<h6 class="margin-no">Updates</h6>
 							</div>
 						</div>
 						
 						<div class="row">
 							
 							<div class="col-md-3" ng-class="{false:'mobile\-hide'}[!!elm.updates[type]]" ng-repeat="type in types">
-								<div class="element" ng-if="!!elm.updates[type]">
+								<div class="element margin-top" ng-if="!!elm.updates[type]">
 									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
 									<div ng-if="!!elm.updates[type].conditions" class="margin-top">
 										<h6>conditions</h6>
@@ -222,14 +235,15 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 					
+					<div class="border-top elements-group-bg margin-top" id="{{elms[$index+1].id}}">
+						<p class="margin-no"><a ng-click="scrollTo('top')"><small>Back to top</small></a></p>
+					</div>
 				</div>
 			</div>
 		</div>			
 
-	</div>
-</div>
-
+</div><!-- /container-->

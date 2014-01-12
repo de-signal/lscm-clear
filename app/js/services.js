@@ -439,14 +439,11 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('SearchFilters', function($resource){
 		return $resource('json/search_filters.json');
 	})
-	.factory('GuidelinesOverview', function($resource){
-		return $resource('json/guidelines_overview.json');
-	})
 	.factory('GuidelinesProcess', function($resource){
 		return $resource('json/guidelines_process.json');
 	})
-	.factory('GuidelinesBackoffice', function($resource){
-		return $resource('json/guidelines_backoffice.json');
+	.factory('GuidelinesWeb', function($resource){
+		return $resource('json/guidelines_web.json');
 	})
 	.factory('GuidelinesMobile', function($resource){
 		return $resource('json/guidelines_mobile.json');

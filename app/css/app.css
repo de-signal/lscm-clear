@@ -144,7 +144,7 @@ a:hover {
 	margin-top: 40px;
 }
 .margin-no {
-	margin-bottom:-20px;
+	margin-bottom:0;
 }
 
 /* element group */
@@ -1084,7 +1084,7 @@ fieldset {
 }
 
 .center {
-	text-align: center;
+	margin: 0 auto;
 }
 
 .bg-stripped {
@@ -1100,14 +1100,14 @@ fieldset {
 }
 
 .picto {
+	text-align: center;
 	padding-top: 20px;
 	background-color: white;
 	width:100px;
-	margin: 0 auto;
+	height:100px;
 	-webkit-border-radius: 50px;
 		 -moz-border-radius: 50px;
 			  border-radius: 50px;
-	height:100px;
 }
 .picto:before {
 	display: block;
@@ -1115,13 +1115,13 @@ fieldset {
 	margin-bottom:-10px;
 }
 
-.picto_backoffice:before {
+.picto_web:before {
 	content:  url(../img/clear_icon_backoffice.svg);	
 }
 .picto_system:before {
 	content:  url(../img/clear_icon_system.svg);
 }
-.picto_operator:before {
+.picto_mobile:before {
 	content:  url(../img/clear_icon_operator.svg);	
 }
 .picto_inspector:before {
@@ -1192,9 +1192,6 @@ h5 .badge-parent {
 	margin-left: 40%;
 	margin-top: 20px;
 }
-.elements-download .element {
-	margin-bottom: 50px;
-}
 
 @media (min-width: 992px) {
 	.plan-left-arrow .bloc1 {
@@ -1207,6 +1204,7 @@ h5 .badge-parent {
 	.plan-left-arrow .bloc3 {
 		background:url(../img/clear_guideline_arrow_right.svg) center 40px no-repeat;
 		height:130px;
+		margin-bottom: 0;
 	}
 	.plan-right-arrow .bloc1 {
 		background:url(../img/clear_guideline_arrow_end_right.svg) left 40px no-repeat;
@@ -1216,6 +1214,7 @@ h5 .badge-parent {
 		background:url(../img/clear_guideline_arrow_left.svg) center 40px no-repeat;
 		float: left;
 		height:130px;
+		margin-bottom: 0;
 	}
 	.plan-right-arrow .bloc2, .plan-right .bloc2 {
 		float: right;

@@ -2,6 +2,7 @@
 	{
 		"step": 1,
 		"name": "Add order",
+		"id": "add_order",
 		"location": "Location n/a",
 		"location_id": "na",
 		"interactions": [
@@ -9,7 +10,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Client",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send an email",
 				"conditions": [
@@ -22,7 +23,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -35,7 +36,7 @@
 						"guideline": {
 							"name": "Add a new order",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "add-order"
 							}
 						},
@@ -48,6 +49,7 @@
 	{
 		"step": 1.1,
 		"name": "Consolidation",
+		"id": "consolidation",
 		"location": "Location n/a", 
 		"location_id": "na",
 		"description": "Request the client to dispatch items which parts quantity is greater than 30.",
@@ -61,7 +63,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -74,7 +76,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -88,7 +90,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Client",
-					"type": "backoffice",
+					"type": "web",
 					"id": "client"
 				},
 				"name": "Fill in the file and send email",
@@ -102,7 +104,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -115,7 +117,7 @@
 						"guideline": {
 							"name": "Upload a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "upload-file"
 							}
 						}
@@ -127,6 +129,7 @@
 	{
 		"step": 2,
 		"name": "Order placed",
+		"id": "order_placed",
 		"location": "Location n/a",
 		"location_id": "na",
 		"processing": {
@@ -154,7 +157,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -166,7 +169,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -179,7 +182,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice",
+					"type": "web",
 					"id": "lscm"
 				},
 				"name": "Send email",
@@ -198,7 +201,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice",
+					"type": "web",
 					"id": "lscm"
 				},
 				"name": "Send by mail",
@@ -217,7 +220,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Vendor",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Fill in the file and send email",
 				"conditions": [
@@ -230,7 +233,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice",
+					"type": "web",
 					"id": "lscm"
 				}
 			}
@@ -245,7 +248,7 @@
 						"guideline": {
 							"name": "Upload a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "upload-file"
 							}
 						} 
@@ -257,6 +260,7 @@
 	{
 		"step": 3,
 		"name": "Order in preparation",
+		"id": "order_in_preparation",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"description": "Automatic milestone update one day after order was placed.",
@@ -271,6 +275,7 @@
 	{
 		"step": 4,
 		"name": "Order completed",
+		"id": "order_completed",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -309,7 +314,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -320,7 +325,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -335,7 +340,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -349,7 +354,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"conditions": [
 					{
@@ -366,7 +371,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Vendor",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Fill in the file and send email",
 				"conditions": [
@@ -381,7 +386,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"conditions": [
 					{
@@ -394,7 +399,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Client",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -406,7 +411,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -420,7 +425,7 @@
 						"guideline": {
 							"name": "Upload a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "upload-file"
 							}
 						}
@@ -432,7 +437,7 @@
 						"guideline": {
 							"name": "Fill in an input",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "fill-input"
 							}
 						}
@@ -444,6 +449,7 @@
 	{
 		"step": 5,
 		"name": "Box ready for collection",
+		"id": "box_ready_for_collection",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -473,7 +479,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -486,7 +492,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -500,7 +506,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "3PL",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -512,7 +518,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -525,7 +531,7 @@
 						"guideline": {
 							"name": "Select a date",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "select-date"
 							}
 						}
@@ -536,7 +542,7 @@
 						"guideline": {
 							"name": "Select a date",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "select-date"
 							}
 						}
@@ -548,6 +554,7 @@
 	{
 		"step": 6,
 		"name": "Shipment booked in",
+		"id": "shipment_booked_in",
 		"location": "At the vendor",
 		"location_id": "vendor",
 		"processing": {
@@ -562,7 +569,7 @@
 				"type": "ext",
 				"origin": {
 					"company": "3PL",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -588,6 +595,7 @@
 	{
 		"step": 7,
 		"name": "Shipment collected",
+		"id": "shipment_collected",
 		"location": "Transport to the hub",
 		"location_id": "tohub",
 		"processing": {
@@ -612,7 +620,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -638,6 +646,7 @@
 	{
 		"step": 8,
 		"name": "Shipment received",
+		"id": "shipment_received",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -662,7 +671,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -712,6 +721,7 @@
 	{
 		"step": 8.1,
 		"name": "Box OSD",
+		"id": "box_osd",
 		"location": "At the hub", 
 		"location_id": "hub",
 		"description": "If \"OSD\" box property is true.",
@@ -737,7 +747,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -763,6 +773,7 @@
 	{
 		"step": 8.2,
 		"name": "Box ready for inspection",
+		"id": "box_ready_for_inspection",
 		"description": "If \"Inspection required\" box property is true.",
 		"location": "At the hub",
 		"location_id": "hub",
@@ -789,7 +800,7 @@
 				"type": "int",
 				"origin": {
 					"company": "Inspector",
-					"type": "inspector"
+					"type": "mobile"
 				}
 			}
 		],
@@ -815,6 +826,7 @@
 	{
 		"step": 9,
 		"name": "Ready for green light",
+		"id": "ready_for_green_light",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -844,7 +856,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -855,7 +867,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -866,7 +878,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -877,7 +889,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -888,7 +900,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -899,7 +911,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -912,7 +924,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email and request for green light",
 				"conditions": [
@@ -926,7 +938,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "Client",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -941,7 +953,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -955,7 +967,7 @@
 						"guideline": {
 							"name": "Fill an input",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "fill-input"
 							}
 						}
@@ -967,7 +979,7 @@
 						"guideline": {
 							"name": "Fill an input",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "fill-input"
 							}
 						}
@@ -979,6 +991,7 @@
 	{
 		"step": 10,
 		"name": "Green light approved",
+		"id": "green_light_approved",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -1004,7 +1017,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -1017,7 +1030,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "3PL",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -1032,7 +1045,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -1045,7 +1058,7 @@
 						"guideline": {
 							"name": "Select a date",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "select-date"
 							}
 						}
@@ -1057,6 +1070,7 @@
 	{
 		"step": 11,
 		"name": "Pre-alert",
+		"id": "pre_alert",
 		"location": "At the hub",
 		"location_id": "hub", 
 		"downloads": {
@@ -1068,7 +1082,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1079,7 +1093,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1090,7 +1104,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1101,7 +1115,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1112,7 +1126,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1123,7 +1137,7 @@
 						"guideline": {
 							"name": "Download a file",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "download-file"
 							}
 						}
@@ -1136,7 +1150,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send email",
 				"conditions": [
@@ -1150,7 +1164,7 @@
 				"type": "ext",
 				"origin": {
 					"company": "3PL",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		]
@@ -1158,6 +1172,7 @@
 	{
 		"step": 12,
 		"name": "Shipment booked out",
+		"id": "shipment_booked_out",
 		"location": "At the hub",
 		"location_id": "hub",
 		"processing": {
@@ -1171,7 +1186,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -1197,6 +1212,7 @@
 	{
 		"step": 13,
 		"name": "Shipment departed",
+		"id": "shipment_departed",
 		"location": "Transport from the hub",
 		"location_id": "fromhub",
 		"processing": {
@@ -1222,7 +1238,7 @@
 				"type": "ext_to",
 				"origin": {
 					"company": "3PL",
-					"type": "backoffice"
+					"type": "web"
 				},
 				"name": "Send an email",
 				"conditions": [
@@ -1234,7 +1250,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -1247,7 +1263,7 @@
 						"guideline": {
 							"name": "Select a date",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "select-date"
 							}
 						}
@@ -1259,6 +1275,7 @@
 	{
 		"step": 14,
 		"name": "Shipment arrived",
+		"id": "shipment_arrived",
 		"location": "At the port / airport",
 		"location_id": "port",
 		"processing": {
@@ -1283,7 +1300,7 @@
 			{
 				"origin": {
 					"company": "LSCM",
-					"type": "backoffice"
+					"type": "web"
 				}
 			}
 		],
@@ -1296,7 +1313,7 @@
 						"guideline": {
 							"name": "check a condition",
 							"url": {
-								"page": "backoffice",
+								"page": "web",
 								"anchor": "check-condition"
 							}
 						}
@@ -1308,6 +1325,7 @@
 	{
 		"step": 15,
 		"name": "Shipment custom released",
+		"id": "shipment_custom_released",
 		"location": "Transport to the client",
 		"location_id": "toclient",
 		"processing": {
@@ -1333,7 +1351,7 @@
 				"type": "int_to",
 				"origin": {
 					"company": "LSCM",
-					"type": "operator"
+					"type": "mobile"
 				},
 				"name": "Proof of delivery"
 			},
@@ -1341,7 +1359,7 @@
 				"type": "ext",
 				"origin": {
 					"company": "Client",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -1367,6 +1385,7 @@
 	{
 		"step": 16,
 		"name": "Shipment delivered",
+		"id": "shipment_delivered",
 		"location": "At the client",
 		"location_id": "client",
 		"processing": {
@@ -1398,7 +1417,7 @@
 				"type": "ext",
 				"origin": {
 					"company": "Client",
-					"type": "operator"
+					"type": "mobile"
 				}
 			}
 		],
@@ -1423,7 +1442,8 @@
 	}, 
 	{
 		"step": 17, 
-		"name": "Order closed", 
+		"name": "Order closed",
+		"id": "order_closed", 
 		"location": "At the client",
 		"location_id": "client",
 		"processing": {

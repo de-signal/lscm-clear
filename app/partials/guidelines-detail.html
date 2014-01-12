@@ -6,11 +6,15 @@
 
 	<div class="row margin-top">
 		<div class="col-md-12">
+			<h2 class="picto pull-right" ng-class="['picto_'+elm.type]">{{elm.type}}</h2>
 			<h1>{{elm.title}}</h1>
 		</div>
 	</div>
 	<div class="row margin-top">
-		<div class="col-md-12">
+		<div class="col-md-4">
+			{{elm.description}}
+		</div>
+		<div class="col-md-8">
 			<ul>
 				<li ng-repeat="instruction in elm.instructions"><a ng-click="scrollTo(instruction.id)"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a></li>
 			</ul>
@@ -50,7 +54,9 @@
 								</div>
 							</div>
 						</div>
-						<p class="margin-top"><a ng-click="scrollTo('top')" id="{{elm.instructions[$index+1].id}}">Back to top</a></p>
+						<div class="border-top elements-group-bg margin-top" id="{{elm.instructions[$index+1].id}}">
+							<p class="margin-no"><a ng-click="scrollTo('top')"><small>Back to top</small></a></p>
+						</div>
 					</div>
 				</div>
 				

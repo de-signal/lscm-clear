@@ -24,7 +24,7 @@ angular.module('clearApp', [ 'http-auth-interceptor', 'ngRoute', 'ngAnimate', 'n
 		$routeProvider.when('/static-search', {templateUrl: '/app/partials/static-search.html', controller: 'StaticSearchCtrl'});
 		$routeProvider.when('/guidelines', {templateUrl: '/app/partials/guidelines.html', controller: 'GuidelinesCtrl'});
 		$routeProvider.when('/guidelines/process', {templateUrl: '/app/partials/guidelines-process.html', controller: 'GuidelinesProcessCtrl'});
-		$routeProvider.when('/guidelines/backoffice', {templateUrl: '/app/partials/guidelines-detail.html', controller: 'GuidelinesBackofficeCtrl'});
+		$routeProvider.when('/guidelines/web', {templateUrl: '/app/partials/guidelines-detail.html', controller: 'GuidelinesWebCtrl'});
 		$routeProvider.when('/guidelines/mobile', {templateUrl: '/app/partials/guidelines-detail.html', controller: 'GuidelinesMobileCtrl'});
 		
 		$routeProvider.when('/login', {templateUrl: '/app/partials/login.html', controller: 'Login'});

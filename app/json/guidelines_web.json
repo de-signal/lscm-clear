@@ -1,5 +1,7 @@
 { 
-	"title": "Backoffice operations", 
+	"title": "Web app operations", 
+	"type": "web",
+	"description": "Instructions for each type of operation which can be done from the web app.",
 	"instructions": [
 		{
 			"name": "Add a new order",
@@ -29,7 +31,19 @@
 				{
 					"from": "From the \"Add Order\" page",
 					"description": "When the file is processed, you are automatically redirected on the newly created order.", 
-					"img": "backoffice-add_order-05.jpg"
+					"img": "backoffice-add_order-05.jpg", 
+					"elements_required_txt": "BW file is attached to the order page", 
+					"elements_required": [
+						{
+							"type": "order", 
+							"requireds": [
+								{
+									"type": "upload",
+									"name": "BW.xls"
+								}
+							]
+						}
+					]
 				}
 			]
 		}, 
