@@ -263,22 +263,12 @@ angular.module('clearApp.services', ['ngResource'])
 	        }
 		}
 	}])
-	.factory('ChartsConfig', function(){
+	.factory('ColorScaleConfig', function(){
 		var colorBest = '#5cb85c', 
 			colorGood = '#a6b15b', 
 			colorMedium = '#eeac57', 
 			colorBad = '#e28054', 
-			colorWorst = '#d75452'; 
-		var colorArrayBest = [colorBest, '#FFFFFF'],
-			colorArrayGood = [colorGood, '#FFFFFF'],
-			colorArrayMedium = [colorMedium, '#FFFFFF'],
-			colorArrayBad = [colorBad, '#FFFFFF'],
-			colorArrayWorst = [colorWorst, '#FFFFFF'],
-			colorArrayBrand = ['#FFCC0F', '#C79F25', '#705A11', '#9C863D', '#BCAD74', '#FFE699'],
-			colorArrayOrder = ['#FF7F00', '#C96301', '#703700', '#9D6826', '#BC9461', '#FFBF81'],
-			colorArrayShipment = ['#7EDF02', '#65AD01', '#366201', '#688F25', '#95B164', '#BFEF81'],
-			colorArrayBox = ['#36BFE3', '#3194A7', '#1C554F', '#4F8180', '#82A9A8', '#A0DFF0'],
-			colorArrayItem = ['#FF7D9F', '#C66378', '#6F373A', '#9B6865', '#BD9595', '#FFBED0'];
+			colorWorst = '#d75452';
 		
 		var snapToGrid = function (value) {
 			var dest = null;
@@ -291,6 +281,28 @@ angular.module('clearApp.services', ['ngResource'])
 			}
 			return dest;
 		}
+		
+		return {
+			colorFn: function (value) {
+				var colorArrayScale = [ colorWorst, colorBad, colorMedium, colorGood, colorBest ];
+				return { 'color': colorArrayScale[snapToGrid(value)] };	
+			}, 
+			labelFn: function (value) {
+				var textArrayScale = [ 'worst', 'bad', 'medium', 'good', 'best' ];
+				return textArrayScale[snapToGrid(value)];	
+			}, 
+			assignProperties: function (object, id) {
+				object.color = this.colorFn(object.value); 
+				object.label = this.labelFn(object.value);
+			}
+		}
+	})
+	.factory('ChartsConfig', function(){
+		var colorArrayBrand = ['#FFCC0F', '#C79F25', '#705A11', '#9C863D', '#BCAD74', '#FFE699'],
+			colorArrayOrder = ['#FF7F00', '#C96301', '#703700', '#9D6826', '#BC9461', '#FFBF81'],
+			colorArrayShipment = ['#7EDF02', '#65AD01', '#366201', '#688F25', '#95B164', '#BFEF81'],
+			colorArrayBox = ['#36BFE3', '#3194A7', '#1C554F', '#4F8180', '#82A9A8', '#A0DFF0'],
+			colorArrayItem = ['#FF7D9F', '#C66378', '#6F373A', '#9B6865', '#BD9595', '#FFBED0'];
 		
 		return {
 			colors: { 
@@ -353,33 +365,6 @@ angular.module('clearApp.services', ['ngResource'])
 				        return d.key;
 				    }
 				}
-			}, 
-			chartColorFn: function (value) {
-				var colorArrayScale = [ colorArrayWorst, colorArrayBad, colorArrayMedium, colorArrayGood, colorArrayBest ];
-				return function() {
-					return function(d, i) {
-				    	return colorArrayScale[snapToGrid(value)][i];
-				    };
-				}
-			}, 
-			typeColorFn: function (value) {
-				var colorArrayScale = [ colorWorst, colorBad, colorMedium, colorGood, colorBest ];
-				return { 'color': colorArrayScale[snapToGrid(value)] };	
-			}, 
-			textLabelFn: function (value) {
-				var textArrayScale = [ 'Worst', 'Bad', 'Medium', 'Good', 'Best' ];
-				return textArrayScale[snapToGrid(value)];	
-			}, 
-			assignChartsProperties: function (object, id) {
-				object.id = id;
-				this.chartFn(object);
-				object.chartColor = this.chartColorFn(object.value); 
-				object.typeColor = this.typeColorFn(object.value); 
-				object.textLabel = this.textLabelFn(object.value); 
-				object.datas =  [
-				    { "key": "key_1", "value": object.value },
-				    { "key": "key_2", "value": 100-object.value }
-				];
 			}
 		}
 	})

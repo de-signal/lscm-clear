@@ -204,7 +204,9 @@ a:hover {
 }
 
 /* typography */ 
-
+.capitalize {
+	text-transform: capitalize;
+}
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto', sans-serif;
 	margin-top: 0;
@@ -307,15 +309,22 @@ h3.doubleLineTitle {
 .type-color-best {
 	color: #5BB75B;
 }
-.success {
-	color: #468847;
+.progress-bar-worst {
+	background-color: #D8524E;
 }
-.important {
-	color: #b94a48;
+.progress-bar-bad {
+	background-color: #E37F4D;
 }
-.warning {
-	color: #f89406;
+.progress-bar-medium {
+	background-color: #EFAC4D;
 }
+.progress-bar-good {
+	background-color: #A5B154;
+}
+.progress-bar-best {
+	background-color: #5BB75B;
+}
+
 
 /* navbar menu */
 

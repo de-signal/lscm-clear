@@ -173,14 +173,14 @@ angular.module('clearApp.controllers', [])
 		$scope.colors = ChartsConfig.colors;
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
-	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'Elements', 'ChartsConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, Elements, ChartsConfig, Utils, ClearFn) {
+	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'Elements', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, Elements, ColorScaleConfig, Utils, ClearFn) {
 		
 		Elements.get({'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
 			
 			for (var index in elm.charts) {
-				ChartsConfig.assignChartsProperties(elm.charts[index], index);
+				ColorScaleConfig.assignProperties(elm.charts[index]);
+
 			}
-			
 			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
 			
 		    $scope.elm = elm;
@@ -216,10 +216,7 @@ angular.module('clearApp.controllers', [])
 			$timeout(function() {
 				$scope.date[param].opened = true;
 			});
-		}
-
-		
-			
+		}	
 	}])
 	.controller('TplModalCtrl', ['$scope', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, ClearFn, $modalInstance, required, elm) {
 		$scope.required = required;
@@ -717,11 +714,11 @@ angular.module('clearApp.controllers', [])
 			$anchorScroll();
 		}	
 	}])
-	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', 'Elm', '$modal', 'ClearFn', 'ChartsConfig', '$timeout', 'Utils', function($scope, $location, $anchorScroll, Elm, $modal, ClearFn, ChartsConfig, $timeout, Utils) {
+	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', 'Elm', '$modal', 'ClearFn', 'ColorScaleConfig', '$timeout', 'Utils', function($scope, $location, $anchorScroll, Elm, $modal, ClearFn, ColorScaleConfig, $timeout, Utils) {
 	
 		Elm.get(function(elm) {
 			for (var index in elm.charts) {
-				ChartsConfig.assignChartsProperties(elm.charts[index], index);
+				ColorScaleConfig.assignProperties(elm.charts[index]);
 			}
 			
 			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 

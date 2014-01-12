@@ -4,88 +4,55 @@
 
 <div class="container margin-top">
 	<div class="row">
-	<div class="col-md-3 filet">
-		<h6>reference</h6>
-		<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
-		
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>reference</h6>
+			<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+		</div>
 	</div>
-	<div class="col-md-6 filet">
-		<h6>milestone</h6>
-		<h2>{{elm.milestone}}</h2>
-		<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'">
-		<i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i> </span>
+	<div class="col-md-6">
+		<div class="filet">
+			<h6>milestone</h6>
+			<h2>{{elm.milestone}}</h2>
+			<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'">
+			<i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i> </span>
+		</div>
 	</div>
-	<div class="col-md-3 filet">
-		<h6>status</h6>
-		<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>status</h6>
+			<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
+		</div>
 	</div>
 </div>
 <div class="row margin-top">
-	<div class="col-md-3 filet">
-		<h6>description</h6>
-		<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
-		<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>description</h6>
+			<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
+			<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
+		</div>
 	</div>
-	<div class="col-md-3 filet">
-		<h6>daily production value</h6>
-		<p class="type-fat" ng-style="charts.daily_production_value.typeColor">{{charts.daily_production_value.value}} %</p>
-		<nvd3-pie-chart 
-			data="charts.daily_production_value.datas" 
-			id="{{charts.daily_production_value.id}}"
-			x="charts.daily_production_value.xFunction()"
-			y="charts.daily_production_value.yFunction()" 
-			color="charts.daily_production_value.chartColor()"
-			margin="{left:0,top:0,bottom:0,right:0}"
-			showLabels="false"
-			showValues="false"
-			showLegend="false"
-			tooltips="false"
-			description="charts.daily_production_value.descriptionFunction()"
-			tooltipcontent="pieChartTooltipFn()"
-			><svg></svg>
-		</nvd3-pie-chart>
-		<progress percent="elm.daily_production_value" class="hide"></progress>
-		
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>daily production value</h6>
+			<p class="type-fat" ng-style="charts.daily_production_value.color">{{charts.daily_production_value.value}} %</p>
+			<progressbar value="charts.daily_production_value.value" type="{{charts.daily_production_value.label}}"></progressbar>
+		</div>		
 	</div>
-	<div class="col-md-3 filet">
-		<h6>production completion</h6>
-		<p class="type-fat" ng-style="charts.production_completion.typeColor">{{charts.production_completion.value}} %</p>
-		<nvd3-pie-chart 
-			data="charts.production_completion.datas" 
-			id="{{charts.production_completion.id}}"
-			x="charts.production_completion.xFunction()"
-			y="charts.production_completion.yFunction()" 
-			color="charts.production_completion.chartColor()"
-			margin="{left:0,top:0,bottom:0,right:0}"
-			showLabels="false"
-			showValues="false"
-			showLegend="false"
-			tooltips="false"
-			description="charts.production_completion.descriptionFunction()"
-			tooltipcontent="pieChartTooltipFn()"
-			><svg></svg>
-		</nvd3-pie-chart>
-		<progress percent="charts.production_completion" class="hide"></progress>
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>production completion</h6>
+			<p class="type-fat" ng-style="charts.production_completion.color">{{charts.production_completion.value}} %</p>
+			<progressbar value="charts.production_completion.value" type="{{charts.production_completion.label}}"></progressbar>
+		</div>
 	</div>
-	<div class="col-md-3 filet">
-		<h6>production ratio</h6>
-		<p class="type-fat"  ng-style="charts.production_ratio.typeColor">{{charts.production_ratio.textLabel}}</p>
-		<nvd3-pie-chart 
-			data="charts.production_ratio.datas" 
-			id="{{charts.production_ratio.id}}"
-			x="charts.production_ratio.xFunction()"
-			y="charts.production_ratio.yFunction()" 
-			color="charts.production_ratio.chartColor()"
-			margin="{left:0,top:0,bottom:0,right:0}"
-			showLabels="false"
-			showValues="false"
-			showLegend="false"
-			tooltips="false"
-			description="charts.production_ratio.descriptionFunction()"
-			tooltipcontent="pieChartTooltipFn()"
-			><svg></svg>
-		</nvd3-pie-chart>
-		<progress percent="elm.production_ratio" class="hide"></progress>
+	<div class="col-md-3">
+		<div class="filet">
+			<h6>production ratio</h6>
+			<p class="type-fat capitalize"  ng-style="charts.production_ratio.color">{{charts.production_ratio.label}}</p>
+			<progressbar value="charts.production_ratio.value" type="{{charts.production_ratio.label}}"></progressbar>
+		</div>
 	</div>
 	</div>
 	
