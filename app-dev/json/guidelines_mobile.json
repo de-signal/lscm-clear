@@ -1,0 +1,277 @@
+{ 
+	"title": "Mobile app operations",
+	"type": "mobile", 
+	"description": "Instructions for each type of operation which can be done from the mobile app.", 
+	"instructions": [
+		{
+			"name": "Check a condition",
+			"id": "check-condition",
+			"description": "", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"IMI, Instant Material Informations\" to access the QR code scanner.", 
+					"img": "mobile-check_condition-01.jpg", 
+					"elements_required_txt": "Checkbox conditions belong to the following element types", 
+					"elements_required": [
+						{
+							"type": "box", 
+							"conditions": [ 
+								{
+									"type": "checkbox",
+									"name": "At vendor",
+									"guideline": {
+										"name": "6. Shipment booked in",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-booked-in"
+										}
+									}
+								}, 
+								{
+									"type": "checkbox",
+									"name": "At the hub",
+									"guideline": {
+										"name": "7. Shipment collected",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-collected"
+										}
+									}
+								}, 
+								{
+									"type": "checkbox",
+									"name": "OSD",
+									"guideline": {
+										"name": "8. Shipment received",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-received"
+										}
+									}
+								}, 
+								{
+									"type": "checkbox",
+									"name": "Inspection required",
+									"guideline": {
+										"name": "8. Shipment received",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-received"
+										}
+									}
+								}
+							]
+						},
+						{
+							"type": "item", 
+							"conditions": [ 
+								{
+									"type": "checkbox",
+									"name": "In stock",
+									"guideline": {
+										"name": "16. Shipment delivered",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-delivered"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the element you want to update. Depending on the scanned QR code, you are automatically redirected to the page of the element to update.", 
+					"img": "mobile-check_condition-02.jpg"
+				}, 
+				{
+					"from": "From the element's page", 
+					"description": "Click on the button to check the condition. (confirmation ?)", 
+					"img": "mobile-check_condition-03.jpg"
+				}
+			]
+		}, 
+		{
+			"name": "Fill in an input",
+			"id": "fill-input",
+			"description": " ", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"IMI, Instant Material Informations\" to access the QR code scanner.", 
+					"img": "mobile-fill_input-01.jpg", 
+					"elements_required_txt": "Inputs fields belong to the following element types", 
+					"elements_required": [
+						{
+							"type": "box", 
+							"conditions": [ 
+								{
+									"type": "text",
+									"name": "Storage cell",
+									"guideline": {
+										"name": "8. Shipment received",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-received"
+										}
+									}
+								}, 
+								{
+									"type": "text",
+									"name": "Storage cell",
+									"guideline": {
+										"name": "8.1. Box OSD",
+										"url": {
+											"page": "process",
+											"anchor": "box-osd"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the element you want to update. Depending on the scanned QR code, you are automatically redirected to the page of the element to update.", 
+					"img": "mobile-fill_input-02.jpg"
+				}, 
+				{
+					"from": "From the element's page", 
+					"description": "Fill in the field and confirm.", 
+					"img": "mobile-fill_input-03.jpg"
+				}
+			]
+		}, 
+		{
+			"name": "Select a date",
+			"id": "select-date",
+			"description": " ", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"IMI, Instant Material Informations\" to access the QR code scanner.", 
+					"img": "mobile-fill_input-01.jpg", 
+					"elements_required_txt": "Date fields belong to the following element types", 
+					"elements_required": [
+						{
+							"type": "box", 
+							"conditions": [ 
+								{
+									"type": "date",
+									"name": "ATD",
+									"guideline": {
+										"name": "12. Shipment booked out",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-booked-out"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the element you want to update. Depending on the scanned QR code, you are automatically redirected to the page of the element to update.", 
+					"img": "mobile-fill_input-02.jpg"
+				}, 
+				{
+					"from": "From the element's page", 
+					"description": "Select the date and confirm.", 
+					"img": "mobile-fill_input-03.jpg"
+				}
+			]
+		}, 
+		{
+			"name": "Create a Proof of delivery",
+			"id": "create-proof_of_delivery",
+			"description": " ", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"POD, Proof of delivery\" to access the QR code scanner.", 
+					"img": "mobile-create_proof_of_delivery-01.jpg", 
+					"elements_required_txt": "A proof of delivery refers to a shipment", 
+					"elements_required": [
+						{
+							"type": "shipment", 
+							"conditions": [ 
+								{
+									"type": "text",
+									"name": "Proof of delivery",
+									"guideline": {
+										"name": "15. Shipment custom released",
+										"url": {
+											"page": "process",
+											"anchor": "shipment-custom-released"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the waybill of the shipment for wich you want to create a POD. You are automatically redirected to the page to create a POD for this shipment.", 
+					"img": "mobile-create_proof_of_delivery-02.jpg"
+				}, 
+				{
+					"from": "From the proof of delivery's page", 
+					"description": "Require the client's signature and confirm.", 
+					"img": "mobile-create_proof_of_delivery-03.jpg"
+				}
+			]
+		}, 
+		{
+			"name": "Create an Inspection report",
+			"id": "create-inspection_report",
+			"description": " ", 
+			"steps": [
+				{
+					"from": "From the main menu", 
+					"description": "Click on \"IR, Inspection report\" to access the QR code scanner.", 
+					"img": "mobile-create_inspection_report-01.jpg", 
+					"elements_required_txt": "An inspection report refers to a box", 
+					"elements_required": [
+						{
+							"type": "box", 
+							"conditions": [ 
+								{
+									"type": "text",
+									"name": "Inspection report",
+									"guideline": {
+										"name": "8.2. Box ready for inspection",
+										"url": {
+											"page": "process",
+											"anchor": "box-ready-for-inspection"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the box to inspect.", 
+					"img": "mobile-create_inspection_report-02.jpg"
+				},
+				{
+					"from": "From the scanner page", 
+					"description": "Point the camera of your device toward the QR code of the items to inspect. You are automatically redirected to the page to create an Inspection report for this box.", 
+					"img": "mobile-create_inspection_report-03.jpg"
+				}, 
+				{
+					"from": "From the Inspection report's page", 
+					"description": "Detail process", 
+					"img": "mobile-create_inspection_report-04.jpg"
+				}
+			]
+		}
+	]	
+}

@@ -1,10 +1,13 @@
 **/.DS_store
 logs/*
+app/
+.tmp/
+node_modules/
 !.gitkeep
 config/
 logs/
 scripts/
 test/
-app/lscm-clear.com.esproj/
-app/components/
-app/.sass-cache
+app-dev/lscm-clear.com.esproj/
+app-dev/components/
+app-dev/.sass-cache

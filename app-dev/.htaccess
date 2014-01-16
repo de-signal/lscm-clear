@@ -1,0 +1,10 @@
+Options +FollowSymLinks
+ 
+<ifModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !index
+    RewriteCond %{REQUEST_URI} !.*\.(js|html|png|css)
+    RewriteRule (.*) index.html [L]
+</ifModule>
