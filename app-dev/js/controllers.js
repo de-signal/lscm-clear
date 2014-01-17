@@ -669,7 +669,8 @@ angular.module('clearApp.controllers', [])
 		$scope.display = {
 			"downloads": true,
 			"interactions": true,
-			"updates": true, 
+			"updates": true,
+			"updates_mobile": true, 
 			"processing": false 
 				
 		}

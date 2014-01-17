@@ -569,7 +569,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -620,7 +620,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -671,7 +671,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -747,7 +747,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -800,7 +800,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -1184,7 +1184,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"box": {
 				"conditions": [
 					{
@@ -1357,7 +1357,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"shipment": {
 				"conditions": [
 					{
@@ -1415,7 +1415,7 @@
 				}
 			}
 		],
-		"updates": {
+		"updates_mobile": {
 			"item": {
 				"conditions": [
 					{

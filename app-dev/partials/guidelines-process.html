@@ -55,6 +55,11 @@
 										<input type="checkbox" ng-model="display.updates"> Updates
 									</label>
 								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="display.updates_mobile"> Updates from mobile
+									</label>
+								</div>
 							</fieldset>
 						</div>
 						
@@ -229,6 +234,34 @@
 									<div ng-if="!!elm.updates[type].conditions" class="margin-top">
 										<h6>conditions</h6>
 										<div ng-repeat="required in elm.updates[type].conditions">
+											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<p><small>{{required.description}}</small></p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					
+					<!-- updates from mobile -->
+										
+					<div class="border-top elements-group-bg elements-update margin-top" ng-if="!!elm.updates_mobile" ng-show="display.updates_mobile">
+					
+						<div class="row">
+							<div class="col-md-12">
+								<h6 class="margin-no">Updates from mobile</h6>
+							</div>
+						</div>
+						
+						<div class="row">
+							
+							<div class="col-md-3" ng-class="{false:'mobile\-hide'}[!!elm.updates_mobile[type]]" ng-repeat="type in types">
+								<div class="element margin-top" ng-if="!!elm.updates_mobile[type]">
+									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
+									<div ng-if="!!elm.updates_mobile[type].conditions" class="margin-top">
+										<h6>conditions</h6>
+										<div ng-repeat="required in elm.updates_mobile[type].conditions">
 											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 											<p><small>{{required.description}}</small></p>
 										</div>
