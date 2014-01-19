@@ -1,5 +1,5 @@
 /* @override 
-	http://dev-clear.ofon2.com/app/css/app.css */
+	http://dev-clear.ofon2.com/app-dev/css/app.css */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,300);
 
 /* general styles -------------------------------------------------- */
@@ -49,7 +49,7 @@ footer {
 
 @media (min-width: 992px) {
 	.content {
-		padding-top: 60px;
+		padding-top: 65px;
 	}
 	.navbar-fixed-top,
 	.navbar-fixed-bottom {
@@ -59,11 +59,13 @@ footer {
 
 
 .fa {
-	font-variant: normal;
 	margin: 0;
 }
 thead .fa {
 	color: white;
+}
+.fa-circle, .fa-circle-o {
+	margin-right: 3px;
 }
 
 /* login form */ 
@@ -325,19 +327,19 @@ h3.doubleLineTitle {
 	color: #5BB75B;
 }
 .progress-bar-worst {
-	background-color: #D8524E;
+	background-color: #d9534f;
 }
 .progress-bar-bad {
 	background-color: #E37F4D;
 }
 .progress-bar-medium {
-	background-color: #EFAC4D;
+	background-color: #f0ad4e;
 }
 .progress-bar-good {
 	background-color: #A5B154;
 }
 .progress-bar-best {
-	background-color: #5BB75B;
+	background-color: #5cb85c;
 }
 
 
@@ -359,7 +361,7 @@ legend {
   padding-top:20px;
 }
 .navbar .nav > li > a {
-	padding:15px;
+	padding:15px 15px 20px;
 	text-decoration: none;
 	text-shadow: 0 1px 0 #ffffff;
 	border-top: 10px solid white;
@@ -583,6 +585,93 @@ th h6 {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
+
+.timeline .col-md-3 {
+	background:url(../img/clear_timeline_v.svg) 30px 0 no-repeat;
+	min-height: 80px;
+	position: relative;
+}
+.timeline .col-md-2 {
+	background:url(../img/clear_timeline_dot.svg) 30px 0 no-repeat;
+	min-height: 80px;
+	position: relative;
+}
+.timeline h4, .timeline-desc {
+	margin-left:60px;
+}
+.col-md-3 .timeline-active {
+	background:url(../img/clear_timeline_v_active.svg) 30px 0 no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+.col-md-3 .timeline-completed {
+	background:url(../img/clear_timeline_v_completed.svg) 30px 0 no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+.col-md-2 .timeline-active {
+	background:url(../img/clear_timeline_dot_active.svg) 30px 0 no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+
+
+
+@media (min-width: 992px) {
+	.timeline h4 {
+		margin-left:-10px;
+	}
+	.timeline .col-md-3 {
+		background: url(../img/clear_timeline_h.svg) 0 30px no-repeat;
+		min-height: 100px;
+		position: relative;
+	}
+	.timeline .col-md-2 {
+		background: url(../img/clear_timeline_dot.svg) 0 30px no-repeat;
+		min-height: 100px;
+		position: relative;
+	}
+	.col-md-3 .timeline-active {
+		background: url(../img/clear_timeline_h_active.svg) 0 30px no-repeat;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.col-md-3 .timeline-completed {
+		background: url(../img/clear_timeline_h_completed.svg) 0 30px no-repeat;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.col-md-2 .timeline-active {
+		background: url(../img/clear_timeline_dot_active.svg) 0 30px no-repeat;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.timeline-desc {
+		margin-left: 50px;
+		margin-top: 30px;
+		float: left;
+	} 
+}
+
+
 .hack-top {
 	margin-top: -10px;
 }
@@ -672,26 +761,8 @@ a.accordion-toggle h4, tab-heading h4 {
 	margin: 5px 0 0;
 }
 
-.dropdown-menu.ng-valid-date thead {
-	background-color: transparent;
-}
-.dropdown-menu.ng-valid-date thead th {
-	color: #9e9e8e;
-}
-
-
-.input-append .btn:last-child {
-  -webkit-border-radius: 4px 4px 4px 4px;
-	 -moz-border-radius: 4px 4px 4px 4px;
-		  border-radius: 4px 4px 4px 4px;
-}
-
 .dropdown-menu  .btn-group {
 	visibility: hidden;
-}
-
-.dropdown-menu .btn-success:hover {
-	background-color: #9e9e8e;
 }
 
 /* modal */ 
@@ -699,25 +770,18 @@ a.accordion-toggle h4, tab-heading h4 {
 .modal-body {
 	background-color: #dfdfd7;
 }
-
+.modal-footer {
+	margin-top: 0;
+}
 
 
 /* modal datepicker */
-
-/*.ng-valid-date  {
-	float: left;
-	margin-right: 10px;
-}*/
 
 .ng-valid-date thead {
 	background-color: transparent;
 }
 .ng-valid-date  thead th {
 	color: #9e9e8e;
-}
-
-.datepicker {
-	width: 195px;
 }
 
 .chart {
@@ -844,8 +908,6 @@ fieldset {
 	background-color: inherit;
 	cursor: inherit;
 }
-
-
 
 /* toaster */
 
@@ -1075,36 +1137,6 @@ fieldset {
 .label-neutral {
 	background-color: white;
 	color: #9e9e8e;
-}
-.label-neutral:before {
-	padding-right:8px;padding-left: 8px;
-	margin-right:0px;margin-left: -8px;
-	color: white;
-	-webkit-border-top-left-radius: 3px;
-	-webkit-border-bottom-left-radius: 3px;
-	-moz-border-radius-topleft: 3px;
-	-moz-border-radius-bottomleft: 3px;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
-	float: left;
-	margin-bottom: -4px;
-}
-
-.label-neutral-order:before {
-	content: "Order";
-	background-color: #fd7f23;
-}
-.label-neutral-shipment:before {
-	content: "Shipment";
-	background-color: #82dd2a;
-}
-.label-neutral-box:before {
-	content: "Box";
-	background-color: #47bfdd;
-}
-.label-neutral-item:before {
-	content: "Item";
-	background-color: #fd81a1;
 }
 
 .center {
@@ -1358,33 +1390,4 @@ h5 .badge-parent {
 }
 .list-anim.ng-move.ng-move-active {
   opacity:1;
-}
-.modal-footer {
-	margin-top: 0;
-}
-
-@media (max-width: 979px) {
-  /* Enable use of floated navbar text */
-  .navbar-text.pull-right {
-	float: none;
-	padding-left: 5px;
-	padding-right: 5px;
-  }
-  .chart {
-  	padding-right: 0px;
-  	padding-left: 0px;
-  }
-  .type-superfat {
-  	font-size:40px;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-	padding-right: 0px;
-	padding-left: 0px;
-  }
-  .type-superfat {
-  	font-size:60px;
-  }
 }

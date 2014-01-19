@@ -162,11 +162,22 @@ angular.module('clearApp.services', ['ngResource'])
 	})
 	.factory('ClearFn', ['$filter', '$rootScope', '$location', '$modal', 'toaster', 'Utils', function($filter, $rootScope, $location, $modal, toaster, Utils){
 		return {
-			badgesDisplay: function(query) {
+			badgesDisplay: function(query, filters) {
 				var badges = [];
+				var objectNameById =  function(array, id) {
+					for (var i = 0, count = array.length; i < count; i++) {
+						if (array[i].id = id) {
+							return array[i].name;
+						}
+					}
+				}
+				
 				if (query.reference) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + query.location});
-				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + query.user });
+				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + filters.locations.values[query.location].name });
+				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + objectNameById(filters.users.values, query.user) });
+				if (query.status) badges.push({'name': 'status', 'display': 'Status: ' + objectNameById(filters.statuses.values, query.status) });
+				if (query.collection) badges.push({'name': 'collection', 'display': 'Collection: ' + objectNameById(filters.collections.values, query.collection) });
+				if (query.delivery) badges.push({'name': 'delivery', 'display': 'Delivery: ' + objectNameById(filters.deliveries.values, query.delivery) });
 				if (query.date_from) badges.push({'name': 'date_from', 'display': 'From: ' + $filter('date')(query.date_from*1000, 'dd.MM.yy') });
 				if (query.date_to) badges.push({'name': 'date_to', 'display': 'To: ' + $filter('date')(query.date_to*1000, 'dd.MM.yy') });
 				

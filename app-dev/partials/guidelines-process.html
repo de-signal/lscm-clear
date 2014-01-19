@@ -176,7 +176,7 @@
 									<div ng-if="!!elm.downloads[type].documents" class="margin-top">
 										<h6>documents</h6>
 										<div ng-repeat="required in elm.downloads[type].documents">
-											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 											<p><small>{{required.description}}</small></p>
 										</div>
 									</div>
@@ -234,7 +234,7 @@
 									<div ng-if="!!elm.updates[type].conditions" class="margin-top">
 										<h6>conditions</h6>
 										<div ng-repeat="required in elm.updates[type].conditions">
-											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 											<p><small>{{required.description}}</small></p>
 										</div>
 									</div>
@@ -262,7 +262,7 @@
 									<div ng-if="!!elm.updates_mobile[type].conditions" class="margin-top">
 										<h6>conditions</h6>
 										<div ng-repeat="required in elm.updates_mobile[type].conditions">
-											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="/app/guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="fa" required-icon></i> {{required.name}}</span> <a ng-href="guidelines/{{required.guideline.url.page + '#' + required.guideline.url.anchor}}" ng-if="!!required.guideline"><i class="fa fa-question-circle" tooltip="{{required.guideline.name}}" tooltip-placement="right"></i></a></h5>
 											<p><small>{{required.description}}</small></p>
 										</div>
 									</div>

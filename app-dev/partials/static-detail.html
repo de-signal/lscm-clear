@@ -4,59 +4,91 @@
 
 <div class="container margin-top">
 	<div class="row">
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>reference</h6>
-			<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>reference</h6>
+				<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="filet">
-			<h6>milestone</h6>
-			<h2>{{elm.milestone}}</h2>
-			<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'">
-			<i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i> </span>
+		<div class="col-md-6">
+			<div class="filet">
+				<h6>milestone</h6>
+				<h2>{{elm.milestone}}</h2>
+				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>status</h6>
-			<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>status</h6>
+				<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
+			</div>
 		</div>
-	</div>
-</div>
-<div class="row margin-top">
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>description</h6>
-			<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
-			<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>daily production value</h6>
-			<p class="type-fat" ng-style="charts.daily_production_value.color">{{charts.daily_production_value.value}} %</p>
-			<progressbar value="charts.daily_production_value.value" type="{{charts.daily_production_value.label}}"></progressbar>
-		</div>		
-	</div>
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>production completion</h6>
-			<p class="type-fat" ng-style="charts.production_completion.color">{{charts.production_completion.value}} %</p>
-			<progressbar value="charts.production_completion.value" type="{{charts.production_completion.label}}"></progressbar>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="filet">
-			<h6>production ratio</h6>
-			<p class="type-fat capitalize"  ng-style="charts.production_ratio.color">{{charts.production_ratio.label}}</p>
-			<progressbar value="charts.production_ratio.value" type="{{charts.production_ratio.label}}"></progressbar>
-		</div>
-	</div>
 	</div>
 	
-	<div class="row margin-top" ng-show="elm.required">
+	<div class="row margin-top" ng-if="elm.timeline">
+		<div class="col-md-12">
+			<div class="filet timeline">
+				<div class="row">
+					<div class="col-md-1">
+					
+					</div>
+					<div class="col-md-3">
+						 <h4>{{elm.timeline[0].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[0].description}}</i></span>
+						 <div ng-if="elm.timeline[0].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[1].completed]"></div>
+					</div>
+					<div class="col-md-3">
+						 <h4>{{elm.timeline[1].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[1].description}}</i></span>
+						 <div ng-if="elm.timeline[1].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[2].completed]"></div>
+					</div>
+					<div class="col-md-3">
+						 <h4>{{elm.timeline[2].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[2].description}}</i></span>
+						 <div ng-if="elm.timeline[2].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[3].completed]"></div>
+					</div>
+					<div class="col-md-2 timeline-last">
+						 <h4>{{elm.timeline[3].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[3].description}}</i></span>
+						 <div class="timeline-active" ng-if="elm.timeline[3].completed"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>description</h6>
+				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
+				<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>daily production value</h6>
+				<p class="type-fat" ng-style="charts.daily_production_value.color">{{charts.daily_production_value.value}} %</p>
+				<progressbar value="charts.daily_production_value.value" type="{{charts.daily_production_value.label}}"></progressbar>
+			</div>		
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>production completion</h6>
+				<p class="type-fat" ng-style="charts.production_completion.color">{{charts.production_completion.value}} %</p>
+				<progressbar value="charts.production_completion.value" type="{{charts.production_completion.label}}"></progressbar>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>production ratio</h6>
+				<p class="type-fat capitalize"  ng-style="charts.production_ratio.color">{{charts.production_ratio.label}}</p>
+				<progressbar value="charts.production_ratio.value" type="{{charts.production_ratio.label}}"></progressbar>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top" ng-if="elm.required">
 		<div class="col-md-12">
 			<h3>conditions</h3>
 			<table class="table table-condensed">
@@ -78,7 +110,7 @@
 	</div>
 	
 	
-	<div class="row" ng-show="elm.documents">
+	<div class="row" ng-if="elm.documents">
 		<div class="col-md-12">
 			<h3>documents</h3>
 			<table class="table table-condensed">
@@ -125,7 +157,7 @@
 			<accordion close-others="false">
 			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup">
 			    	<accordion-heading>
-			    		<span ng-class="[group.id, 'group']">{{group.name}}</span>
+			    		<i ng-class="['group_' + group.id, 'group']"></i> {{group.name}}
 			    	</accordion-heading>
 					<div class="form-horizontal">
 						<div class="form-group" ng-repeat="prop in group.set">
@@ -152,11 +184,11 @@
 										ng-disabled="!prop.editable" 
 										show-weeks="false"
 										ng-change="prop.value = dateToTimestamp(date[prop.name].value); propertySave(elm, 'property', group.name)">
-									<span class="input-group-btn"><button class="btn" ng-click="calOpen(prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button></span>
+									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button></span>
 								</div>
 							</span>
 							<span class="col-sm-4">
-								<i class="fa fa-info-circle" tooltip="{{prop.info}}" tooltip-placement="right" ng-show="prop.info"></i>
+								<i class="fa fa-info-circle" tooltip="{{prop.info}}" tooltip-placement="right" ng-if="prop.info"></i>
 							</span>
 							
 				    	</div>
@@ -166,7 +198,7 @@
 		</div><!--/span-->
 	</div><!--/row-->
 	
-	<div class="row margin-top" ng-show="elm.related" id="related">
+	<div class="row margin-top" ng-if="elm.related" id="related">
 		<div class="col-md-12">
 			<h3>related</h3>
 			<tabset>

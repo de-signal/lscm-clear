@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1
+        "name": "Global report",
+        "type": "pdf",
+        "url": "/url/to/document.pdf",
+        "info": "Week 07",
+        "date": 1371292983
+    },
+    {
+        "id": 2
+        "name": "Global report",
+        "type": "pdf",
+        "url": "/url/to/document.pdf",
+        "info": "Week 08",
+        "date": 1371292983
+    }
+]

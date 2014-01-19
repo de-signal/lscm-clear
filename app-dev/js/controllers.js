@@ -220,11 +220,11 @@ angular.module('clearApp.controllers', [])
         $scope.propertySave = ClearFn.propertySave;
         $scope.dateToTimestamp = Utils.dateToTimestamp;
 		
-		$scope.calOpen = function(param) {
-			$timeout(function() {
-				$scope.date[param].opened = true;
-			});
-		}	
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};	
 	}])
 	.controller('TplModalCtrl', ['$scope', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, ClearFn, $modalInstance, required, elm) {
 		$scope.required = required;
@@ -348,7 +348,7 @@ angular.module('clearApp.controllers', [])
 		});
 	  };
 	}])
-	.controller('InspectionReportsCtrl', ['$location', '$scope', 'E1', '$timeout', '$filter', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, $filter, Utils, ClearFn) {
+	.controller('InspectionReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
 		
 		var date = { from: {}, to: {} };
 		var query = $location.search();
@@ -377,10 +377,10 @@ angular.module('clearApp.controllers', [])
 		// Disable weekend selection
 		$scope.calDisabled = ClearFn.calDisabled;
 		
-		$scope.calOpen = function(param) {
-			$timeout(function() {
-				$scope.date[param].opened = true;
-			});
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
 		};
 		
 		$scope.go = ClearFn.go;
@@ -389,16 +389,14 @@ angular.module('clearApp.controllers', [])
 			$location.search(ClearFn.filterRemove(badge, query));
 		}  
 		
-		
-		
 		var queryType = Utils.collect({'type': 'ir'}, query);
 		
-		E1.query(queryType, function(docs) { 
-			$scope.badges = ClearFn.badgesDisplay(query); 
+		E1.query(queryType, function(docs) {
+			E1.get({'type': 'ir', 'id': 'filter'}, function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters); 
+			});
 		    $scope.docs = docs; 
-		});
-		E1.get({'type': 'ir', 'id': 'filter'}, function(filters) { 
-		    $scope.filters = filters; 
 		});
 		
 	}])
@@ -410,14 +408,53 @@ angular.module('clearApp.controllers', [])
 			} 
 		});
 	}])
-	.controller('NonComplianceReportsCtrl', ['$scope', 'ClearFn', 'E1', function($scope, ClearFn, E1) {
-		E1.query({'type': 'ncr'}, function(docs) { 
-		    $scope.docs = docs; 
-		});
-		E1.get({'type': 'ncr', 'id': 'filter'}, function(filters) { 
-		    $scope.filters = filters; 
-		});
+	.controller('NonComplianceReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.search = function (query) {
+			$location.search('page', null);
+			for (var i in query) {
+				console.log('i: ', i, 'query[i]: ', query[i]);
+				if (!query[i]) {
+			    	$location.search(i, null);
+			    }
+			}
+			if (!query.reference) { 
+				$location.search('related_to', null);
+			}
+			$location.search(query);
+		};
+		
+		// Disable weekend selection
+		$scope.calDisabled = ClearFn.calDisabled;
+		
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};
+		
 		$scope.go = ClearFn.go;
+		
+		$scope.badgeRemove = function(badge) {
+			$location.search(ClearFn.filterRemove(badge, query));
+		}
+		
+		E1.query({'type': 'ncr'}, function(docs) { 
+			E1.get({'type': 'ncr', 'id': 'filter'}, function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			});
+			$scope.docs = docs;  
+		});
 	}])
 	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E1', '$modal', function($scope, $routeParams, E1, $modal) {
 		E1.get({'type': 'ncr', 'id': $routeParams.id}, function(doc) {
@@ -445,14 +482,53 @@ angular.module('clearApp.controllers', [])
 			}
         }; 
 	}])
-	.controller('ProofsOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'E1', function($location, $scope, ClearFn, E1) {
-		E1.query({'type': 'pod'}, function(docs) { 
-		    $scope.docs = docs; 
-		});
-		E1.get({'type': 'pod', 'id': 'filter'}, function(filters) { 
-		    $scope.filters = filters; 
-		});
+	.controller('ProofsOfDeliveryCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {	
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.search = function (query) {
+			$location.search('page', null);
+			for (var i in query) {
+				console.log('i: ', i, 'query[i]: ', query[i]);
+				if (!query[i]) {
+			    	$location.search(i, null);
+			    }
+			}
+			if (!query.reference) { 
+				$location.search('related_to', null);
+			}
+			$location.search(query);
+		};
+		
+		// Disable weekend selection
+		$scope.calDisabled = ClearFn.calDisabled;
+		
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};
+		
 		$scope.go = ClearFn.go;
+		
+		$scope.badgeRemove = function(badge) {
+			$location.search(ClearFn.filterRemove(badge, query));
+		}
+		
+		E1.query({'type': 'pod'}, function(docs) {
+			E1.get({'type': 'pod', 'id': 'filter'}, function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			});
+			$scope.docs = docs; 
+		});
 	}])
 	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E1', function($scope, $routeParams, ClearFn, E1) {
 		E1.get({'type': 'pod', 'id': $routeParams.id}, function(doc) {
@@ -488,7 +564,7 @@ angular.module('clearApp.controllers', [])
 		$scope.list = StaticDashboardList.query();
 		$scope.go = ClearFn.go;
 	}])
-	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', '$filter', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, $filter, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
+	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
 		
 		var date = { from: {}, to: {} };
 		var query = $location.search();
@@ -517,36 +593,26 @@ angular.module('clearApp.controllers', [])
 		// Disable weekend selection
 		$scope.calDisabled = ClearFn.calDisabled;
 		
-		$scope.calOpen = function(param) {
-			$timeout(function() {
-				$scope.date[param].opened = true;
-			});
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
 		};
 		
 		$scope.go = ClearFn.go;
 		
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
-		}  
+		}
 		
-		
-		
-		var queryType = Utils.collect({'type': 'ir'}, query);
-		
-		InspectionReports.query(function(docs) { 
-			var badges = [];
-			if (query.reference) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-			if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + query.location});
-			if (query.user) badges.push({'name': 'user', 'display': 'User: ' + query.user });
-			if (query.date_from) badges.push({'name': 'date_from', 'display': 'Active from: ' + $filter('date')(query.date_from*1000, 'dd.MM.yy') });
-			if (query.date_to) badges.push({'name': 'date_to', 'display': 'Active until: ' + $filter('date')(query.date_to*1000, 'dd.MM.yy') });
-			$scope.badges = badges; 
-			
-		    $scope.docs = docs; 
+		InspectionReports.query(function(docs) {
+			InspectionReportsFilters.get(function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			});
+			$scope.docs = docs; 
 		});
-		InspectionReportsFilters.get(function(filters) { 
-		    $scope.filters = filters; 
-		});
+		
 		
 	}])
 	.controller('StaticInspectionReportCtrl', ['$scope', '$filter', 'InspectionReport', function($scope, $filter, InspectionReport) {
@@ -556,10 +622,53 @@ angular.module('clearApp.controllers', [])
 			} 
 		});
 	}])
-	.controller('StaticNonComplianceReportsCtrl', ['$location', '$scope', 'ClearFn', 'NonComplianceReports', 'NonComplianceReportsFilters', function($location, $scope, ClearFn, NonComplianceReports, NonComplianceReportsFilters) {
-		$scope.docs = NonComplianceReports.query();
-		$scope.filters = NonComplianceReportsFilters.get();
+	.controller('StaticNonComplianceReportsCtrl', ['$location', '$scope', 'ClearFn', 'NonComplianceReports', 'NonComplianceReportsFilters', 'Utils', function($location, $scope, ClearFn, NonComplianceReports, NonComplianceReportsFilters, Utils) {
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.search = function (query) {
+			$location.search('page', null);
+			for (var i in query) {
+				console.log('i: ', i, 'query[i]: ', query[i]);
+				if (!query[i]) {
+			    	$location.search(i, null);
+			    }
+			}
+			if (!query.reference) { 
+				$location.search('related_to', null);
+			}
+			$location.search(query);
+		};
+		
+		// Disable weekend selection
+		$scope.calDisabled = ClearFn.calDisabled;
+		
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};
+		
 		$scope.go = ClearFn.go;
+		
+		$scope.badgeRemove = function(badge) {
+			$location.search(ClearFn.filterRemove(badge, query));
+		}
+		
+		NonComplianceReports.query(function(docs) {
+			NonComplianceReportsFilters.get(function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			});
+			$scope.docs = docs; 
+		});
 	}])
 	.controller('StaticNonComplianceReportCtrl', ['$location', '$scope', 'NonComplianceReport', '$modal', function($location, $scope, NonComplianceReport, $modal) {
 		NonComplianceReport.get(function(doc){
@@ -614,10 +723,53 @@ angular.module('clearApp.controllers', [])
 		$scope.doc = ProofOfDelivery.get();
 		$scope.go = ClearFn.go;
 	}])
-	.controller('StaticProofsOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'ProofsOfDelivery', 'ProofsOfDeliveryFilters', function($location, $scope, ClearFn, ProofsOfDelivery, ProofsOfDeliveryFilters) {
-		$scope.docs = ProofsOfDelivery.query();
-		$scope.filters = ProofsOfDeliveryFilters.get();
+	.controller('StaticProofsOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'ProofsOfDelivery', 'ProofsOfDeliveryFilters', 'Utils', function($location, $scope, ClearFn, ProofsOfDelivery, ProofsOfDeliveryFilters, Utils) {
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.search = function (query) {
+			$location.search('page', null);
+			for (var i in query) {
+				console.log('i: ', i, 'query[i]: ', query[i]);
+				if (!query[i]) {
+			    	$location.search(i, null);
+			    }
+			}
+			if (!query.reference) { 
+				$location.search('related_to', null);
+			}
+			$location.search(query);
+		};
+		
+		// Disable weekend selection
+		$scope.calDisabled = ClearFn.calDisabled;
+		
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};
+		
 		$scope.go = ClearFn.go;
+		
+		$scope.badgeRemove = function(badge) {
+			$location.search(ClearFn.filterRemove(badge, query));
+		}
+		
+		ProofsOfDelivery.query(function(docs) {
+			ProofsOfDeliveryFilters.get(function(filters) { 
+			    $scope.filters = filters; 
+			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			});
+			$scope.docs = docs; 
+		});
 	}])
 	.controller('StaticListCtrl', ['$location', '$scope', 'ClearFn', 'Elms', function($location, $scope, ClearFn, Elms) {
 		var list=[],elements=[],j;
@@ -757,11 +909,11 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.calDisabled = ClearFn.calDisabled;
 		
-		$scope.calOpen = function(param) {
-			$timeout(function() {
-				$scope.date[param].opened = true;
-			});
-		}
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.date[param].opened = true;
+		};
 		
 	}])
 	.controller('News', ['$scope', function($scope) {

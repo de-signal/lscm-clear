@@ -150,7 +150,7 @@
 										ng-disabled="!prop.editable" 
 										show-weeks="false"
 										ng-change="prop.value = dateToTimestamp(date[prop.name].value); propertySave(elm, 'property', group.name)">
-									<span class="input-group-btn"><button class="btn" ng-click="calOpen(prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button></span>
+									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="fa fa-calendar"></i></button></span>
 								</div>
 							</span>
 							<span class="col-sm-4">

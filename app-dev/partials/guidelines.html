@@ -6,7 +6,7 @@
 	<div class="row margin-top">
 		<div class="col-md-12">
 			<div class="elements-group">
-				<h1><a href="/app/guidelines/process">Process overview</a></h1>
+				<h1><a href="guidelines/process">Process overview</a></h1>
 				<div class="row margin-top">
 					<div class="col-md-4">
 						<p>The whole logistics process, presented step by step, from the creation of an order to the delivery at the client. </p>
@@ -14,7 +14,7 @@
 					<div class="col-md-8">
 						<div class="row" ng-repeat="elm in elmsProcess">
 							<div class="col-md-12">
-								<a ng-href="/app/guidelines/process#{{elm.id}}"><h4>{{elm.step}}. {{elm.name}}</h4></a>
+								<a ng-href="guidelines/process#{{elm.id}}"><h4>{{elm.step}}. {{elm.name}}</h4></a>
 							</div>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 		<div class="col-md-12">
 			<div class="elements-group">
 				<h2 class="picto picto_web pull-right">Web</h2>
-				<h1><a href="/app/guidelines/web">{{elmWeb.title}}</a></h1>
+				<h1><a href="guidelines/web">{{elmWeb.title}}</a></h1>
 				<div class="row margin-top">
 					<div class="col-md-4">
 						<p>{{elmWeb.description}} </p>
@@ -35,7 +35,7 @@
 					<div class="col-md-8">
 						<div class="row" ng-repeat="instruction in elmWeb.instructions">
 							<div class="col-md-12">
-								<a ng-href="/app/guidelines/web#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a>
+								<a ng-href="guidelines/web#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a>
 							</div>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 		<div class="col-md-12">
 			<div class="elements-group">
 				<h2 class="picto picto_mobile pull-right">Mobile</h2>
-				<h1><a href="/app/guidelines/mobile">{{elmMobile.title}}</a></h1>
+				<h1><a href="guidelines/mobile">{{elmMobile.title}}</a></h1>
 				<div class="row margin-top">
 					<div class="col-md-4">
 						<p>{{elmMobile.description}} </p>
@@ -56,7 +56,7 @@
 					<div class="col-md-8">
 						<div class="row" ng-repeat="instruction in elmMobile.instructions">
 							<div class="col-md-12">
-								<a ng-href="/app/guidelines/mobile#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a>
+								<a ng-href="guidelines/mobile#{{instruction.id}}"><h4>{{$index+1 + '. ' + instruction.name}}</h4></a>
 							</div>
 						</div>
 					</div>

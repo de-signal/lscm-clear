@@ -21,15 +21,78 @@
 	},  
 	"locations": {
 	    "type": "select", 
-	    "values": ["warehouse", "somewhere", "anywhere", "nowhere", "eslewhere", "somewhere else", "here"]
+	    "values": [ 
+	    	{ 
+	    		"id": 0,  
+	    		"name": "warehouse" 
+	    	}, 
+	    	{
+	    		"id": 1,  
+	    		"name": "somewhere"
+	    	}, 
+	    	{
+	    		"id": 2,  
+	    		"name": "anywhere"
+	    	}, 
+	    	{
+	    		"id": 3,  
+	    		"name": "nowhere" 
+	    	}, 
+	    	{
+	    		"id": 4,  
+	    		"name": "eslewhere"
+	    	}, 
+	    	{
+	    		"id": 5,  
+	    		"name": "somewhere else"
+	    	}, 
+	    	{
+	    		"id": 6,  
+	    		"name": "here"
+	    	}
+	    ]
 	},
 	"statuses": {
 	    "type": "select", 
-	    "values": ["late", "open", "closed"]
+	    "values": [
+	    	{ 
+	    		"id": 0,  
+	    		"name": "late"
+    		}, 
+    		{
+				"id": 1,  
+				"name": "open"
+			}, 
+			{
+				"id": 2,  
+				"name": "closed"
+			}
+		]
 	}, 
 	"users": {
 	    "type": "select", 
-	    "values": ["Henri Robert", "User 2", "User 3", "User 4", "User 5"]
+	    "values": [ 
+	    	{ 
+	    		"id": 0,  
+	    		"name": "Henri Robert" 
+	    	}, 
+	    	{
+	    		"id": 1,  
+	    		"name": "User 2"
+	    	}, 
+	    	{
+	    		"id": 2,  
+	    		"name": "User 3"
+	    	}, 
+	    	{
+	    		"id": 3,  
+	    		"name": "User 4"
+	    	}, 
+	    	{
+	    		"id": 4,  
+	    		"name": "User 5"
+	    	}
+	    ]
 	}, 
 	"dates": {
         "from": {

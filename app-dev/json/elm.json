@@ -1,9 +1,31 @@
 {
     "type": "order",
     "id": 12,
-    "reference": "0101010109292",
-	"_comment 0" : "bloc info depend on element type. demo with order.info. display only one infos bloc.",
-	"_comment 1" : "rename 'infos' if element.type == order",
+    "reference": "0101010109292", 
+    "tracking": true,
+    "status": "upcoming",
+    "milestone": "Departed",
+    "delay": -5,
+    "timeline": [
+    	{
+    		"name": "In preparation", 
+    		"completed": true
+    	}, 
+    	{
+    		"name": "Collected at vendor", 
+    		"description": "Inspection and consolidation", 
+    		"completed": true
+    	}, 
+    	{
+    		"name": "Green light approved", 
+    		"description": "In transit",
+    		"completed": true
+    	}, 
+    	{
+    		"name": "Delivered",
+    		"completed": true
+    	}
+    ],
     "infos": [ 
     	{ "vendor": "HYUNDAI HEAVY INDUSTRIES CO.,LTD." },
     	{ "country": "South Korea" },
@@ -31,10 +53,7 @@
     	{ "description": "ACCELEROMETER, 10.2 MV/M/S2" },
     	{ "supplier": "BENTLY NEVADA" }, 
     	{ "supplier material": "455825LMP" }
-    ], 
-    "tracking": true,
-    "milestone": "Departed",
-    "delay": -5,
+    ],
     "charts": { 
     	"daily_production_value": {
 			"name": "daily production value", 
@@ -49,7 +68,6 @@
 			"value": 90 
 		}
     },
-    "status": "upcoming",
     "required": [
         {
             "id": 1234,
@@ -258,7 +276,7 @@
     "properties": [
         {
             "name": "Scope and delay",
-            "id": "group_1",
+            "id": "scope_and_delay",
             "set": [
                 {
                     "type": "text",
@@ -319,7 +337,7 @@
         },
         {
             "name": "Location",
-            "id": "group_2",
+            "id": "location",
             "set": [
                 {
                     "type": "text",
@@ -355,7 +373,7 @@
         },
         {
             "name": "Quality assurance / Quality control",
-            "id": "group_3",
+            "id": "qa_qc",
             "set": [
                 {
                     "type": "text",
@@ -391,7 +409,7 @@
         },
         {
             "name": "Shipping",
-            "id": "group_4",
+            "id": "shipping",
             "set": [
                 {
                     "type": "text",
@@ -427,7 +445,7 @@
         },
         {
             "name": "Transport",
-            "id": "group_5",
+            "id": "transport",
             "set": [
                 {
                     "type": "text",
@@ -463,7 +481,7 @@
         },
         {
             "name": "Repacking",
-            "id": "group_6",
+            "id": "repacking",
             "set": [
                 {
                     "type": "text",
@@ -499,7 +517,7 @@
         },
         {
             "name": "Catalogue",
-            "id": "group_7",
+            "id": "catalogue",
             "set": [
                 {
                     "type": "text",
@@ -535,7 +553,295 @@
         },
         {
             "name": "Procurement",
-            "id": "group_8",
+            "id": "procurement",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Aspect",
+            "id": "aspect",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Comments",
+            "id": "comments",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Documentation",
+            "id": "documentation",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Validation",
+            "id": "validation",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Shipping pre-hub",
+            "id": "shipping_prehub",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Shipping post-hub",
+            "id": "shipping_posthub",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Scope and delay",
+            "id": "scope_and_delay",
+            "set": [
+                {
+                    "type": "text",
+                    "name": "control time stamp",
+                    "value": "started",
+                    "editable": true
+                },
+                {
+                    "type": "checkbox",
+                    "name": "associated",
+                    "value": true,
+                    "editable": false
+                },
+                {
+                    "type": "checkbox",
+                    "name": "new property",
+                    "value": true,
+                    "editable": true
+                },
+                {
+                    "type": "select",
+                    "name": "type of service",
+                    "value": 3,
+                    "values": [
+                        "Door to Door",
+                        "Door to Airport/port",
+                        "Clearance & Delivery",
+                        "Consolidation hub Inspection"
+                    ],
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "name": "Reference",
+            "id": "refence",
             "set": [
                 {
                     "type": "text",

@@ -29,11 +29,11 @@
 	    				<div class="col-md-4">
 	    					<fieldset>
 		    					<legend>Location</legend>
-		    					<select class="form-control" ng-model="query.location" ng-options="location for location in filters.locations.values"><option value="">---</option></select>
+		    					<select class="form-control" ng-model="query.location" ng-options="location.id as location.name for location in filters.locations.values"><option value="">---</option></select>
 		    				</fieldset>
 		    				<fieldset>
 		    					<legend>User </legend>
-		    					<select class="form-control" ng-model="query.user" ng-options="user for user in filters.users.values"><option value="">---</option></select>
+		    					<select class="form-control" ng-model="query.user" ng-options="user.id as user.name for user in filters.users.values"><option value="">---</option></select>
 		    				</fieldset>
 	    				</div>
 	    				
@@ -43,7 +43,7 @@
 		    					<div class="input-group">
 		    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.from.value" is-open="date.from.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" max="date.to.value" ng-change="query.date_from = dateToTimestamp(date.from.value)" />
 		    						<span class="input-group-btn">
-		    							<button class="btn" ng-click="calOpen('from')"><i class="fa fa-calendar"></i></button>
+		    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="fa fa-calendar"></i></button>
 		    						</span>
 		    					</div>
 		    				</fieldset>
@@ -52,7 +52,7 @@
 		    					<div class="input-group">
 		    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.to.value" is-open="date.to.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" min="date.from.value" ng-change="query.date_to = dateToTimestamp(date.to.value)" />
 		    						<span class="input-group-btn">
-		    							<button class="btn" ng-click="calOpen('to')"><i class="fa fa-calendar"></i></button>
+		    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="fa fa-calendar"></i></button>
 		    						</span>
 		    					</div>
 		    				</fieldset>
