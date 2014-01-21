@@ -9,5 +9,6 @@ logs/
 scripts/
 test/
 app-dev/lscm-clear.com.esproj/
+app-tmp/pdf/pdf.lscm-clear.com.esproj/
 app-dev/components/
 app-dev/.sass-cache

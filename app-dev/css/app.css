@@ -631,17 +631,21 @@ th h6 {
 		margin-left:-10px;
 	}
 	.timeline .col-md-3 {
-		background: url(../img/clear_timeline_h.svg) 0 30px no-repeat;
+		background: url(../img/clear_timeline_h.svg) 0 50px no-repeat;
 		min-height: 100px;
 		position: relative;
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 	.timeline .col-md-2 {
-		background: url(../img/clear_timeline_dot.svg) 0 30px no-repeat;
+		background: url(../img/clear_timeline_dot.svg) 0 50px no-repeat;
 		min-height: 100px;
 		position: relative;
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 	.col-md-3 .timeline-active {
-		background: url(../img/clear_timeline_h_active.svg) 0 30px no-repeat;
+		background: url(../img/clear_timeline_h_active.svg) 0 50px no-repeat;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -649,7 +653,7 @@ th h6 {
 		left: 0;
 	}
 	.col-md-3 .timeline-completed {
-		background: url(../img/clear_timeline_h_completed.svg) 0 30px no-repeat;
+		background: url(../img/clear_timeline_h_completed.svg) 0 50px no-repeat;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -657,7 +661,7 @@ th h6 {
 		left: 0;
 	}
 	.col-md-2 .timeline-active {
-		background: url(../img/clear_timeline_dot_active.svg) 0 30px no-repeat;
+		background: url(../img/clear_timeline_dot_active.svg) 0 50px no-repeat;
 		position: absolute;
 		right: 0;
 		top: 0;

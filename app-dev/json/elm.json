@@ -19,11 +19,11 @@
     	{
     		"name": "Green light approved", 
     		"description": "In transit",
-    		"completed": true
+    		"completed": false
     	}, 
     	{
     		"name": "Delivered",
-    		"completed": true
+    		"completed": false
     	}
     ],
     "infos": [ 
