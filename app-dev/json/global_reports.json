@@ -1,6 +1,6 @@
 [
     {
-        "id": 1
+        "id": 1,
         "name": "Global report",
         "type": "pdf",
         "url": "/url/to/document.pdf",
@@ -8,7 +8,7 @@
         "date": 1371292983
     },
     {
-        "id": 2
+        "id": 2,
         "name": "Global report",
         "type": "pdf",
         "url": "/url/to/document.pdf",

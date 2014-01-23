@@ -1,10 +1,32 @@
-<div class="header bg-shipment">
-	<h1 class="container"><i class="icon i-element i-element-shipment"></i> Shipments</h1>
+<div class="header bg-generic">
+	<h1 class="container">Dashboard</h1>
 </div>
 
 <div class="container margin-top">
 	<div class="row">
-		<div class="col-md-12">			
+			<div class="col-md-12">
+				<h3>global report</h3>
+				<table class="table table-condensed">
+					<thead>
+					<tr>
+						<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>info</h6></th><th><h6></h6></th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{report.type}}</td>
+							<td><strong>{{report.name}}</strong></td>
+							<td><span class="label label-default">{{report.info}}</span></td>
+							<td><a ng-href="{{report.url}}" class='btn btn-sm'>Download</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+	<div class="row">
+		<div class="col-md-12">	
+			<h3>shipments</h3>	
 			<table class="table table-condensed" >
 				<thead>
 					<tr>

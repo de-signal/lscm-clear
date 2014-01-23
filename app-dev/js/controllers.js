@@ -71,6 +71,9 @@ angular.module('clearApp.controllers', [])
 		E1.query({'type': 'dashboard'}, function(list) {
 			$scope.list= list;
 		});
+		E1.query({'type': 'reports'}, function(docs){
+			$scope.report = docs[docs.length-1];
+		});
 		$scope.go = ClearFn.go;
 		$scope.modalOpen = ClearFn.modalOpen; 
 		$scope.propertySave = ClearFn.propertySave;
@@ -556,8 +559,13 @@ angular.module('clearApp.controllers', [])
 		$scope.tooltips = ChartsConfig.tooltips;	
 		
 	}])
-	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', function($location, $scope, ClearFn, StaticDashboardList) {
-		$scope.list = StaticDashboardList.query();
+	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', 'StaticGlobalReports', function($location, $scope, ClearFn, StaticDashboardList, StaticGlobalReports) {
+		StaticGlobalReports.query( function(docs){
+			$scope.report = docs[docs.length-1];
+		});
+		StaticDashboardList.query( function(list) {
+			$scope.list = list;
+		});
 		$scope.go = ClearFn.go;
 	}])
 	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
