@@ -26,7 +26,7 @@ angular.module('clearApp', [ 'http-auth-interceptor', 'ngRoute', 'ngAnimate', 'n
 		$routeProvider.when('/guidelines/web', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesWebCtrl'});
 		$routeProvider.when('/guidelines/mobile', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesMobileCtrl'});
 		
-		$routeProvider.when('/profile', {templateUrl: 'partials/profile.html', controller: 'ProfileCtrl'});
+		$routeProvider.when('/user', {templateUrl: 'partials/user-profile.html', controller: 'UserProfileCtrl'});
 		$routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: 'DashboardCtrl'});
 		$routeProvider.when('/tv', {templateUrl: 'partials/tv.html', controller: 'TvCtrl'});
 		$routeProvider.when('/tracking', {templateUrl: 'partials/tracking.html', controller: 'TrackingCtrl'});

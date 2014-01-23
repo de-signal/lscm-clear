@@ -62,7 +62,7 @@ angular.module('clearApp.controllers', [])
 			console.log('logout');
 		}
 	}])
-	.controller('ProfileCtrl', ['E1', function(E1) {
+	.controller('UserProfileCtrl', ['$scope', 'E1', function($scope, E1) {
 		E1.get({'type': 'user'}, function(user) { 
 			$scope.user = user;
 		});

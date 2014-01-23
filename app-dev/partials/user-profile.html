@@ -1,0 +1,20 @@
+<div class="header bg-generic">
+	<h1 class="container"><i class="icon i-user"></i> User profile</h1>
+</div>
+
+<div class="container margin-top">
+	<div class="row">
+			<div class="col-md-12">
+				<p>Name: {{user.name}} </p>
+				<p>First name: {{user.first_name}} </p>
+			</div>
+		</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<pre><small>
+{{user | json}}
+			</small></pre>
+		</div>
+	</div>
+</div>
