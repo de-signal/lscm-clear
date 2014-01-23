@@ -1,5 +1,5 @@
 <div class="header bg-generic bg-proofOfDelivery">
-	<h1 class="container">Proof of delivery</h1>
+	<h1 class="container"><i class="icon i-document-pod"></i> Proof of delivery</h1>
 </div>
 
 <div class="container margin-top">
@@ -9,7 +9,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>order reference</h6>
-						<h2><span class="label label-order">{{doc.related.order.reference}}</span> <a class="btn" ng-href="order/{{doc.related.order.id}}" alt="Order details"><i class="fa fa-external-link"></i></a></h2>
+						<h2><span class="label label-order">{{doc.related.order.reference}}</span> <a class="btn" ng-href="order/{{doc.related.order.id}}" alt="Order details"><i class="icon i-external-link"></i></a></h2>
 					</div>
 				</div>
 			</div>
@@ -17,7 +17,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>shipment reference</h6>
-						<h2><span class="label label-shipment">{{doc.related.shipment.reference}}</span> <a class="btn" ng-href="shipment/{{doc.related.shipment.id}}" alt="Shipment details"><i class="fa fa-external-link"></i></a></h2>
+						<h2><span class="label label-shipment">{{doc.related.shipment.reference}}</span> <a class="btn" ng-href="shipment/{{doc.related.shipment.id}}" alt="Shipment details"><i class="icon i-external-link"></i></a></h2>
 					</div>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><i class="lead fa fa-file-text-o"></i>&nbsp;&nbsp;{{doc.document.type}}</td>
+						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.document.type}}</td>
 						<td><strong>{{doc.document.name}}</strong></td>
 						<td><span class="label label-default">{{doc.document.info}}</span></td>
 						<td><a ng-href="{{doc.document.url}}" class='btn btn-small' target="_blank">Download</a></td>

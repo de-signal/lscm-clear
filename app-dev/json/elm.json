@@ -276,7 +276,7 @@
     "properties": [
         {
             "name": "Scope and delay",
-            "id": "scope_and_delay",
+            "id": "scope-and-delay",
             "set": [
                 {
                     "type": "text",
@@ -373,7 +373,7 @@
         },
         {
             "name": "Quality assurance / Quality control",
-            "id": "qa_qc",
+            "id": "qa-qc",
             "set": [
                 {
                     "type": "text",
@@ -733,7 +733,7 @@
         },
         {
             "name": "Shipping pre-hub",
-            "id": "shipping_prehub",
+            "id": "shipping-prehub",
             "set": [
                 {
                     "type": "text",
@@ -769,43 +769,7 @@
         },
         {
             "name": "Shipping post-hub",
-            "id": "shipping_posthub",
-            "set": [
-                {
-                    "type": "text",
-                    "name": "control time stamp",
-                    "value": "started",
-                    "editable": true
-                },
-                {
-                    "type": "checkbox",
-                    "name": "associated",
-                    "value": true,
-                    "editable": false
-                },
-                {
-                    "type": "checkbox",
-                    "name": "new property",
-                    "value": true,
-                    "editable": true
-                },
-                {
-                    "type": "select",
-                    "name": "type of service",
-                    "value": 3,
-                    "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
-                    ],
-                    "editable": true
-                }
-            ]
-        },
-        {
-            "name": "Scope and delay",
-            "id": "scope_and_delay",
+            "id": "shipping-posthub",
             "set": [
                 {
                     "type": "text",
@@ -841,7 +805,7 @@
         },
         {
             "name": "Reference",
-            "id": "refence",
+            "id": "reference",
             "set": [
                 {
                     "type": "text",

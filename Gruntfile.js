@@ -96,23 +96,13 @@ module.exports = function (grunt) {
 					cwd: 'app-dev/components/',
 					src: [
 						'bootstrap/dist/css/bootstrap.css',
-						'components-font-awesome/css/font-awesome.css',
 						'AngularJS-Toaster/toaster.css',
 						'nvd3/nv.d3.css'
 					],
 					dest: 'app-dev/lib/css',
 					flatten: true
-				}, 
-				{
-					expand: true,
-					cwd: 'app-dev/components/',
-					src: [
-						'bootstrap/dist/fonts/*',
-						'components-font-awesome/fonts/*'
-					],
-					dest: 'app-dev/lib/fonts',
-					flatten: true
-				}]
+				}
+				]
 			}, 
 			app: { // Copies remaining files to places other tasks can use
 				files: [{
@@ -133,8 +123,8 @@ module.exports = function (grunt) {
 					dot: true,
 					flatten: true,
 					cwd: 'app-dev',
-					dest: 'app/fonts',
-					src: [ 'lib/fonts/*']
+					dest: 'app/css/fonts',
+					src: [ 'css/fonts/*']
 				}]
 			}, 
 			hack: { // Copies remaining files to places other tasks can use

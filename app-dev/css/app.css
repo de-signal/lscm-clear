@@ -10,7 +10,6 @@ body {
 	color: #1f1f00;
 	overflow-y: scroll;
 }
-
 /* sticky footer -------------------------------------------------- */
 
 html, body {
@@ -58,15 +57,6 @@ footer {
 }
 
 
-.fa {
-	margin: 0;
-}
-thead .fa {
-	color: white;
-}
-.fa-circle, .fa-circle-o {
-	margin-right: 3px;
-}
 
 /* login form */ 
 .login-box {
@@ -92,6 +82,9 @@ thead .fa {
 a {
 	color: #1f1f00;
 }
+a:hover {
+	text-decoration: none;
+}
 
 ul, ul ul {
 	list-style: none;
@@ -115,7 +108,7 @@ ol.inline {
 ul.inline > li,
 ol.inline > li {
 	padding: 0;
-	margin-right: 5px;
+	margin-right: 4px;
 	float: left;
 }
 
@@ -135,6 +128,9 @@ a:hover {
 .margin-top {
 	margin-top:20px;
 	clear: both;
+}
+.margin-top-s {
+	margin-top:5px;
 }
 .padding-left {
 	padding-left:10px;
@@ -226,21 +222,21 @@ h2 .badge {
 	line-height: 32px;
 	margin-right: 5px;
 }
-h2 .btn {
-	padding: 1px 3px 0 5px;
-	margin-top: 4px;
-	display: inline-block;
+h2 .btn, h5 .btn {
+	padding: 2px 2px 0 5px;
+	vertical-align: text-bottom;
+}
+h2 .btn i, h5 .btn i {
+	margin-bottom: -2px;
+	float: left;
 }
 
 h5 .label,
 h5 .badge  {
 	font-size:15px;
-	padding:0px 6px;
+	padding: 1px 6px;
 	margin-right: 4px;
 	line-height:23px;
-}
-h5 .btn {
-	padding: 1px 3px 0 5px;
 }
 
 h6, h3, text.nv-legend-text {
@@ -398,8 +394,8 @@ h1 {
 	margin-bottom: 0;
 }
 .header h1 {
-	padding-top:17px;
-	padding-bottom:13px;
+	padding-top:15px;
+	padding-bottom:15px;
 }
 h1 .pointer {
 	color: white;
@@ -430,57 +426,31 @@ h1 .pointer {
 	margin-top: -1px;
 	margin-right: 4px;
 }
-.bg-order h1:before, 
-.bg-shipment h1:before, 
-.bg-box h1:before, 
-.bg-item h1:before, 
-.bg-nonCompliantReport h1:before, 
-.bg-inspectionReport h1:before, 
-.bg-proofOfDelivery h1:before {
-	display: block;
-	float: left;
+.header h1 i {
+	padding-top: 10px;
+	font-size: 0.8em;
+	margin-right: 10px;
+}
+.header h1 i.i-element {
+	background:rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 	width:55px;
 	height:55px;
-	margin-top: -8px;
+	margin-top: -5px;
 	margin-right: 12px;
+	float: left;
+	text-align: center;
 }
-.bg-order h1:before {
-	content:  url(../img/clear_icon_order.svg);
-	background:rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
+h4 i.icon {
+	color: gray;
+	font-size: 1.5em;
+	margin-right: 10px;
+	float: left;
+	margin-top: -2px;
 }
-.bg-shipment h1:before {
-	content:  url(../img/clear_icon_shipment.svg);
-	background:rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
-}
-.bg-box h1:before {
-	content:  url(../img/clear_icon_box.svg);
-	background:rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;	
-}
-.bg-item h1:before {
-	content:  url(../img/clear_icon_item.svg);
-	background:rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;	
-}
-.bg-nonCompliantReport h1:before {
-	content:  url(../img/clear_icon_nonCompliantReport.svg);
-}
-.bg-inspectionReport h1:before {
-	content:  url(../img/clear_icon_inspectionReport.svg);
-}
-.bg-proofOfDelivery h1:before {
-	content:  url(../img/clear_icon_proofOfDelivery.svg);
-}
+
 .tracking {
 	font-size:30px;
 	margin-top: 5px;
@@ -518,6 +488,20 @@ th h6 {
 	background-color: white;
 }
 
+
+.icon {
+	font-size: 16px;
+	margin: 0;
+	vertical-align: middle;
+}
+
+.lead.icon {
+	font-size: 24px;
+}
+
+thead .icon {
+	color: white;
+}
 /* transportation icons for shipments */
 .transportation-icon-plane {
 	content:  url(../img/clear_icon_transportation_plane.svg);
@@ -527,6 +511,25 @@ th h6 {
 }
 .transportation-icon-truck {
 	content:  url(../img/clear_icon_transportation_truck.svg);
+}
+[class^="glyphicon-"]:before,
+[class*=" glyphicon-"]:before {
+  font-family: "clear" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-chevron-right {
+	content: "\e022";
+}
+.glyphicon-chevron-left {
+	content: "\e021";
 }
 
 
@@ -548,11 +551,9 @@ th h6 {
 	border-color: white;
 }
 
-
-
 .btn-icon {
-	padding: 2px 4px;
-	margin: -6px 0 -1px;
+	padding: 3px 2px 2px 3px;
+	margin: -5px 0 -2px;
 	line-height: 16px;
 }
 .btn-generic {
@@ -707,36 +708,6 @@ a.accordion-toggle h4, tab-heading h4 {
 	background-color: white;
 }
 
-.group:before {
-	float: left;
-	margin-top: -7px;
-	margin-right: 10px;
-}
-.group_1:before {
-	content:  url(../img/clear_icon_group_1.svg);	
-}
-.group_2:before {
-	content:  url(../img/clear_icon_group_2.svg);	
-}
-.group_3:before {
-	content:  url(../img/clear_icon_group_3.svg);	
-}
-.group_4:before {
-	content:  url(../img/clear_icon_group_4.svg);	
-}
-.group_5:before {
-	content:  url(../img/clear_icon_group_5.svg);	
-}
-.group_6:before {
-	content:  url(../img/clear_icon_group_6.svg);	
-}
-.group_7:before {
-	content:  url(../img/clear_icon_group_7.svg);	
-}
-.group_8:before {
-	content:  url(../img/clear_icon_group_8.svg);	
-}
-
 .nav > li > a:hover,
 .nav > li > a:focus {
   background-color: white;
@@ -804,9 +775,12 @@ fieldset {
 
 .badge {
 	margin-right:10px;
+	padding-left: 10px;
+	padding-top: 4px;
 }
-.badge .fa-times {
+.badge .icon {
 	margin-left: 5px;
+	vertical-align: middle;
 }
 .badge-inverse {
 	background-color: #1f1f00;
@@ -827,12 +801,6 @@ fieldset {
 }
 .label-ncr {
 	background-color: #ffcb32;
-	text-shadow:
-	-1px -1px 0 white,
-	1px -1px 0 white,
-	-1px 1px 0 white,
-	1px 1px 0 white;
-	
 	margin-right: -20px;
 	-webkit-border-top-right-radius: 0px;
 	-moz-border-radius-topright: 0px;
@@ -841,24 +809,26 @@ fieldset {
 	-moz-border-radius-bottomright: 0px;
 	border-bottom-right-radius: 0px;
 	padding: 0;
-	}
+}
 .icon-conform {
 	margin-right:-4px;
 	float: right;
-}
-.label-ncr a:before {
-	content:  url(../img/clear_icon_nonCompliantReport_16.svg);
-	vertical-align:middle;
-	margin-right:7px;
-	margin-bottom: -2px;
-	display: inline-block;
-	margin-top: -3px;
 }
 
 .label-ncr a {
 	display: inline-block;
 	padding:4px 20px 2px 4px;
 	margin-bottom: 2px;
+	font-size: 1.5em;
+}
+.label-ncr .i-disc {
+	text-shadow:
+	-1px -1px 0 white,
+	1px -1px 0 white,
+	-1px 1px 0 white,
+	1px 1px 0 white;
+	margin-left: 8px;
+	font-size: 0.75em;
 }
 .label-ncr a:hover {
 	text-decoration: none;
@@ -1141,6 +1111,10 @@ fieldset {
 .label-neutral {
 	background-color: white;
 	color: #9e9e8e;
+}
+.label-neutral .icon {
+	margin-right: 3px;
+	vertical-align: text-top;
 }
 
 .center {

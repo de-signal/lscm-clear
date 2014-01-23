@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Calque_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-        <polygon fill="#9F9F8F" points="10,22 8,20 6,22 10,26 16,20 14,18    "/>
-        <polygon fill="#9F9F8F" points="10,12 8,10 6,12 10,16 16,10 14,8    "/>
-        <path fill="#9F9F8F" d="M23.414 0H2v32h28V6.586L23.414 0zM24 3.414L26.586 6H24V3.414zM28 30H4V2h18v6h6V30z"/>
-        <rect x="18" y="12" fill="#9F9F8F" width="6" height="2"/>
-        <rect x="18" y="22" fill="#9F9F8F" width="6" height="2"/>
-      <rect fill="none" width="32" height="32"/>
-</svg>

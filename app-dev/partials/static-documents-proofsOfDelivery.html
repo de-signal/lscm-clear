@@ -1,5 +1,5 @@
 <div class="header bg-generic bg-proofOfDelivery">
-	<h1 class="container">Proofs of delivery</h1>
+	<h1 class="container"><i class="icon i-document-pod"></i> Proofs of delivery</h1>
 </div>
 
 <div class="container margin-top">
@@ -36,7 +36,7 @@
 								<div class="input-group">
 									<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.from.value" is-open="date.from.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" max="date.to.value" ng-change="query.date_from = dateToTimestamp(date.from.value)" />
 									<span class="input-group-btn">
-										<button class="btn" ng-click="calOpen($event, 'from')"><i class="fa fa-calendar"></i></button>
+										<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
 									</span>
 								</div>
 							</fieldset>
@@ -45,7 +45,7 @@
 								<div class="input-group">
 									<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.to.value" is-open="date.to.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" min="date.from.value" ng-change="query.date_to = dateToTimestamp(date.to.value)" />
 									<span class="input-group-btn">
-										<button class="btn" ng-click="calOpen($event, 'to')"><i class="fa fa-calendar"></i></button>
+										<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
 									</span>
 								</div>
 							</fieldset>
@@ -70,7 +70,7 @@
 	
 	<div class="row margin-top" ng-show="badges">
 		<div class="col-md-12">
-			<span class="badge badge-inverse" ng-repeat="badge in badges">{{badge.display}} <i class="fa fa-times pointer" ng-click="badgeRemove(badge.name)"></i></span> 
+			<span class="badge badge-inverse" ng-repeat="badge in badges">{{badge.display}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.name)"></i></span> 
 		</div>
 	</div>
 	

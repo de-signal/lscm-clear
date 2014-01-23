@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "clear";
+  src:url("fonts/clear.eot");
+  src:url("fonts/clear.eot?#iefix") format("embedded-opentype"),
+    url("fonts/clear.woff") format("woff"),
+    url("fonts/clear.ttf") format("truetype"),
+    url("fonts/clear.svg#clear") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "clear" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="i-"]:before,
+[class*=" i-"]:before {
+  font-family: "clear" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-element-box:before {
+  content: "\e000";
+}
+.i-property-repacking:before {
+  content: "\e001";
+}
+.i-property-procurement:before {
+  content: "\e002";
+}
+.i-property-shipping:before {
+  content: "\e003";
+}
+.i-property-shipping-posthub:before {
+  content: "\e004";
+}
+.i-property-shipping-prehub:before {
+  content: "\e005";
+}
+.i-property-comments:before {
+  content: "\e006";
+}
+.i-phone:before {
+  content: "\e007";
+}
+.i-property-catalogue:before {
+  content: "\e008";
+}
+.i-element-item:before {
+  content: "\e009";
+}
+.i-property-aspect:before {
+  content: "\e00a";
+}
+.i-document-pod:before {
+  content: "\e00b";
+}
+.i-condition-text:before {
+  content: "\e00c";
+}
+.i-search:before {
+  content: "\e00d";
+}
+.i-condition-link:before {
+  content: "\e00e";
+}
+.i-condition-upload:before {
+  content: "\e00f";
+}
+.i-condition-document:before {
+  content: "\e010";
+}
+.i-condition-email:before {
+  content: "\e011";
+}
+.i-property-documentation:before {
+  content: "\e012";
+}
+.i-computer:before {
+  content: "\e013";
+}
+.i-element-shipment:before {
+  content: "\e014";
+}
+.i-property-location:before {
+  content: "\e015";
+}
+.i-element-order:before {
+  content: "\e016";
+}
+.i-property-validation:before {
+  content: "\e017";
+}
+.i-condition-date:before {
+  content: "\e018";
+}
+.i-property-qa-qc:before {
+  content: "\e019";
+}
+.i-property-reference:before {
+  content: "\e01a";
+}
+.i-chevron-big-r:before {
+  content: "\e01b";
+}
+.i-chevron-big-d:before {
+  content: "\e01c";
+}
+.i-chevron-big-u:before {
+  content: "\e01d";
+}
+.i-chevron-big-l:before {
+  content: "\e01e";
+}
+.i-chevron-medium-d:before {
+  content: "\e01f";
+}
+.i-chevron-medium-u:before {
+  content: "\e020";
+}
+.i-chevron-medium-l:before {
+  content: "\e021";
+}
+.i-chevron-medium-r:before {
+  content: "\e022";
+}
+.i-document-ncr:before {
+  content: "\e023";
+}
+.i-user:before {
+  content: "\e024";
+}
+.i-help:before {
+  content: "\e025";
+}
+.i-qr-code:before {
+  content: "\e026";
+}
+.i-tracking-untracked:before {
+  content: "\e027";
+}
+.i-tracking-tracked:before {
+  content: "\e028";
+}
+.i-condition-checkbox:before {
+  content: "\e02a";
+}
+.i-document-ir:before {
+  content: "\e02b";
+}
+.i-property-transport:before {
+  content: "\e029";
+}
+.i-document-pod:before {
+  content: "\e02e";
+}
+.i-external-link:before {
+  content: "\e02f";
+}
+.i-cross:before {
+  content: "\e00b";
+}
+.i-check:before {
+  content: "\e030";
+}
+.i-disc:before {
+  content: "\e031";
+}
+.i-circle:before {
+  content: "\e032";
+}
+.i-caret-r:before {
+  content: "\e02c";
+}
+.i-caret-d:before {
+  content: "\e02d";
+}
+.i-property-scope-and-delay:before {
+  content: "\e033";
+}
+.i-infos:before {
+  content: "\e034";
+}
+.i-transportation-boat:before {
+  content: "\e035";
+}
+.i-transportation-plane:before {
+  content: "\e036";
+}
+.i-transportation-truck:before {
+  content: "\e037";
+}

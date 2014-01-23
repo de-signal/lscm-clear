@@ -14,12 +14,12 @@
 					<tbody ng-controller="DetailCtrl">
 						<tr  ng-repeat="elm in list" ng-click="go('shipment', elm.id)" class="pointer over list-anim">
 							<td><span class="label label-shipment">{{elm.reference}}</span></td>
-							<td><small><i class="transportation\-icon" ng-class="{express:'transportation\-icon\-plane', air:'transportation\-icon\-plane', sea:'transportation\-icon\-boat', haulage:'transportation\-icon\-truck'}[elm.mode]">{{elm.mode}}</i></small></td>
+							<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]">{{elm.mode}}</i></small></td>
 							<td><small>{{elm.milestone}}</small></td>
 							<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 							<td><ul class="inline">
 							<li ng-repeat="required in elm.required">
-							<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="fa" required-icon tooltip="{{required.name}}"></i></span></span>
+							<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 							</li>
 							</ul></td>
 							<td><small>{{elm.departure.location}}</small></td>

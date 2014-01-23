@@ -11,10 +11,10 @@
 			<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 			<td><ul class="inline">
 			<li ng-repeat="required in elm.required">
-			<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="fa" required-icon tooltip="{{required.name}}"></i></span></span>
+			<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 			</li>
 			</ul></td>
-			<td ng-show="trackingShow"><i class="pointer fa" ng-class="{true:'fa\-star', false:'fa\-star\-o'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
+			<td ng-show="trackingShow"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
 		</tr>
 	</tbody>
 	<tfoot ng-show="pagesCount>1">

@@ -49,7 +49,7 @@
 									<div class="input-group">
 										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
 										<span class="input-group-btn">
-											<button class="btn" ng-click="open('milestone_start')"><i class="fa fa-calendar"></i></button>
+											<button class="btn" ng-click="open('milestone_start')"><i class="icon i-condition-date"></i></button>
 										</span>
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 									<div class="input-group">
 										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
 										<span class="input-group-btn">
-											<button class="btn" ng-click="open('milestone_end')"><i class="fa fa-calendar"></i></button>
+											<button class="btn" ng-click="open('milestone_end')"><i class="icon i-condition-date"></i></button>
 										</span>
 									</div>
 								</div>
@@ -87,7 +87,7 @@
 									<div class="input-group">
 										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
 										<span class="input-group-btn">
-											<button class="btn" ng-click="open('property_start')"><i class="fa fa-calendar"></i></button>
+											<button class="btn" ng-click="open('property_start')"><i class="icon i-condition-date"></i></button>
 										</span>
 									</div>
 								</div>
@@ -96,7 +96,7 @@
 									<div class="input-group">
 										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
 										<span class="input-group-btn">
-											<button class="btn" ng-click="open('property_end')"><i class="fa fa-calendar"></i></button>
+											<button class="btn" ng-click="open('property_end')"><i class="icon i-condition-date"></i></button>
 										</span>
 									</div>
 								</div>
@@ -120,7 +120,7 @@
 	
 	<div class="row margin-top" ng-controller="ListCtrl" >
 	    <div class="col-md-12" ng-if="showList">
-	   		<h3><i class="fa fa-search lead"></i> search results</h3>
+	   		<h3><i class="icon i-search lead"></i> search results</h3>
 	   		<span ng-include="'partials/tplList.html'" onload="loadList(query)"></span> 
 	    </div><!--/span-->
 	</div><!--/row-->

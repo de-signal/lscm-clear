@@ -72,23 +72,24 @@ angular.module('clearApp.directives', [])
 	.directive('stepIcon', function() {
 		return function(scope, elem, attr) {
 			switch (scope.milestone.step) { 
-	          	case 'current': elem.addClass('fa\-chevron\-right'); break;
+	          	case 'current': elem.addClass('i\-chevron\-big\-r'); break;
 	          	case 'next': 
-	          	case 'future': elem.addClass('fa\-chevron\-down'); elem.addClass('ultralight'); break; 
-	          	default: elem.addClass('fa\-chevron\-down'); elem.addClass('light'); break; 
+	          	case 'future': elem.addClass('i\-chevron\-big\-d'); elem.addClass('ultralight'); break; 
+	          	default: elem.addClass('i\-chevron\-big\-d'); elem.addClass('light'); break; 
 			}
 	  	};
 	})
 	.directive('requiredIcon', function() {
 		return function(scope, elem, attr) {
 			switch (scope.required.type) {
-	        	case 'upload': elem.addClass('fa\-file\-text\-o'); break; 
-	          	case 'checkbox': elem.addClass('fa\-check\-square\-o'); break;
-	          	case 'date': elem.addClass('fa\-calendar'); break;
-				case 'text': elem.addClass('fa\-pencil\-square\-o'); break;
-				case 'email': elem.addClass('fa\-envelope\-o'); break;
-				case 'link': elem.addClass('fa\-link'); break;
-				case 'scan': elem.addClass('fa\-qrcode'); break;
+	        	case 'upload': elem.addClass('i\-condition\-upload'); break; 
+	        	case 'document': elem.addClass('i\-condition\-document'); break; 
+	          	case 'checkbox': elem.addClass('i\-condition\-checkbox'); break;
+	          	case 'date': elem.addClass('i\-condition\-date'); break;
+				case 'text': elem.addClass('i\-condition\-text'); break;
+				case 'email': elem.addClass('i\-condition\-email'); break;
+				case 'link': elem.addClass('i\-condition\-link'); break;
+				case 'scan': elem.addClass('i\-condition\-scan'); break;
 			}
 	  	};
 	})
