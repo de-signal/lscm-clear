@@ -536,8 +536,6 @@ angular.module('clearApp.controllers', [])
 		});
 		$scope.go = ClearFn.go;
 	}])
-	.controller('StaticIndicatorsTemplateCtrl', function() {
-	})
 	.controller('StaticIndicatorsCtrl', ['$scope', 'StaticIndicators', 'ChartsConfig', function($scope, StaticIndicators, ChartsConfig) {
 		$scope.charts = [];
 		
@@ -551,14 +549,6 @@ angular.module('clearApp.controllers', [])
 		$scope.colors = ChartsConfig.colors;
 		$scope.tooltips = ChartsConfig.tooltips;	
 		
-	}])
-	.controller('StaticIndicatorsD3jsCtrl', ['$scope', '$filter', 'IndicatorsD3js', function($scope, $filter, IndicatorsD3js) {
-		$scope.datas = IndicatorsD3js.query(function(data){
-			for(var i=0, len= $scope.datas.length;i<len;i++) {
-				$scope.datas[i].id="id"+i;
-			}
-			$scope.datasGroupBy3 = $filter('groupBy')(data, 3);
-		});
 	}])
 	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', function($location, $scope, ClearFn, StaticDashboardList) {
 		$scope.list = StaticDashboardList.query();

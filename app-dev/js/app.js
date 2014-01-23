@@ -12,8 +12,6 @@ angular.module('clearApp', [ 'http-auth-interceptor', 'ngRoute', 'ngAnimate', 'n
 //		Static pages 
 		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/static-dashboard.html', controller: 'StaticDashboardCtrl'});
 		$routeProvider.when('/static-indicators', {templateUrl: 'partials/static-indicators.html', controller: 'StaticIndicatorsCtrl'});
-		$routeProvider.when('/static-indicators-template', {templateUrl: 'partials/static-indicators-template.html', controller: 'StaticIndicatorsTemplateCtrl'});
-		$routeProvider.when('/static-indicators-d3js', {templateUrl: 'partials/static-indicators-d3js.html', controller: 'StaticIndicatorsD3jsCtrl'});
 		$routeProvider.when('/static-inspection-reports', {templateUrl: 'partials/static-documents-inspectionReports.html', controller: 'StaticInspectionReportsCtrl'});
 		$routeProvider.when('/static-non-compliance-reports', {templateUrl: 'partials/static-documents-nonComplianceReports.html', controller: 'StaticNonComplianceReportsCtrl'});
 		$routeProvider.when('/static-proofs-of-delivery', {templateUrl: 'partials/static-documents-proofsOfDelivery.html', controller: 'StaticProofsOfDeliveryCtrl'});
