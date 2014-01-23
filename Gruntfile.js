@@ -86,7 +86,8 @@ module.exports = function (grunt) {
 						'AngularJS-Toaster/toaster.js', 
 						'd3/d3.js', 
 						'nvd3/nv.d3.js', 
-						'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js'
+						'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js', 
+						'angular-loading-bar/build/loading-bar.js'
 					],
 					dest: 'app-dev/lib/js',
 					flatten: true
@@ -97,7 +98,8 @@ module.exports = function (grunt) {
 					src: [
 						'bootstrap/dist/css/bootstrap.css',
 						'AngularJS-Toaster/toaster.css',
-						'nvd3/nv.d3.css'
+						'nvd3/nv.d3.css', 
+						'angular-loading-bar/build/loading-bar.css'
 					],
 					dest: 'app-dev/lib/css',
 					flatten: true

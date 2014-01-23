@@ -44,7 +44,13 @@ footer {
 	position:relative;
 	margin-bottom: 0px;
 }
-
+#loading-bar .bar {
+  background: #ffcb32;
+  height: 4px;
+}
+#loading-bar .peg {
+  box-shadow: 0 0 10px #ffcb32, 0 0 5px #ffcb32;
+}
 
 @media (min-width: 992px) {
 	.content {

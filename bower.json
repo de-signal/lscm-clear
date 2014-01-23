@@ -12,7 +12,8 @@
     "AngularJS-Toaster": "~0.4.1",
     "angular-bootstrap": "~0.9.0",
     "bootstrap": "~3.0.3",
-    "angular-http-auth": "~1.2.1"
+    "angular-http-auth": "~1.2.1",
+    "angular-loading-bar": "~0.3.0"
   },
   "devDependencies": {},
   "resolutions": {
