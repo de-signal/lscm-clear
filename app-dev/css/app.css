@@ -883,99 +883,126 @@ fieldset {
 	cursor: inherit;
 }
 
-/* toaster */
+/* AngularJS-Toaster */
 
 .toast-title {
-  font-weight: bold;
+	font-weight: bold;
 }
 .toast-message {
-  -ms-word-wrap: break-word;
-  word-wrap: break-word;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
 }
 .toast-message a,
 .toast-message label {
-  color: #ffffff;
+	color: #ffffff;
 }
 .toast-message a:hover {
-  color: #cccccc;
-  text-decoration: none;
+	color: #cccccc;
+	text-decoration: none;
+}
+.toast-close-button {
+	position: relative;
+	right: -0.3em;
+	top: -0.3em;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+	-webkit-text-shadow: 0 1px 0 #ffffff;
+	text-shadow: 0 1px 0 #ffffff;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+.toast-close-button:hover,
+.toast-close-button:focus {
+	color: #000000;
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+/*Additional properties for button version
+ iOS requires the button element instead of an anchor tag.
+ If you want the anchor version, it requires `href="#"`.*/
+button.toast-close-button {
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	-webkit-appearance: none;
 }
 .toast-top-full-width {
-  top: 0;
-  right: 0;
-  width: 100%;
+	top: 0;
+	right: 0;
+	width: 100%;
 }
 .toast-bottom-full-width {
-  bottom: 0;
-  right: 0;
-  width: 100%;
+	bottom: 0;
+	right: 0;
+	width: 100%;
 }
 .toast-top-left {
-  top: 0px;
-  left: 12px;
+	top: 0px;
+	left: 12px;
 }
 .toast-top-right {
-  top: 0px;
-  right: 12px;
+	top: 0px;
+	right: 12px;
 }
 .toast-top-center {
 	margin-left: -150px;
 	top: 0px;
 	left: 50%;
 }
+.toast-bottom-right {
+	right: 12px;
+	bottom: 12px;
+}
+.toast-bottom-left {
+	bottom: 12px;
+	left: 12px;
+}
 #toast-container {
-  position: fixed;
-  z-index: 999998;
+	position: fixed;
+	z-index: 999998;
 }
 #toast-container * {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
-#toast-container > div > div {
-  margin: 0 0 6px;
-  padding: 15px 15px 15px 15px;
-  width: 300px;
-  background-position: 15px center;
-  background-repeat: no-repeat;
-  color: #ffffff;
+#toast-container > div {
+	margin: 0 0 6px;
+	padding: 15px 15px 15px 15px;
+	width: 300px;
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	color: #ffffff;
 }
 #toast-container > div > :hover {
-  opacity: 1;
-  cursor: pointer;
-}
-#toast-container > div > .toast-info {
-
-}
-#toast-container > div > .toast-error {
-
-}
-#toast-container > div > .toast-success {
-
-}
-#toast-container > div > .toast-warning {
-
+	opacity: 1;
+	cursor: pointer;
 }
 #toast-container.toast-top-full-width > div,
 #toast-container.toast-bottom-full-width > div {
-  width: 96%;
-  margin: auto;
+	width: 96%;
+	margin: auto;
 }
 .toast {
-  background-color: #030303;
-  z-index: 999999;
+	background-color: #030303;
 }
 .toast-success {
-  background-color: #468847;
+	background-color: #5cb85c;
 }
 .toast-error {
-  background-color: #b94a48;
+	background-color: #d9534f;
 }
 .toast-info {
-  background-color: #2f96b4;
+	background-color: #2f96b4;
 }
 .toast-warning {
-  background-color: #f89406;
+	background-color: #f0ad4e;
 }
 /*Responsive Design*/
 @media all and (max-width: 320px) {
@@ -986,9 +1013,9 @@ fieldset {
 		margin-left: -64px;
 	}
 }
-/*Animation CSS3*/
-.animateToaster.ng-enter, 
-.animateToaster.ng-leave
+
+#toast-container > div.ng-enter,
+#toast-container > div.ng-leave
 { 
 	-webkit-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 	-moz-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -997,14 +1024,14 @@ fieldset {
 	transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 } 
 
-.animateToaster.ng-enter.ng-enter-active, 
-.animateToaster.ng-leave {
-	opacity: 0.8;
+#toast-container > div.ng-enter.ng-enter-active, 
+#toast-container > div.ng-leave {
+    opacity: 0.8;
 }
 
-.animateToaster.ng-leave.ng-leave-active,
-.animateToaster.ng-enter {
-	opacity: 0;
+#toast-container > div.ng-leave.ng-leave-active,
+#toast-container > div.ng-enter {
+    opacity: 0;
 }
 
 .collapse {
