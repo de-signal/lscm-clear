@@ -562,6 +562,11 @@ thead .icon {
 	margin: -5px 0 -2px;
 	line-height: 16px;
 }
+.btn .icon {
+	margin-bottom: -3px;
+	display: inline-block;
+	margin-top: -3px;
+}
 .btn-generic {
 	
 }

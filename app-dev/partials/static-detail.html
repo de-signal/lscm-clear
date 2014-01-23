@@ -176,13 +176,13 @@
 								<div class="input-group" ng-switch-when="date">
 									<input type="text" class="form-control" 
 										datepicker-popup="dd.MM.yy HH:mm" 
-										ng-model="date[prop.name].value" 
-										is-open="date[prop.name].opened" 
+										ng-model="prop.date" 
+										is-open="prop.opened" 
 										min="minDate" 
 										date-disabled="calDisabled(date, mode)" 
 										ng-disabled="!prop.editable" 
 										show-weeks="false"
-										ng-change="prop.value = dateToTimestamp(date[prop.name].value); propertySave(elm, 'property', group.name)">
+										ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, 'property', group.name)">
 									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="icon i-condition-date"></i></button></span>
 								</div>
 							</span>

@@ -98,7 +98,7 @@ angular.module('clearApp.services', ['ngResource'])
 				else return null;
 			}, 
 			timestampToDate: function(timestamp) {
-				 return new Date( timestamp * 1000 );
+				return new Date( timestamp * 1000 ); 
 			}, 
 			is_empty: function (obj) {
 				var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -157,6 +157,13 @@ angular.module('clearApp.services', ['ngResource'])
 				}
 			
 				throw new Error("Unable to copy obj! Its type isn't supported.");
+			}, 
+			objectByKey:  function(array, key, value) {
+				for (var i in array) {
+					if (array[i][key] == value) {
+						return array[i];
+					}
+				}
 			}
 		}
 	})
@@ -164,20 +171,13 @@ angular.module('clearApp.services', ['ngResource'])
 		return {
 			badgesDisplay: function(query, filters) {
 				var badges = [];
-				var objectNameById =  function(array, id) {
-					for (var i = 0, count = array.length; i < count; i++) {
-						if (array[i].id === id) {
-							return array[i].name;
-						}
-					}
-				}
 				
 				if (query.reference) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + objectNameById(filters.locations.values, query.location) });
-				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + objectNameById(filters.users.values, query.user) });
-				if (query.status) badges.push({'name': 'status', 'display': 'Status: ' + objectNameById(filters.statuses.values, query.status) });
-				if (query.collection) badges.push({'name': 'collection', 'display': 'Collection: ' + objectNameById(filters.collections.values, query.collection) });
-				if (query.delivery) badges.push({'name': 'delivery', 'display': 'Delivery: ' + objectNameById(filters.deliveries.values, query.delivery) });
+				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + Utils.objectByKey(filters.locations.values, "id", query.location).name });
+				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + Utils.objectByKey(filters.users.values, "id", query.user).name });
+				if (query.status) badges.push({'name': 'status', 'display': 'Status: ' + Utils.objectByKey(filters.statuses.values, "id", query.status).name });
+				if (query.collection) badges.push({'name': 'collection', 'display': 'Collection: ' + Utils.objectByKey(filters.collections.values, "id", query.collection).name });
+				if (query.delivery) badges.push({'name': 'delivery', 'display': 'Delivery: ' + Utils.objectByKey(filters.deliveries.values, "id", query.delivery).name });
 				if (query.date_from) badges.push({'name': 'date_from', 'display': 'From: ' + $filter('date')(query.date_from*1000, 'dd.MM.yy') });
 				if (query.date_to) badges.push({'name': 'date_to', 'display': 'To: ' + $filter('date')(query.date_to*1000, 'dd.MM.yy') });
 				
@@ -216,47 +216,38 @@ angular.module('clearApp.services', ['ngResource'])
 				elm.tracking=!elm.tracking;
 			}, 
 			propertySave: function(elm, type, group) {
+				var self=this;
 				$rootScope.currentGroup = group;
-				console.log('saving property');
-				elm.$save({update:type}, function(p, response) {
+				elm.$save({update:type}, function(elm, response) {
 					var propertyMessage; 
 					
-					if (response("X-Clear-updatedProperty")==="success") {
-						propertyMessage = "Updated property";
-					} else if (response("X-Clear-updatedProperty")==="warning") {
-						propertyMessage = "Property has not been updated";
-					} else if (response("X-Clear-updatedProperty")==="error") {
-						propertyMessage = "Property has not been updated";
-					}
+					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated";
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated";
 					
-					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), message, response("X-Clear-updatedPropertyName"));
-					console.log('saved-> elm: ', elm,'/ type: ', type,'/ group: ', group) 
+					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, response("X-Clear-updatedPropertyName"));
+					
+					elm = self.propertiesDate(elm);
 				});
 			}, 
 			requiredSave: function (elm, id) {
-				elm.$save({update:'required', update_id:id}, function(p, response) {
+				var self=this;
+				
+				elm.$save({update:'required', update_id:id}, function(elm, response) {
 					var requiredMessage, milestoneMessage; 
 					
-					if (response("X-Clear-updatedRequired")==="success") {
-						requiredMessage = "Updated condition";
-					} else if (response("X-Clear-updatedRequired")==="warning") {
-						propertyMessage = "Condition has not been updated";
-					} else if (response("X-Clear-updatedRequired")==="error") {
-						requiredMessage = "Condition has not been updated"
-					}
+					if (response("X-Clear-updatedRequired")==="success") requiredMessage = "Updated condition";
+					else if (response("X-Clear-updatedRequired")==="warning") propertyMessage = "Condition has not been updated";
+					else if (response("X-Clear-updatedRequired")==="error") requiredMessage = "Condition has not been updated";
 					
-					if (response("X-Clear-updatedMilestone")==="success") {
-						milestoneMessage = "Updated milestone";
-					} else if (response("X-Clear-updatedMilestone")==="warning") {
-						propertyMessage = "Milestone has not been updated";
-					} else if (response("X-Clear-updatedMilestone")==="error") {
-						milestoneMessage = "Milestone has not been updated";
-					}
+					if (response("X-Clear-updatedMilestone")==="success") milestoneMessage = "Updated milestone";
+					else if (response("X-Clear-updatedMilestone")==="warning") propertyMessage = "Milestone has not been updated";
+					else if (response("X-Clear-updatedMilestone")==="error") milestoneMessage = "Milestone has not been updated";
 					
 					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, response("X-Clear-updatedRequiredName"));
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
 					
-					console.log('saved-> elm: ', elm,'/ type: required / update_id: ', id); 
+					elm = self.propertiesDate(elm);
 				});
 			}, 
 			go: function (type, id, related) {
@@ -275,12 +266,11 @@ angular.module('clearApp.services', ['ngResource'])
 					for (var property in elm.properties[group].set) {
 						var property = elm.properties[group].set[property];
 						if (property.type === 'date') {
-							date[property.name] = {};
-							if (property.value)	date[property.name].value = Utils.timestampToDate(property.value);
+							if (property.value)	property.date = Utils.timestampToDate(property.value);
 						}
 					}
 				}
-				return date;
+				return elm;
 			}, 
 			qrCodeGoogle: function (elm) {
 				var e;

@@ -75,8 +75,7 @@ angular.module('clearApp.controllers', [])
 			$scope.report = docs[docs.length-1];
 		});
 		$scope.go = ClearFn.go;
-		$scope.modalOpen = ClearFn.modalOpen; 
-		$scope.propertySave = ClearFn.propertySave;
+		$scope.modalOpen = ClearFn.modalOpen;
 	}])
 	.controller('TvCtrl', ['$interval', '$rootScope', '$scope', 'E1', 'News', 'ClearFn', function($interval, $rootScope, $scope, E1, News, ClearFn) {
 	
@@ -128,7 +127,6 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.go = ClearFn.go;
 		$scope.modalOpen = ClearFn.modalOpen; 
-		$scope.propertySave = ClearFn.propertySave;
 	}])
 	.controller('AddOrderCtrl', function() {
 	})
@@ -153,7 +151,9 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.modalOpen = ClearFn.modalOpen; 
 		$scope.trackingToggle = ClearFn.trackingToggle;
-		$scope.propertySave = ClearFn.propertySave;
+		$scope.propertySave = function(elm, property, groupName) {
+			ClearFn.propertySave(elm, property, groupName);
+		}
 		
 		$scope.loadPage = function (page) {
 			$scope.listInit.page = page;
@@ -193,11 +193,12 @@ angular.module('clearApp.controllers', [])
 			
 			for (var index in elm.charts) {
 				ColorScaleConfig.assignProperties(elm.charts[index]);
-
 			}
-			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
+			
+			elm = ClearFn.propertiesDate(elm);
 			
 		    $scope.elm = elm;
+		    $scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
 		    $scope.charts = elm.charts;
 		    var related_type = $location.search().related_type;
     		if (related_type) {
@@ -211,8 +212,6 @@ angular.module('clearApp.controllers', [])
     				$anchorScroll();
     			}, 1000);
     		}
-		    
-		    $scope.date = ClearFn.propertiesDate(elm);
 		});	
 		
 		$scope.relatedActiveTab = {};
@@ -220,13 +219,26 @@ angular.module('clearApp.controllers', [])
 		$scope.trackingShow = true;
 		$scope.modalOpen = ClearFn.modalOpen; 
         $scope.trackingToggle = ClearFn.trackingToggle;
-        $scope.propertySave = ClearFn.propertySave;
+        $scope.propertySave = function(elm, property, groupName) {
+        	ClearFn.propertySave(elm, property, groupName);
+        }
         $scope.dateToTimestamp = Utils.dateToTimestamp;
 		
-		$scope.calOpen = function($event, param) {
+		$scope.calOpen = function($event, propName) {
 			$event.preventDefault();
 		    $event.stopPropagation();
-		    $scope.date[param].opened = true;
+		    
+		    var currentProp = function(name) {
+		    	var props = $scope.elm.properties;
+		    	for (var group in props) {
+		    		for (var n in props[group].set) {
+		    			var prop = props[group].set[n];
+		    			if (prop.name === name) return prop; 
+		    		}
+		    	}
+		    }
+		    currentProp(propName).opened = true;
+		    console.log('currentProp: ', currentProp(propName) );
 		};	
 	}])
 	.controller('TplModalCtrl', ['$scope', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, ClearFn, $modalInstance, required, elm) {
@@ -271,7 +283,9 @@ angular.module('clearApp.controllers', [])
 	    	break;
 	    }
 	    
-        $scope.requiredSave = ClearFn.requiredSave;
+        $scope.requiredSave = function(elm, elmId) { 
+        	ClearFn.requiredSave(elm, elmId);
+        }
         $scope.requiredCancel = ClearFn.requiredCancel;
         
         $scope.requiredClose = function() {
@@ -908,7 +922,9 @@ angular.module('clearApp.controllers', [])
 		$scope.trackingShow = true;
 		$scope.modalOpen = ClearFn.modalOpen; 
 		$scope.trackingToggle = ClearFn.trackingToggle;
-		$scope.propertySave = ClearFn.propertySave;
+		$scope.propertySave = function(elm, property, groupName) {
+			ClearFn.propertySave(elm, property, groupName);
+		}
 		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		
 		$scope.calDisabled = ClearFn.calDisabled;
