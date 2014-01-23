@@ -10,17 +10,17 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		
 //		Static pages 
-		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/static-dashboard.html', controller: 'StaticDashboardCtrl'});
-		$routeProvider.when('/static-indicators', {templateUrl: 'partials/static-indicators.html', controller: 'StaticIndicatorsCtrl'});
-		$routeProvider.when('/static-inspection-reports', {templateUrl: 'partials/static-documents-inspectionReports.html', controller: 'StaticInspectionReportsCtrl'});
-		$routeProvider.when('/static-non-compliance-reports', {templateUrl: 'partials/static-documents-nonComplianceReports.html', controller: 'StaticNonComplianceReportsCtrl'});
-		$routeProvider.when('/static-proofs-of-delivery', {templateUrl: 'partials/static-documents-proofsOfDelivery.html', controller: 'StaticProofsOfDeliveryCtrl'});
-		$routeProvider.when('/inspection-report/static', {templateUrl: 'partials/static-documents-inspectionReport.html', controller: 'StaticInspectionReportCtrl'});
-		$routeProvider.when('/non-compliance-report/static', {templateUrl: 'partials/static-documents-nonComplianceReport.html', controller: 'StaticNonComplianceReportCtrl'});
-		$routeProvider.when('/proof-of-delivery/static', {templateUrl: 'partials/static-documents-proofOfDelivery.html', controller: 'StaticProofOfDeliveryCtrl'});
-		$routeProvider.when('/static-tracking', {templateUrl: 'partials/static-tracking.html', controller: 'TrackingCtrl'});
-		$routeProvider.when('/static-detail', {templateUrl: 'partials/static-detail.html', controller: 'StaticDetailCtrl'});
-		$routeProvider.when('/static-search', {templateUrl: 'partials/static-search.html', controller: 'StaticSearchCtrl'});
+		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/dashboard.html', controller: 'StaticDashboardCtrl'});
+		$routeProvider.when('/static-indicators', {templateUrl: 'partials/indicators.html', controller: 'StaticIndicatorsCtrl'});
+		$routeProvider.when('/static-inspection-reports', {templateUrl: 'partials/documents-inspectionReports.html', controller: 'StaticInspectionReportsCtrl'});
+		$routeProvider.when('/static-non-compliance-reports', {templateUrl: 'partials/documents-nonComplianceReports.html', controller: 'StaticNonComplianceReportsCtrl'});
+		$routeProvider.when('/static-proofs-of-delivery', {templateUrl: 'partials/documents-proofsOfDelivery.html', controller: 'StaticProofsOfDeliveryCtrl'});
+		$routeProvider.when('/inspection-report/static', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'StaticInspectionReportCtrl'});
+		$routeProvider.when('/non-compliance-report/static', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'StaticNonComplianceReportCtrl'});
+		$routeProvider.when('/proof-of-delivery/static', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'StaticProofOfDeliveryCtrl'});
+		$routeProvider.when('/static-tracking', {templateUrl: 'partials/tracking.html', controller: 'TrackingCtrl'});
+		$routeProvider.when('/static-detail', {templateUrl: 'partials/detail.html', controller: 'StaticDetailCtrl'});
+		$routeProvider.when('/static-search', {templateUrl: 'partials/search.html', controller: 'StaticSearchCtrl'});
 		$routeProvider.when('/guidelines', {templateUrl: 'partials/guidelines.html', controller: 'GuidelinesCtrl'});
 		$routeProvider.when('/guidelines/process', {templateUrl: 'partials/guidelines-process.html', controller: 'GuidelinesProcessCtrl'});
 		$routeProvider.when('/guidelines/web', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesWebCtrl'});
@@ -42,11 +42,7 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/add-order', {templateUrl: 'partials/add_order.html', controller: 'AddOrderCtrl'});
 		
 		$routeProvider.otherwise({redirectTo: '/dashboard'});
-		
 
-
-		
-		
 //		RestangularProvider.setBaseUrl('../index_rest.php/api/clear/v1/');
 //		RestangularProvider.setFullResponse(true);
 	}]);
