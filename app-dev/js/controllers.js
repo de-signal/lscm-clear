@@ -430,6 +430,7 @@ angular.module('clearApp.controllers', [])
 			if (!query.reference) { 
 				$location.search('related_to', null);
 			}
+			console.log('query: ', query);
 			$location.search(query);
 		};
 		
@@ -448,7 +449,9 @@ angular.module('clearApp.controllers', [])
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
-		E1.query({'type': 'ncr'}, function(docs) { 
+		var queryType = Utils.collect({'type': 'ncr'}, query);
+		
+		E1.query(queryType, function(docs) { 
 			E1.get({'type': 'ncr', 'id': 'filter'}, function(filters) { 
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
@@ -504,6 +507,7 @@ angular.module('clearApp.controllers', [])
 			if (!query.reference) { 
 				$location.search('related_to', null);
 			}
+			console.log('query: ', query);
 			$location.search(query);
 		};
 		
@@ -522,7 +526,9 @@ angular.module('clearApp.controllers', [])
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
-		E1.query({'type': 'pod'}, function(docs) {
+		var queryType = Utils.collect({'type': 'pod'}, query);
+		
+		E1.query(queryType, function(docs) {
 			E1.get({'type': 'pod', 'id': 'filter'}, function(filters) { 
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);

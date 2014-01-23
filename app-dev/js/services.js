@@ -166,14 +166,14 @@ angular.module('clearApp.services', ['ngResource'])
 				var badges = [];
 				var objectNameById =  function(array, id) {
 					for (var i = 0, count = array.length; i < count; i++) {
-						if (array[i].id = id) {
+						if (array[i].id === id) {
 							return array[i].name;
 						}
 					}
 				}
 				
 				if (query.reference) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + filters.locations.values[query.location].name });
+				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + objectNameById(filters.locations.values, query.location) });
 				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + objectNameById(filters.users.values, query.user) });
 				if (query.status) badges.push({'name': 'status', 'display': 'Status: ' + objectNameById(filters.statuses.values, query.status) });
 				if (query.collection) badges.push({'name': 'collection', 'display': 'Collection: ' + objectNameById(filters.collections.values, query.collection) });
@@ -242,7 +242,7 @@ angular.module('clearApp.services', ['ngResource'])
 					} else if (response("X-Clear-updatedRequired")==="warning") {
 						propertyMessage = "Condition has not been updated";
 					} else if (response("X-Clear-updatedRequired")==="error") {
-						requiredMessage = "Condition element has not been updated"
+						requiredMessage = "Condition has not been updated"
 					}
 					
 					if (response("X-Clear-updatedMilestone")==="success") {
@@ -252,7 +252,6 @@ angular.module('clearApp.services', ['ngResource'])
 					} else if (response("X-Clear-updatedMilestone")==="error") {
 						milestoneMessage = "Milestone has not been updated";
 					}
-					
 					
 					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, response("X-Clear-updatedRequiredName"));
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
@@ -402,6 +401,9 @@ angular.module('clearApp.services', ['ngResource'])
 	})
 	.factory('StaticDashboardList', ['$resource', function($resource){
 		return $resource('json/elms_tv.json');
+	}])
+	.factory('StaticGlobalReports', ['$resource', function($resource){
+		return $resource('json/global_reports.json');
 	}])
 	.factory('InspectionReports', ['$resource', function($resource){
 		return $resource('json/documents_inspectionReports.json');

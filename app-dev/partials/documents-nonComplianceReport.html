@@ -63,7 +63,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>status</h6>
-						<h2 class="type-bold"><i class="fa fa-circle" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]"></i></h2>
+						<h2 class="type-bold"><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]"></i></h2>
 					</div>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><i class="lead fa fa-file-text-o"></i>&nbsp;&nbsp;<small>{{doc.document.type}}</small></td>
+						<td><i class="lead icon i-condition-text"></i>&nbsp;&nbsp;<small>{{doc.document.type}}</small></td>
 						<td><strong>{{doc.document.name}}</strong></td>
 						<td><span class="label label-default">{{doc.document.info}}</span></td>
 						<td><a ng-href="{{doc.document.url}}" class='btn btn-sm' target="_blank">Download</a></td>
@@ -111,7 +111,9 @@
 									<h6>description</h6>
 									<p>{{doc.element.description}}</p>
 									<h6>photo</h6>
-									<div><img ng-src="{{doc.element.image.url}}" alt="{{doc.element.image.name}}" /></div>
+									<div>
+										<div class="image-wrapper"><img ng-src="{{doc.element.image.url}}" alt="{{doc.element.image.name}}" /></div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -123,7 +125,7 @@
 									</thead>
 									<tbody>
 										<tr ng-repeat="comment in doc.comments">
-											<td><i class="fa fa-circle" ng-class="{late:'important', open:'warning', closed:'success'}[comment.status]"></i></td>
+											<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[comment.status]"></i></td>
 											<td nowrap>{{comment.date * 1000 | date:'dd.MM.yy, HH:mm'}}</td>
 											<td>{{comment.message}}</td>
 										</tr>
