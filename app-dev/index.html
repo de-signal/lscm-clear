@@ -1,158 +1,153 @@
 <!doctype html>
 <html lang="en" ng-app="clearApp">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CLEAR | LSCM</title>
-  <!-- build:css(.) /app/css/libs.css -->
-  <link rel="stylesheet" href="/app-dev/lib/css/bootstrap.css"/>
-  <link rel="stylesheet" href="/app-dev/lib/css/nv.d3.css"/>
-  <link rel="stylesheet" href="/app-dev/lib/css/loading-bar.css"/>
-  <!-- endbuild -->
-  <!-- build:css(.) /app/css/app.css -->
-  <link rel="stylesheet" href="/app-dev/css/icons.css"/>
-  <link rel="stylesheet" href="/app-dev/css/app.css"/>
-  <!-- endbuild -->
-  <!-- update:include ../app-dev/partials/base.html -->
-  <base href="/app-dev/">
-  <!-- /update -->
-	
-</head>
-
-<body ng-controller="UserCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen}">
-
-	<div id="wrap">
-	
-	    <toaster-container toaster-options="{'position-class': 'toast-top-center'}"> </toaster-container>
-	
-		<div class="login-box" ng-hide="loggedIn">
-			<div class="login-logo">
-				<img src="img/clear_logo_type.svg" alt="Cloud Logistics Extranet Application Resource"/>
-			</div>
-			<form ng-submit="login()" class="form-horizontal" role="form">
-				<div class="form-group">
-					<label class="control-label col-sm-4">Username</label>
-					<div class="controls col-sm-8">
-						<input type="text" class="form-control" ng-model="username">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4">Password</label>
-					<div class="controls col-sm-8">
-						<input type="password" ng-model="password" class="form-control">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="controls col-sm-offset-4 col-sm-8">
-						<label class="checkbox">
-							<input type="checkbox" ng-model="remember">Remember me
-						</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="controls col-sm-offset-4 col-sm-8">
-						<input type="submit" class="btn btn-lg btn-default" value="Log In"/>
-					</div>
-				</div>		
-			</form>
-		</div>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CLEAR | LSCM</title>
+		<!-- build:css(.) /app/css/app.css -->
+		<link rel="stylesheet" href="/app-dev/css/app.css"/>
+		<link rel="stylesheet" href="/app-dev/css/styles.css"/>
+		<!-- endbuild -->
+		<!-- update:include ../app-dev/partials/base.html -->
+		<base href="/app-dev/">
+		<!-- /update -->
 		
-		<div ng-show="loggedIn">
+	</head>
+
+	<body ng-controller="UserCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen}">
+
+		<div id="wrap">
+		
+			<toaster-container toaster-options="{'position-class': 'toast-top-center'}"> </toaster-container>
+		
+			<div class="login-box" ng-hide="loggedIn">
+				<div class="login-logo">
+					<img src="img/clear_logo_type.svg" alt="Cloud Logistics Extranet Application Resource"/>
+				</div>
+				<form ng-submit="login()" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="control-label col-sm-4">Username</label>
+						<div class="controls col-sm-8">
+							<input type="text" class="form-control" ng-model="username">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4">Password</label>
+						<div class="controls col-sm-8">
+							<input type="password" ng-model="password" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls col-sm-offset-4 col-sm-8">
+							<label class="checkbox">
+								<input type="checkbox" ng-model="remember">Remember me
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls col-sm-offset-4 col-sm-8">
+							<input type="submit" class="btn btn-lg btn-default" value="Log In"/>
+						</div>
+					</div>		
+				</form>
+			</div>
 			
-			<div class="navbar navbar-default navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen"  role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse" ng-click="isCollapsed = !isCollapsed">
-						      <span class="sr-only">Toggle navigation</span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						    </button>
-						<a class="navbar-brand" href="dashboard"><img src="img/clear_logo_type.svg" alt="Clear" /></a>
-					</div>
-					<div class="navbar-collapse collapse" collapse="isCollapsed">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="guidelines" alt="Guidelines" title="Guidelines"><i class="icon i-help"></i></a>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" href="#"><i class="icon i-user"></i> <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="user">{{user.first_name}} {{user.name}}</a></li>
-									<li><a ng-click="logout()">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="nav navbar-nav">
-							<li><a href="tracking">Tracking</a></li>
-							<li><a href="indicators">Indicators</a></li>
-							<li><a href="search">Search</a></li>
-							<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="inspection-report">Inspection reports</a></li>
-									<li><a href="non-compliance-report">Non-compliance reports</a></li>
-									<li><a href="proof-of-delivery">Proofs of delivery</a></li>
-								</ul>
-							</li>
-							<li><a href="add-order">Add order</a>
-							</li>
-						</ul>
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-	
-			<div class="content">
-				<div ng-view></div>
-				<div id="push"></div>
-			</div>
-		
-		</div> <!--/loggedIn-->
+			<div ng-show="loggedIn">
 				
-	</div> <!--/#wrap-->
-	    
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<img src="img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
+				<div class="navbar navbar-default navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen"  role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse" ng-click="isCollapsed = !isCollapsed">
+								  <span class="sr-only">Toggle navigation</span>
+								  <span class="icon-bar"></span>
+								  <span class="icon-bar"></span>
+								  <span class="icon-bar"></span>
+								</button>
+							<a class="navbar-brand" href="dashboard"><img src="img/clear_logo_type.svg" alt="Clear" /></a>
+						</div>
+						<div class="navbar-collapse collapse" collapse="isCollapsed">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="guidelines" alt="Guidelines" title="Guidelines"><i class="icon i-help"></i></a>
+								</li>
+								<li class="dropdown">
+									<a class="dropdown-toggle" href="#"><i class="icon i-user"></i> <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="user">{{user.first_name}} {{user.name}}</a></li>
+										<li><a ng-click="logout()">Logout</a></li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav">
+								<li><a href="tracking">Tracking</a></li>
+								<li><a href="indicators">Indicators</a></li>
+								<li><a href="search">Search</a></li>
+								<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="inspection-report">Inspection reports</a></li>
+										<li><a href="non-compliance-report">Non-compliance reports</a></li>
+										<li><a href="proof-of-delivery">Proofs of delivery</a></li>
+									</ul>
+								</li>
+								<li><a href="add-order">Add order</a>
+								</li>
+							</ul>
+						</div><!--/.nav-collapse -->
+					</div>
 				</div>
-				<div class="col-md-3">
-					<p class="static-links margin-top"><small>Static: <a href="static-dashboard">Dashboard</a> / 
-						<a href="static-tracking">Tracking</a> / 
-						<a href="static-detail">Detail</a> / 
-						<a href="static-indicators">Indicators</a><br />
-						<a href="static-inspection-reports">Inspection reports</a> / 
-						<a href="static-non-compliance-reports">Non-compliance reports</a> / 
-						<a href="static-proofs-of-delivery">Proofs of delivery</a> / <a ng-click="logoutTest()">Logout-test</a></small></p>
+		
+				<div class="content">
+					<div ng-view></div>
+					<div id="push"></div>
 				</div>
-				<div class="col-md-3">
-					<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>
-					<p class="margin-top"><img src="img/lscm_logo.png" alt="" /></p>
+			
+			</div> <!--/loggedIn-->
+					
+		</div> <!--/#wrap-->
+			
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<img src="img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
+					</div>
+					<div class="col-md-3">
+						<p class="static-links margin-top"><small>Static: <a href="static-dashboard">Dashboard</a> / 
+							<a href="static-tracking">Tracking</a> / 
+							<a href="static-detail">Detail</a> / 
+							<a href="static-indicators">Indicators</a><br />
+							<a href="static-inspection-reports">Inspection reports</a> / 
+							<a href="static-non-compliance-reports">Non-compliance reports</a> / 
+							<a href="static-proofs-of-delivery">Proofs of delivery</a> / <a ng-click="logoutTest()">Logout-test</a></small></p>
+					</div>
+					<div class="col-md-3">
+						<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>
+						<p class="margin-top"><img src="img/lscm_logo.png" alt="" /></p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</footer>
-  
-  <!-- build:js js/libs.js -->
-  <script src="lib/js/angular.js"></script>
-  <script src="lib/js/angular-route.js"></script>
-  <script src="lib/js/angular-resource.js"></script>
-  <script src="lib/js/angular-cookies.js"></script>
-  <script src="lib/js/angular-animate.js"></script>
-  <script src="lib/js/ui-bootstrap-tpls.js"></script>
-  <script src="lib/js/http-auth-interceptor.js"></script>
-  <script src="lib/js/loading-bar.js"></script>
-  <script src="lib/js/ng-upload.js"></script>
-  <script src="lib/js/toaster.js"></script>
-  <script src="lib/js/d3.js"></script>
-  <script src="lib/js/nv.d3.js"></script>
-  <script src="lib/js/angularjs-nvd3-directives.js"></script>
-  <!-- endbuild -->
-  <!-- build:js js/app.js -->
-  <script src="js/app.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/directives.js"></script>
-  <!-- endbuild -->
-</body>
+		</footer>
+
+		<!-- build:js js/libs.js -->
+		<script src="lib/js/angular.js"></script>
+		<script src="lib/js/angular-route.js"></script>
+		<script src="lib/js/angular-resource.js"></script>
+		<script src="lib/js/angular-cookies.js"></script>
+		<script src="lib/js/angular-animate.js"></script>
+		<script src="lib/js/ui-bootstrap-tpls.js"></script>
+		<script src="lib/js/http-auth-interceptor.js"></script>
+		<script src="lib/js/loading-bar.js"></script>
+		<script src="lib/js/ng-upload.js"></script>
+		<script src="lib/js/toaster.js"></script>
+		<script src="lib/js/d3.js"></script>
+		<script src="lib/js/nv.d3.js"></script>
+		<script src="lib/js/angularjs-nvd3-directives.js"></script>
+		<!-- endbuild -->
+		<!-- build:js js/app.js -->
+		<script src="js/app.js"></script>
+		<script src="js/filters.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/directives.js"></script>
+		<!-- endbuild -->
+	</body>
 </html>

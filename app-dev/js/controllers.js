@@ -71,7 +71,7 @@ angular.module('clearApp.controllers', [])
 		E1.query({'type': 'dashboard'}, function(list) {
 			$scope.list= list;
 		});
-		E1.query({'type': 'reports'}, function(docs){
+		E1.query({'type': 'report'}, function(docs){
 			$scope.report = docs[docs.length-1];
 		});
 		$scope.go = ClearFn.go;

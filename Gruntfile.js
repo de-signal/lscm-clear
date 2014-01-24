@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 		},
 
 
-		// Empties folders to start fresh
+		// Cleans folders to start fresh
 		clean: {
 			install: {
 				files: [{
@@ -103,6 +103,14 @@ module.exports = function (grunt) {
 					],
 					dest: 'app-dev/lib/css',
 					flatten: true
+				}, 
+				{
+					expand: true,
+					cwd: 'app-dev/components/bootstrap-sass/vendor/assets/stylesheets/',
+					src: [
+						'bootstrap/*'
+					],
+					dest: 'app-dev/lib/scss/'
 				}
 				]
 			}, 
@@ -129,7 +137,7 @@ module.exports = function (grunt) {
 					src: [ 'css/fonts/*']
 				}]
 			}, 
-			hack: { // Copies remaining files to places other tasks can use
+			hack: { // remove two folder-levels because of usemin mis-understanding of css relative path
 				files: [{
 					expand: true,
 					dot: true,
@@ -228,16 +236,37 @@ module.exports = function (grunt) {
 			options: {
 				assetsDirs: ['app']
 			}
+		}, 
+		compass: {
+			dist: {
+				options: {
+					sassDir: 'src/scss',
+					specify: 'src/scss/styles.scss',
+					cssDir: 'dist',
+					environment: 'production'
+				}
+			},
+			dev: {                    
+				options: {
+					sassDir: 'app-dev/scss',
+					specify: 'app-dev/scss/app.scss',
+					cssDir: 'app-dev/css'
+				}
+			}
 		}
 	});
 
 
+	grunt.registerTask('default', [
+		'compass:dev'
+	]);
 
 	grunt.registerTask('install', [
 		'clean:install',
 		'bower:install',
 		'copy:install'
 	]);
+
 	grunt.registerTask('app', [
 		'clean:app',
     	'useminPrepare',
