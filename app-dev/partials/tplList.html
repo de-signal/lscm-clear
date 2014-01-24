@@ -1,4 +1,7 @@
-<table class="table table-condensed" ng-show="elementsCount">
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<table class="table table-condensed" ng-show="elementsCount" ng-show="loaded">
 	<thead>
 		<tr>
 			<th class="col-xs-3"><h6>reference</h6></th><th class="col-xs-3"><h6>milestone</h6></th><th class="col-xs-1"><h6>status</h6></th><th ng-class="trackingShow ? 'col\-xs\-4' : 'col\-xs\-5'"><h6>conditions</h6></th><th class="col-xs-1" ng-show="trackingShow"><h6>tracking</h6></th>
@@ -24,5 +27,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-<p ng-show="noResults">No results.</p>

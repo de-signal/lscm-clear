@@ -1,6 +1,10 @@
 /* @override 
-	http://dev-clear.ofon2.com/app-dev/css/app.css */
+	http://dev-clear.ofon2.com/app-dev/css/styles.css */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,300);
+
+	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
 
 /* general styles -------------------------------------------------- */
 
@@ -43,13 +47,6 @@ footer {
 .navbar-fixed-bottom {
 	position:relative;
 	margin-bottom: 0px;
-}
-#loading-bar .bar {
-  background: #ffcb32;
-  height: 4px;
-}
-#loading-bar .peg {
-  box-shadow: 0 0 10px #ffcb32, 0 0 5px #ffcb32;
 }
 
 @media (min-width: 992px) {
@@ -95,14 +92,6 @@ a:hover {
 ul, ul ul {
 	list-style: none;
 	padding-left: 0;
-}
-
-/*.hide {
-	display: none !important;
-}*/
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
 }
 
 ul.inline,

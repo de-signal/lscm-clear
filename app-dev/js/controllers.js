@@ -68,8 +68,10 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	.controller('DashboardCtrl', ['$location', '$scope', '$q', 'E1', 'ClearFn', function($location, $scope, $q, E1, ClearFn) {
+		$scope.loaded = false;
 		E1.query({'type': 'dashboard'}, function(list) {
 			$scope.list= list;
+			$scope.loaded = true;
 		});
 		E1.query({'type': 'report'}, function(docs){
 			$scope.report = docs[docs.length-1];
@@ -78,7 +80,7 @@ angular.module('clearApp.controllers', [])
 		$scope.modalOpen = ClearFn.modalOpen;
 	}])
 	.controller('TvCtrl', ['$interval', '$rootScope', '$scope', 'E1', 'News', 'ClearFn', function($interval, $rootScope, $scope, E1, News, ClearFn) {
-	
+		$scope.loaded = false;
 		$rootScope.tvScreen = true;
 		
 		var listLoad = function() {
@@ -86,6 +88,7 @@ angular.module('clearApp.controllers', [])
 				// $scope.list = list;
 				$scope.list=[];
 				$interval(function() {$scope.list.push(list.shift())}, 100, list.length);
+				$scope.loaded = true;
 			});
 		}
 		var listEmpty = function() {
@@ -131,7 +134,7 @@ angular.module('clearApp.controllers', [])
 	.controller('AddOrderCtrl', function() {
 	})
 	.controller('ListCtrl', ['$scope', 'Elements', '$location', 'Utils', 'ClearFn', function($scope, Elements, $location, Utils, ClearFn) {
-		
+		$scope.loaded = false;
 		$scope.loadList = function (listInit) {
 		 	$scope.listInit = listInit;
 			var params = Utils.collect($scope.init, listInit);
@@ -142,7 +145,7 @@ angular.module('clearApp.controllers', [])
 				$scope.pagesCount = response("X-Clear-pagesCount");
 				$scope.elementsCount =  response("X-Clear-elementsCount");
 				console.log("pagesCount: " + response("X-Clear-pagesCount") + ", currentPage: " + response("X-Clear-currentPage") + ", elementsCount: " + response("X-Clear-elementsCount"));
-				if (!$scope.elementsCount) $scope.noResults = true;
+				$scope.loaded = true;
 			}, 
 			function() {
 				console.log('list not loaded');
@@ -177,18 +180,20 @@ angular.module('clearApp.controllers', [])
 	}])
 	.controller('IndicatorsCtrl', ['$scope', 'E1', 'ChartsConfig', function($scope, E1, ChartsConfig) {
 		$scope.charts = [];
+		$scope.loaded = false;
 		E1.query({'type': 'kpi'}, function(charts){
 			for(var i = 0, len = charts.length; i < len; ++i) {
 			    ChartsConfig.chartFn(charts[i]); 
 			    $scope.charts[charts[i].id] = charts[i];
 			}
+			$scope.loaded = true;
 			console.log('charts: ', charts);
 		});	
 		$scope.colors = ChartsConfig.colors;
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
 	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'Elements', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, Elements, ColorScaleConfig, Utils, ClearFn) {
-		
+		$scope.loaded = false;
 		Elements.get({'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
 			
 			for (var index in elm.charts) {
@@ -212,6 +217,7 @@ angular.module('clearApp.controllers', [])
     				$anchorScroll();
     			}, 1000);
     		}
+    		$scope.loaded = true;
 		});	
 		
 		$scope.relatedActiveTab = {};
@@ -366,6 +372,7 @@ angular.module('clearApp.controllers', [])
 	  };
 	}])
 	.controller('InspectionReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
+		$scope.loaded = false;
 		
 		var date = { from: {}, to: {} };
 		var query = $location.search();
@@ -414,18 +421,22 @@ angular.module('clearApp.controllers', [])
 			    $scope.badges = ClearFn.badgesDisplay(query, filters); 
 			});
 		    $scope.docs = docs; 
+		    $scope.loaded = true;
 		});
 		
 	}])
 	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', 'E1', function($scope, $filter, $routeParams, E1) {
+		$scope.loaded = false;
 		E1.get({'type': 'ir', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
+			$scope.loaded = true;
 			for(var i=0, len=doc.boxes.length;i<len;i++) {
 				$scope.doc.boxes[i].itemsGroupBy4 = $filter('groupBy')(doc.boxes[i].items, 4);
 			} 
 		});
 	}])
 	.controller('NonComplianceReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
+		$scope.loaded = false;
 		var date = { from: {}, to: {} };
 		var query = $location.search();
 		
@@ -473,12 +484,15 @@ angular.module('clearApp.controllers', [])
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
 			});
-			$scope.docs = docs;  
+			$scope.docs = docs;
+			$scope.loaded = true;
 		});
 	}])
 	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E1', '$modal', function($scope, $routeParams, E1, $modal) {
+		$scope.loaded = false;
 		E1.get({'type': 'ncr', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
+			$scope.loaded = true;
 		});
         $scope.open = function (doc, type) {            
 			if (doc.status != 'closed') {
@@ -502,7 +516,8 @@ angular.module('clearApp.controllers', [])
 			}
         }; 
 	}])
-	.controller('ProofsOfDeliveryCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {	
+	.controller('ProofsOfDeliveryCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
+		$scope.loaded = false;
 		var date = { from: {}, to: {} };
 		var query = $location.search();
 		
@@ -550,16 +565,22 @@ angular.module('clearApp.controllers', [])
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
 			});
-			$scope.docs = docs; 
+			$scope.docs = docs;
+			$scope.loaded = true;
 		});
 	}])
 	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E1', function($scope, $routeParams, ClearFn, E1) {
+		$scope.loaded = false;
 		E1.get({'type': 'pod', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
+			$scope.loaded = true;
 		});
 		$scope.go = ClearFn.go;
 	}])
 	.controller('StaticIndicatorsCtrl', ['$scope', 'StaticIndicators', 'ChartsConfig', function($scope, StaticIndicators, ChartsConfig) {
+		
+		$scope.loaded = false;
+		
 		$scope.charts = [];
 		
 		StaticIndicators.query(function(charts){
@@ -567,6 +588,7 @@ angular.module('clearApp.controllers', [])
 			    ChartsConfig.chartFn(charts[i]); 
 			    $scope.charts[charts[i].id] = charts[i];
 			}
+			$scope.loaded = true;
 			console.log('charts: ', charts);
 		});	
 		$scope.colors = ChartsConfig.colors;
@@ -574,15 +596,18 @@ angular.module('clearApp.controllers', [])
 		
 	}])
 	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', 'StaticGlobalReports', function($location, $scope, ClearFn, StaticDashboardList, StaticGlobalReports) {
+		$scope.loaded = false;
 		StaticGlobalReports.query( function(docs){
 			$scope.report = docs[docs.length-1];
 		});
 		StaticDashboardList.query( function(list) {
 			$scope.list = list;
+			$scope.loaded = true;
 		});
 		$scope.go = ClearFn.go;
 	}])
 	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
+		$scope.loaded = false;
 		
 		var date = { from: {}, to: {} };
 		var query = $location.search();
@@ -628,19 +653,23 @@ angular.module('clearApp.controllers', [])
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
 			});
-			$scope.docs = docs; 
+			$scope.docs = docs;
+			$scope.loaded = true;
 		});
 		
 		
 	}])
 	.controller('StaticInspectionReportCtrl', ['$scope', '$filter', 'InspectionReport', function($scope, $filter, InspectionReport) {
+		$scope.loaded = false;
 		$scope.doc = InspectionReport.get(function(doc) {
 			for(var i=0, len=doc.boxes.length;i<len;i++) {
 				$scope.doc.boxes[i].itemsGroupBy4 = $filter('groupBy')(doc.boxes[i].items, 4);
-			} 
+			}
+			$scope.loaded = true;
 		});
 	}])
 	.controller('StaticNonComplianceReportsCtrl', ['$location', '$scope', 'ClearFn', 'NonComplianceReports', 'NonComplianceReportsFilters', 'Utils', function($location, $scope, ClearFn, NonComplianceReports, NonComplianceReportsFilters, Utils) {
+		$scope.loaded = false;
 		var date = { from: {}, to: {} };
 		var query = $location.search();
 		
@@ -685,13 +714,15 @@ angular.module('clearApp.controllers', [])
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
 			});
-			$scope.docs = docs; 
+			$scope.docs = docs;
+			$scope.loaded = true;
 		});
 	}])
 	.controller('StaticNonComplianceReportCtrl', ['$location', '$scope', 'NonComplianceReport', '$modal', function($location, $scope, NonComplianceReport, $modal) {
+		$scope.loaded = false;
 		NonComplianceReport.get(function(doc){
 			$scope.doc = doc;
-			console.log('doc status: ', doc.status)
+			$scope.loaded = true;
 		});
         $scope.open = function (doc, type) {            
 			if (doc.status != 'closed') {
@@ -738,10 +769,15 @@ angular.module('clearApp.controllers', [])
 	    };
 	}])
 	.controller('StaticProofOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'ProofOfDelivery', function($location, $scope, ClearFn, ProofOfDelivery) {
-		$scope.doc = ProofOfDelivery.get();
+		$scope.loaded = false;
+		ProofOfDelivery.get(function(doc) {
+			$scope.doc = doc;
+			$scope.loaded = true;
+		});
 		$scope.go = ClearFn.go;
 	}])
 	.controller('StaticProofsOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'ProofsOfDelivery', 'ProofsOfDeliveryFilters', 'Utils', function($location, $scope, ClearFn, ProofsOfDelivery, ProofsOfDeliveryFilters, Utils) {
+		$scope.loaded = false;
 		var date = { from: {}, to: {} };
 		var query = $location.search();
 		
@@ -786,7 +822,8 @@ angular.module('clearApp.controllers', [])
 			    $scope.filters = filters; 
 			    $scope.badges = ClearFn.badgesDisplay(query, filters);
 			});
-			$scope.docs = docs; 
+			$scope.docs = docs;
+			$scope.loaded = true;
 		});
 	}])
 	.controller('StaticListCtrl', ['$location', '$scope', 'ClearFn', 'Elms', function($location, $scope, ClearFn, Elms) {
@@ -890,7 +927,7 @@ angular.module('clearApp.controllers', [])
 		}	
 	}])
 	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', 'Elm', '$modal', 'ClearFn', 'ColorScaleConfig', '$timeout', 'Utils', function($scope, $location, $anchorScroll, Elm, $modal, ClearFn, ColorScaleConfig, $timeout, Utils) {
-	
+		$scope.loaded = false;
 		Elm.get(function(elm) {
 			for (var index in elm.charts) {
 				ColorScaleConfig.assignProperties(elm.charts[index]);
@@ -914,7 +951,8 @@ angular.module('clearApp.controllers', [])
 			}
 			
 			$scope.date = ClearFn.propertiesDate(elm);
-			console.log('charts: ', elm.charts);
+			
+			$scope.loaded = true;
 		}); 
 		
 		$scope.relatedActiveTab = {};

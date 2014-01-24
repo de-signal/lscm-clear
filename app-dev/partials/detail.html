@@ -1,8 +1,11 @@
-<div class="header"  ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
 	<h1 class="container"><i class="icon pull-right" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i><i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
 </div>
 
-<div class="container margin-top">
+<div class="container margin-top" ng-show="loaded">
 	<div class="row">
 		<div class="col-md-3">
 			<div class="filet">
@@ -210,4 +213,5 @@
             </tabset>			
 		</div>
 	</div>
+	
 </div>

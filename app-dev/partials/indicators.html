@@ -2,7 +2,10 @@
 	<h1 class="container">Indicators</h1>
 </div>
 
-<div class="container margin-top">
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
 	<div class="row margin-top">
 		<div class="col-md-12">
 			<h3>{{charts.figuresOfTheDay.name}}</h3>
