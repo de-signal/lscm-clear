@@ -71,47 +71,59 @@ module.exports = function (grunt) {
 
 		copy: {
 			install: { 
-				files: [{
-					expand: true,
-					cwd: 'app-dev/components/',
-					src: [
-						'angular/angular.js', 
-						'angular-animate/angular-animate.js',  
-						'angular-cookies/angular-cookies.js', 
-						'angular-route/angular-route.js', 
-						'angular-resource/angular-resource.js', 
-						'angular-bootstrap/ui-bootstrap-tpls.js',
-						'angular-http-auth/src/http-auth-interceptor.js', 
-						'ngUpload/ng-upload.js',
-						'AngularJS-Toaster/toaster.js', 
-						'd3/d3.js', 
-						'nvd3/nv.d3.js', 
-						'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js', 
-						'angular-loading-bar/build/loading-bar.js'
-					],
-					dest: 'app-dev/lib/js',
-					flatten: true
-				}, 
-				{
-					expand: true,
-					cwd: 'app-dev/components/',
-					src: [
-						'bootstrap/dist/css/bootstrap.css',
-						'AngularJS-Toaster/toaster.css',
-						'nvd3/nv.d3.css', 
-						'angular-loading-bar/build/loading-bar.css'
-					],
-					dest: 'app-dev/lib/css',
-					flatten: true
-				}, 
-				{
-					expand: true,
-					cwd: 'app-dev/components/bootstrap-sass/vendor/assets/stylesheets/',
-					src: [
-						'bootstrap/*'
-					],
-					dest: 'app-dev/lib/scss/'
-				}
+				files: [
+					{
+						expand: true,
+						cwd: 'app-dev/components/',
+						src: [
+							'angular/angular.js', 
+							'angular-animate/angular-animate.js',  
+							'angular-cookies/angular-cookies.js', 
+							'angular-route/angular-route.js', 
+							'angular-resource/angular-resource.js', 
+							'angular-bootstrap/ui-bootstrap-tpls.js',
+							'angular-http-auth/src/http-auth-interceptor.js', 
+							'ngUpload/ng-upload.js',
+							'AngularJS-Toaster/toaster.js', 
+							'd3/d3.js', 
+							'nvd3/nv.d3.js', 
+							'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js', 
+							'angular-loading-bar/build/loading-bar.js', 
+							'planetary.js/dist/planetaryjs.js',
+							'topojson/topojson.js' 
+						],
+						dest: 'app-dev/lib/js',
+						flatten: true
+					},
+					{
+						expand: true,
+						cwd: 'app-dev/components/',
+						src: [
+							'planetary.js/dist/world-110m.json'
+						],
+						dest: 'app-dev/lib/json',
+						flatten: true
+					}, 
+					{
+						expand: true,
+						cwd: 'app-dev/components/',
+						src: [
+							'bootstrap/dist/css/bootstrap.css',
+							'AngularJS-Toaster/toaster.css',
+							'nvd3/nv.d3.css', 
+							'angular-loading-bar/build/loading-bar.css'
+						],
+						dest: 'app-dev/lib/css',
+						flatten: true
+					}, 
+					{
+						expand: true,
+						cwd: 'app-dev/components/bootstrap-sass/vendor/assets/stylesheets/',
+						src: [
+							'bootstrap/*'
+						],
+						dest: 'app-dev/lib/scss/'
+					}
 				]
 			}, 
 			app: { // Copies remaining files to places other tasks can use
