@@ -2,7 +2,7 @@
 	http://dev-clear.ofon2.com/app-dev/css/styles.css */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,300);
 
-	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
 
@@ -1147,6 +1147,10 @@ button.toast-close-button {
 .center {
 	margin: 0 auto;
 }
+.center-txt {
+	text-align: center;
+}
+
 
 .bg-stripped {
 	background-image: repeating-linear-gradient(45deg, #e9e9e3 0px, #e9e9e3 6px, transparent 6px, transparent 12px);
@@ -1396,3 +1400,90 @@ h5 .badge-parent {
 .list-anim.ng-move.ng-move-active {
   opacity:1;
 }
+
+
+.clock {
+	position: relative;	
+	width:80%;
+	height: 0;
+	padding-bottom:40%;
+	padding-top:40%;
+	margin-right:auto;
+	margin-left: auto;
+}
+.circle {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.face {
+  width: 100%;
+  height: 100%;
+  border: 5px solid #9e9e8e;
+  border-radius: 50%;
+  position: relative;
+}
+
+.face:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 10px;
+  content: "";
+  display: block;
+  background-color: #9e9e8e;
+}
+
+.hour {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -5px 0 -5px -25%;
+  padding: 5px 0 5px 25%;
+  background: #fff;
+  -webkit-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  border-radius: 5px 0 0 5px;
+}
+
+.minute {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -5px 0;
+  padding: 40% 5px 0;
+  background: #fff;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  border-radius: 5px 5px 0 0;
+}
+
+.second {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -1px 0 0;
+  padding: 40% 1px 0;
+  background: #fff;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+

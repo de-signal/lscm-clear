@@ -93,7 +93,7 @@ angular.module('clearApp.directives', [])
 			}
 	  	};
 	})
-	.directive('planetary', ['$interval', function ($interval) {
+	.directive('clearPlanetary', ['$interval', function ($interval) {
 		var autorotate = function (degPerSec) {
 			// Planetary.js plugins are functions that take a `planet` instance
 			// as an argument...
@@ -135,10 +135,10 @@ angular.module('clearApp.directives', [])
 				
 				planet.projection.scale(250).translate([250, 250]);
 				planet.loadPlugin(planetaryjs.plugins.earth({
-					topojson: { file: 'lib/json/world-110m.json' },
-						oceans:   { fill:   '#9e9e8e' },
-						land:     { fill:   '#c4c4ba' },
-						borders:  { stroke: '#9e9e8e', lineWidth: 0.1 }
+					topojson: { file: 'json/world-110m.json' },
+					oceans:   { fill:   '#9e9e8e' },
+					land:     { fill:   '#c4c4ba' },
+					borders:  { stroke: '#9e9e8e', lineWidth: 0.1 }
 				}));
 				planet.loadPlugin(planetaryjs.plugins.pings({color: '#82dd2a', ttl: 5000, angle: 10, lineWidth: 3}));
 				planet.loadPlugin(planetaryjsDots({color: '#fff', angle: 1}));
@@ -173,6 +173,44 @@ angular.module('clearApp.directives', [])
 			}
 		}
 	}])
+	.directive('clearClock', ['$filter', function ($filter) {
+			return {
+				restrict: 'A',
+				scope: {
+					timezone: '='
+				}, 
+				template: "<div class='circle'><div class='face'><div class='hour'></div><div class='minute'></div><div class='second'></div></div></div>", 
+				link: function (scope, element, attrs) {
+					function update(){
+						var date = new Date(), 
+							utc = date.getTime() + date.getTimezoneOffset()*60*1000, 
+							dateWithOffset = new Date(utc + (3600000*scope.timezone)), 
+							face = element[0];
+						
+				        var second = $filter('date')(dateWithOffset, 's') * 6,
+				            minute = $filter('date')(dateWithOffset, 'm') * 6 + second / 60,
+				            hour = (($filter('date')(dateWithOffset, 'h') % 12) / 12) * 360 + 90 + minute / 12;
+				        
+						angular.element(face.querySelector('.hour')).css("\-webkit\-transform", "rotate(" + hour + "deg)");
+				        angular.element(face.querySelector('.minute')).css("\-webkit\-transform", "rotate(" + minute + "deg)");
+				        angular.element(face.querySelector('.second')).css("\-webkit\-transform", "rotate(" + second + "deg)");
+				        angular.element(face.querySelector('.hour')).css("\-moz\-transform", "rotate(" + hour + "deg)");
+				        angular.element(face.querySelector('.minute')).css("\-moz\-transform", "rotate(" + minute + "deg)");
+				        angular.element(face.querySelector('.second')).css("\-moz\-transform", "rotate(" + second + "deg)");
+				        angular.element(face.querySelector('.hour')).css("\-ms\-transform", "rotate(" + hour + "deg)");
+				        angular.element(face.querySelector('.minute')).css("\-ms\-transform", "rotate(" + minute + "deg)");
+				        angular.element(face.querySelector('.second')).css("\-ms\-transform", "rotate(" + second + "deg)");
+				    }
+				
+				    function timedUpdate () {
+				        update();
+				        setTimeout(timedUpdate, 1000);
+				    }
+				
+				    timedUpdate();
+				}
+			}
+		}])
 	.directive('graphD3', function () {
 		return {
 			restrict: 'A',

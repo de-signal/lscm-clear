@@ -8,14 +8,38 @@
 <div class="container margin-top" ng-show="loaded">
 
 	<div class="row">
-		<div class="col-md-4">
-			<canvas planetary width='500' height='500' class="img-responsive"></canvas>
+		<div class="col-md-6">
+			<canvas clear-planetary width='500' height='500' class="img-responsive"></canvas>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-xs-6">
+					<h3 class="center-txt">Nigeria</h3>
+					<div clear-clock timezone="1" class="clock"></div>
+				</div>
+				<div class="col-xs-6">
+					<h3 class="center-txt">France</h3>
+					<div clear-clock timezone="1" class="clock"></div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-xs-6">
+					<h3 class="center-txt">Korea</h3>
+					<div clear-clock timezone="+9" class="clock"></div>
+				</div>
+				<div class="col-xs-6">
+					<h3 class="center-txt">China</h3>
+					<div clear-clock timezone="8" class="clock"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
-	<div class="row margin-top">
+	<div class="row margin-top-l">
 		<div class="col-md-12">	
-			<h3>shipments</h3>	
+			<div class="header bg-shipment padding-left">
+				<h1><i class="icon i-element i-element-shipment"></i> Shipments</h1>
+			</div>
 			<table class="table table-condensed" >
 				<thead>
 					<tr>
