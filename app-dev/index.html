@@ -14,7 +14,7 @@
 		
 	</head>
 
-	<body ng-controller="UserCtrl" ng-cloak clear-auth ng-class="{tv: tvScreen}">
+	<body ng-controller="UserCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen, login: !loggedIn}">
 
 		<div id="wrap">
 		
@@ -52,7 +52,7 @@
 				</form>
 			</div>
 			
-			<div ng-show="loggedIn">
+			<div ng-if="loggedIn">
 				
 				<div class="navbar navbar-default navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen"  role="navigation">
 					<div class="container">
@@ -117,7 +117,7 @@
 							<a href="static-indicators">Indicators</a><br />
 							<a href="static-inspection-reports">Inspection reports</a> / 
 							<a href="static-non-compliance-reports">Non-compliance reports</a> / 
-							<a href="static-proofs-of-delivery">Proofs of delivery</a> / <a ng-click="logoutTest()">Logout-test</a></small></p>
+							<a href="static-proofs-of-delivery">Proofs of delivery</a></small></p>
 					</div>
 					<div class="col-md-3">
 						<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>

@@ -17,7 +17,7 @@
 					<tbody ng-controller="DetailCtrl">
 						<tr  ng-repeat="elm in list" ng-click="go('shipment', elm.id)" class="pointer over list-anim">
 							<td><span class="label label-shipment">{{elm.reference}}</span></td>
-							<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]">{{elm.mode}}</i></small></td>
+							<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
 							<td><small>{{elm.milestone}}</small></td>
 							<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 							<td><ul class="inline">

@@ -4,57 +4,57 @@
 
 
 angular.module('clearApp.controllers', [])
-	.controller('UserCtrl', ['$scope', '$route', '$timeout', '$cookieStore', 'authService', '$http', 'Base64', 'E1', 
-		function ($scope, $route, $timeout, $cookieStore, authService, $http, Base64, E1) {
-		
+	.controller('UserCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 
+		function ($scope, $route, toaster, $cookieStore, authService, $http, E1) {
 		var credentials;
-		
-		var connect = function (credentials) {
-			$http.defaults.headers.common['Authorization'] = credentials;
-			$timeout(function() {authService.loginConfirmed()}, 0, false);
-			console.log('login success: ', $http.defaults.headers.common);
-		}
-		
+
 		if ($cookieStore.get("token")) {
-			console.log('login from cookie -> token: ', $cookieStore.get("token"));
-			connect($cookieStore.get("token"));
+			credentials = $cookieStore.get("token"); 
+			$http.defaults.headers.common['Authorization'] = credentials;
+			$scope.loggedIn=true;
+			console.log('connect from cookie: ', $http.defaults.headers.common);
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.user = user;
+			});
 		} 
-		
-		E1.get({'type': 'user'}, function(user) { 
-			$scope.user = user;
-		});
-		
+
 		$scope.login = function() {
-			$http.post('../oauth/oauth.php', {login: $scope.username, password: $scope.password})
+			$http.post('../oauth/oauth.php', {ignoreAuthModule: true, login: $scope.username, password: $scope.password})
 				.success(function(data, status, headers, config) {
-					console.log('status Ok :', status);
 					credentials = 'OAuth '+ data.access_token;
+					$cookieStore.remove("token");
 					if($scope.remember) {
 						$cookieStore.put("token", credentials);
-					} else {
-						$cookieStore.remove("token");
-					}
-					console.log('login -> token: ', credentials);
-				    connect(credentials);
+					} 
+				    $http.defaults.headers.common['Authorization'] = credentials;
+				    authService.loginConfirmed();
+				    console.log('connect from form: ', $http.defaults.headers.common);
+				    E1.get({'type': 'user'}, function(user) {
+				    	toaster.pop('success', 'Welcome', user.first_name + ' ' + user.name);
+				    	$scope.user = user;
+				    });
+				    
 				})
 				.error(function(data, status, headers, config) {
-					console.log('status error :', status, ' / login failed');
+					toaster.pop('error', 'Error', headers("X-clear-login"));
 				});
-		}
+			}
 		
 		$scope.logout = function () {
 			$http.post('../oauth/oauth.php', {action: 'logout', token: credentials})
 				.success(function(data, status, headers, config) {
 					$cookieStore.remove("token");
-					$http.defaults.headers.common['Authorization'] = ''; 
+					delete $http.defaults.headers.common['Authorization'];
 					$route.reload();
-					console.log('logout');
+					$scope.loggedIn=false;
+					console.log('logout: ', $http.defaults.headers.common);
+					toaster.pop('success', 'Logged out');
 				})
 				.error(function(data, status, headers, config) {
 					console.log('status error :', status, ' / logout failed');
 				});
-            
-		}
+			}
+		
 		$scope.logoutTest = function () {
 			$cookieStore.remove("token");
 			$http.defaults.headers.common['Authorization'] = ''; 

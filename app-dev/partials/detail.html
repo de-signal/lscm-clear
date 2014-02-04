@@ -68,26 +68,12 @@
 				<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3" ng-repeat="chart in charts">
 			<div class="filet">
-				<h6>daily production value</h6>
-				<p class="type-fat" ng-style="charts.daily_production_value.color">{{charts.daily_production_value.value}} %</p>
-				<progressbar value="charts.daily_production_value.value" type="{{charts.daily_production_value.label}}"></progressbar>
+				<h6>{{chart.name}}</h6>
+				<p class="type-fat" ng-style="chart.color">{{chart.value}} %</p>
+				<progressbar value="chart.value" type="{{chart.label}}"></progressbar>
 			</div>		
-		</div>
-		<div class="col-md-3">
-			<div class="filet">
-				<h6>production completion</h6>
-				<p class="type-fat" ng-style="charts.production_completion.color">{{charts.production_completion.value}} %</p>
-				<progressbar value="charts.production_completion.value" type="{{charts.production_completion.label}}"></progressbar>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="filet">
-				<h6>production ratio</h6>
-				<p class="type-fat capitalize"  ng-style="charts.production_ratio.color">{{charts.production_ratio.label}}</p>
-				<progressbar value="charts.production_ratio.value" type="{{charts.production_ratio.label}}"></progressbar>
-			</div>
 		</div>
 	</div>
 	

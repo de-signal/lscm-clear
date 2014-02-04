@@ -79,6 +79,10 @@ footer {
 	width: 184px;
 }
 
+.login #loading-bar,
+.login #loading-bar-spinner {
+	display: none;
+}
 
 /* utilities  */ 
 
@@ -1486,4 +1490,6 @@ h5 .badge-parent {
   -ms-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
 }
+
+
 

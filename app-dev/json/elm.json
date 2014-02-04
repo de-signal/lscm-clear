@@ -5,6 +5,7 @@
     "tracking": true,
     "status": "upcoming",
     "milestone": "Departed",
+    "deletable": true,
     "delay": -5,
     "timeline": [
     	{
@@ -54,20 +55,20 @@
     	{ "supplier": "BENTLY NEVADA" }, 
     	{ "supplier material": "455825LMP" }
     ],
-    "charts": { 
-    	"daily_production_value": {
+    "charts": [ 
+    	{
 			"name": "daily production value", 
 			"value": 66 
 		},
-        "production_completion": { 
+        { 
     		"name": "production completion", 
     		"value": 32 
     	},
-    	"production_ratio": { 
+    	{ 
 			"name": "production ratio", 
 			"value": 90 
 		}
-    },
+    ],
     "required": [
         {
             "id": 1234,

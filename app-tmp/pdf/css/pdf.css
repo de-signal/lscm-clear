@@ -69,9 +69,10 @@ body {
     padding: 0;
     /*background-color: #FAFAFA;*/
 }
-* {
-   box-sizing: border-box;
-   -moz-box-sizing: border-box; 
+*, *:before, *:after {
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
 }
 /*.page {
     width: 210mm;

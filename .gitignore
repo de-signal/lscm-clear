@@ -1,4 +1,5 @@
 **/.DS_store
+npm-debug.log
 logs/*
 app/
 .tmp/

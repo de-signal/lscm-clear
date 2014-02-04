@@ -11,10 +11,9 @@
     "angularjs-nvd3-directives": "~0.0.5-beta",
     "AngularJS-Toaster": "~0.4.1",
     "angular-bootstrap": "~0.9.0",
-    "bootstrap": "~3.0.3",
     "angular-http-auth": "~1.2.1",
     "angular-loading-bar": "~0.3.0",
-    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.0.3-0",
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0",
     "planetary.js": "~1.0.3"
   },
   "devDependencies": {},
