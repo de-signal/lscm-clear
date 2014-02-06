@@ -1,0 +1,12 @@
+<div class="modal-header">
+	<h3>delete</h3>
+</div>
+<div class="modal-body">
+	<p>You are about to delete this {{elm.type}}: </p>
+	<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+	<p>Process with care, this operation can not be canceled. </p>
+</div>
+<div class="modal-footer">
+	<button class="btn cancel" ng-click="deleteCancel()">Cancel</button>
+	<button class="btn" ng-click="deleteConfirm(elm); deleteClose()">Confirm deletion</button>
+</div>

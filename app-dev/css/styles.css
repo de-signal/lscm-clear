@@ -89,9 +89,6 @@ footer {
 a {
 	color: #1f1f00;
 }
-a:hover {
-	text-decoration: none;
-}
 
 ul, ul ul {
 	list-style: none;
@@ -490,6 +487,7 @@ th h6 {
 
 .icon {
 	font-size: 16px;
+	line-height:16px;
 	margin: 0;
 	vertical-align: middle;
 }
@@ -501,6 +499,56 @@ th h6 {
 thead .icon {
 	color: white;
 }
+
+.icon-link {
+	cursor: pointer;
+}
+
+/* button */
+
+.btn {
+	cursor: pointer;
+	background: transparent;
+	border: 1px solid #bebeb6;
+	font-weight: bold;
+	color: #1f1f00;
+}
+
+.btn:hover {
+	background-color: white;
+	border-color: white;
+}
+
+.btn-icon {
+	padding:0 2px 1px 3px;
+	margin:-5px 0 -3px;
+}
+.btn .icon {
+/*	margin-bottom: -3px;
+	display: inline-block;
+	margin-top: -3px;*/
+}
+
+.completed {
+	color: #9e9e8e;
+}
+.btn-off {
+	cursor: auto;
+	border: 1px solid transparent;
+}
+.btn-off:hover,
+.btn-off:focus,
+.btn-off:active,
+.btn-off.active,
+.btn-off.disabled,
+.btn[disabled] {
+  color: #333333;
+  background-color: transparent;
+}
+.btn-info {
+	background-color: white;
+}
+
 /* transportation icons for shipments */
 .transportation-icon-plane {
 	content:  url(../img/clear_icon_transportation_plane.svg);
@@ -533,56 +581,6 @@ thead .icon {
 
 
 /* label clear */ 
-
-
-/* button */
-
-.btn {
-	cursor: pointer;
-	background: transparent;
-	border: 1px solid #bebeb6;
-	font-weight: bold;
-	color: #1f1f00;
-}
-
-.btn:hover {
-	background-color: white;
-	border-color: white;
-}
-
-.btn-icon {
-	padding: 3px 2px 2px 3px;
-	margin: -5px 0 -2px;
-	line-height: 16px;
-}
-.btn .icon {
-	margin-bottom: -3px;
-	display: inline-block;
-	margin-top: -3px;
-}
-.btn-generic {
-	
-}
-
-.completed {
-	color: #9e9e8e;
-}
-.btn-off {
-	cursor: auto;
-	border: 1px solid transparent;
-}
-.btn-off:hover,
-.btn-off:focus,
-.btn-off:active,
-.btn-off.active,
-.btn-off.disabled,
-.btn[disabled] {
-  color: #333333;
-  background-color: transparent;
-}
-.btn-info {
-	background-color: white;
-}
 
 .outline {
 	border: 1px solid #bebeb6;
@@ -839,7 +837,7 @@ fieldset {
 }
 
 .pagination {
-	margin: -2px 0 -6px;
+	margin:0 0 -2px;
 	padding: 0;
 }
 
@@ -849,7 +847,7 @@ fieldset {
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-radius: 4px;
-	margin-right: 5px;
+	margin-right: 2px;
 	background-color: inherit;
 
 }
@@ -858,6 +856,7 @@ fieldset {
 	border-color: #c4c4ba;
 	background-color: #c4c4ba;
 	color: white;
+	padding:2px 8px;
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
@@ -865,6 +864,7 @@ fieldset {
 .pagination > li > span:focus {
 	background-color:white;
 	color: #9e9e8e;
+	border: 1px solid white;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -956,7 +956,12 @@ button.toast-close-button {
 }
 .toast-top-center {
 	margin-left: -150px;
-	top: 0px;
+	top: 68px;
+	left: 50%;
+}
+.toast-bottom-center {
+	margin-left: -150px;
+	bottom: 0px;
 	left: 50%;
 }
 .toast-bottom-right {
@@ -977,7 +982,7 @@ button.toast-close-button {
 	box-sizing: border-box;
 }
 #toast-container > div {
-	margin: 0 0 6px;
+	margin:5px 0;
 	padding: 15px 15px 15px 15px;
 	width: 300px;
 	background-position: 15px center;

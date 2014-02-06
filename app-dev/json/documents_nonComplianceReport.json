@@ -62,7 +62,7 @@
 		"image": {
 			"name": "130930_ref_NCR_photo", 
 			"type": "jpg", 
-			"url": "/app/img/temp_horiz.jpg"
+			"url": "img/temp_horiz.jpg"
 		}
 	}
 }

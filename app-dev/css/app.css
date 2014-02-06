@@ -7550,3 +7550,8 @@ Interactive Layer
 .i-transportation-truck:before {
   content: "\e037";
 }
+
+/* line 212, ../scss/_icons.scss */
+.i-trash:before {
+  content: "\e038";
+}

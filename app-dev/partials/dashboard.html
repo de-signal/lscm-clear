@@ -54,7 +54,7 @@
 						<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 						<td><ul class="inline">
 						<li ng-repeat="required in elm.required">
-						<span ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
+						<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 						</li>
 						</ul></td>
 						<td><small>{{elm.departure.location}}</small></td>

@@ -2,7 +2,10 @@
 </div>
 
 <div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
-	<h1 class="container"><i class="icon pull-right" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i><i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
+	<h1 class="container">
+		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i>
+		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDeleteOpen(elm, $event)' ></i>
+		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
 </div>
 
 <div class="container margin-top" ng-show="loaded">
@@ -91,7 +94,7 @@
 						<td><i class="lead icon" required-icon></i></td>
 						<td><strong>{{required.name}}</strong></td>
 						<td><span class="label label-default" status="{{elm.status}}"  required-status editable="{{required.editable}}" completed="{{required.completed}}">{{required.message}}</span></td>
-						<td><button class='btn btn-sm' ng-click='modalOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
+						<td><button class='btn btn-sm' ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
 					</tr>
 				</tbody>
 			</table>			

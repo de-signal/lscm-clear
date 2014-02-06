@@ -41,7 +41,7 @@
         "image": {
             "name": "130930_ref_POD_signature",
             "type": "jpg",
-            "url": "/app/img/temp_pod_signature.jpg"
+            "url": "img/temp_pod_signature.jpg"
         }
     },
     "related": {
