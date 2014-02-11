@@ -139,8 +139,7 @@ angular.module('ngUpload', [])
         element.bind('submit', function uploadStart() {
           var formController = scope[attrs.name];
           // if form is invalid don't submit (e.g. keypress 13)
-          if(formController && (formController.$invalid || formController.$pristine)) return false;
-
+          if(formController && formController.$invalid) return false;
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
 
@@ -172,6 +171,8 @@ angular.module('ngUpload', [])
 
         // Finish upload
        function uploadEnd() {
+          // unbind load after uploadEnd to prevent another load triggering uploadEnd
+          iframe.unbind('load');
           if (!scope.$$phase) {
             scope.$apply(function() {
               setLoadingState(false);
@@ -197,7 +198,7 @@ angular.module('ngUpload', [])
                  fn(scope, { content: content});
              });
           } else {
-             fn(scope, { content: content});
+            fn(scope, { content: content});
           }
         }
       }

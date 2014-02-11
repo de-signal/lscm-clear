@@ -68,7 +68,8 @@
 			<div class="filet">
 				<h6>description</h6>
 				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
-				<img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/>
+				<p><img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/></p>
+				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
 		</div>
 		<div class="col-md-3" ng-repeat="chart in charts">

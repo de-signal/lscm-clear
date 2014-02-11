@@ -1,15 +1,21 @@
 <div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
 </div>
 
-<table class="table table-condensed" ng-show="elementsCount" ng-show="loaded">
+<table class="table table-condensed" ng-show="loaded">
 	<thead>
 		<tr>
-			<th class="col-xs-3"><h6>reference</h6></th><th class="col-xs-3"><h6>milestone</h6></th><th class="col-xs-1"><h6>status</h6></th><th ng-class="trackingShow ? 'col\-xs\-4' : 'col\-xs\-5'"><h6>conditions</h6></th><th class="col-xs-1" ng-show="trackingShow"><h6>tracking</h6></th>
+			<th><h6>reference</h6></th>
+			<th ng-if="listInit.type==='shipment'"><h6>chrono</h6></th>
+			<th><h6>milestone</h6></th>
+			<th><h6>status</h6></th>
+			<th><h6>conditions</h6></th>
+			<th ng-if="trackingShow"><h6>tracking</h6></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr  ng-repeat="elm in list" ng-click="go(elm.type, elm.id)" class="pointer over">
 			<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
+			<td ng-if="elm.type==='shipment'"><small>{{elm.chrono}}</small></td>
 			<td><strong><small>{{elm.milestone}}</small></strong></td>
 			<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 			<td><ul class="inline">
@@ -17,12 +23,12 @@
 			<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 			</li>
 			</ul></td>
-			<td ng-show="trackingShow"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
+			<td ng-if="trackingShow"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
 		</tr>
 	</tbody>
-	<tfoot ng-show="pagesCount>1">
+	<tfoot ng-if="pagesCount>1">
 		<tr>
-			<td colspan="{{trackingShow ? '5' : '4'}}">
+			<td colspan="{{footerColspan}}">
 			<pagination total-items="elementsCount" page="currentPage" max-size="10" items-per-page="itemsPerPage" boundary-links="true" direction-links="false" on-select-page="loadPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
 		</tr>
 	</tfoot>

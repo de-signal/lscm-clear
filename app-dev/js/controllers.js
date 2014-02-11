@@ -152,6 +152,15 @@ angular.module('clearApp.controllers', [])
 				$scope.elementsCount =  response("X-Clear-elementsCount");
 				console.log("pagesCount: " + response("X-Clear-pagesCount") + ", currentPage: " + response("X-Clear-currentPage") + ", elementsCount: " + response("X-Clear-elementsCount"));
 				$scope.loaded = true;
+				$scope.footerColspan = 4; 
+				
+				if (listInit.type === 'shipment') {
+					$scope.footerColspan++
+				}
+				if ($scope.trackingShow) {
+					$scope.footerColspan++
+				}
+				
 			}, 
 			function() {
 				console.log('list not loaded');
