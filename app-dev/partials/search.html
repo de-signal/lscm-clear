@@ -13,7 +13,7 @@
 						<legend>Type </legend>
 						<div class="radio" ng-repeat="type in filters.types">
 							<label class="control-label">
-								<input type="radio" ng-model="query.type" value="{{type}}" ng-change="queryInit(query.type)"> {{type}}
+								<input type="radio" ng-model="query.type" value="{{type.id}}" ng-change="queryInit(query.type)"> {{type.name}}
 							</label>
 						</div>
 					</fieldset>
@@ -47,7 +47,7 @@
 								<div class="form-group">
 									<label class="control-label">From</label>
 									<div class="input-group">
-										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_start.value" is-open="date.milestone_start.opened" show-weeks="false" max="date.milestone_end.value" ng-change="query.milestone_date_start = dateToTimestamp(date.milestone_start.value)" />
 										<span class="input-group-btn">
 											<button class="btn" ng-click="open('milestone_start')"><i class="icon i-condition-date"></i></button>
 										</span>
@@ -56,7 +56,7 @@
 								<div class="form-group">
 									<label class="control-label">To</label>
 									<div class="input-group">
-										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.milestone_end.value" is-open="date.milestone_end.opened" show-weeks="false" min="date.milestone_start.value" ng-change="query.milestone_date_end = dateToTimestamp(date.milestone_end.value)" />
 										<span class="input-group-btn">
 											<button class="btn" ng-click="open('milestone_end')"><i class="icon i-condition-date"></i></button>
 										</span>
@@ -77,6 +77,14 @@
 							</select>
 						</div>
 						<span ng-switch="selected.property.type">
+							<div class="form-group" ng-switch-when="select">
+								<div class="form-group">
+									<label class="control-label">{{query.property_name}}</label>
+									<select class="form-control" ng-model="query.property_value" ng-options="value for value in selected.property.values">
+										<option value="">---</option>
+									</select>
+								</div>
+							</div>
 							<div class="form-group" ng-switch-when="text">
 								<label class="control-label">{{query.property_name}}</label>
 								<input class="form-control" type="text" ng-model="query.property_value">
@@ -85,7 +93,7 @@
 								<div class="form-group">
 									<label class="control-label">From</label>
 									<div class="input-group">
-										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" date-disabled="disabled(date, mode)" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_start.value" is-open="date.property_start.opened" show-weeks="false" max="query.property_end.value" ng-change="query.property_date_start = dateToTimestamp(date.property_start.value)" />
 										<span class="input-group-btn">
 											<button class="btn" ng-click="open('property_start')"><i class="icon i-condition-date"></i></button>
 										</span>
@@ -94,7 +102,7 @@
 								<div class="form-group">
 									<label class="control-label">To</label>
 									<div class="input-group">
-										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" date-disabled="disabled(date, mode)" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
+										<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.property_end.value" is-open="date.property_end.opened" show-weeks="false" min="date.property_start.value" ng-change="query.property_date_end = dateToTimestamp(date.property_end.value)" />
 										<span class="input-group-btn">
 											<button class="btn" ng-click="open('property_end')"><i class="icon i-condition-date"></i></button>
 										</span>
@@ -121,7 +129,7 @@
 	<div class="row margin-top" ng-controller="ListCtrl" >
 	    <div class="col-md-12" ng-if="showList">
 	   		<h3><i class="icon i-search lead"></i> search results</h3>
-	   		<span ng-include="'partials/tplList.html'" onload="loadList(query)"></span> 
+	   		<span ng-include="'partials/tplList.html'" onload="listLoad(query)"></span> 
 	    </div><!--/span-->
 	</div><!--/row-->
 	

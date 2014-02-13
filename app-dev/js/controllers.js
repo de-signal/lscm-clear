@@ -70,15 +70,41 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
-	.controller('DashboardCtrl', ['$location', '$scope', '$q', 'E1', 'ClearFn', function($location, $scope, $q, E1, ClearFn) {
-		$scope.loaded = false;
-		E1.query({'type': 'dashboard'}, function(list) {
-			$scope.list= list;
-			$scope.loaded = true;
-		});
+	.controller('DashboardCtrl', ['$location', '$scope', 'E1', 'ClearFn', 'Utils', function($location, $scope, E1, ClearFn, Utils) {
+		$scope.listLoad = function(listInit) {
+			var config = {'resource': E1}; 
+			var list = ClearFn.listLoad(listInit, $scope.init, config);
+			
+			list.then(function(list) {
+				$scope.listInit = list.listInit;
+				$scope.config = list.config;
+				$scope.elements = list.elements;
+				$scope.loaded = true;
+			});
+		}
+		
+		$scope.pageLoad = function (page) {
+			$scope.listInit.page = page;
+			$scope.listLoad($scope.listInit);
+		}
+		
+		$scope.listSort = function(type) {
+			delete $scope.listInit.page;
+			if ($scope.listInit.sortBy === type) { 
+				$scope.listInit.sortAsc = !$scope.listInit.sortAsc;
+			} else {
+				$scope.listInit.sortBy = type;
+			}
+			$scope.listLoad($scope.listInit);
+		}
+		
 		E1.query({'type': 'report'}, function(docs){
 			$scope.report = docs[docs.length-1];
 		});
+		
+		$scope.init = { sortAsc: true, limit: 8, tracking: true };
+		$scope.loaded = false;
+		$scope.listLoad({'type': 'dashboard'}); 
 		$scope.go = ClearFn.go;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen;
 	}])
@@ -139,45 +165,50 @@ angular.module('clearApp.controllers', [])
 	.controller('AddOrderCtrl', function() {
 	})
 	
-	.controller('ListCtrl', ['$scope', 'Elements', '$location', 'Utils', 'ClearFn', function($scope, Elements, $location, Utils, ClearFn) {
-		$scope.loaded = false;
-		$scope.loadList = function (listInit) {
-		 	$scope.listInit = listInit;
-			var params = Utils.collect($scope.init, listInit);
-			Elements.query(params, function(list, response) {
-				$scope.list = list; 
-				$scope.itemsPerPage = params.limit;
-				$scope.currentPage = response("X-Clear-currentPage");
-				$scope.pagesCount = response("X-Clear-pagesCount");
-				$scope.elementsCount =  response("X-Clear-elementsCount");
-				console.log("pagesCount: " + response("X-Clear-pagesCount") + ", currentPage: " + response("X-Clear-currentPage") + ", elementsCount: " + response("X-Clear-elementsCount"));
-				$scope.loaded = true;
-				$scope.footerColspan = 4; 
-				
-				if (listInit.type === 'shipment') {
-					$scope.footerColspan++
-				}
-				if ($scope.trackingShow) {
-					$scope.footerColspan++
-				}
-				
-			}, 
-			function() {
-				console.log('list not loaded');
-			}); 
+	.controller('ListCtrl', ['$scope', 'E2', '$location', 'Utils', 'ClearFn', function($scope, E2, $location, Utils, ClearFn) {
+		
+		$scope.listSort = function(type) {
+			delete $scope.listInit.page;
+			if ($scope.listInit.sortBy === type) { 
+				$scope.listInit.sortAsc = !$scope.listInit.sortAsc;
+			} else {
+				$scope.listInit.sortBy = type;
+			}
+			$scope.listLoad($scope.listInit);
 		}
 		
-		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
-		$scope.trackingToggle = ClearFn.trackingToggle;
 		$scope.propertySave = function(elm, property, groupName) {
 			ClearFn.propertySave(elm, property, groupName);
 		}
 		
-		$scope.loadPage = function (page) {
+		$scope.pageLoad = function (page) {
 			$scope.listInit.page = page;
-			$scope.loadList($scope.listInit);
+			$scope.listLoad($scope.listInit);
 		}
 		
+		$scope.listLoad = function(listInit) {
+			var config = {'resource': E2}; 
+			var list = ClearFn.listLoad(listInit, $scope.init, config);
+			
+			list.then( function(list) {
+				$scope.listInit = list.listInit;
+				$scope.config = list.config;
+				$scope.elements = list.elements;
+				$scope.loaded = true;
+				
+				$scope.columns=4;
+				if (listInit.type === 'shipment') {
+					$scope.columns++
+				}
+				if ($scope.trackingShow) {
+					$scope.columns++
+				}
+			});
+		}
+		
+		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
+		$scope.trackingToggle = ClearFn.trackingToggle;
+		$scope.loaded = false;
 		$scope.go = ClearFn.go;
 	}])
 	
@@ -189,7 +220,7 @@ angular.module('clearApp.controllers', [])
 			{"name": "Items", "type": "item" }
 		];
 		
-		$scope.init = { sortType: 'DESC', limit: 8, tracking: true };
+		$scope.init = { sortAsc: true, limit: 8, tracking: true };
 		$scope.trackingShow = false;
 		
 	}])
@@ -209,9 +240,9 @@ angular.module('clearApp.controllers', [])
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
 	
-	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'Elements', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, Elements, ColorScaleConfig, Utils, ClearFn) {
+	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'E2', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, E2, ColorScaleConfig, Utils, ClearFn) {
 		$scope.loaded = false;
-		Elements.get({'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
+		E2.get({'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
 			
 			for (var index in elm.charts) {
 				ColorScaleConfig.assignProperties(elm.charts[index]);
@@ -238,7 +269,7 @@ angular.module('clearApp.controllers', [])
 		});	
 		
 		$scope.relatedActiveTab = {};
-		$scope.init = { sortType: 'DESC', limit: 16 };
+		$scope.init = { sortAsc: true, limit: 16 };
 		$scope.trackingShow = true;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
 		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen; 
@@ -289,6 +320,7 @@ angular.module('clearApp.controllers', [])
 		$scope.elm = elm;
 	    console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ required: ', required);
 	    switch (required.type) {
+	    
 	    	case 'upload': 
 	    		// ngUpload
 				$scope.uploadUrl = '/index_rest.php/api/clear/v2/'+ elm.type + '/' + elm.id + '?required=' + required.id;
@@ -299,30 +331,26 @@ angular.module('clearApp.controllers', [])
 				$scope.complete = function (content, completed) {
 					$scope.uploadMessage = 'File uploaded. Save to complete.'
 				};
-	    	break; 
-	    	case 'checkbox': 
-	    	
 	    	break;
+	    	
+	    	case 'checkbox': 
+	    	break;
+	    	
 	    	case 'date':
-	    		// ui-Bootstrap datepicker
-	    		
-	    		$scope.disabled = function(date, mode) {
-	    			return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-	    		};
 	    		$scope.minDate = new Date();
 	    		$scope.$watch('required.dt', function(newValue) { 
 	    			if (newValue) $scope.required.value = Math.floor(newValue.getTime() / 1000); 
 	    			console.log('required date -> name: ', $scope.required.name , '/ value: ', $scope.required.value, '/ dt: ', newValue);
 	    		});
 	    	break;
+	    	
 	    	case 'text': 
-	    	
 	    	break;
+	    	
 	    	case 'email': 
-	    	
 	    	break;
+	    	
 	    	case 'link':
-	    		
 	    	break;
 	    }
 	    
@@ -342,27 +370,7 @@ angular.module('clearApp.controllers', [])
         
 	}])
 	
-	.controller('SearchCtrl', ['$location', '$scope', 'SearchFilters', '$timeout', 'Utils', function($location, $scope, SearchFilters, $timeout, Utils) { 
-		
-		var date = { milestone_start: {}, milestone_end: {}, property_start: {}, property_end: {} };
-		var query = $location.search();
-		
-		(Utils.is_empty(query)) ? $scope.showList=false : $scope.showList=true;
-		
-		if (query.milestone_date_start)	date.milestone_start.value	= Utils.timestampToDate(query.milestone_date_start);
-		if (query.milestone_date_end)	date.milestone_end.value	= Utils.timestampToDate(query.milestone_date_end);
-		if (query.property_date_start)	date.property_start.value	= Utils.timestampToDate(query.property_date_start);
-		if (query.property_date_end)	date.property_end.value		= Utils.timestampToDate(query.property_date_end);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		$scope.IndxOf = Utils.IndxOf;
-		$scope.init = { sortType: 'DESC', limit: 24 };
-		$scope.trackingShow = true;
-		
-		
-		console.log('query: ', $scope.query, '/ showList: ', $scope.showList);
+	.controller('SearchCtrl', ['$location', '$scope', 'E3', '$timeout', 'Utils', function($location, $scope, E3, $timeout, Utils) { 
 		
 		$scope.search = function (query) {
 			$location.search('page', null);
@@ -380,7 +388,8 @@ angular.module('clearApp.controllers', [])
 			$location.search(query);
 			$scope.showList=true;
 		};
-		SearchFilters.get(function(searchFilters){ 
+		
+		E3.get({"type": "core", 'id': 'filter' }, function(searchFilters){ 
 			$scope.filters = searchFilters;
 			if($scope.query.property_id) { 
 				$scope.selected = { 
@@ -397,30 +406,34 @@ angular.module('clearApp.controllers', [])
 			$scope.query.type = type;
 		}
 	
-	  // Disable weekend selection
-	  $scope.disabled = function(date, mode) {
-	    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-	  };
-	
 	  $scope.openCal = function(param) {
 		$timeout(function() {
 		  $scope.date[param].opened = true;
 		});
 	  };
+	  
+	  var date = { milestone_start: {}, milestone_end: {}, property_start: {}, property_end: {} };
+	  var query = $location.search();
+	  
+	  (Utils.is_empty(query)) ? $scope.showList=false : $scope.showList=true;
+	  
+	  if (query.milestone_date_start)	date.milestone_start.value	= Utils.timestampToDate(query.milestone_date_start);
+	  if (query.milestone_date_end)		date.milestone_end.value	= Utils.timestampToDate(query.milestone_date_end);
+	  if (query.property_date_start)	date.property_start.value	= Utils.timestampToDate(query.property_date_start);
+	  if (query.property_date_end)		date.property_end.value		= Utils.timestampToDate(query.property_date_end);
+	  
+	  $scope.query = query;
+	  $scope.date = date;
+	  $scope.dateToTimestamp = Utils.dateToTimestamp;
+	  $scope.IndxOf = Utils.IndxOf;
+	  $scope.init = { sortAsc: true, limit: 12 };
+	  $scope.trackingShow = true;
+
+	  console.log('query: ', $scope.query, '/ showList: ', $scope.showList);
+	  
 	}])
 	
 	.controller('InspectionReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
-		$scope.loaded = false;
-		
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		
 		$scope.search = function (query) {
 			$location.search('page', null);
@@ -436,31 +449,53 @@ angular.module('clearApp.controllers', [])
 			$location.search(query);
 		};
 		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
-		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
-		
-		$scope.go = ClearFn.go;
-		
+				
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
-		}  
+		}
 		
-		var queryType = Utils.collect({'type': 'ir'}, query);
-		
-		E1.query(queryType, function(docs) {
-			E1.get({'type': 'ir', 'id': 'filter'}, function(filters) { 
-			    $scope.filters = filters; 
-			    $scope.badges = ClearFn.badgesDisplay(query, filters); 
+		$scope.listLoad = function(listInit) {
+			var config = {
+				'resource': E1, 
+				'filters': { 'resource': E1, 'type': listInit.type, 'id': 'filter' }
+			}; 
+			var list = ClearFn.listLoad(listInit, $scope.init, config);
+			
+			list.then(function(list) {
+				$scope.listInit = list.listInit;
+				$scope.config = list.config;
+				$scope.docs = list.elements;
+				$scope.loaded = true;
 			});
-		    $scope.docs = docs; 
-		    $scope.loaded = true;
-		});
+		}
+		
+		$scope.pageLoad = function (page) {
+			$scope.listInit.page = page;
+			$scope.listLoad($scope.listInit);
+		}
+		
+		var type = 'ir';
+		var query = $location.search();
+		var queryType = Utils.collect({'type': type}, query);
+		var date = { from: {}, to: {} };
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.go = ClearFn.go;
+		$scope.init = { sortAsc: true, limit: 8, tracking: true };
+		console.log('query: ', query, 'queryType: ', queryType);
+		$scope.listLoad(queryType);
 	}])
 	
 	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', 'E1', function($scope, $filter, $routeParams, E1) {
@@ -475,17 +510,6 @@ angular.module('clearApp.controllers', [])
 	}])
 	
 	.controller('NonComplianceReportsCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
-		$scope.loaded = false;
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		
 		$scope.search = function (query) {
 			$location.search('page', null);
 			for (var i in query) {
@@ -497,35 +521,57 @@ angular.module('clearApp.controllers', [])
 			if (!query.reference) { 
 				$location.search('related_to', null);
 			}
-			console.log('query: ', query);
 			$location.search(query);
 		};
-		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
 		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
-		
-		$scope.go = ClearFn.go;
-		
+				
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
-		var queryType = Utils.collect({'type': 'ncr'}, query);
-		
-		E1.query(queryType, function(docs) { 
-			E1.get({'type': 'ncr', 'id': 'filter'}, function(filters) { 
-			    $scope.filters = filters; 
-			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+		$scope.listLoad = function(listInit) {
+			var config = {
+				'resource': E1, 
+				'filters': { 'resource': E1, 'type': listInit.type, 'id': 'filter' }
+			}; 
+			var list = ClearFn.listLoad(listInit, $scope.init, config);
+			
+			list.then(function(list) {
+				$scope.listInit = list.listInit;
+				$scope.config = list.config;
+				$scope.docs = list.elements;
+				$scope.loaded = true;
 			});
-			$scope.docs = docs;
-			$scope.loaded = true;
-		});
+		}
+		
+		$scope.pageLoad = function (page) {
+			$scope.listInit.page = page;
+			$scope.listLoad($scope.listInit);
+		}
+		
+		var type = 'ncr';
+		var query = $location.search();
+		var queryType = Utils.collect({'type': type}, query);
+		var date = { from: {}, to: {} };
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.go = ClearFn.go;
+		$scope.init = { sortAsc: true, limit: 8, tracking: true };
+		console.log('query: ', query, 'queryType: ', queryType);
+		$scope.listLoad(queryType);
+
 	}])
 	
 	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E1', '$modal', function($scope, $routeParams, E1, $modal) {
@@ -558,17 +604,6 @@ angular.module('clearApp.controllers', [])
 	}])
 	
 	.controller('ProofsOfDeliveryCtrl', ['$location', '$scope', 'E1', '$timeout', 'Utils', 'ClearFn', function($location, $scope, E1, $timeout, Utils, ClearFn) {
-		$scope.loaded = false;
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		
 		$scope.search = function (query) {
 			$location.search('page', null);
 			for (var i in query) {
@@ -580,35 +615,56 @@ angular.module('clearApp.controllers', [])
 			if (!query.reference) { 
 				$location.search('related_to', null);
 			}
-			console.log('query: ', query);
 			$location.search(query);
 		};
-		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
 		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
-		
-		$scope.go = ClearFn.go;
-		
+				
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
-		var queryType = Utils.collect({'type': 'pod'}, query);
-		
-		E1.query(queryType, function(docs) {
-			E1.get({'type': 'pod', 'id': 'filter'}, function(filters) { 
-			    $scope.filters = filters; 
-			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+		$scope.listLoad = function(listInit) {
+			var config = {
+				'resource': E1, 
+				'filters': { 'resource': E1, 'type': listInit.type, 'id': 'filter' }
+			}; 
+			var list = ClearFn.listLoad(listInit, $scope.init, config);
+			
+			list.then(function(list) {
+				$scope.listInit = list.listInit;
+				$scope.config = list.config;
+				$scope.docs = list.elements;
+				$scope.loaded = true;
 			});
-			$scope.docs = docs;
-			$scope.loaded = true;
-		});
+		}
+		
+		$scope.pageLoad = function (page) {
+			$scope.listInit.page = page;
+			$scope.listLoad($scope.listInit);
+		}
+		
+		var type = 'pod';
+		var query = $location.search();
+		var queryType = Utils.collect({'type': type}, query);
+		var date = { from: {}, to: {} };
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.go = ClearFn.go;
+		$scope.init = { sortAsc: true, limit: 8, tracking: true };
+		console.log('query: ', query, 'queryType: ', queryType);
+		$scope.listLoad(queryType);
 	}])
 	
 	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E1', function($scope, $routeParams, ClearFn, E1) {
@@ -653,17 +709,6 @@ angular.module('clearApp.controllers', [])
 	}])
 	
 	.controller('StaticInspectionReportsCtrl', ['$location', '$scope', 'ClearFn', 'InspectionReports', 'InspectionReportsFilters', 'Utils', function($location, $scope, ClearFn, InspectionReports, InspectionReportsFilters, Utils) {
-		$scope.loaded = false;
-		
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		
 		$scope.search = function (query) {
 			$location.search('page', null);
@@ -679,25 +724,32 @@ angular.module('clearApp.controllers', [])
 			$location.search(query);
 		};
 		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
-		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
 		
-		$scope.go = ClearFn.go;
-		
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.go = ClearFn.go;
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
 		InspectionReports.query(function(docs) {
 			InspectionReportsFilters.get(function(filters) { 
-			    $scope.filters = filters; 
-			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			    $scope.config.filters = filters; 
+			    $scope.config.badges = ClearFn.badgesDisplay(query, filters);
 			});
 			$scope.docs = docs;
 			$scope.loaded = true;
@@ -715,16 +767,6 @@ angular.module('clearApp.controllers', [])
 	}])
 	
 	.controller('StaticNonComplianceReportsCtrl', ['$location', '$scope', 'ClearFn', 'NonComplianceReports', 'NonComplianceReportsFilters', 'Utils', function($location, $scope, ClearFn, NonComplianceReports, NonComplianceReportsFilters, Utils) {
-		$scope.loaded = false;
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		
 		$scope.search = function (query) {
 			$location.search('page', null);
@@ -740,25 +782,32 @@ angular.module('clearApp.controllers', [])
 			$location.search(query);
 		};
 		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
-		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
 		
-		$scope.go = ClearFn.go;
-		
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
 		
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		$scope.go = ClearFn.go;
+		
 		NonComplianceReports.query(function(docs) {
 			NonComplianceReportsFilters.get(function(filters) { 
-			    $scope.filters = filters; 
-			    $scope.badges = ClearFn.badgesDisplay(query, filters);
+			    $scope.config.filters = filters; 
+			    $scope.config.badges = ClearFn.badgesDisplay(query, filters);
 			});
 			$scope.docs = docs;
 			$scope.loaded = true;
@@ -825,16 +874,6 @@ angular.module('clearApp.controllers', [])
 	}])
 	
 	.controller('StaticProofsOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'ProofsOfDelivery', 'ProofsOfDeliveryFilters', 'Utils', function($location, $scope, ClearFn, ProofsOfDelivery, ProofsOfDeliveryFilters, Utils) {
-		$scope.loaded = false;
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		
 		$scope.search = function (query) {
 			$location.search('page', null);
@@ -850,20 +889,27 @@ angular.module('clearApp.controllers', [])
 			$location.search(query);
 		};
 		
-		// Disable weekend selection
-		$scope.calDisabled = ClearFn.calDisabled;
-		
 		$scope.calOpen = function($event, param) {
 			$event.preventDefault();
 		    $event.stopPropagation();
 		    $scope.date[param].opened = true;
 		};
 		
-		$scope.go = ClearFn.go;
-		
 		$scope.badgeRemove = function(badge) {
 			$location.search(ClearFn.filterRemove(badge, query));
 		}
+		
+		var date = { from: {}, to: {} };
+		var query = $location.search();
+		
+		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
+		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
+		
+		$scope.loaded = false;
+		$scope.query = query;
+		$scope.date = date;
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		$scope.go = ClearFn.go;
 		
 		ProofsOfDelivery.query(function(docs) {
 			ProofsOfDeliveryFilters.get(function(filters) { 
@@ -878,7 +924,7 @@ angular.module('clearApp.controllers', [])
 	.controller('StaticListCtrl', ['$location', '$scope', 'ClearFn', 'Elms', function($location, $scope, ClearFn, Elms) {
 		var list=[],elements=[],j;
 		
-		$scope.loadList = function (ListInit) {
+		$scope.listLoad = function (ListInit) {
 			elements = Elms.query(function(datas){ 
 					for (j=datas.length-1;j>=0;j--) {
 						if (datas[j].type === ListInit.type) {
@@ -1013,7 +1059,7 @@ angular.module('clearApp.controllers', [])
 		}); 
 		
 		$scope.relatedActiveTab = {};
-		$scope.init = { sortType: 'DESC', limit: 16 };
+		$scope.init = { sortAsc: true, limit: 16 };
 		$scope.trackingShow = true;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen;
 		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen;  

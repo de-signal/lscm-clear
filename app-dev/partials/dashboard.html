@@ -43,20 +43,38 @@
 			<table class="table table-condensed" >
 				<thead>
 					<tr>
-						<th><h6>reference</h6></th>
-						<th><h6>chrono</h6></th>
-						<th><h6>mode</h6></th>
-						<th><h6>milestone</h6></th>
-						<th><h6>status</h6></th>
+						<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'reference'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('chrono')"><span>chrono</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'chrono'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('mode')"><span>mode</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'mode'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('milestone')"><span>milestone</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'milestone'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('status')"><span>status</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'status'"></i>
+							</a></h6></th>
 						<th><h6>required</h6></th>
-						<th><h6>departure</h6></th>
-						<th><h6>ETD</h6></th>
-						<th><h6>arrival</h6></th>
-						<th><h6>ETA</h6></th>
+						<th><h6><a ng-click="listSort('departure_location')"><span>departure</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'departure_location'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('departure_date')"><span>ETD</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'departure_date'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('arrival_location')"><span>arrival</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'arrival_location'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('arrival_date')"><span>ETA</span> 
+							<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'arrival_date'"></i>
+							</a></h6></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr  ng-repeat="elm in list" ng-click="go('shipment', elm.id)" class="pointer over">
+					<tr  ng-repeat="elm in elements" ng-click="go('shipment', elm.id)" class="pointer over">
 						<td><span class="label label-shipment">{{elm.reference}}</span></td>
 						<td><small>{{elm.chrono}}</small></td>
 						<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
@@ -76,7 +94,7 @@
 				<tfoot ng-if="pagesCount>1">
 					<tr>
 						<td colspan="10">
-						<pagination total-items="elementsCount" page="currentPage" max-size="10" boundary-links="true" direction-links="false" on-select-page="loadList(listType, {page: page})" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+						<pagination total-items="config.elementsCount" page="config.page" max-size="10" items-per-page="config.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="pageLoad(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
 					</tr>
 				</tfoot>
 			</table>

@@ -476,6 +476,13 @@ th h6 {
 	color: white;
 	padding-top: 5px;
 }
+th h6 a, th h6 a:hover {
+	color: white;
+	text-decoration: none;
+}
+th h6 a:hover span {
+	text-decoration: underline;
+}
 .table tbody tr:first-child td {
   border-top: 0px none;
 }

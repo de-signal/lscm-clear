@@ -17,7 +17,7 @@
 						<div class="col-md-4">
 							<fieldset>
 								<legend>Related to </legend>
-								<div class="radio" ng-repeat="related in filters.related.type.values">		
+								<div class="radio" ng-repeat="related in config.filters.related.type.values">		
 									<label class="control-label">
 										<input type="radio" ng-model="query.related_to" value="{{related}}"> {{related}} 
 									</label>
@@ -32,7 +32,7 @@
 						<div class="col-md-4">
 							<fieldset>
 								<legend>User </legend>
-								<select class="form-control" ng-model="query.user" ng-options="user.id as user.name for user in filters.users.values"><option value="">---</option></select>
+								<select class="form-control" ng-model="query.user" ng-options="user.id as user.name for user in config.filters.users.values"><option value="">---</option></select>
 							</fieldset>
 							<fieldset>
 							<legend>From </legend>
@@ -57,11 +57,11 @@
 						<div class="col-md-4">
 							<fieldset>
 								<legend>Collection </legend>
-								<select class="form-control" ng-model="query.collection" ng-options="collection.id as collection.name for collection in filters.collections.values"><option value="">---</option></select>
+								<select class="form-control" ng-model="query.collection" ng-options="collection.id as collection.name for collection in config.filters.collections.values"><option value="">---</option></select>
 							</fieldset>
 							<fieldset>
 								<legend>Delivery </legend>
-								<select class="form-control" ng-model="query.delivery" ng-options="delivery.id as delivery.name for delivery in filters.deliveries.values"><option value="">---</option></select>
+								<select class="form-control" ng-model="query.delivery" ng-options="delivery.id as delivery.name for delivery in config.filters.deliveries.values"><option value="">---</option></select>
 							</fieldset>
 						</div>
 					</div><!--/row-->
@@ -71,9 +71,9 @@
 		</div>
 	</div>
 	
-	<div class="row margin-top" ng-show="badges">
+	<div class="row margin-top" ng-show="config.badges">
 		<div class="col-md-12">
-			<span class="badge badge-inverse" ng-repeat="badge in badges">{{badge.display}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.name)"></i></span> 
+			<span class="badge badge-inverse" ng-repeat="badge in config.badges">{{badge.display}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.name)"></i></span> 
 		</div>
 	</div>
 	
@@ -97,8 +97,8 @@
 				</tbody>
 				<tfoot ng-show="pagesCount>1">
 					<tr>
-						<td colspan="4">
-						<pagination num-pages="pagesCount" current-page="currentPage" max-size="10" boundary-links="true" direction-links="false" on-select-page="loadList(collect(listInit, {page: page}))" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+						<td colspan="6">
+						<pagination total-items="config.elementsCount" page="config.page" max-size="10" items-per-page="config.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="pageLoad(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
 					</tr>
 				</tfoot>
 			</table>	

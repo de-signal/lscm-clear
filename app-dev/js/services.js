@@ -6,8 +6,13 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('E1', ['$resource', function($resource) {
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
-	.factory('Elements', ['$resource', function($resource) {
+	.factory('E2', ['$resource', function($resource) {
 		return $resource('../index_rest.php/api/clear/v2/:type/:id', 
+			{ 	type:'@type', id:'@id' }
+		);
+	}])
+	.factory('E3', ['$resource', function($resource) {
+		return $resource('../index_rest.php/api/clear/v3/:type/:id', 
 			{ 	type:'@type', id:'@id' }
 		);
 	}])
@@ -87,8 +92,35 @@ angular.module('clearApp.services', ['ngResource'])
 			}
 		}
 	})
-	.factory('ClearFn', ['$filter', '$rootScope', '$location', '$modal', 'toaster', 'Utils', function($filter, $rootScope, $location, $modal, toaster, Utils){
+	.factory('ClearFn', ['$filter', '$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($filter, $rootScope, $location, $modal, $q, toaster, Utils){
 		return {
+			listLoad: function (listInit, init, config) {
+				var that = this; 
+				var q=$q.defer(); 
+				if (!listInit.hasOwnProperty("sortBy")) listInit.sortBy = 'status'; 
+				if (!listInit.hasOwnProperty("sortAsc")) listInit.sortAsc = true; 
+			 	var params = Utils.collect(init, listInit);
+				config.resource.query(params, function(elements, response) {
+					config.itemsPerPage = params.limit;
+					config.page = response("X-Clear-currentPage");
+					config.pagesCount = response("X-Clear-pagesCount");
+					config.elementsCount =  response("X-Clear-elementsCount");
+					console.log("pagesCount: " + config.pagesCount 
+						+ ", currentPage: " + config.page 
+						+ ", elementsCount: " + config.elementsCount);
+					
+					if (config.filters) {
+						config.filters.resource.get({'type': config.filters.type, 'id': config.filters.id}, function(filters) { 
+						    config.filters = filters; 
+						    config.badges = that.badgesDisplay(listInit, filters);
+						    q.resolve({ elements: elements, listInit: listInit, config: config });
+						});
+					} else {
+						q.resolve({ elements: elements, listInit: listInit, config: config });
+					}
+				});
+				return q.promise;
+			},
 			badgesDisplay: function(query, filters) {
 				var badges = [];
 				

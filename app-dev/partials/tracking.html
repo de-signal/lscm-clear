@@ -4,14 +4,14 @@
 			<div class="header bg-order padding-left">
 				<h1><i class="icon i-element i-element-order"></i> {{categories[0].name}}</h1>
 			</div>
-			<span ng-include="'partials/tplList.html'" onload="loadList({'type': categories[0].type})"></span>
+			<span ng-include="'partials/tplList.html'" onload="listLoad({'type': categories[0].type})"></span>
 		</div>
 		
 		<div class="col-md-6" ng-controller="ListCtrl">
 			<div class="header bg-shipment padding-left">
 				<h1><i class="icon i-element i-element-shipment"></i> {{categories[1].name}}</h1>
 			</div>
-			<span ng-include="'partials/tplList.html'" onload="loadList({'type': categories[1].type})"></span>
+			<span ng-include="'partials/tplList.html'" onload="listLoad({'type': categories[1].type})"></span>
 		</div>
 	</div>
    	<div class="row">
@@ -19,13 +19,13 @@
    			<div class="header bg-box padding-left">
    				<h1><i class="icon i-element i-element-box"></i> {{categories[2].name}}</h1>
    			</div>
-   			<span ng-include="'partials/tplList.html'" onload="loadList({'type': categories[2].type})"></span>
+   			<span ng-include="'partials/tplList.html'" onload="listLoad({'type': categories[2].type})"></span>
    		</div>
    		<div class="col-md-6" ng-controller="ListCtrl">
    			<div class="header bg-item padding-left">
    				<h1><i class="icon i-element i-element-item"></i> {{categories[3].name}}</h1>
    			</div>
-   			<span ng-include="'partials/tplList.html'" onload="loadList({'type': categories[3].type})"></span>
+   			<span ng-include="'partials/tplList.html'" onload="listLoad({'type': categories[3].type})"></span>
    		</div>
    	</div>
 </div>
