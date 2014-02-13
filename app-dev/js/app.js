@@ -12,12 +12,10 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 //		Static pages 
 		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/dashboard.html', controller: 'StaticDashboardCtrl'});
 		$routeProvider.when('/static-indicators', {templateUrl: 'partials/indicators.html', controller: 'StaticIndicatorsCtrl'});
-		$routeProvider.when('/static-inspection-reports', {templateUrl: 'partials/documents-inspectionReports.html', controller: 'StaticInspectionReportsCtrl'});
-		$routeProvider.when('/static-non-compliance-reports', {templateUrl: 'partials/documents-nonComplianceReports.html', controller: 'StaticNonComplianceReportsCtrl'});
-		$routeProvider.when('/static-proofs-of-delivery', {templateUrl: 'partials/documents-proofsOfDelivery.html', controller: 'StaticProofsOfDeliveryCtrl'});
-		$routeProvider.when('/inspection-report/static', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'StaticInspectionReportCtrl'});
-		$routeProvider.when('/non-compliance-report/static', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'StaticNonComplianceReportCtrl'});
-		$routeProvider.when('/proof-of-delivery/static', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'StaticProofOfDeliveryCtrl'});
+		$routeProvider.when('/static-documents/:type', {templateUrl: 'partials/documents.html', controller: 'StaticDocumentsCtrl'});
+		$routeProvider.when('/documents/ir/static', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'StaticInspectionReportCtrl'});
+		$routeProvider.when('/documents/ncr/static', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'StaticNonComplianceReportCtrl'});
+		$routeProvider.when('/documents/pod/static', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'StaticProofOfDeliveryCtrl'});
 		$routeProvider.when('/static-tracking', {templateUrl: 'partials/tracking.html', controller: 'TrackingCtrl'});
 		$routeProvider.when('/static-detail', {templateUrl: 'partials/detail.html', controller: 'StaticDetailCtrl'});
 		$routeProvider.when('/static-search', {templateUrl: 'partials/search.html', controller: 'StaticSearchCtrl'});
@@ -32,12 +30,10 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/tracking', {templateUrl: 'partials/tracking.html', controller: 'TrackingCtrl'});
 		$routeProvider.when('/indicators', {templateUrl: 'partials/indicators.html', controller: 'IndicatorsCtrl'});
 		$routeProvider.when('/search', {templateUrl: 'partials/search.html', controller: 'SearchCtrl', reloadOnSearch: true});
-		$routeProvider.when('/inspection-report', {templateUrl: 'partials/documents-inspectionReports.html', controller: 'InspectionReportsCtrl'});
-		$routeProvider.when('/inspection-report/:id', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'InspectionReportCtrl'});
-		$routeProvider.when('/non-compliance-report', {templateUrl: 'partials/documents-nonComplianceReports.html', controller: 'NonComplianceReportsCtrl'});
-		$routeProvider.when('/non-compliance-report/:id', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'NonComplianceReportCtrl'});
-		$routeProvider.when('/proof-of-delivery', {templateUrl: 'partials/documents-proofsOfDelivery.html', controller: 'ProofsOfDeliveryCtrl'});
-		$routeProvider.when('/proof-of-delivery/:id', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'ProofOfDeliveryCtrl'});
+		$routeProvider.when('/documents/:type', {templateUrl: 'partials/documents.html', controller: 'DocumentsCtrl'});
+		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'InspectionReportCtrl'});
+		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'NonComplianceReportCtrl'});
+		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'ProofOfDeliveryCtrl'});
 		$routeProvider.when('/:type/:id', {templateUrl: 'partials/detail.html', controller: 'DetailCtrl'});
 		$routeProvider.when('/add-order', {templateUrl: 'partials/add_order.html', controller: 'AddOrderCtrl'});
 		

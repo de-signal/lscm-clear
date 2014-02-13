@@ -7511,3 +7511,13 @@ Interactive Layer
 .i-trash:before {
   content: "\e038";
 }
+
+/* line 215, ../scss/_icons.scss */
+.i-caret-u:before {
+  content: "\e039";
+}
+
+/* line 218, ../scss/_icons.scss */
+.i-caret-l:before {
+  content: "\e03a";
+}

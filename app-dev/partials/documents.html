@@ -1,0 +1,143 @@
+<div class="header bg-generic bg-inspectionReport">
+	<h1 class="container"><i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
+</div>
+
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
+	<div class="row">
+		<div class="col-md-12">
+		    <accordion close-others="false">
+	    	    <accordion-group>
+	    	    	<accordion-heading>
+	    	    		Filters
+	    	    	</accordion-heading>
+	    			<div class="row">
+	    				<div class="col-md-4">
+	    					<fieldset>
+		    					<legend>Related to </legend>
+		    					<div class="radio" ng-repeat="related in listConfig.filters.related.type.values">		
+			    					<label class="control-label">
+			    						<input type="radio" ng-model="query.related_to" value="{{related}}"> {{related}} 
+			    					</label>
+			    				</div>
+			    				<div class="form-group" ng-show="query.related_to">
+			    					<label>Reference </label>
+			    					<input type="text" ng-model="query.reference" class="form-control">
+			    				</div>
+			    			</fieldset>
+	    				</div>
+	    				
+	    				<div class="col-md-4">
+	    					<fieldset>
+		    					<legend>User </legend>
+		    					<select class="form-control" ng-model="query.user" ng-options="user.id as user.name for user in listConfig.filters.users.values"><option value="">---</option></select>
+		    				</fieldset>
+		    				<fieldset ng-if="listConfig.filters.locations">
+		    					<legend>Location</legend>
+		    					<select class="form-control" ng-model="query.location" ng-options="location.id as location.name for location in listConfig.filters.locations.values"><option value="">---</option></select>
+		    				</fieldset>
+		    				<fieldset ng-if="listConfig.filters.statuses">
+		    				<legend>Status </legend>
+		    					<select class="form-control" ng-model="query.status" ng-options="status.id as status.name for status in listConfig.filters.statuses.values"><option value="">---</option></select>
+		    				</fieldset>
+		    				<fieldset ng-if="listConfig.filters.collections">
+		    					<legend>Collection </legend>
+		    					<select class="form-control" ng-model="query.collection" ng-options="collection.id as collection.name for collection in listConfig.filters.collections.values"><option value="">---</option></select>
+		    				</fieldset>
+		    				<fieldset ng-if="listConfig.filters.deliveries">
+		    					<legend>Delivery </legend>
+		    					<select class="form-control" ng-model="query.delivery" ng-options="delivery.id as delivery.name for delivery in listConfig.filters.deliveries.values"><option value="">---</option></select>
+		    				</fieldset>
+	    				</div>
+	    				
+	    				<div class="col-md-4">
+	    					<fieldset>
+	    					<legend>From </legend>
+		    					<div class="input-group">
+		    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.from.value" is-open="date.from.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" max="date.to.value" ng-change="query.date_from = dateToTimestamp(date.from.value)" />
+		    						<span class="input-group-btn">
+		    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
+		    						</span>
+		    					</div>
+		    				</fieldset>
+		    				<fieldset>
+		    					<legend>To </legend>
+		    					<div class="input-group">
+		    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="date.to.value" is-open="date.to.opened" date-disabled="calDisabled(date, mode)" show-weeks="false" min="date.from.value" ng-change="query.date_to = dateToTimestamp(date.to.value)" />
+		    						<span class="input-group-btn">
+		    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
+		    						</span>
+		    					</div>
+		    				</fieldset>
+	    				</div>
+	    			</div><!--/row-->
+	    			<button class="btn btn-block btn-lg" type="button" ng-click="search(query)">Load</button>
+	    	    </accordion-group>
+	        </accordion>
+	    </div>
+	</div>
+	
+	<div class="row" ng-if="listConfig.badges">
+		<div class="col-md-12">
+			<span class="badge badge-inverse" ng-repeat="badge in listConfig.badges">{{badge.display}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.name)"></i></span> 
+		</div>
+	</div>
+	
+	<div class="row margin-top hide">
+		<div class="col-md-12">	
+<pre>
+{{query | json}}
+</pre>		
+		</div>
+	</div>
+	<div class="row margin-top">
+		<div class="col-md-12">			
+			<table class="table table-condensed" >
+				<thead>
+					<tr>
+						<th><h6>order</h6></th><th><h6>shipment</h6></th><th><h6>user</h6></th>
+						<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>location</h6></th>
+						<th><h6>created</h6></th>
+						<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>modified</h6></th>
+						<th ng-if="page.type==='ir'"><h6>boxes</h6></th>
+						<th ng-if="page.type==='ir'"><h6>conformity</h6></th>
+						<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>status</h6></th>
+						<th ng-if="page.type==='ncr'"><h6>element</h6></th>
+						<th ng-if="page.type==='pod'"><h6>collection</h6></th>
+						<th ng-if="page.type==='pod'"><h6>delivery</h6></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="doc in docs" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
+						<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+						<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+						<td><small>{{doc.user}}</small></td>
+						<td ng-if="page.type==='ncr' || page.type==='ir'"><small>{{doc.location}}</small></td>
+						<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td ng-if="page.type==='ncr' || page.type==='ir'"><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td ng-if="page.type==='ir'">{{doc.boxes.length}}</td>
+						<td ng-if="page.type==='ir'">
+						    <span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
+						    <span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+						</td>
+						<td ng-if="page.type==='ncr' || page.type==='ir'">
+						    <i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i>
+						</td>
+						<td ng-if="page.type==='ncr'"><span class="label" ng-class="{shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.element.type]">{{doc.element.reference}}</span></td>
+						
+						<td ng-if="page.type==='pod'"><small>{{doc.collection.company.name}}</small></td>
+						<td ng-if="page.type==='pod'"><small>{{doc.delivery.company.name}}</small></td>
+					</tr>
+				</tbody>
+				<tfoot ng-show="pagesCount>1">
+					<tr>
+						<td colspan="8">
+						<pagination total-items="listConfig.elementsCount" page="listConfig.page" max-size="10" items-per-page="listConfig.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="pageLoad(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>

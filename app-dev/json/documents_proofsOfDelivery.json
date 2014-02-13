@@ -1,7 +1,9 @@
 [
 	{
 	    "id": "static",
-	    "date": 1375907474,
+	    "dates": {
+	        "created": 1375907474
+	    },
 	    "user": "Henri Robert",
 	    "collection": {
 	       "company": {
@@ -27,7 +29,9 @@
 	},
 	{
 	    "id": "static",
-	    "date": 1375907474,
+	    "dates": {
+	        "created": 1375907474
+	    },
 	    "user": "Henri Robert",
 	    "collection": {
 	       "company": {
@@ -53,7 +57,9 @@
 	},
 	{
 	    "id": "static",
-	    "date": 1375907474,
+	    "dates": {
+	        "created": 1375907474
+	    },
 	    "user": "Henri Robert",
 	    "collection": {
 	       "company": {

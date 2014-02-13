@@ -1,20 +1,19 @@
 <div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
 </div>
-
 <table class="table table-condensed" ng-show="loaded">
 	<thead>
 		<tr>
 			<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
-				<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'reference'"></i>
+				<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[listInit.sortOrder]" ng-show="listInit.sortBy === 'reference'"></i>
 				</a></h6></th>
-			<th ng-if="listInit.type==='shipment'"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
-				<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'chrono'"></i>
+			<th ng-if="colmunChrono"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
+				<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[listInit.sortOrder]" ng-show="listInit.sortBy === 'chrono'"></i>
 				</a></h6></th>
 			<th><h6><a ng-click="listSort('milestone')"><span>milestone</span>
-				<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'milestone'"></i>
+				<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[listInit.sortOrder]" ng-show="listInit.sortBy === 'milestone'"></i>
 				</a></h6></th>
 			<th><h6><a ng-click="listSort('status')"><span>status</span>
-				<i class="icon" ng-class="{true:'i\-caret\-u', false:'i\-caret\-d'}[listInit.sortAsc]" ng-show="listInit.sortBy === 'status'"></i>
+				<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[listInit.sortOrder]" ng-show="listInit.sortBy === 'status'"></i>
 				</a></h6></th>
 			<th><h6>conditions</h6></th>
 			<th ng-if="trackingShow"><h6>tracking</h6></th>
@@ -23,7 +22,7 @@
 	<tbody>
 		<tr  ng-repeat="elm in elements" ng-click="go(elm.type, elm.id)" class="pointer over">
 			<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
-			<td ng-if="elm.type==='shipment'"><small>{{elm.chrono}}</small></td>
+			<td ng-if="colmunChrono"><small>{{elm.chrono}}</small></td>
 			<td><strong><small>{{elm.milestone}}</small></strong></td>
 			<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 			<td><ul class="inline">
@@ -34,10 +33,10 @@
 			<td ng-if="trackingShow"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
 		</tr>
 	</tbody>
-	<tfoot ng-if="config.pagesCount>1">
+	<tfoot ng-if="listConfig.pagesCount>1">
 		<tr>
 			<td colspan="{{columns}}">
-			<pagination total-items="config.elementsCount" page="config.page" max-size="10" items-per-page="config.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="pageLoad(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
+			<pagination total-items="listConfig.elementsCount" page="listConfig.page" max-size="10" items-per-page="listConfig.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="pageLoad(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination></td>
 		</tr>
 	</tfoot>
 </table>

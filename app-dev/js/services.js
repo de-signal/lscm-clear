@@ -7,14 +7,10 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('E2', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v2/:type/:id', 
-			{ 	type:'@type', id:'@id' }
-		);
+		return $resource('../index_rest.php/api/clear/v2/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('E3', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v3/:type/:id', 
-			{ 	type:'@type', id:'@id' }
-		);
+		return $resource('../index_rest.php/api/clear/v3/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('Utils', function(){
 		return {
@@ -94,29 +90,28 @@ angular.module('clearApp.services', ['ngResource'])
 	})
 	.factory('ClearFn', ['$filter', '$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($filter, $rootScope, $location, $modal, $q, toaster, Utils){
 		return {
-			listLoad: function (listInit, init, config) {
-				var that = this; 
-				var q=$q.defer(); 
-				if (!listInit.hasOwnProperty("sortBy")) listInit.sortBy = 'status'; 
-				if (!listInit.hasOwnProperty("sortAsc")) listInit.sortAsc = true; 
-			 	var params = Utils.collect(init, listInit);
-				config.resource.query(params, function(elements, response) {
-					config.itemsPerPage = params.limit;
-					config.page = response("X-Clear-currentPage");
-					config.pagesCount = response("X-Clear-pagesCount");
-					config.elementsCount =  response("X-Clear-elementsCount");
-					console.log("pagesCount: " + config.pagesCount 
-						+ ", currentPage: " + config.page 
-						+ ", elementsCount: " + config.elementsCount);
+			listLoad: function (listInit, config) {
+				var that = this;
+				var listConfig = {};  
+				var q=$q.defer();
+				
+			 	config.resource.query(listInit, function(elements, response) {
+					listConfig.itemsPerPage = listInit.limit;
+					listConfig.page = response("X-Clear-currentPage");
+					listConfig.pagesCount = response("X-Clear-pagesCount");
+					listConfig.elementsCount =  response("X-Clear-elementsCount");
+					console.log("pagesCount: " + listConfig.pagesCount + ", currentPage: " + listConfig.page + ", elementsCount: " + listConfig.elementsCount);
 					
 					if (config.filters) {
 						config.filters.resource.get({'type': config.filters.type, 'id': config.filters.id}, function(filters) { 
-						    config.filters = filters; 
-						    config.badges = that.badgesDisplay(listInit, filters);
-						    q.resolve({ elements: elements, listInit: listInit, config: config });
+						    listConfig.filters = filters; 
+						    listConfig.badges = that.badgesDisplay(listInit, filters);
+						    console.log("config: ", listConfig);
+						    q.resolve({ elements: elements, listConfig: listConfig });
 						});
 					} else {
-						q.resolve({ elements: elements, listInit: listInit, config: config });
+						console.log("config: ", listConfig);
+						q.resolve({ elements: elements, listConfig: listConfig });
 					}
 				});
 				return q.promise;
@@ -124,12 +119,12 @@ angular.module('clearApp.services', ['ngResource'])
 			badgesDisplay: function(query, filters) {
 				var badges = [];
 				
-				if (query.reference) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-				if (query.location) badges.push({'name': 'location', 'display': 'Location: ' + Utils.objectByKey(filters.locations.values, "id", query.location).name });
-				if (query.user) badges.push({'name': 'user', 'display': 'User: ' + Utils.objectByKey(filters.users.values, "id", query.user).name });
-				if (query.status) badges.push({'name': 'status', 'display': 'Status: ' + Utils.objectByKey(filters.statuses.values, "id", query.status).name });
-				if (query.collection) badges.push({'name': 'collection', 'display': 'Collection: ' + Utils.objectByKey(filters.collections.values, "id", query.collection).name });
-				if (query.delivery) badges.push({'name': 'delivery', 'display': 'Delivery: ' + Utils.objectByKey(filters.deliveries.values, "id", query.delivery).name });
+				if (query.hasOwnProperty('reference')) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
+				if (query.hasOwnProperty('location')) badges.push({'name': 'location', 'display': 'Location: ' + Utils.objectByKey(filters.locations.values, "id", query.location).name });
+				if (query.hasOwnProperty('user')) badges.push({'name': 'user', 'display': 'User: ' + Utils.objectByKey(filters.users.values, "id", query.user).name });
+				if (query.hasOwnProperty('status')) badges.push({'name': 'status', 'display': 'Status: ' + Utils.objectByKey(filters.statuses.values, "id", query.status).name });
+				if (query.hasOwnProperty('collection')) badges.push({'name': 'collection', 'display': 'Collection: ' + Utils.objectByKey(filters.collections.values, "id", query.collection).name });
+				if (query.hasOwnProperty('delivery')) badges.push({'name': 'delivery', 'display': 'Delivery: ' + Utils.objectByKey(filters.deliveries.values, "id", query.delivery).name });
 				if (query.date_from) badges.push({'name': 'date_from', 'display': 'From: ' + $filter('date')(query.date_from*1000, 'dd.MM.yy') });
 				if (query.date_to) badges.push({'name': 'date_to', 'display': 'To: ' + $filter('date')(query.date_to*1000, 'dd.MM.yy') });
 				
@@ -365,31 +360,31 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('StaticGlobalReports', ['$resource', function($resource){
 		return $resource('json/global_reports.json');
 	}])
-	.factory('InspectionReports', ['$resource', function($resource){
+	.factory('IRs', ['$resource', function($resource){
 		return $resource('json/documents_inspectionReports.json');
 	}])
-	.factory('InspectionReportsFilters', ['$resource', function($resource){
+	.factory('IRsFilters', ['$resource', function($resource){
 		return $resource('json/documents_inspectionReports_filters.json');
 	}])
-	.factory('InspectionReport', ['$resource', function($resource){
+	.factory('IR', ['$resource', function($resource){
 		return $resource('json/documents_inspectionReport.json');
 	}])
-	.factory('NonComplianceReports', ['$resource', function($resource){
+	.factory('NCRs', ['$resource', function($resource){
 		return $resource('json/documents_nonComplianceReports.json');
 	}])
-	.factory('NonComplianceReportsFilters', ['$resource', function($resource){
+	.factory('NCRsFilters', ['$resource', function($resource){
 		return $resource('json/documents_nonComplianceReports_filters.json');
 	}])
-	.factory('NonComplianceReport', ['$resource', function($resource){
+	.factory('NCR', ['$resource', function($resource){
 		return $resource('json/documents_nonComplianceReport.json');
 	}])
-	.factory('ProofsOfDelivery', ['$resource', function($resource){
+	.factory('PODs', ['$resource', function($resource){
 		return $resource('json/documents_proofsOfDelivery.json');
 	}])
-	.factory('ProofsOfDeliveryFilters', ['$resource', function($resource){
+	.factory('PODsFilters', ['$resource', function($resource){
 		return $resource('json/documents_proofsOfDelivery_filters.json');
 	}])
-	.factory('ProofOfDelivery', ['$resource', function($resource){
+	.factory('POD', ['$resource', function($resource){
 		return $resource('json/documents_proofOfDelivery.json');
 	}])
 	.factory('StaticIndicators', ['$resource', function($resource){
