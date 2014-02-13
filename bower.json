@@ -13,7 +13,7 @@
     "angular-bootstrap": "~0.9.0",
     "angular-http-auth": "~1.2.1",
     "angular-loading-bar": "~0.3.0",
-    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0",
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git",
     "planetary.js": "~1.0.3"
   },
   "devDependencies": {},
