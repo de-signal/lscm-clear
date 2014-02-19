@@ -596,93 +596,175 @@ thead .icon {
 	padding-bottom: 15px;
 }
 
-.timeline .col-md-3 {
-	background:url(../img/clear_timeline_v.svg) 30px 0 no-repeat;
-	min-height: 80px;
-	position: relative;
-}
-.timeline .col-md-2 {
-	background:url(../img/clear_timeline_dot.svg) 30px 0 no-repeat;
+.timeline .col-md-3, .timeline .col-md-2 {
 	min-height: 80px;
 	position: relative;
 }
 .timeline h4, .timeline-desc {
 	margin-left:60px;
 }
-.col-md-3 .timeline-active {
-	background:url(../img/clear_timeline_v_active.svg) 30px 0 no-repeat;
+.timeline-completed, .timeline-active, .timeline-bg {
 	position: absolute;
 	right: 0;
 	top: 0;
 	bottom: 0;
 	left: 0;
+	overflow: hidden;
 }
-.col-md-3 .timeline-completed {
-	background:url(../img/clear_timeline_v_completed.svg) 30px 0 no-repeat;
+.timeline-circle {
+	background-color: #C4C4BA;
 	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	left: 0;
+	width: 32px;
+	height: 32px;
+	border-radius: 16px;
+	left:20px;
+	overflow: visible;
 }
-.col-md-2 .timeline-active {
-	background:url(../img/clear_timeline_dot_active.svg) 30px 0 no-repeat;
+.timeline-bar {
+	width: 14px;
+	height: 100px;
+	background-color: #C4C4BA;
 	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	left: 0;
+	left:29px;
 }
-
-
-
+.timeline-completed .timeline-circle, 
+.timeline-active .timeline-circle {
+	width: 24px;
+	height: 24px;
+	border-radius: 12px;
+	left:24px;
+	top:4px;
+	animation: timelineCircleAnim 1s;
+	-webkit-animation: timelineCircleAnim 1s;
+	border: 6px solid #ffcb32;
+	z-index: 2;
+	
+}
+.timeline-active .timeline-circle {
+	background-color: #fff;
+}
+.timeline-completed .timeline-bar,
+.timeline-active .timeline-bar {
+	background-color: #ffcb32;
+	left: 33px;
+	width: 6px;
+	z-index: 1;
+	animation: timelineBarAnimY 1s ease-in-out;
+	-webkit-animation: timelineBarAnimY 1s ease-in-out;
+}
+.first .timeline-bar {
+	top: 12px;
+}
+.last .timeline-bar,
+.timeline-active .timeline-bar {
+	height:16px;
+}
+@keyframes timelineCircleAnim {
+	0% { 
+		transform: scale(0);	
+	}
+	100% { 
+		transform: scaleY(1);
+	}
+}
+@-webkit-keyframes timelineCircleAnim {
+	0% { 
+		-webkit-transform: scale(0);	
+	}
+	100% { 
+		-webkit-transform: scaleY(1);
+	}
+}
+@keyframes timelineBarAnimY {
+	0% { 
+		transform: scaleY(0);	
+	}
+	100% { 
+		transform: scaleY(1);
+	}
+}
+@-webkit-keyframes timelineBarAnimY {
+	0% { 
+  		-webkit-transform: scaleY(0);
+  		-webkit-transform-origin: 0 0;
+	}
+	100% { 
+		-webkit-transform: scaleY(1);
+		-webkit-transform-origin: 0 0;
+	}
+}
 @media (min-width: 992px) {
+	.timeline .col-md-3, .timeline .col-md-2 {
+		min-height: 100px;
+	}
 	.timeline h4 {
 		margin-left:-10px;
-	}
-	.timeline .col-md-3 {
-		background: url(../img/clear_timeline_h.svg) 0 50px no-repeat;
-		min-height: 100px;
-		position: relative;
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-	.timeline .col-md-2 {
-		background: url(../img/clear_timeline_dot.svg) 0 50px no-repeat;
-		min-height: 100px;
-		position: relative;
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-	.col-md-3 .timeline-active {
-		background: url(../img/clear_timeline_h_active.svg) 0 50px no-repeat;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		left: 0;
-	}
-	.col-md-3 .timeline-completed {
-		background: url(../img/clear_timeline_h_completed.svg) 0 50px no-repeat;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		left: 0;
-	}
-	.col-md-2 .timeline-active {
-		background: url(../img/clear_timeline_dot_active.svg) 0 50px no-repeat;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		left: 0;
 	}
 	.timeline-desc {
 		margin-left: 50px;
 		margin-top: 30px;
 		float: left;
-	} 
+	}
+	.timeline-circle {
+		top: 26px;
+		left: 0;
+	}
+	.timeline-bar {
+		width: 300px;
+		height: 14px;
+		top: 35px;
+		left: 0;
+	}
+	.timeline-completed .timeline-circle, 
+	.timeline-active .timeline-circle {
+		left:4px;
+		top:30px;
+	}
+	.timeline-completed .timeline-bar, 
+	.timeline-active .timeline-bar {
+		top: 39px;
+		height: 6px;
+		left: 0;
+		width: 300px;
+		animation: timelineBarAnimX 1s ease-in-out;
+		-webkit-animation: timelineBarAnimX 1s ease-in-out;
+	}
+	.first .timeline-bar {
+		left: 12px;
+		top: 35px;
+	}
+	.first .timeline-completed .timeline-bar {
+		top: 39px
+	}
+	.last .timeline-bar {
+		width:16px;
+		height:14px;
+	}
+	.timeline-active .timeline-bar, 
+	.last .timeline-active .timeline-bar {
+		width:16px;
+		height: 6px;
+	}
+	@keyframes timelineBarAnimX {
+		0% { 
+			transform: scaleX(0);
+			transform-origin: 0 0;	
+		}
+		100% { 
+			transform: scaleX(1);
+			transform-origin: 0 0;
+		}
+	}
+	@-webkit-keyframes timelineBarAnimX {
+		0% { 
+	  		-webkit-transform: scaleX(0);
+	  		-webkit-transform-origin: 0 0;
+		}
+		100% { 
+			-webkit-transform: scaleX(1);
+			-webkit-transform-origin: 0 0;
+		}
+	}
 }
 
 

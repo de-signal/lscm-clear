@@ -829,16 +829,28 @@ angular.module('clearApp.controllers', [])
 		}	
 	}])
 	
-	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', 'Elm', '$modal', 'ClearFn', 'ColorScaleConfig', '$timeout', 'Utils', function($scope, $location, $anchorScroll, Elm, $modal, ClearFn, ColorScaleConfig, $timeout, Utils) {
+	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$interval', 'Elm', '$modal', 'ClearFn', 'ColorScaleConfig', 'Utils', function($scope, $location, $anchorScroll, $timeout, $interval, Elm, $modal, ClearFn, ColorScaleConfig, Utils) {
 		$scope.loaded = false;
+		
 		Elm.get(function(elm) {
+			var timelineAnim = function(index) {
+				console.log('anim: ', index);
+				if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
+			}
+			
 			for (var index in elm.charts) {
 				ColorScaleConfig.assignProperties(elm.charts[index]);
 			}
 			
+			
 			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
 			
 			$scope.elm = elm;
+			
+			var timelineIndex = 0;
+			$interval(function() {timelineAnim(timelineIndex++)}, 1200, 4); 
+
+			
 			$scope.charts = elm.charts;
 			var related_type = $location.search().related_type;
 			if (related_type) {
@@ -854,7 +866,6 @@ angular.module('clearApp.controllers', [])
 			}
 			
 			$scope.date = ClearFn.propertiesDate(elm);
-			
 			$scope.loaded = true;
 		}); 
 		

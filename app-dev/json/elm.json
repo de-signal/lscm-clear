@@ -1,6 +1,6 @@
 {
     "type": "order",
-    "id": 12,
+    "id": 1,
     "reference": "0101010109292", 
     "tracking": true,
     "status": "upcoming",
@@ -20,7 +20,7 @@
     	{
     		"name": "Green light approved", 
     		"description": "In transit",
-    		"completed": false
+    		"completed": true
     	}, 
     	{
     		"name": "Delivered",
@@ -843,14 +843,14 @@
     ],
     "related": [
         {
-            "name": "orders",
-            "type": "order",
+            "name": "boxes",
+            "type": "box",
             "quantity": 2
         },
         {
             "name": "shipments",
             "type": "shipment",
-            "quantity": 5
+            "quantity": 2
         },
         {
             "name": "items",

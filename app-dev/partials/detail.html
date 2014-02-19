@@ -38,25 +38,53 @@
 					<div class="col-md-1">
 					
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 first">
 						 <h4>{{elm.timeline[0].name}}</h4>
 						 <span class="timeline-desc"><i>{{elm.timeline[0].description}}</i></span>
-						 <div ng-if="elm.timeline[0].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[1].completed]"></div>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[0].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[1].completed]">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
 					</div>
 					<div class="col-md-3">
 						 <h4>{{elm.timeline[1].name}}</h4>
 						 <span class="timeline-desc"><i>{{elm.timeline[1].description}}</i></span>
-						 <div ng-if="elm.timeline[1].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[2].completed]"></div>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[1].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[2].completed]">
+							 <div class="timeline-circle"></div>
+							 <div class="timeline-bar"></div>
+						 </div>
 					</div>
 					<div class="col-md-3">
 						 <h4>{{elm.timeline[2].name}}</h4>
 						 <span class="timeline-desc"><i>{{elm.timeline[2].description}}</i></span>
-						 <div ng-if="elm.timeline[2].completed" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[3].completed]"></div>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[2].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[3].completed]">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
 					</div>
-					<div class="col-md-2 timeline-last">
+					<div class="col-md-2 last">
 						 <h4>{{elm.timeline[3].name}}</h4>
 						 <span class="timeline-desc"><i>{{elm.timeline[3].description}}</i></span>
-						 <div class="timeline-active" ng-if="elm.timeline[3].completed"></div>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[3].anim" class="timeline-active" >
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
 					</div>
 				</div>
 			</div>
@@ -67,7 +95,7 @@
 		<div class="col-md-3">
 			<div class="filet">
 				<h6>description</h6>
-				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong>{{value}}</span></p>
+				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}:</strong> {{value}}</span></p>
 				<p><img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/></p>
 				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
