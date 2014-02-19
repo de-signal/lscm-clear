@@ -641,7 +641,7 @@ thead .icon {
 	
 }
 .timeline-active .timeline-circle {
-	background-color: #fff;
+	background-color: #ffcb32;
 }
 .timeline-completed .timeline-bar,
 .timeline-active .timeline-bar {
@@ -677,10 +677,12 @@ thead .icon {
 }
 @keyframes timelineBarAnimY {
 	0% { 
-		transform: scaleY(0);	
+		transform: scaleY(0);
+		transform-origin: 0 0;	
 	}
 	100% { 
 		transform: scaleY(1);
+		transform-origin: 0 0;
 	}
 }
 @-webkit-keyframes timelineBarAnimY {

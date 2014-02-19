@@ -108,7 +108,6 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: 'app-dev/components/',
 						src: [
-							'bootstrap/dist/css/bootstrap.css',
 							'AngularJS-Toaster/toaster.css',
 							'nvd3/nv.d3.css', 
 							'angular-loading-bar/build/loading-bar.css'

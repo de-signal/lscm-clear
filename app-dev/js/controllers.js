@@ -241,7 +241,7 @@ angular.module('clearApp.controllers', [])
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
 	
-	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', 'E2', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $timeout, $anchorScroll, E2, ColorScaleConfig, Utils, ClearFn) {
+	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', 'E2', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, E2, ColorScaleConfig, Utils, ClearFn) {
 		$scope.loaded = false;
 		$scope.relatedActiveTab = {};
 		$scope.init = { sortBy: 'status', sortOrder: 'ASC', limit: 16 };
@@ -280,6 +280,15 @@ angular.module('clearApp.controllers', [])
 			elm = ClearFn.propertiesDate(elm);
 			
 		    $scope.elm = elm;
+		    
+		    if (elm.hasOwnProperty('timeline')) {
+		    	var timelineAnim = function(index) {
+		    		console.log('anim: ', index);
+		    		if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
+		    	}
+		    	var timelineIndex = 0;
+		    	$interval(function() {timelineAnim(timelineIndex++)}, 1200, 4); 
+		    }
 		    $scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
 		    $scope.charts = elm.charts;
 		    var related_type = $location.search().related_type;
@@ -833,24 +842,21 @@ angular.module('clearApp.controllers', [])
 		$scope.loaded = false;
 		
 		Elm.get(function(elm) {
-			var timelineAnim = function(index) {
-				console.log('anim: ', index);
-				if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
-			}
-			
 			for (var index in elm.charts) {
 				ColorScaleConfig.assignProperties(elm.charts[index]);
 			}
-			
 			
 			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
 			
 			$scope.elm = elm;
 			
+			var timelineAnim = function(index) {
+				console.log('anim: ', index);
+				if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
+			}
 			var timelineIndex = 0;
 			$interval(function() {timelineAnim(timelineIndex++)}, 1200, 4); 
 
-			
 			$scope.charts = elm.charts;
 			var related_type = $location.search().related_type;
 			if (related_type) {
