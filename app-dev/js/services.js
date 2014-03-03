@@ -7,10 +7,7 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('E2', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v2/:type/:id', { type:'@type', id:'@id' });
-	}])
-	.factory('E3', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v3/:type/:id', { type:'@type', id:'@id' });
+		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id', { format:'@format', type:'@type', id:'@id' });
 	}])
 	.factory('Utils', function(){
 		return {
@@ -21,7 +18,7 @@ angular.module('clearApp.services', ['ngResource'])
 			timestampToDate: function(timestamp) {
 				return new Date( timestamp * 1000 ); 
 			}, 
-			is_empty: function (obj) {
+			isEmpty: function (obj) {
 				var hasOwnProperty = Object.prototype.hasOwnProperty;
 				// null and undefined are empty
 				if (obj == null) return true;
@@ -36,12 +33,6 @@ angular.module('clearApp.services', ['ngResource'])
 				// Doesn't handle toString and toValue enumeration bugs in IE < 9
 				return true;
 			}, 
-			IndxOf: function(myArray, searchTerm, property) {
-				for(var i = 0, len = myArray.length; i < len; i++) {
-					if (myArray[i][property] === searchTerm) return i+1;
-				}
-				return -1;
-			}, 
 			collect: function (a,b){
 				var c = {};
 				for (var att in a) { c[att] = a[att]; }
@@ -49,6 +40,7 @@ angular.module('clearApp.services', ['ngResource'])
 				return c;
 			}, 
 			clone: function (obj) {
+				var that = this; 
 				// Handle the 3 simple types, and null or undefined
 				if (null == obj || "object" != typeof obj) return obj;
 			
@@ -63,7 +55,7 @@ angular.module('clearApp.services', ['ngResource'])
 				if (obj instanceof Array) {
 					var copy = [];
 					for (var i = 0, len = obj.length; i < len; i++) {
-						copy[i] = clone(obj[i]);
+						copy[i] = that.clone(obj[i]);
 					}
 					return copy;
 				}
@@ -72,7 +64,7 @@ angular.module('clearApp.services', ['ngResource'])
 				if (obj instanceof Object) {
 					var copy = {};
 					for (var attr in obj) {
-						if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+						if (obj.hasOwnProperty(attr)) copy[attr] = that.clone(obj[attr]);
 					}
 					return copy;
 				}
@@ -81,59 +73,188 @@ angular.module('clearApp.services', ['ngResource'])
 			}, 
 			objectByKey:  function(array, key, value) {
 				for (var i in array) {
-					if (array[i][key] == value) {
-						return array[i];
-					}
+					if (array[i][key] == value) return array[i];
 				}
+			}, 
+			objectIndexbyKey: function(array, key, value) {
+				for(var i in array) {
+					if (array[i][key] === value) return i;
+				}
+				return -1;
 			}
 		}
 	})
-	.factory('ClearFn', ['$filter', '$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($filter, $rootScope, $location, $modal, $q, toaster, Utils){
+	
+	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'E1', 'E2', 'IRs', 'IRsFilters', 'PODs', 'PODsFilters', 'NCRs', 'NCRsFilters', 'Utils', function($filter, $rootScope, $location, $q, E1, E2, IRs, IRsFilters, PODs, PODsFilters, NCRs, NCRsFilters, Utils){
+		
 		return {
-			listLoad: function (listInit, config) {
-				var that = this;
-				var listConfig = {};  
+			listElementsLoad: function (listConfig) {
+				var resources = { "1": E1, "2": E2, "10": IRs, "11": PODs, "12": NCRs  }; 
+				var list = listConfig;
 				var q=$q.defer();
+				var listQuery = { 'type': listConfig.type, 'format': listConfig.format }; 
 				
-			 	config.resource.query(listInit, function(elements, response) {
-					listConfig.itemsPerPage = listInit.limit;
-					listConfig.page = response("X-Clear-currentPage");
-					listConfig.pagesCount = response("X-Clear-pagesCount");
-					listConfig.elementsCount =  response("X-Clear-elementsCount");
-					console.log("pagesCount: " + listConfig.pagesCount + ", currentPage: " + listConfig.page + ", elementsCount: " + listConfig.elementsCount);
-					
-					if (config.filters) {
-						config.filters.resource.get({'type': config.filters.type, 'id': config.filters.id}, function(filters) { 
-						    listConfig.filters = filters; 
-						    listConfig.badges = that.badgesDisplay(listInit, filters);
-						    console.log("config: ", listConfig);
-						    q.resolve({ elements: elements, listConfig: listConfig });
-						});
-					} else {
-						console.log("config: ", listConfig);
-						q.resolve({ elements: elements, listConfig: listConfig });
-					}
+				listQuery = Utils.collect(listQuery, listConfig.urlParams); 				
+				
+			 	resources[listConfig.resource].query( listQuery, function(elements, response) {
+			 		list.pagination = { 
+						'itemsPerPage': listConfig.urlInit.limit, 
+						'page': response("X-Clear-currentPage"), 
+						'pagesCount': response("X-Clear-pagesCount"), 
+						'elementsCount': response("X-Clear-elementsCount")
+					} 
+					console.log("pagesCount: " + list.pagination.pagesCount + ", currentPage: " + list.pagination.currentPage + ", elementsCount: " + list.pagination.elementsCount);
+					list.elements = elements; 
+					q.resolve(list);
 				});
 				return q.promise;
 			},
-			badgesDisplay: function(query, filters) {
+			listFiltersLoad: function(listConfig) {
+				var resources = { "1": E1, "2": E2, "10": IRsFilters, "11": PODsFilters, "12": NCRsFilters }; 
+				var that = this;
+				var filters = {}; 
+				var q=$q.defer();
+				resources[listConfig.resource].get({'format': listConfig.format, 'type': listConfig.type, 'id': 'filter'}, 
+					function(values) { 
+						filters.values = values; 
+						filters.badges = that.listFiltersBadgesInit(listConfig.urlParams, listConfig.filters, values);
+						filters.date = that.listFiltersDateInit(listConfig.urlParams, listConfig.filters);
+						filters.tmp = that.listFiltersTmpInit(listConfig.urlParams, listConfig.filters, values);
+						q.resolve(filters);
+					}
+				);
+				return q.promise;
+			},
+			listFiltersDateInit: function (urlParams, listConfigFilters) {
+				var filtersDate = {};
+				for (var i in listConfigFilters) {
+					if (listConfigFilters[i].type === 'date') {
+						filtersDate[listConfigFilters[i].id] = {}; 
+						if (urlParams[listConfigFilters[i].id]) filtersDate[listConfigFilters[i].id].value = Utils.timestampToDate(urlParams[listConfigFilters[i].id]);
+					}
+				} 
+				return filtersDate; 
+			}, 
+			listFiltersTmpInit: function  (urlParams, listConfigFilters, values) {
+				var filtersTmp = {};
+				filtersTmp.property = {}; 
+				if (urlParams.property_name) {
+					var p = values.properties;
+					filtersTmp.property = p[Utils.objectIndexbyKey(p, 'name', urlParams.property_name)];
+					filtersTmp.property.value;
+				}
+				return filtersTmp;
+			}, 
+			listFiltersBadgesInit: function(urlParams, listConfigFilters, filters) {
 				var badges = [];
-				
-				if (query.hasOwnProperty('reference')) badges.push({'name': 'reference', 'display': query.related_to + ' reference: ' + query.reference });
-				if (query.hasOwnProperty('location')) badges.push({'name': 'location', 'display': 'Location: ' + Utils.objectByKey(filters.locations.values, "id", query.location).name });
-				if (query.hasOwnProperty('user')) badges.push({'name': 'user', 'display': 'User: ' + Utils.objectByKey(filters.users.values, "id", query.user).name });
-				if (query.hasOwnProperty('status')) badges.push({'name': 'status', 'display': 'Status: ' + Utils.objectByKey(filters.statuses.values, "id", query.status).name });
-				if (query.hasOwnProperty('collection')) badges.push({'name': 'collection', 'display': 'Collection: ' + Utils.objectByKey(filters.collections.values, "id", query.collection).name });
-				if (query.hasOwnProperty('delivery')) badges.push({'name': 'delivery', 'display': 'Delivery: ' + Utils.objectByKey(filters.deliveries.values, "id", query.delivery).name });
-				if (query.date_from) badges.push({'name': 'date_from', 'display': 'From: ' + $filter('date')(query.date_from*1000, 'dd.MM.yy') });
-				if (query.date_to) badges.push({'name': 'date_to', 'display': 'To: ' + $filter('date')(query.date_to*1000, 'dd.MM.yy') });
-				
+				for (var i in listConfigFilters) {
+					var p = listConfigFilters[i];
+					if (urlParams.hasOwnProperty(p.id)) {
+						switch (p.type) {
+							case 'date': 
+								badges.push({'id': p.id, 'name': p.name + ': ' + $filter('date')(urlParams[p.id]*1000, 'dd.MM.yy') });
+							break;
+							case 'byId':
+								badges.push({'id': p.id, 'name': p.name + ': ' + Utils.objectByKey(filters[p.filterName].values, "id", urlParams[p.id]).name });
+							break;
+							default:
+								badges.push({'id': p.id, 'name': p.name + ': ' + urlParams[p.id] });
+						}
+					}
+				}				
+				if (urlParams.hasOwnProperty('related_reference')) 
+					badges.push({'id': 'related_reference', 'name': urlParams.related_to + ' reference: ' + urlParams.related_reference });
 				return badges;
 			}, 
-			filterRemove: function(badge, query) {
-				delete query[badge];
-				if (badge === 'reference') delete query.related_to;
-				return query;
+			listCleanUrl: function(urlParams) {
+				for (var i in urlParams) {
+				    if (!urlParams[i]) {
+				     	delete urlParams[i];
+				     	
+				     	if (urlParams[i]===null || (i === 'related_reference' && !urlParams[i])) {
+					    	delete urlParams[i]
+					    }
+				    }
+				}
+				if (!urlParams.hasOwnProperty('property_name')) {
+					delete urlParams['property_value'];
+					delete urlParams['property_from'];
+					delete urlParams['property_to'];
+					delete urlParams['property_group'];
+				}
+					
+				if (!urlParams.hasOwnProperty('related_reference')) { 
+					delete urlParams['related_to'];
+				}
+			}
+		}
+	}])
+	
+	.factory('ClearFn', ['$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($rootScope, $location, $modal, $q, toaster, Utils){
+		
+		var parentReady, listsReady=[]; 
+		
+		return {
+			listsReady: function(p) {
+				if (p == 'init') { 
+					parentReady=false; listsReady = [] 
+				} else if (p == 'parent') { 
+					parentReady=true; 
+					for (var i in listsReady) {
+						$rootScope.$broadcast('event:listReady_' + listsReady[i], listsReady[i]);
+					}
+				} else { 
+					listsReady.push(p); 
+					if (parentReady) $rootScope.$broadcast('event:listReady_' + p, p);
+				} 
+			}, 
+			listsUrlSet: function(urlParams, listId, listConfig) {
+				
+				var urlPage = $location.search();
+				
+				if (listConfig.listCode) {
+					var urlList = {}		
+					for (var i in urlPage) {
+						var code = i.slice(1,2); 
+						if (code === listConfig.listCode) { 
+							var param = i.slice(3, i.length); 
+							urlList[param] = urlPage[i]; 
+							delete urlPage[i]; 
+						}
+					}
+					if (Utils.isEmpty(urlParams)) urlParams = urlList; 
+					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					
+					for (i in urlParams) {
+						urlPage['_' + listConfig.listCode + '_' + i] = urlParams[i]; 
+					}
+					$location.search(urlPage);
+				} else {
+					if (Utils.isEmpty(urlParams)) urlParams = urlPage; 
+					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					$location.search(urlParams);
+				} 
+			
+				listConfig.urlParams = urlParams; 	
+				return listConfig; 
+			},
+			detailUpdate: function(elm) {
+				var self = this;
+				self.propertiesDate(elm); 
+				self.qrCodeGoogle(elm);
+				self.detailTimeline(elm);
+				for (var index in elm.charts) {
+					self.colorScaleConfig(elm.charts[index], elm.charts[index].value);
+				}
+				return elm;
+			}, 
+			detailTimeline: function(elm) {
+				if (!elm.anim && elm.timeline) {
+					for (var i = 0; i < 4; i++) {
+						if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
+					}
+				} 
+				return elm;
 			}, 
 			modalDeleteOpen: function (elm, $event) {   
 				console.log('delete');          
@@ -192,7 +313,7 @@ angular.module('clearApp.services', ['ngResource'])
 					
 					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, response("X-Clear-updatedPropertyName"));
 					
-					elm = self.propertiesDate(elm);
+					elm = self.detailUpdate(elm);
 				});
 			}, 
 			requiredSave: function (elm, id) {
@@ -212,7 +333,7 @@ angular.module('clearApp.services', ['ngResource'])
 					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, response("X-Clear-updatedRequiredName"));
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
 					
-					elm = self.propertiesDate(elm);
+					elm = self.detailUpdate(elm);
 				});
 			}, 
 			go: function (type, id, related) {
@@ -220,7 +341,7 @@ angular.module('clearApp.services', ['ngResource'])
 				$location.$$search = {};
 				$location.path( type + '/' + id )
 				if (related) {
-					$location.search('related_type', related).hash('related');
+					$location.search('related_type_active', related).hash('related');
 				}
 				console.log('go ->', type, id, related);
 			}, 
@@ -245,44 +366,45 @@ angular.module('clearApp.services', ['ngResource'])
 					case 'box': e = 'B'; break;
 					case 'item': e = 'I'; break;
 				}
-				return 'http://chart.apis.google.com/chart?cht=qr&chs=63x63&chl='+ e + elm.id + '&chld=H%7C0';
+				elm.qrCodeGoogle = 'http://chart.apis.google.com/chart?cht=qr&chs=63x63&chl='+ e + elm.id + '&chld=H%7C0';
+				return elm;
+			}, 
+			colorScaleConfig: function(elm, value){
+				var colorBest = '#5cb85c', 
+					colorGood = '#a6b15b', 
+					colorMedium = '#eeac57', 
+					colorBad = '#e28054', 
+					colorWorst = '#d75452';
+				
+				var snapToGrid = function (value) {
+					var dest = null;
+					var gridArray = [ 0, 20, 40, 60, 80, 101 ];
+					for (var i=0, len=gridArray.length; i<gridArray.length; i++) {
+						if (gridArray[i] > value) {
+							dest = i-1;
+							break;
+						}
+					}
+					return dest;
+				}
+				var colorFn = function (value) {
+					var colorArrayScale = [ colorWorst, colorBad, colorMedium, colorGood, colorBest ];
+					return { 'color': colorArrayScale[snapToGrid(value)] };	
+				}
+				 
+				var labelFn = function (value) {
+					var textArrayScale = [ 'worst', 'bad', 'medium', 'good', 'best' ];
+					return textArrayScale[snapToGrid(value)];	
+				}
+				
+				elm.color = colorFn(value); 
+				elm.label = labelFn(value);
+				
+				return elm;
 			}
 		}
 	}])
-	.factory('ColorScaleConfig', function(){
-		var colorBest = '#5cb85c', 
-			colorGood = '#a6b15b', 
-			colorMedium = '#eeac57', 
-			colorBad = '#e28054', 
-			colorWorst = '#d75452';
-		
-		var snapToGrid = function (value) {
-			var dest = null;
-			var gridArray = [ 0, 20, 40, 60, 80, 101 ];
-			for (var i=0, len=gridArray.length; i<gridArray.length; i++) {
-				if (gridArray[i] > value) {
-					dest = i-1;
-					break;
-				}
-			}
-			return dest;
-		}
-		
-		return {
-			colorFn: function (value) {
-				var colorArrayScale = [ colorWorst, colorBad, colorMedium, colorGood, colorBest ];
-				return { 'color': colorArrayScale[snapToGrid(value)] };	
-			}, 
-			labelFn: function (value) {
-				var textArrayScale = [ 'worst', 'bad', 'medium', 'good', 'best' ];
-				return textArrayScale[snapToGrid(value)];	
-			}, 
-			assignProperties: function (object, id) {
-				object.color = this.colorFn(object.value); 
-				object.label = this.labelFn(object.value);
-			}
-		}
-	})
+	
 	.factory('ChartsConfig', function(){
 		var colorArrayBrand = ['#FFCC0F', '#C79F25', '#705A11', '#9C863D', '#BCAD74', '#FFE699'],
 			colorArrayOrder = ['#FF7F00', '#C96301', '#703700', '#9D6826', '#BC9461', '#FFBF81'],
@@ -392,6 +514,12 @@ angular.module('clearApp.services', ['ngResource'])
 	}])
 	.factory('Elms', ['$resource', function($resource){
 		return $resource('json/elms.json');
+	}])
+	.factory('ElmsListsConfig', ['$resource', function($resource){
+		return $resource('json/elmsConfig.json');
+	}])
+	.factory('DocumentsConfig', ['$resource', function($resource){
+		return $resource('json/documentsConfig.json');
 	}])
 	.factory('Elm', ['$resource', function($resource){
 		return $resource('json/elm.json');

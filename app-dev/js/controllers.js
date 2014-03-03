@@ -2,7 +2,6 @@
 
 /* Controllers */
 
-
 angular.module('clearApp.controllers', [])
 
 	.controller('UserCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 
@@ -27,14 +26,14 @@ angular.module('clearApp.controllers', [])
 					if($scope.remember) {
 						$cookieStore.put("token", credentials);
 					} 
-				    $http.defaults.headers.common['Authorization'] = credentials;
-				    authService.loginConfirmed();
-				    console.log('connect from form: ', $http.defaults.headers.common);
-				    E1.get({'type': 'user'}, function(user) {
-				    	toaster.pop('success', 'Welcome', user.first_name + ' ' + user.name);
-				    	$scope.user = user;
-				    });
-				    
+					$http.defaults.headers.common['Authorization'] = credentials;
+					authService.loginConfirmed();
+					console.log('connect from form: ', $http.defaults.headers.common);
+					E1.get({'type': 'user'}, function(user) {
+						toaster.pop('success', 'Welcome', user.first_name + ' ' + user.name);
+						$scope.user = user;
+					});
+					
 				})
 				.error(function(data, status, headers, config) {
 					toaster.pop('error', 'Error', headers("X-clear-login"));
@@ -70,41 +69,36 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
-	.controller('DashboardCtrl', ['$location', '$scope', 'E1', 'ClearFn', 'Utils', function($location, $scope, E1, ClearFn, Utils) {
-		$scope.listLoad = function(listInit) {
-			var config = {'resource': E1}; 
-			$scope.listInit = Utils.collect($scope.init, listInit);
-			var list = ClearFn.listLoad($scope.listInit, config);
-			
-			list.then(function(list) {
-				$scope.listConfig = list.listConfig;
-				$scope.elements = list.elements;
-				$scope.loaded = true;
-			});
-		}
+	.controller('DashboardCtrl', ['$location', '$scope', '$timeout', 'E1', 'ClearFn', 'Utils', function($location, $scope, $timeout, E1, ClearFn, Utils) {
 		
-		$scope.pageLoad = function (page) {
-			$scope.listInit.page = page;
-			$scope.listLoad($scope.listInit);
-		}
-		
-		$scope.listSort = function(type) {
-			delete $scope.listInit.page;
-			if ($scope.listInit.sortBy === type) { 
-				($scope.listInit.sortOrder ==='ASC' ) ? $scope.listInit.sortOrder = 'DESC': $scope.listInit.sortOrder = 'ASC';
-			} else {
-				$scope.listInit.sortBy = type;
+		ClearFn.listsReady('init');
+		$scope.listsConfig = [{
+			"resource": "1", 
+			"format": "", 
+			"type": "dashboard",
+			"id": "dashboard",  
+			"display": { 
+				"filters" : false
+			}, 
+			"urlInit": {
+				"sortBy": "status", 
+				"sortOrder": "ASC", 
+				"limit": 12
 			}
-			$scope.listLoad($scope.listInit);
-		}
+		}]
+		$timeout(function() {
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearFn.listsReady('parent');
+		});
+		 
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+		});
 		
 		E1.query({'type': 'report'}, function(docs){
 			$scope.report = docs[docs.length-1];
 		});
 		
-		$scope.init = { sortBy: 'status', sortOrder: 'ASC', limit: 8, tracking: true };
-		$scope.loaded = false;
-		$scope.listLoad({'type': 'dashboard'}); 
 		$scope.go = ClearFn.go;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen;
 	}])
@@ -113,8 +107,8 @@ angular.module('clearApp.controllers', [])
 		$scope.loaded = false;
 		$rootScope.tvScreen = true;
 		
-		var listLoad = function() {
-			E1.query({'type': 'dashboard'}, function(list) {
+		var listElementsLoad = function() {
+			E1.query({'type': 'dashboard', "sortBy": "status", "sortOrder": "ASC", "limit": 12 }, function(list) {
 				// $scope.list = list;
 				$scope.list=[];
 				$interval(function() {$scope.list.push(list.shift())}, 100, list.length);
@@ -124,13 +118,12 @@ angular.module('clearApp.controllers', [])
 		var listEmpty = function() {
 			if ($scope.list) {
 				var n = $scope.list.length;
-				$interval(function() {$scope.list.shift()}, 50, n).then(listLoad);
+				$interval(function() {$scope.list.shift()}, 50, n).then(listElementsLoad);
 			}
 		}	
 		
-		listLoad();
+		listElementsLoad();
 		$interval(listEmpty, 25000);
-		
 		
 		var newsQty;
 		var next;
@@ -165,64 +158,370 @@ angular.module('clearApp.controllers', [])
 	.controller('AddOrderCtrl', function() {
 	})
 	
-	.controller('ListCtrl', ['$scope', 'E2', '$location', 'Utils', 'ClearFn', function($scope, E2, $location, Utils, ClearFn) {
+	.controller('ListCtrl', ['$scope', 'Utils', 'ClearFn', 'ClearListsFn', function($scope, Utils, ClearFn, ClearListsFn) {
 		
-		$scope.listSort = function(type) {
-			delete $scope.listInit.page;
-			if ($scope.listInit.sortBy === type) { 
-				($scope.listInit.sortOrder ==='ASC' ) ? $scope.listInit.sortOrder = 'DESC': $scope.listInit.sortOrder = 'ASC';
-			} else {
-				$scope.listInit.sortBy = type;
+		$scope.listInit = function(listId) {
+		console.log('lisInit', listId); 
+			$scope.loaded = false; 
+			$scope.$on('event:listLoad_' + listId, function(event, listConfig) {
+				$scope.listLoad(listConfig);
+			});
+			$scope.$on('event:listReady_' + listId, function(event, listId) {
+				$scope.listQuery({}, listId);
+			});
+			ClearFn.listsReady(listId);
+		}
+		
+		$scope.listQuery = function(urlParams, listId) {
+			ClearListsFn.listCleanUrl(urlParams); 
+			$scope.$emit('event:urlSet', urlParams, listId); 
+		}
+		
+		$scope.listLoad = function(listConfig) {
+			$scope.listElementsLoad(listConfig);
+			if (listConfig.display.filters) {
+				$scope.listFiltersLoad(listConfig);
+			} else { 
+				$scope.filters = {}; 
 			}
-			$scope.listLoad($scope.listInit);
+		}
+		
+		$scope.listElementsLoad = function(listConfig) {
+			ClearListsFn.listElementsLoad(listConfig).then( function(list) {
+				console.log('listELoad: ', list);
+				$scope.list = list;
+				$scope.loaded = true;
+			});
+		}
+		
+		$scope.listFiltersLoad = function(listConfig) {
+			ClearListsFn.listFiltersLoad(listConfig).then( function(filters) {
+				$scope.filters = filters;
+			}); 
+		}
+		
+		$scope.listSort = function(param) {
+			delete $scope.list.urlParams.page;
+			if ($scope.list.urlParams.sortBy === param) { 
+				$scope.list.urlParams.sortOrder = ($scope.list.urlParams.sortOrder ==='ASC' ) ? 'DESC' : 'ASC';
+			} else {
+				$scope.list.urlParams.sortBy = param;
+			}
+			$scope.listQuery($scope.list.urlParams, $scope.list.id); 
 		}
 		
 		$scope.propertySave = function(elm, property, groupName) {
 			ClearFn.propertySave(elm, property, groupName);
 		}
 		
-		$scope.pageLoad = function (page) {
-			$scope.listInit.page = page;
-			$scope.listLoad($scope.listInit);
+		$scope.listPaginate = function (page) {
+			$scope.list.urlParams.page = page;
+			$scope.listQuery($scope.list.urlParams, $scope.list.id);; 
 		}
-		
-		$scope.listLoad = function(listInit) {
-			var config = {'resource': E2}; 
-			$scope.listInit = Utils.collect($scope.init, listInit);
-			var list = ClearFn.listLoad($scope.listInit, config);
-			
-			list.then( function(list) {
-				$scope.listConfig = list.listConfig;
-				$scope.elements = list.elements;
-				$scope.loaded = true;
-				
-				$scope.columns=4;
-				if (listInit.type === 'shipment') {
-					$scope.columns++
-					$scope.colmunChrono = true;
-				}
-				if ($scope.trackingShow) {
-					$scope.columns++
-				}
-			});
+
+		$scope.badgeRemove = function(badge) {
+			console.log ('badge remove: ', badge); 
+			delete $scope.list.urlParams[badge];
+			$scope.listQuery($scope.list.urlParams, $scope.list.id);; 
 		}
+
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.filters.date[param].opened = true;
+		};
 		
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
 		$scope.trackingToggle = ClearFn.trackingToggle;
-		$scope.loaded = false;
 		$scope.go = ClearFn.go;
+		$scope.loaded = false;
+		
+		$scope.$on('event:ListInit', function(event, listId) {
+			$scope.listInit(listId); 
+		});
 	}])
 	
-	.controller('TrackingCtrl', ['$scope', function($scope) {
-		$scope.categories=[	
-			{"name": "Orders", "type": "order" }, 
-			{"name": "Shipments", "type": "shipment" }, 
-			{"name": "Boxes", "type": "box" }, 
-			{"name": "Items", "type": "item" }
-		];
+	.controller('TrackingCtrl', ['$scope', '$location', 'Utils', 'ClearFn', 'ElmsListsConfig', function($scope, $location, Utils, ClearFn, ElmsListsConfig){
 		
-		$scope.init = { sortBy: 'status', sortOrder: 'ASC', limit: 8, tracking: true };
-		$scope.trackingShow = false;
+		ClearFn.listsReady('init'); 
+		
+		$scope.types=[	
+			{"name": "Orders", "id": "order", 'url': 'O' }, 
+			{"name": "Shipments", "id": "shipment", 'url': 'S' }, 
+			{"name": "Boxes", "id": "box", 'url': 'B'  }, 
+			{"name": "Items", "id": "item", 'url': 'I'  }
+		];		
+		
+		$scope.listsConfig = [];
+		ElmsListsConfig.get( function(config) {	
+			for (var i in $scope.types) {
+				$scope.listsConfig[i] = Utils.clone(config);
+				$scope.listsConfig[i].resource = '2'; 
+				$scope.listsConfig[i].id = $scope.types[i].id; 
+				$scope.listsConfig[i].type = $scope.types[i].id;
+				$scope.listsConfig[i].listCode = $scope.types[i].url; 
+			}
+			ClearFn.listsReady('parent'); 
+		});
+		
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			var typeIndex = Utils.objectIndexbyKey($scope.types, 'id', listId); 
+			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex])); 
+		});
+	}])
+	
+	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', 'E2', 'Utils', 'ClearFn', 'ElmsListsConfig', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, E2, Utils, ClearFn, ElmsListsConfig) {
+		
+		$scope.loaded = false;
+		$scope.relatedActiveTab = {};
+		ClearFn.listsReady('init');
+		
+		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
+		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen; 
+		$scope.trackingToggle = ClearFn.trackingToggle;
+		$scope.propertySave = function(elm, property, groupName) {
+			ClearFn.propertySave(elm, property, groupName);
+		}
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.calOpen = function($event, propName) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			
+			var currentProp = function(name) {
+				var props = $scope.elm.properties;
+				for (var group in props) {
+					for (var n in props[group].set) {
+						var prop = props[group].set[n];
+						if (prop.name === name) return prop; 
+					}
+				}
+			}
+			currentProp(propName).opened = true;
+			console.log('currentProp: ', currentProp(propName) );
+		};
+		
+		E2.get({'format': 'elements', 'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
+			
+			elm.anim = true; 
+			elm = ClearFn.detailUpdate(elm);
+			
+			$scope.elm = elm;
+			
+			if (elm.timeline) {
+				var timelineAnim = function(i) {
+					console.log('anim: ', i);
+					if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
+				}
+				var loops = 0;
+				$interval(function() {timelineAnim(loops++)}, 1000, 4); 
+			}
+			
+			if ($location.search().related_type_active) {
+				for (var i in elm.related) {
+					if ($location.search().related_type_active === elm.related[i].type) {
+						$scope.relatedActiveTab[$location.search().related_type_active] = true;
+						break;
+					}
+				}
+				$timeout(function() {
+					$anchorScroll();
+				}, 1000);
+			}
+			
+			$scope.listsConfig = [];
+			ElmsListsConfig.get( function(config) {
+				for (var i in elm.related) {
+					$scope.listsConfig[i] = Utils.clone(config);
+					$scope.listsConfig[i].urlInit.related = elm.type; 
+					$scope.listsConfig[i].urlInit.related_id = elm.id; 
+					$scope.listsConfig[i].type = elm.related[i].type;
+					$scope.listsConfig[i].id = elm.related[i].type;
+					$scope.listsConfig[i].resource = '2'; 
+					switch (elm.related[i].type) {
+						case 'order': $scope.listsConfig[i].listCode = 'O'; break;
+						case 'shipment': $scope.listsConfig[i].listCode = 'S'; break;
+						case 'box': $scope.listsConfig[i].listCode = 'B'; break;
+						case 'item': $scope.listsConfig[i].listCode = 'I'; break;
+					}
+				}
+				ClearFn.listsReady('parent'); 
+			}); 
+			$scope.$on('event:urlSet', function(event, urlParams, listId) {
+				var typeIndex = Utils.objectIndexbyKey($scope.elm.related, 'type', listId); 
+				$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex]));
+			});
+			
+			$scope.loaded = true;
+		});	
+		
+	}])
+	
+	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$interval', 'Elm', 'ElmsListsConfig', '$modal', 'ClearFn', 'Utils', function($scope, $location, $anchorScroll, $timeout, $interval, Elm, ElmsListsConfig, $modal, ClearFn, Utils) {
+	
+		$scope.loaded = false;
+		$scope.relatedActiveTab = {};
+		ClearFn.listsReady('init');
+		
+		$scope.modalConditionOpen = ClearFn.modalConditionOpen;
+		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen;  
+		$scope.trackingToggle = ClearFn.trackingToggle;
+		$scope.propertySave = function(elm, property, groupName) {
+			ClearFn.propertySave(elm, property, groupName);
+		}
+		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		
+		$scope.calOpen = function($event, param) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.date[param].opened = true;
+		};
+		
+		Elm.get(function(elm) {
+			elm.anim = true; 
+			elm = ClearFn.detailUpdate(elm);
+			
+			$scope.elm = elm;
+			
+			if (elm.timeline) {
+				var timelineAnim = function(i) {
+					console.log('anim: ', i);
+					if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
+				}
+				var loops = 0;
+				$interval(function() {timelineAnim(loops++)}, 1000, 4); 
+			}
+
+			var active = $location.search().related_type_active;
+			if (active) {
+				for (var i in elm.related) {
+					if (active === elm.related[i].type) {
+						$scope.relatedActiveTab[active] = true;
+						break;
+					}
+				}
+				$timeout(function() {
+					$anchorScroll();
+				}, 1000);
+			}
+			
+			$scope.listsConfig = [];
+			ElmsListsConfig.get( function(config) {
+				for (var i in elm.related) {
+					$scope.listsConfig[i] = Utils.clone(config);
+					$scope.listsConfig[i].urlInit.related = elm.type; 
+					$scope.listsConfig[i].urlInit.related_id = elm.id; 
+					$scope.listsConfig[i].type = elm.related[i].type;
+					$scope.listsConfig[i].id = elm.related[i].type;
+					$scope.listsConfig[i].resource = '2'; 
+					switch (elm.related[i].type) {
+						case 'order': $scope.listsConfig[i].listCode = 'O'; break;
+						case 'shipment': $scope.listsConfig[i].listCode = 'S'; break;
+						case 'box': $scope.listsConfig[i].listCode = 'B'; break;
+						case 'item': $scope.listsConfig[i].listCode = 'I'; break;
+					}
+				}
+				ClearFn.listsReady('parent'); 
+			}); 
+			$scope.$on('event:urlSet', function(event, urlParams, listId) {
+				var typeIndex = Utils.objectIndexbyKey($scope.elm.related, 'type', listId); 
+				$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex]));
+			});
+			
+			$scope.loaded = true;
+		}); 
+	}])
+		
+	.controller('SearchCtrl', ['$scope', '$location', 'ClearFn', 'Utils', 'ElmsListsConfig', function($scope, $location, ClearFn, Utils, ElmsListsConfig) {
+		
+		ClearFn.listsReady('init');
+		
+		$scope.urlSet = function(urlParams, listId) {
+			var type = urlParams.type || $location.search().type;
+			if (type) {
+				$scope.listsConfig[0].type = type; 
+				var listConfig = ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]); 
+				$scope.$broadcast('event:listLoad_' + listId, listConfig);
+				$scope.urlPage = listConfig.urlParams;
+				$scope.listShow=true;				
+			} else {
+				$scope.urlPage = {}; 
+				$scope.listShow=false;
+			}
+		} 
+		
+		$scope.types=[	
+			{"name": "Orders", "id": "order" }, 
+			{"name": "Shipments in", "id": "shipmentIn" }, 
+			{"name": "Shipments out", "id": "shipmentOut" }, 
+			{"name": "Boxes", "id": "box" }, 
+			{"name": "Items", "id": "item" }
+		];		
+		
+		$scope.listsConfig = [];
+		ElmsListsConfig.get( function(config) {
+			$scope.listsConfig[0] = config; 
+			$scope.listsConfig[0].id = "searchResult";
+			$scope.listsConfig[0].resource = '2'; 
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearFn.listsReady('parent'); 
+		}); 
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.urlSet(urlParams, listId);
+		});
+	}])
+	
+	.controller('DocumentsCtrl', ['$location', '$scope', '$routeParams', 'ClearFn', 'Utils', 'DocumentsConfig', function($location, $scope, $routeParams, ClearFn, Utils, DocumentsConfig) {
+		
+		ClearFn.listsReady('init'); 
+		
+		var type = $routeParams.type; 
+		
+		$scope.listsConfig = [];
+		DocumentsConfig.get( function(config) {
+			$scope.listsConfig[0] = config; 
+			$scope.listsConfig[0].resource = '2'; 
+			$scope.listsConfig[0].type = type;
+			$scope.listsConfig[0].id = "documents";
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearFn.listsReady('parent'); 
+		}); 
+		
+		switch (type) {
+			case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; break;
+			case 'ncr': $scope.page= {'name': 'Non compliance reports', 'type': type }; break;
+			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;	
+		}
+		
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+		});
+	}])
+	
+	.controller('StaticDocumentsCtrl', ['$location', '$scope', '$routeParams', 'ClearFn', 'DocumentsConfig', 'Utils', function($location, $scope, $routeParams, ClearFn, DocumentsConfig, Utils) {
+		
+		ClearFn.listsReady('init'); 
+		
+		var type = $routeParams.type; 
+		
+		$scope.listsConfig = [];
+		DocumentsConfig.get( function(config) {
+			$scope.listsConfig[0] = config; 
+			$scope.listsConfig[0].type = type;
+			$scope.listsConfig[0].id = "documents";
+			switch (type) {
+				case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; $scope.listsConfig[0].resource = '10'; break;
+				case 'ncr': $scope.page= {'name': 'Non compliance reports', 'type': type }; $scope.listsConfig[0].resource = '11'; break;
+				case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; $scope.listsConfig[0].resource = '12'; break;	
+			}
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearFn.listsReady('parent'); 
+		}); 
+		
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+		});
 		
 	}])
 	
@@ -231,8 +530,8 @@ angular.module('clearApp.controllers', [])
 		$scope.loaded = false;
 		E1.query({'type': 'kpi'}, function(charts){
 			for(var i = 0, len = charts.length; i < len; ++i) {
-			    ChartsConfig.chartFn(charts[i]); 
-			    $scope.charts[charts[i].id] = charts[i];
+				ChartsConfig.chartFn(charts[i]); 
+				$scope.charts[charts[i].id] = charts[i];
 			}
 			$scope.loaded = true;
 			console.log('charts: ', charts);
@@ -241,98 +540,31 @@ angular.module('clearApp.controllers', [])
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
 	
-	.controller('DetailCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', 'E2', 'ColorScaleConfig', 'Utils', 'ClearFn', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, E2, ColorScaleConfig, Utils, ClearFn) {
-		$scope.loaded = false;
-		$scope.relatedActiveTab = {};
-		$scope.init = { sortBy: 'status', sortOrder: 'ASC', limit: 16 };
-		$scope.trackingShow = true;
-		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
-		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen; 
-        $scope.trackingToggle = ClearFn.trackingToggle;
-        $scope.propertySave = function(elm, property, groupName) {
-        	ClearFn.propertySave(elm, property, groupName);
-        }
-        $scope.dateToTimestamp = Utils.dateToTimestamp;
-		
-		$scope.calOpen = function($event, propName) {
-			$event.preventDefault();
-		    $event.stopPropagation();
-		    
-		    var currentProp = function(name) {
-		    	var props = $scope.elm.properties;
-		    	for (var group in props) {
-		    		for (var n in props[group].set) {
-		    			var prop = props[group].set[n];
-		    			if (prop.name === name) return prop; 
-		    		}
-		    	}
-		    }
-		    currentProp(propName).opened = true;
-		    console.log('currentProp: ', currentProp(propName) );
-		};	
-		
-		E2.get({'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
-			
-			for (var index in elm.charts) {
-				ColorScaleConfig.assignProperties(elm.charts[index]);
-			}
-			
-			elm = ClearFn.propertiesDate(elm);
-			
-		    $scope.elm = elm;
-		    
-		    if (elm.hasOwnProperty('timeline')) {
-		    	var timelineAnim = function(index) {
-		    		console.log('anim: ', index);
-		    		if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
-		    	}
-		    	var timelineIndex = 0;
-		    	$interval(function() {timelineAnim(timelineIndex++)}, 1200, 4); 
-		    }
-		    $scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
-		    $scope.charts = elm.charts;
-		    var related_type = $location.search().related_type;
-			if (related_type) {
-				for (var i in elm.related) {
-					if (related_type === elm.related[i].type) {
-						$scope.relatedActiveTab[related_type] = true;
-						break;
-					}
-				}
-				$timeout(function() {
-					$anchorScroll();
-				}, 1000);
-			}
-			$scope.loaded = true;
-		});	
-	}])
-	
 	.controller('TplModalDeleteCtrl', ['$scope', '$location', 'ClearFn', '$modalInstance', 'elm', function ($scope, $location, ClearFn, $modalInstance, elm) {
 		$scope.elm = elm;
-	    console.log('elm: ', elm);
-	    
-	    $scope.deleteConfirm = function(elm) { 
-	    	elm.$delete({"type": elm.type, "id": elm.id });
-	    	$location.path('tracking');
-	    }
-	    
-	    $scope.deleteClose = function() {
-	    	$modalInstance.close();
-	    }
-	     
-	    $scope.deleteCancel = function () {
-	        $modalInstance.dismiss('cancel');
-	    }
+		console.log('elm: ', elm);
+		
+		$scope.deleteConfirm = function(elm) { 
+			elm.$delete({"type": elm.type, "id": elm.id });
+			$location.path('tracking');
+		}
+		
+		$scope.deleteClose = function() {
+			$modalInstance.close();
+		}
+		 
+		$scope.deleteCancel = function () {
+			$modalInstance.dismiss('cancel');
+		}
 	}])
 	
 	.controller('TplModalConditionCtrl', ['$scope', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, ClearFn, $modalInstance, required, elm) {
 		$scope.required = required;
 		$scope.elm = elm;
-	    console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ required: ', required);
-	    switch (required.type) {
-	    
-	    	case 'upload': 
-	    		// ngUpload
+		console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ required: ', required);
+		switch (required.type) {
+			case 'upload': 
+				// ngUpload
 				$scope.uploadUrl = '/index_rest.php/api/clear/v2/'+ elm.type + '/' + elm.id + '?required=' + required.id;
 				$scope.startUploading = function() {
 					$scope.uploadMessage = "Uploading in progress, please wait…";
@@ -341,182 +573,39 @@ angular.module('clearApp.controllers', [])
 				$scope.complete = function (content, completed) {
 					$scope.uploadMessage = 'File uploaded. Save to complete.'
 				};
-	    	break;
-	    	
-	    	case 'checkbox': 
-	    	break;
-	    	
-	    	case 'date':
-	    		$scope.minDate = new Date();
-	    		$scope.$watch('required.dt', function(newValue) { 
-	    			if (newValue) $scope.required.value = Math.floor(newValue.getTime() / 1000); 
-	    			console.log('required date -> name: ', $scope.required.name , '/ value: ', $scope.required.value, '/ dt: ', newValue);
-	    		});
-	    	break;
-	    	
-	    	case 'text': 
-	    	break;
-	    	
-	    	case 'email': 
-	    	break;
-	    	
-	    	case 'link':
-	    	break;
-	    }
-	    
-        $scope.requiredSave = function(elm, elmId) { 
-        	ClearFn.requiredSave(elm, elmId);
-        }
-        
-        $scope.requiredClose = function() {
-        	$modalInstance.close();
-        }
-         
-        $scope.requiredCancel = function () {
-            $modalInstance.dismiss('cancel');
-        }
-        
-        $scope.go = ClearFn.go;
-        
-	}])
-	
-	.controller('SearchCtrl', ['$location', '$scope', 'E3', '$timeout', 'Utils', function($location, $scope, E3, $timeout, Utils) { 
-		
-		$scope.search = function (query) {
-			$location.search('page', null);
-			for (var i in query) {
-			     if (!query[i]) {
-			     	if (i === 'property_name') {
-						$location.search('property_value', null);
-						$location.search('property_id', null);
-						$location.search('property_date_start', null);
-						$location.search('property_date_end', null);
-			     	}	
-			    	$location.search(i, null);
-			    }	
-			}
-			$location.search(query);
-			$scope.showList=true;
-		};
-		
-		E3.get({"type": "core", 'id': 'filter' }, function(searchFilters){ 
-			$scope.filters = searchFilters;
-			if($scope.query.property_id) { 
-				$scope.selected = { 
-					"property": searchFilters.properties[$scope.query.type][$scope.query.property_id-1]
-				};
-				console.log("property id: ", $scope.query.property_id);
-			}
-		});
-			 
-		$scope.queryInit = function (type) {
-			$scope.query = {};
-			$scope.date = { milestone_start: {}, milestone_end: {}, property_start: {}, property_end: {} };
-			if ($scope.selected) $scope.selected.property = {};
-			$scope.query.type = type;
-		}
-	
-	  $scope.openCal = function(param) {
-		$timeout(function() {
-		  $scope.date[param].opened = true;
-		});
-	  };
-	  
-	  var date = { milestone_start: {}, milestone_end: {}, property_start: {}, property_end: {} };
-	  var query = $location.search();
-	  
-	  (Utils.is_empty(query)) ? $scope.showList=false : $scope.showList=true;
-	  
-	  if (query.milestone_date_start)	date.milestone_start.value	= Utils.timestampToDate(query.milestone_date_start);
-	  if (query.milestone_date_end)		date.milestone_end.value	= Utils.timestampToDate(query.milestone_date_end);
-	  if (query.property_date_start)	date.property_start.value	= Utils.timestampToDate(query.property_date_start);
-	  if (query.property_date_end)		date.property_end.value		= Utils.timestampToDate(query.property_date_end);
-	  
-	  $scope.query = query;
-	  $scope.date = date;
-	  $scope.dateToTimestamp = Utils.dateToTimestamp;
-	  $scope.IndxOf = Utils.IndxOf;
-	  $scope.init = { sortBy: 'status', sortOrder: 'ASC', limit: 12 };
-	  $scope.trackingShow = true;
-
-	  console.log('query: ', $scope.query, '/ showList: ', $scope.showList);
-	  
-	}])
-	
-	.controller('DocumentsCtrl', ['$location', '$scope', '$routeParams', '$timeout', 'E1', 'Utils', 'ClearFn', function($location, $scope, $routeParams, $timeout, E1, Utils, ClearFn) {
-		
-		$scope.search = function (query) {
-			$location.search('page', null);
-			for (var i in query) {
-				console.log('i: ', i, 'query[i]: ', query[i]);
-				if (query[i]===null || (i === 'reference' && !query[i])) {
-			    	$location.search(i, null);
-			    }
-			}
-			if (!query.hasOwnProperty('reference')) { 
-				$location.search('related_to', null);
-			}
-			$location.search(query);
-		};
-		
-		$scope.calOpen = function($event, param) {
-			$event.preventDefault();
-		    $event.stopPropagation();
-		    $scope.date[param].opened = true;
-		};
-				
-		$scope.badgeRemove = function(badge) {
-			$location.search(ClearFn.filterRemove(badge, query));
+			break;
+			case 'checkbox': break;
+			case 'date':
+				$scope.minDate = new Date();
+				$scope.$watch('required.dt', function(newValue) { 
+					if (newValue) $scope.required.value = Math.floor(newValue.getTime() / 1000); 
+					console.log('required date -> name: ', $scope.required.name , '/ value: ', $scope.required.value, '/ dt: ', newValue);
+				});
+			break;
+			case 'text': break;
+			case 'email': break;
+			case 'link': break;
 		}
 		
-		$scope.listLoad = function(listInit) {
-			var config = {
-				'resource': E1, 
-				'filters': { 'resource': E1, 'type': listInit.type, 'id': 'filter' }
-			}; 
-			$scope.listInit = Utils.collect($scope.init, listInit);
-			var list = ClearFn.listLoad($scope.listInit, config);
-			
-			list.then(function(list) {
-				$scope.listConfig = list.listConfig;
-				$scope.docs = list.elements;
-				$scope.loaded = true;
-			});
+		$scope.requiredSave = function(elm, elmId) { 
+			ClearFn.requiredSave(elm, elmId);
 		}
 		
-		$scope.pageLoad = function (page) {
-			$scope.listInit.page = page;
-			$scope.listLoad($scope.listInit);
-		}
-		
-		var type = $routeParams.type;
-		var query = $location.search();
-		var queryType = Utils.collect({'type': type}, query);
-		var date = { from: {}, to: {} };
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		$scope.loaded = false;
-		
-		switch (type) {
-			case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; break;
-			case 'ncr': $scope.page= {'name': 'Non compliance reports', 'type': type }; break;
-			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;	
+		$scope.requiredClose = function() {
+			$modalInstance.close();
 		}
 		 
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
+		$scope.requiredCancel = function () {
+			$modalInstance.dismiss('cancel');
+		}
 		
 		$scope.go = ClearFn.go;
-		$scope.init = { limit: 8, tracking: true };
-		$scope.listLoad(queryType);
+		
 	}])
 	
-	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', 'E1', function($scope, $filter, $routeParams, E1) {
+	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', 'E2', function($scope, $filter, $routeParams, E2) {
 		$scope.loaded = false;
-		E1.get({'type': 'ir', 'id': $routeParams.id}, function(doc) {
+		E2.get({'format': 'documents', 'type': 'ir', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
 			$scope.loaded = true;
 			for(var i=0, lenI=doc.boxes.length; i < lenI;i++) {
@@ -525,38 +614,38 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
-	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E1', '$modal', function($scope, $routeParams, E1, $modal) {
+	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', function($scope, $routeParams, E2, $modal) {
 		$scope.loaded = false;
-		E1.get({'type': 'ncr', 'id': $routeParams.id}, function(doc) {
+		E2.get({'format': 'documents', 'type': 'ncr', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
-        $scope.open = function (doc, type) {            
+		$scope.open = function (doc, type) {            
 			if (doc.status != 'closed') {
-	            var modalInstance = $modal.open({
-	                templateUrl: 'partials/tplModalNcrMessage.html',
-	                controller: 'TplModalNcrMessageCtrl',
-	                resolve: {
-	                  doc: function () {
-	                    return doc;
-	                  },
-	                  type: function () {
-	                    return type;
-	                  } 
-	                }
-	            });
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/tplModalNcrMessage.html',
+					controller: 'TplModalNcrMessageCtrl',
+					resolve: {
+					  doc: function () {
+						return doc;
+					  },
+					  type: function () {
+						return type;
+					  } 
+					}
+				});
 				modalInstance.result.then(function (selectedItem) {
-				    $scope.selected = selectedItem;
+					$scope.selected = selectedItem;
 				}, function () {
 //                $log.info('Modal dismissed at: ' + new Date());
 				});
 			}
-        }; 
+		}; 
 	}])
 	
-	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E1', function($scope, $routeParams, ClearFn, E1) {
+	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E2', function($scope, $routeParams, ClearFn, E2) {
 		$scope.loaded = false;
-		E1.get({'type': 'pod', 'id': $routeParams.id}, function(doc) {
+		E2.get({'format': 'documents', 'type': 'pod', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
 			$scope.loaded = true;
 			
@@ -572,8 +661,8 @@ angular.module('clearApp.controllers', [])
 		
 		StaticIndicators.query(function(charts){
 			for(var i = 0, len = charts.length; i < len; ++i) {
-			    ChartsConfig.chartFn(charts[i]); 
-			    $scope.charts[charts[i].id] = charts[i];
+				ChartsConfig.chartFn(charts[i]); 
+				$scope.charts[charts[i].id] = charts[i];
 			}
 			$scope.loaded = true;
 			console.log('charts: ', charts);
@@ -595,72 +684,6 @@ angular.module('clearApp.controllers', [])
 		$scope.go = ClearFn.go;
 	}])
 	
-	.controller('StaticDocumentsCtrl', ['$location', '$scope', '$routeParams', 'ClearFn', 'IRs', 'NCRs', 'PODs', 'IRsFilters', 'NCRsFilters', 'PODsFilters', 'Utils', function($location, $scope, $routeParams, ClearFn, IRs, NCRs, PODs, IRsFilters, NCRsFilters, PODsFilters, Utils) {
-		
-		$scope.search = function (query) {
-			$location.search('page', null);
-			for (var i in query) {
-				console.log('i: ', i, 'query[i]: ', query[i]);
-				if (!query[i]) {
-			    	$location.search(i, null);
-			    }
-			}
-			if (!query.reference) { 
-				$location.search('related_to', null);
-			}
-			$location.search(query);
-		};
-		
-		$scope.calOpen = function($event, param) {
-			$event.preventDefault();
-		    $event.stopPropagation();
-		    $scope.date[param].opened = true;
-		};
-		
-		$scope.badgeRemove = function(badge) {
-			$location.search(ClearFn.filterRemove(badge, query));
-		}
-		
-		var date = { from: {}, to: {} };
-		var query = $location.search();
-		
-		if (query.date_from)	date.from.value	= Utils.timestampToDate(query.date_from);
-		if (query.date_to)		date.to.value	= Utils.timestampToDate(query.date_to);
-		
-		var type = $routeParams.type;
-		switch (type) {
-			case 'ir': 
-				$scope.page= {'name': 'Inspection reports', 'type': type }; 
-				var datas = {'resource': IRs, 'filtersResource': IRsFilters};
-				break;
-			case 'ncr': 
-				$scope.page= {'name': 'Non compliance reports', 'type': type }; 
-				var datas = {'resource': NCRs, 'filtersResource': NCRsFilters};
-				break;
-			case 'pod': 
-				$scope.page= {'name': 'Proofs of delivery', 'type': type };
-				var datas = {'resource': PODs, 'filtersResource': PODsFilters}; 
-				break;	
-		}
-		
-		console.log('datas: ', datas); 
-		$scope.go = ClearFn.go;
-		$scope.loaded = false;
-		$scope.query = query;
-		$scope.date = date;
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		datas.resource.query(function(docs) {
-			datas.filtersResource.get(function(filters) { 
-			    $scope.config.filters = filters; 
-			    $scope.config.badges = ClearFn.badgesDisplay(query, filters);
-			});
-			$scope.docs = docs;
-			$scope.loaded = true;
-		});
-		
-		
-	}])
-	
 	.controller('StaticInspectionReportCtrl', ['$scope', '$filter', 'IR', function($scope, $filter, IR) {
 		$scope.loaded = false;
 		$scope.doc = IR.get(function(doc) {
@@ -677,27 +700,27 @@ angular.module('clearApp.controllers', [])
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
-        $scope.open = function (doc, type) {            
+		$scope.open = function (doc, type) {            
 			if (doc.status != 'closed') {
-	            var modalInstance = $modal.open({
-	                templateUrl: 'partials/tplModalNcrMessage.html',
-	                controller: 'TplModalNcrMessageCtrl',
-	                resolve: {
-	                  doc: function () {
-	                    return doc;
-	                  },
-	                  type: function () {
-	                    return type;
-	                  } 
-	                }
-	            });
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/tplModalNcrMessage.html',
+					controller: 'TplModalNcrMessageCtrl',
+					resolve: {
+					  doc: function () {
+						return doc;
+					  },
+					  type: function () {
+						return type;
+					  } 
+					}
+				});
 				modalInstance.result.then(function (selectedItem) {
-				    $scope.selected = selectedItem;
+					$scope.selected = selectedItem;
 				}, function () {
 //                $log.info('Modal dismissed at: ' + new Date());
 				});
 			}
-        };  
+		};  
 	}])
 	
 	.controller('TplModalNcrMessageCtrl', ['$scope', '$modalInstance', 'doc', 'type', function ($scope, $modalInstance, doc, type) {
@@ -705,20 +728,20 @@ angular.module('clearApp.controllers', [])
 		if (type=='open') $scope.title = 'Add a comment'; 
 		else $scope.title = 'Close report'; 
 		
-	    $scope.saveNcrMessage = function () {
-	    	var now = new Date();
-	    	var date = Math.floor(now.getTime() / 1000);
-	    	var message = $scope.comment.message;
-	    	
-	    	doc.comments.push({ "date": date, "status": type, "message": message}); 
-	    	console.log("saved -> date", date, "/ status", type, "/ message", message); 
-	        doc.$save({'type': 'ncr', 'id': doc.id, 'update':type}, function(p, response) {});
-	        $modalInstance.close();
-	    };
-	    
-	    $scope.cancel = function () {
-	        $modalInstance.dismiss('cancel');
-	    };
+		$scope.saveNcrMessage = function () {
+			var now = new Date();
+			var date = Math.floor(now.getTime() / 1000);
+			var message = $scope.comment.message;
+			
+			doc.comments.push({ "date": date, "status": type, "message": message}); 
+			console.log("saved -> date", date, "/ status", type, "/ message", message); 
+			doc.$save({'type': 'ncr', 'id': doc.id, 'update':type}, function(p, response) {});
+			$modalInstance.close();
+		};
+		
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
 	}])
 	
 	.controller('StaticProofOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'POD', function($location, $scope, ClearFn, POD) {
@@ -733,10 +756,10 @@ angular.module('clearApp.controllers', [])
 	.controller('StaticListCtrl', ['$location', '$scope', 'ClearFn', 'Elms', function($location, $scope, ClearFn, Elms) {
 		var list=[],elements=[],j;
 		
-		$scope.listLoad = function (ListInit) {
+		$scope.listElementsLoad = function (listUrl) {
 			elements = Elms.query(function(datas){ 
 					for (j=datas.length-1;j>=0;j--) {
-						if (datas[j].type === ListInit.type) {
+						if (datas[j].type === listUrl.type) {
 							if (datas[j].tracking === "tracked") list.unshift(datas[j]);
 							console.log(list);
 						}
@@ -836,63 +859,6 @@ angular.module('clearApp.controllers', [])
 			$location.hash(anchor);
 			$anchorScroll();
 		}	
-	}])
-	
-	.controller('StaticDetailCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$interval', 'Elm', '$modal', 'ClearFn', 'ColorScaleConfig', 'Utils', function($scope, $location, $anchorScroll, $timeout, $interval, Elm, $modal, ClearFn, ColorScaleConfig, Utils) {
-		$scope.loaded = false;
-		
-		Elm.get(function(elm) {
-			for (var index in elm.charts) {
-				ColorScaleConfig.assignProperties(elm.charts[index]);
-			}
-			
-			$scope.qrCodeGoogle = ClearFn.qrCodeGoogle(elm); 
-			
-			$scope.elm = elm;
-			
-			var timelineAnim = function(index) {
-				console.log('anim: ', index);
-				if (elm.timeline[index].completed) $scope.elm.timeline[index].anim = true; 
-			}
-			var timelineIndex = 0;
-			$interval(function() {timelineAnim(timelineIndex++)}, 1200, 4); 
-
-			$scope.charts = elm.charts;
-			var related_type = $location.search().related_type;
-			if (related_type) {
-				for (var i in elm.related) {
-					if (related_type === elm.related[i].type) {
-						$scope.relatedActiveTab[related_type] = true;
-						break;
-					}
-				}
-				$timeout(function() {
-					$anchorScroll();
-				}, 1000);
-			}
-			
-			$scope.date = ClearFn.propertiesDate(elm);
-			$scope.loaded = true;
-		}); 
-		
-		$scope.relatedActiveTab = {};
-		$scope.init = { sortOrder: 'ASC', limit: 16 };
-		$scope.trackingShow = true;
-		$scope.modalConditionOpen = ClearFn.modalConditionOpen;
-		$scope.modalDeleteOpen = ClearFn.modalDeleteOpen;  
-		$scope.trackingToggle = ClearFn.trackingToggle;
-		$scope.propertySave = function(elm, property, groupName) {
-			ClearFn.propertySave(elm, property, groupName);
-		}
-		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		
-		$scope.calDisabled = ClearFn.calDisabled;
-		
-		$scope.calOpen = function($event, param) {
-			$event.preventDefault();
-		    $event.stopPropagation();
-		    $scope.date[param].opened = true;
-		};
 	}])
 	
 	.controller('News', ['$scope', function($scope) {

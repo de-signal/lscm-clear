@@ -634,8 +634,6 @@ thead .icon {
 	border-radius: 12px;
 	left:24px;
 	top:4px;
-	animation: timelineCircleAnim 1s;
-	-webkit-animation: timelineCircleAnim 1s;
 	border: 6px solid #ffcb32;
 	z-index: 2;
 	
@@ -649,8 +647,16 @@ thead .icon {
 	left: 33px;
 	width: 6px;
 	z-index: 1;
+}
+.anim .timeline-completed .timeline-bar,
+.anim .timeline-active .timeline-bar {
 	animation: timelineBarAnimY 1s ease-in-out;
 	-webkit-animation: timelineBarAnimY 1s ease-in-out;
+}
+.anim .timeline-completed .timeline-circle, 
+.anim .timeline-active .timeline-circle {
+	animation: timelineCircleAnim 1s;
+	-webkit-animation: timelineCircleAnim 1s;
 }
 .first .timeline-bar {
 	top: 12px;
@@ -728,6 +734,9 @@ thead .icon {
 		height: 6px;
 		left: 0;
 		width: 300px;
+	}
+	.anim .timeline-completed .timeline-bar, 
+	.anim .timeline-active .timeline-bar {
 		animation: timelineBarAnimX 1s ease-in-out;
 		-webkit-animation: timelineBarAnimX 1s ease-in-out;
 	}

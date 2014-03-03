@@ -1,0 +1,409 @@
+{
+    "plannings": [
+        "initial",
+        "forecasted",
+        "actuel"
+    ],
+    "statuses": [
+        "default",
+        "late",
+        "upcoming"
+    ],
+    "milestones": [
+            "in construction",
+            "ready for collection",
+            "collected",
+            "received",
+            "osd",
+            "ready for inspection",
+            "ready for greenlight",
+            "marshalled",
+            "departed",
+            "arrived",
+            "customs released",
+            "delivered"
+    ],
+    "properties": [
+            {
+                "id": "length",
+                "name": "Length",
+                "type": "text",
+                "group": "Aspect"
+            },
+            {
+                "id": "width",
+                "name": "Width",
+                "type": "text",
+                "group": "Aspect"
+            },
+            {
+                "id": "height",
+                "name": "Height",
+                "type": "text",
+                "group": "Aspect"
+            },
+            {
+                "id": "weight",
+                "name": "Weight",
+                "type": "text",
+                "group": "Aspect"
+            },
+            {
+                "id": "casing_type",
+                "name": "Casing type",
+                "type": "select",
+                "group": "Aspect",
+                "values": [
+                    "Case",
+                    "Box",
+                    "reel",
+                    "Drum",
+                    "Tank",
+                    "Palette",
+                    "Bundle"
+                ]
+            },
+            {
+                "id": "casing_material",
+                "name": "Casing material",
+                "type": "select",
+                "group": "Aspect",
+                "values": [
+                    "Wood",
+                    "Plastic",
+                    "Metal",
+                    "Fiber"
+                ]
+            },
+            {
+                "id": "area",
+                "name": "Area",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "Packing zone",
+                    "Inspection zone",
+                    "Reception zone",
+                    "Departure zone",
+                    "Storage zone"
+                ]
+            },
+            {
+                "id": "location",
+                "name": "Location",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "N/A",
+                    "At vendor",
+                    "En route",
+                    "In warehouse",
+                    "Port/Airport",
+                    "Client",
+                    "Delivery in progress"
+                ]
+            },
+            {
+                "id": "storage_cell_ref",
+                "name": "Storage cell",
+                "type": "text",
+                "group": "Location"
+            },
+            {
+                "id": "transfer",
+                "name": "Transfer",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "Vector",
+                    "Stand by"
+                ]
+            },
+            {
+                "id": "warehouse",
+                "name": "Warehouse",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "FCA",
+                    "KCA",
+                    "NRA"
+                ]
+            },
+            {
+                "id": "fat_required",
+                "name": "FAT required",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "certified",
+                "name": "FAT certified",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "inspection_required",
+                "name": "Inspection required",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "inspection_type",
+                "name": "Inspection type",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Internal",
+                    "External"
+                ]
+            },
+            {
+                "id": "inspection_location",
+                "name": "Inspection location",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "At client",
+                    "At vendor"
+                ]
+            },
+            {
+                "id": "inspected",
+                "name": "Inspected",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Conform",
+                    "Non conform"
+                ]
+            },
+            {
+                "id": "inspection_timestamp",
+                "name": "Inspection timestamp",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "expeditable",
+                "name": "Expeditable",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "dg",
+                "name": "Dangerous good",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "departure_control",
+                "name": "Departure control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "reception_control",
+                "name": "Reception control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "customs_transit",
+                "name": "Customs transit",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "transit_type",
+                "name": "Transit Type",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Transit T1",
+                    "Storage In",
+                    "Bonded Area"
+                ]
+            },
+            {
+                "id": "has_osd",
+                "name": "OSD",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "box_closed",
+                "name": "Closed",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "repacking_required",
+                "name": "Repacking required",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "repacking_cause",
+                "name": "Repacking cause",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    "Damage",
+                    "Non compliant",
+                    "Grouping"
+                ]
+            },
+            {
+                "id": "repacking_done",
+                "name": "Repacking done",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "etc",
+                "name": "ETC in",
+                "type": "date",
+                "group": "Shipping pre-hub"
+            },
+            {
+                "id": "atc",
+                "name": "ATC in",
+                "type": "date",
+                "group": "Shipping pre-hub"
+            },
+            {
+                "id": "etr",
+                "name": "ETD in",
+                "type": "date",
+                "group": "Shipping pre-hub"
+            },
+            {
+                "id": "atr",
+                "name": "ATD in",
+                "type": "date",
+                "group": "Shipping pre-hub"
+            },
+            {
+                "id": "ets",
+                "name": "ETC out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "ats",
+                "name": "ATC out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "eta",
+                "name": "ETA out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "ata",
+                "name": "ATA out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "etd",
+                "name": "ETD out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "atd",
+                "name": "ATD out",
+                "type": "date",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "origin",
+                "name": "Origin",
+                "type": "text",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "destination",
+                "name": "Destination",
+                "type": "text",
+                "group": "Shipping post-hub"
+            },
+            {
+                "id": "associated",
+                "name": "Associated",
+                "type": "select",
+                "group": "Scope and delay",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "destroyed",
+                "name": "Destroyed",
+                "type": "select",
+                "group": "Scope and delay",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            }
+        ]
+    }
+}

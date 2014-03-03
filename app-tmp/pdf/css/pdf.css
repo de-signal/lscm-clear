@@ -209,6 +209,11 @@ p {
 	padding-top: 6pt;
 	-webkit-print-color-adjust: exact;
 }
+.bg-order {
+	background-color: #fd7f23 !important;
+	padding-top: 6pt;
+	-webkit-print-color-adjust: exact;
+}
 .bg h1 {
 	color: white !important;
 	margin-bottom: 3pt;

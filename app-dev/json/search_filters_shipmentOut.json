@@ -1,0 +1,441 @@
+{
+    "plannings": [
+        "initial",
+        "forecasted",
+        "actuel"
+    ],
+    "statuses": [
+        "default",
+        "late",
+        "upcoming"
+    ],
+    "milestones": [
+            "programmed",
+            "ready for greenlight",
+            "greenlight approved",
+            "booked out",
+            "departed",
+            "arrived",
+            "customs released",
+            "delivered"
+    ],
+    "properties": [
+            {
+                "id": "remark",
+                "name": "Comment",
+                "type": "text",
+                "group": "Comments"
+            },
+            {
+                "id": "conformity_remark",
+                "name": "Conformity Remark",
+                "type": "text",
+                "group": "Comments"
+            },
+            {
+                "id": "package_name",
+                "name": "Package name",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "country_of_supply",
+                "name": "Country of supply",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "mf",
+                "name": "MF",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "ba",
+                "name": "Bank account",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "currency",
+                "name": "Currency",
+                "type": "select",
+                "group": "Documentation",
+                "values": [
+                    "USD",
+                    "EUR",
+                    "GBP"
+                ]
+            },
+            {
+                "id": "freight_value",
+                "name": "Freight value",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_company",
+                "name": "Consignee company",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_country",
+                "name": "Consignee country",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_city",
+                "name": "Consignee city",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_address",
+                "name": "Consignee address",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "3pl_in_charge",
+                "name": "3PL in charge",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    "LSCM",
+                    "TLC",
+                    "Joe Eboje",
+                    "Transprojet",
+                    "Others"
+                ]
+            },
+            {
+                "id": "client_chrono",
+                "name": "Client chrono",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "ets",
+                "name": "ETC",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "ats",
+                "name": "ATC",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "eta",
+                "name": "ETA",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "ata",
+                "name": "ATA",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "etd",
+                "name": "ETD",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "atd",
+                "name": "ATD",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "booking_date",
+                "name": "Booking date",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "customs_transit",
+                "name": "Customs transit",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "lscm_waybill_ref",
+                "name": "LSCM waybill reference",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "on_time",
+                "name": "On time",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "transit_type",
+                "name": "Transit type",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    "Transit T1",
+                    "Storage in",
+                    "Bonded area"
+                ]
+            },
+            {
+                "id": "vector_ref",
+                "name": "Vector reference",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "docs_tracking_number",
+                "name": "Documents integrator tracking number",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "docs_delivery_date",
+                "name": "Documents integrator delivery date",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "docs_delivered_to",
+                "name": "Documents integrator delivery contact",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "greenlight_approval",
+                "name": "Greenlight Approval",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    "Requested",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "transport_company",
+                "name": "Airline/Sailing company",
+                "type": "text",
+                "group": "Transport"
+            },
+            {
+                "id": "transport_section",
+                "name": "Transport section",
+                "type": "select",
+                "group": "Transport",
+                "values": [
+                    "Pre Hub",
+                    "Post Hub",
+                    "Direct"
+                ]
+            },
+            {
+                "id": "transport_specification",
+                "name": "Transport specification",
+                "type": "select",
+                "group": "Transport",
+                "values": [
+                    "Standard",
+                    "Heavy Lift",
+                    "ODC"
+                ]
+            },
+            {
+                "id": "transport_mode",
+                "name": "Transport mode",
+                "type": "select",
+                "group": "Transport",
+                "values": [
+                    "Air",
+                    "Sea",
+                    "Express",
+                    "Haulage"
+                ]
+            },
+            {
+                "id": "origin",
+                "name": "Origin",
+                "type": "text",
+                "group": "Transport"
+            },
+            {
+                "id": "destination",
+                "name": "Destination",
+                "type": "text",
+                "group": "Transport"
+            },
+            {
+                "id": "type_of_service",
+                "name": "Type of service",
+                "type": "select",
+                "group": "Transport",
+                "values": [
+                    "Door to Door",
+                    "Door to Airport/port",
+                    "Clearing & Delivery",
+                    "Storage",
+                    "Inspection"
+                ]
+            },
+            {
+                "id": "shipment_closed",
+                "name": "Shipment closed",
+                "type": "select",
+                "group": "Transport",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "incoterm",
+                "name": "Incoterm",
+                "type": "text",
+                "group": "Location"
+            },
+            {
+                "id": "location",
+                "name": "Location",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "N/A",
+                    "At vendor",
+                    "En route",
+                    "In warehouse",
+                    "Port/Airport",
+                    "Client"
+                ]
+            },
+            {
+                "id": "transfer",
+                "name": "Transfer",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "Departed",
+                    "Awaiting Departure"
+                ]
+            },
+            {
+                "id": "warehouse",
+                "name": "Warehouse",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    "FCA",
+                    "KCA",
+                    "NRA"
+                ]
+            },
+            {
+                "id": "po_service",
+                "name": "PO service",
+                "type": "text",
+                "group": "Procurement"
+            },
+            {
+                "id": "po_service_received",
+                "name": "PO service received",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "rfq_reference",
+                "name": "RFQ reference",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "extra_rfq",
+                "name": "Extra RFQ",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "additional_po_service",
+                "name": "Additional PO service",
+                "type": "text",
+                "group": "Procurement"
+            },
+            {
+                "id": "client_approval",
+                "name": "Client approval",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "expeditable",
+                "name": "Expeditable",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "dg",
+                "name": "Dangerous good",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Checked",
+                    "Unchecked"
+                ]
+            },
+            {
+                "id": "departure_control",
+                "name": "Departure control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "reception_control",
+                "name": "Reception control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            }
+        ]
+}

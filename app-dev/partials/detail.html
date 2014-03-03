@@ -8,7 +8,7 @@
 		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
 </div>
 
-<div class="container margin-top" ng-show="loaded">
+<div class="container margin-top" ng-show="loaded" ng-class="{true:'anim'}[elm.anim]">
 	<div class="row">
 		<div class="col-md-3">
 			<div class="filet">
@@ -101,11 +101,11 @@
 			<div class="filet">
 				<h6>description</h6>
 				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}:</strong> {{value}}</span></p>
-				<p><img ng-src="{{qrCodeGoogle}}" alt="QR code" class="clearfix"/></p>
+				<p><img ng-src="{{elm.qrCodeGoogle}}" alt="QR code" class="clearfix"/></p>
 				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
 		</div>
-		<div class="col-md-3" ng-repeat="chart in charts">
+		<div class="col-md-3" ng-repeat="chart in elm.charts">
 			<div class="filet">
 				<h6>{{chart.name}}</h6>
 				<p class="type-fat" ng-style="chart.color">{{chart.value}} %</p>
@@ -230,7 +230,7 @@
 			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
 			        <tab-heading><h4>{{related.name}} ({{related.quantity}})</h4></tab-heading>
 			        <span ng-controller="ListCtrl">
-			            <span ng-include="'partials/tplList.html'" onload="listLoad({'type': related.type, 'related': elm.type, 'related_id': elm.id})"></span>
+			            <span ng-include="'partials/tplList.html'" onload="listInit(related.type)"></span>
 			        </span>
 			    </tab>
             </tabset>			

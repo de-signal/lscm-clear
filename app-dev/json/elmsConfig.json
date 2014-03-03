@@ -1,0 +1,26 @@
+{ 
+	"format": "elements", 
+	"display": { 
+		"filters" : true, 
+		"tracking": true 
+	}, 
+	"urlInit": {
+		"sortBy": "status", 
+		"sortOrder": "ASC", 
+		"limit": 12
+	},
+	"filters": [
+		{ "name": "Reference", "id": "reference"}, 
+		{ "name": "Milestone name", "id": "milestone_name" }, 
+		{ "name": "Milestone planning", "id": "milestone_planning" }, 
+		{ "name": "Milestone status", "id": "milestone_status" }, 
+		{ "name": "Property name", "id": "property_name"}, 
+		{ "name": "Property value", "id": "property_value"}, 
+		{ "name": "Property type", "id": "property_type"}, 
+		{ "name": "Property group", "id": "property_group"}, 
+		{ "name": "Milestone from", "id": "milestone_from", "type": "date" },
+		{ "name": "Milestone to", "id": "milestone_to", "type": "date" }, 
+		{ "name": "Property from", "id": "property_from", "type": "date"},
+		{ "name": "Property to", "id": "property_to", "type": "date"}					
+	]
+}
