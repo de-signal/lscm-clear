@@ -25,12 +25,12 @@ filters.tmp: {{filters.tmp | json}}
 			</small></pre>
 	    </div><!--/col-->
 	</div><!--/row-->
-	<div class="row" ng-if="list.display.filters">
+	<div class="row margin-top-s" ng-if="list.display.filters">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-					<accordion>
-					    <accordion-group>
+					<accordion close-others="true">
+					    <accordion-group is-open="filters.tmp.filtersOpen">
 					    	<accordion-heading>
 					    		Filters
 					    	</accordion-heading>
@@ -141,6 +141,18 @@ filters.tmp: {{filters.tmp | json}}
 							</div>
 						
 						</accordion-group>
+						<accordion-group is-open="filters.tmp.ModificationsOpen" ng-if="list.display.batch">
+					    	<accordion-heading>
+					    		Modifications
+					    	</accordion-heading>
+					
+							<div class="row">
+								<div class="col-md-4">
+									Select
+								</div>
+							</div>
+						</accordion-group>
+						
 					</accordion>
 				</div>
 			</div>
@@ -182,7 +194,7 @@ filters.tmp: {{filters.tmp | json}}
 				<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 				</li>
 				</ul></td>
-				<td ng-if="display.tracking"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i></td>
+				<td ng-if="display.tracking"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i></td>
 			</tr>
 		</tbody>
 	</table>

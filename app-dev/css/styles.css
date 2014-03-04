@@ -126,7 +126,7 @@ a:hover {
 	clear: both;
 }
 .margin-top-s {
-	margin-top:5px;
+	margin-top:10px;
 }
 .padding-left {
 	padding-left:10px;
@@ -247,8 +247,8 @@ h6, text.nv-legend-text {
 }
 h6 {
 	color: #9e9e8e;
-	margin-top: 0;
-}
+	margin-top:0;
+margin-bottom: 5px;}
 h3 {
 	color: #9e9e8e;
 	line-height: 1.25em;
@@ -454,6 +454,12 @@ h4 i.icon {
 
 /* table */ 
 
+.table {
+  margin-bottom: 10px;
+}
+.table tbody {
+	border-bottom: 1px solid #c4c4ba;
+}
 .table-fixed {
 	table-layout: fixed;
 }
@@ -461,7 +467,6 @@ thead, tfoot {
 	background-color: #c4c4ba;
 	color: white;
 }
-
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -471,6 +476,9 @@ thead, tfoot {
 	border-top: 1px solid #c4c4ba;
 	border-bottom-style: none;
 	vertical-align: middle;
+}
+.table tbody tr:first-child td {
+  border-top: 0px none;
 }
 th h6 {
 	color: white;
@@ -482,9 +490,6 @@ th h6 a, th h6 a:hover {
 }
 th h6 a:hover span {
 	text-decoration: underline;
-}
-.table tbody tr:first-child td {
-  border-top: 0px none;
 }
 
 .over:hover, .highlite {
@@ -790,6 +795,9 @@ thead .icon {
   background-color: inherit;
   border: 1px solid #bebeb6;
 }
+.panel-group {
+  margin-bottom: 10px;
+}
 .panel-group .panel {
 	overflow: inherit;
 }
@@ -879,6 +887,7 @@ fieldset {
 	margin-right:10px;
 	padding-left: 10px;
 	padding-top: 4px;
+	margin-bottom:10px;
 }
 .badge .icon {
 	margin-left: 5px;
@@ -937,7 +946,7 @@ fieldset {
 }
 
 .pagination {
-	margin:0 0 -2px;
+	margin: 0 0 20px;
 	padding: 0;
 }
 
@@ -946,23 +955,22 @@ fieldset {
 .pagination > li:first-child > span, 
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-radius: 4px;
-	margin-right: 2px;
+	border-radius: 4px;
+	margin-right: 5px;
 	background-color: inherit;
 
 }
 .pagination > li > a,
 .pagination > li > span {
 	border-color: #c4c4ba;
-	background-color: #c4c4ba;
-	color: white;
+
+	color: #1f1f00;
 	padding:2px 8px;
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-	background-color:white;
 	color: #9e9e8e;
 	border: 1px solid white;
 }
@@ -972,8 +980,9 @@ fieldset {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-	background-color: inherit;
+	background-color:white;
 	border: 1px solid white;
+	color: #1f1f00;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,

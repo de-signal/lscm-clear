@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.14-build.2283+sha.cbcfaa2
+ * @license AngularJS v1.2.15-build.2365+sha.d07101d
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -17,7 +17,6 @@
  * ## Example
  * See {@link ngRoute.$route#example $route} for an example of configuring and using `ngRoute`.
  *
- * {@installModule route}
  *
  * <div doc-module-components="ngRoute"></div>
  */
@@ -56,19 +55,19 @@ function $RouteProvider(){
    *    `$location.path` will be updated to add or drop the trailing slash to exactly match the
    *    route definition.
    *
-   *      * `path` can contain named groups starting with a colon: e.g. `:name`. All characters up
+   *    * `path` can contain named groups starting with a colon: e.g. `:name`. All characters up
    *        to the next slash are matched and stored in `$routeParams` under the given `name`
    *        when the route matches.
-   *      * `path` can contain named groups starting with a colon and ending with a star:
+   *    * `path` can contain named groups starting with a colon and ending with a star:
    *        e.g.`:name*`. All characters are eagerly stored in `$routeParams` under the given `name`
    *        when the route matches.
-   *      * `path` can contain optional named groups with a question mark: e.g.`:name?`.
+   *    * `path` can contain optional named groups with a question mark: e.g.`:name?`.
    *
    *    For example, routes like `/color/:color/largecode/:largecode*\/edit` will match
-   *    `/color/brown/largecode/code/with/slashs/edit` and extract:
+   *    `/color/brown/largecode/code/with/slashes/edit` and extract:
    *
-   *      * `color: brown`
-   *      * `largecode: code/with/slashs`.
+   *    * `color: brown`
+   *    * `largecode: code/with/slashes`.
    *
    *
    * @param {Object} route Mapping information to be assigned to `$route.current` on route
@@ -253,7 +252,7 @@ function $RouteProvider(){
      *     - `$scope` - The current route scope.
      *     - `$template` - The current route template HTML.
      *
-     * @property {Array.&lt;Object&gt;} routes Array of all configured routes.
+     * @property {Array.<Object>} routes Array of all configured routes.
      *
      * @description
      * `$route` is used for deep-linking URLs to controllers and views (HTML partials).
@@ -558,7 +557,7 @@ function $RouteProvider(){
 
 
     /**
-     * @returns the current active route, by matching it against the URL
+     * @returns {Object} the current active route, by matching it against the URL
      */
     function parseRoute() {
       // Match a route
@@ -576,7 +575,7 @@ function $RouteProvider(){
     }
 
     /**
-     * @returns interpolation of the redirect path with the parameters
+     * @returns {string} interpolation of the redirect path with the parameters
      */
     function interpolate(string, params) {
       var result = [];
@@ -610,7 +609,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
  *
  * The route parameters are a combination of {@link ng.$location `$location`}'s
- * {@link ng.$location#methods_search `search()`} and {@link ng.$location#methods_path `path()`}.
+ * {@link ng.$location#search `search()`} and {@link ng.$location#path `path()`}.
  * The `path` parameters are extracted when the {@link ngRoute.$route `$route`} path is matched.
  *
  * In case of parameter name collision, `path` params take precedence over `search` params.
@@ -676,7 +675,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
              deps="angular-route.js;angular-animate.js"
              animations="true" fixBase="true">
       <file name="index.html">
-        <div ng-controller="MainCntl as main">
+        <div ng-controller="MainCtrl as main">
           Choose:
           <a href="Book/Moby">Moby</a> |
           <a href="Book/Moby/ch/1">Moby: Ch1</a> |
@@ -759,12 +758,12 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
           function($routeProvider, $locationProvider) {
             $routeProvider.when('/Book/:bookId', {
               templateUrl: 'book.html',
-              controller: BookCntl,
+              controller: BookCtrl,
               controllerAs: 'book'
             });
             $routeProvider.when('/Book/:bookId/ch/:chapterId', {
               templateUrl: 'chapter.html',
-              controller: ChapterCntl,
+              controller: ChapterCtrl,
               controllerAs: 'chapter'
             });
 
@@ -772,19 +771,19 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
             $locationProvider.html5Mode(true);
         });
 
-        function MainCntl($route, $routeParams, $location) {
+        function MainCtrl($route, $routeParams, $location) {
           this.$route = $route;
           this.$location = $location;
           this.$routeParams = $routeParams;
         }
 
-        function BookCntl($routeParams) {
-          this.name = "BookCntl";
+        function BookCtrl($routeParams) {
+          this.name = "BookCtrl";
           this.params = $routeParams;
         }
 
-        function ChapterCntl($routeParams) {
-          this.name = "ChapterCntl";
+        function ChapterCtrl($routeParams) {
+          this.name = "ChapterCtrl";
           this.params = $routeParams;
         }
       </file>
@@ -793,14 +792,14 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
         it('should load and compile correct template', function() {
           element(by.linkText('Moby: Ch1')).click();
           var content = element(by.css('[ng-view]')).getText();
-          expect(content).toMatch(/controller\: ChapterCntl/);
+          expect(content).toMatch(/controller\: ChapterCtrl/);
           expect(content).toMatch(/Book Id\: Moby/);
           expect(content).toMatch(/Chapter Id\: 1/);
 
           element(by.partialLinkText('Scarlet')).click();
 
           content = element(by.css('[ng-view]')).getText();
-          expect(content).toMatch(/controller\: BookCntl/);
+          expect(content).toMatch(/controller\: BookCtrl/);
           expect(content).toMatch(/Book Id\: Scarlet/);
         });
       </file>
@@ -825,6 +824,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
     link: function(scope, $element, attr, ctrl, $transclude) {
         var currentScope,
             currentElement,
+            previousElement,
             autoScrollExp = attr.autoscroll,
             onloadExp = attr.onload || '';
 
@@ -832,12 +832,19 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
         update();
 
         function cleanupLastView() {
-          if (currentScope) {
+          if(previousElement) {
+            previousElement.remove();
+            previousElement = null;
+          }
+          if(currentScope) {
             currentScope.$destroy();
             currentScope = null;
           }
           if(currentElement) {
-            $animate.leave(currentElement);
+            $animate.leave(currentElement, function() {
+              previousElement = null;
+            });
+            previousElement = currentElement;
             currentElement = null;
           }
         }

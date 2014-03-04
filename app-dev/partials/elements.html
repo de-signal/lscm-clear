@@ -1,0 +1,14 @@
+<div class="header" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[type]">
+	<h1 class="container">
+		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[type]"></i> {{name}}</h1>
+</div>
+
+<div class="container">
+	<div class="row" ng-controller="ListCtrl">
+	    <div class="col-md-12" ng-include="'partials/tplList.html'">
+		
+		</div><!--/col-->
+	</div><!--/row-->
+</div><!--/container-->
+
+

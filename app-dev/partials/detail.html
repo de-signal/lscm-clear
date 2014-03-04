@@ -3,7 +3,7 @@
 
 <div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
 	<h1 class="container">
-		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', '')" alt="tracking"></i>
+		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i>
 		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDeleteOpen(elm, $event)' ></i>
 		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
 </div>
@@ -20,7 +20,7 @@
 			<div class="filet">
 				<h6>milestone</h6>
 				<h2>{{elm.milestone}}</h2>
-				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey fa" ng-class="{past:'fa\-circle', previous:'fa\-circle', current:'fa\-circle', future:'fa\-circle\-o', next:'fa\-circle\-o'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
+				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -136,7 +136,7 @@
 	</div>
 	
 	
-	<div class="row" ng-if="elm.documents">
+	<div class="row margin-top" ng-if="elm.documents">
 		<div class="col-md-12">
 			<h3>documents</h3>
 			<table class="table table-condensed">
@@ -157,7 +157,7 @@
 		</div>
 	</div>
 	
-	<div class="row">
+	<div class="row margin-top">
 		<div class="col-md-12">
 			<h3>schedule</h3>
 			<table class="table table-condensed" ng-init="showCalendar=false">
@@ -177,7 +177,7 @@
 		</div>
 	</div>
 	
-	<div class="row">
+	<div class="row margin-top">
 		<div class="col-md-12">
 			<h3>properties</h3>
 			<accordion close-others="false">
@@ -190,12 +190,12 @@
 							<span class="col-xs-4" ng-switch on="prop.type">
 								<div class="input-group" ng-switch-when="text">
 								  <input type="text" class="form-control" ng-model="prop.value" ng-disabled="!prop.editable">
-								  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, 'property', group.name)">Save</button></span>
+								  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, prop, group.name)">Save</button></span>
 								</div>
 								<div class="checkbox" ng-switch-when="checkbox">
-									<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)"></label>
+									<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)"></label>
 								</div>
-								<select ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, 'property', group.name)" ng-switch-when="select" class="form-control">
+								<select ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)" ng-switch-when="select" class="form-control">
 									<option ng-repeat="i in prop.values" value="{{$index}}" ng-selected="$index == prop.value">{{i}}</option>
 								</select>
 								
@@ -208,7 +208,7 @@
 										date-disabled="calDisabled(date, mode)" 
 										ng-disabled="!prop.editable" 
 										show-weeks="false"
-										ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, 'property', group.name)">
+										ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, prop, group.name)">
 									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="icon i-condition-date"></i></button></span>
 								</div>
 							</span>

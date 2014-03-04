@@ -7,7 +7,11 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('E2', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id', { format:'@format', type:'@type', id:'@id' });
+		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id', 
+			{ format:'@format', type:'@type', id:'@id' }, 
+			{
+				update: { method: 'PUT' }
+			});
 	}])
 	.factory('Utils', function(){
 		return {
@@ -234,7 +238,7 @@ angular.module('clearApp.services', ['ngResource'])
 					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
 					$location.search(urlParams);
 				} 
-			
+				$location.replace();			
 				listConfig.urlParams = urlParams; 	
 				return listConfig; 
 			},
@@ -301,10 +305,10 @@ angular.module('clearApp.services', ['ngResource'])
 				if ($event.stopPropagation) $event.stopPropagation(); 
 				elm.tracking=!elm.tracking;
 			}, 
-			propertySave: function(elm, type, group) {
+			propertySave: function(elm, property, group) {
 				var self=this;
 				$rootScope.currentGroup = group;
-				elm.$save({update:type}, function(elm, response) {
+				elm.$update({ 'propertyName': property.name, 'propertyValue': property.value }, function(elm, response) {
 					var propertyMessage; 
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
@@ -316,10 +320,10 @@ angular.module('clearApp.services', ['ngResource'])
 					elm = self.detailUpdate(elm);
 				});
 			}, 
-			requiredSave: function (elm, id) {
+			requiredSave: function (elm, required) {
 				var self=this;
 				
-				elm.$save({update:'required', update_id:id}, function(elm, response) {
+				elm.$update({ 'requiredName': required.name, 'requiredValue': required.value }, function(elm, response) {
 					var requiredMessage, milestoneMessage; 
 					
 					if (response("X-Clear-updatedRequired")==="success") requiredMessage = "Updated condition";

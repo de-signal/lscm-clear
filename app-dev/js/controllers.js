@@ -96,7 +96,7 @@ angular.module('clearApp.controllers', [])
 		});
 		
 		E1.query({'type': 'report'}, function(docs){
-			$scope.report = docs[docs.length-1];
+			$scope.reports = docs;
 		});
 		
 		$scope.go = ClearFn.go;
@@ -161,7 +161,6 @@ angular.module('clearApp.controllers', [])
 	.controller('ListCtrl', ['$scope', 'Utils', 'ClearFn', 'ClearListsFn', function($scope, Utils, ClearFn, ClearListsFn) {
 		
 		$scope.listInit = function(listId) {
-		console.log('lisInit', listId); 
 			$scope.loaded = false; 
 			$scope.$on('event:listLoad_' + listId, function(event, listConfig) {
 				$scope.listLoad(listConfig);
@@ -188,8 +187,10 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.listElementsLoad = function(listConfig) {
 			ClearListsFn.listElementsLoad(listConfig).then( function(list) {
-				console.log('listELoad: ', list);
 				$scope.list = list;
+				if(listConfig.type ==='shipment' || listConfig.type ==='shipmentIn' || listConfig.type ==='shipmentOut') {
+					$scope.colmunChrono = true; 
+				}
 				$scope.loaded = true;
 			});
 		}
@@ -197,6 +198,7 @@ angular.module('clearApp.controllers', [])
 		$scope.listFiltersLoad = function(listConfig) {
 			ClearListsFn.listFiltersLoad(listConfig).then( function(filters) {
 				$scope.filters = filters;
+				$scope.filters.tmp.filtersOpen = false; 
 			}); 
 		}
 		
@@ -432,7 +434,7 @@ angular.module('clearApp.controllers', [])
 			$scope.loaded = true;
 		}); 
 	}])
-		
+	
 	.controller('SearchCtrl', ['$scope', '$location', 'ClearFn', 'Utils', 'ElmsListsConfig', function($scope, $location, ClearFn, Utils, ElmsListsConfig) {
 		
 		ClearFn.listsReady('init');
@@ -471,8 +473,36 @@ angular.module('clearApp.controllers', [])
 			$scope.urlSet(urlParams, listId);
 		});
 	}])
+		
+	.controller('ElementsCtrl', ['$scope', '$routeParams', 'ClearFn', 'Utils', 'ElmsListsConfig', function($scope, $routeParams, ClearFn, Utils, ElmsListsConfig) {
+		
+		ClearFn.listsReady('init');
+		var type = $routeParams.type; 
+		
+		switch (type) {
+			case 'order': $scope.type = 'order'; $scope.name = 'Orders'; break;
+			case 'shipment': $scope.type = 'shipment'; $scope.name = 'Shipments'; break;
+			case 'shipmentIn': $scope.type = 'shipment'; $scope.name = 'Shipments in'; break;
+			case 'shipmentOut': $scope.type = 'shipment'; $scope.name = 'Shipments out'; break;
+			case 'box': $scope.type = 'box'; $scope.name = 'Boxes'; break;
+			case 'item': $scope.type = 'item'; $scope.name = 'Items'; break;
+		}	
+		
+		$scope.listsConfig = [];
+		ElmsListsConfig.get( function(config) {
+			$scope.listsConfig[0] = config; 
+			$scope.listsConfig[0].type = type; 
+			$scope.listsConfig[0].id = "elements";
+			$scope.listsConfig[0].resource = '2'; 
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearFn.listsReady('parent'); 
+		}); 
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+		});
+	}])
 	
-	.controller('DocumentsCtrl', ['$location', '$scope', '$routeParams', 'ClearFn', 'Utils', 'DocumentsConfig', function($location, $scope, $routeParams, ClearFn, Utils, DocumentsConfig) {
+	.controller('DocumentsCtrl', ['$scope', '$routeParams', 'ClearFn', 'Utils', 'DocumentsConfig', function($scope, $routeParams, ClearFn, Utils, DocumentsConfig) {
 		
 		ClearFn.listsReady('init'); 
 		
@@ -499,7 +529,7 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
-	.controller('StaticDocumentsCtrl', ['$location', '$scope', '$routeParams', 'ClearFn', 'DocumentsConfig', 'Utils', function($location, $scope, $routeParams, ClearFn, DocumentsConfig, Utils) {
+	.controller('StaticDocumentsCtrl', ['$scope', '$routeParams', 'ClearFn', 'DocumentsConfig', 'Utils', function($scope, $routeParams, ClearFn, DocumentsConfig, Utils) {
 		
 		ClearFn.listsReady('init'); 
 		
@@ -558,12 +588,41 @@ angular.module('clearApp.controllers', [])
 		}
 	}])
 	
-	.controller('TplModalConditionCtrl', ['$scope', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, ClearFn, $modalInstance, required, elm) {
+	.controller('TplModalConditionCtrl', ['$scope', '$upload', 'ClearFn', '$modalInstance', 'required', 'elm', function ($scope, $upload, ClearFn, $modalInstance, required, elm) {
 		$scope.required = required;
+		console.log('requireddd: ', required); 
 		$scope.elm = elm;
 		console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ required: ', required);
 		switch (required.type) {
 			case 'upload': 
+				$scope.onFileSelect = function($files) {
+				    for (var i = 0; i < $files.length; i++) {
+				      var file = $files[i];
+				      $scope.upload = $upload.upload({
+				        url: '/index_rest.php/api/clear/v2/elements/'+ elm.type + '/' + elm.id + '?required=' + required.id, //upload.php script, node.js route, or servlet url
+				        // method: POST or PUT,
+				        // headers: {'headerKey': 'headerValue'},
+				        // withCredentials: true,
+				        data: {myObj: $scope.myModelObj},
+				        file: file,
+				        // file: $files, //upload multiple files, this feature only works in HTML5 FromData browsers
+				        /* set file formData name for 'Content-Desposition' header. Default: 'file' */
+				        //fileFormDataName: myFile, //OR for HTML5 multiple upload only a list: ['name1', 'name2', ...]
+				        /* customize how data is added to formData. See #40#issuecomment-28612000 for example */
+				        //formDataAppender: function(formData, key, val){} //#40#issuecomment-28612000
+				      }).progress(function(evt) {
+				        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+				      }).success(function(data, status, headers, config) {
+				        // file is uploaded successfully
+				        console.log(data);
+				      });
+				      //.error(...)
+				      //.then(success, error, progress); 
+				    }
+				    // $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
+				  };
+				
+				
 				// ngUpload
 				$scope.uploadUrl = '/index_rest.php/api/clear/v2/'+ elm.type + '/' + elm.id + '?required=' + required.id;
 				$scope.startUploading = function() {
@@ -587,8 +646,9 @@ angular.module('clearApp.controllers', [])
 			case 'link': break;
 		}
 		
-		$scope.requiredSave = function(elm, elmId) { 
-			ClearFn.requiredSave(elm, elmId);
+		$scope.requiredSave = function(elm, required) { 
+			ClearFn.requiredSave(elm, required);
+			console.log('required: ', required, required.name); 
 		}
 		
 		$scope.requiredClose = function() {
@@ -810,7 +870,7 @@ angular.module('clearApp.controllers', [])
 			"interactions": true,
 			"updates": true,
 			"updates_mobile": true, 
-			"processing": false 
+			"processing": true 
 				
 		}
 		$scope.location = {

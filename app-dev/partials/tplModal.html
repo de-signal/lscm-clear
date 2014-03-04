@@ -5,7 +5,7 @@
 	<h4><i class="lead icon" required-icon></i> {{required.name}}</h4>
 	<div ng-switch on="required.type">
 		<label class="form-horizontal" ng-switch-when="text">
-			{{required.name}} <input type="text" ng-model="required.value">
+			<input type="text" ng-model="required.value">
 		</label>
 		<label class="checkbox" ng-switch-when="checkbox" >
 			<input type="checkbox" ng-model="required.value" ng-checked="required.value"> {{required.name}}
@@ -23,16 +23,16 @@
         </div>
         <button ng-switch-when="email" class="btn btn-large" type="button">Send e-mail</button>
         
-        <form action="{{uploadUrl}}" ng-upload="complete(content, completed)" ng-switch-when="upload" > 
-             <input type="file" name="file"></input>
-             <button class='btn' ng-disabled="$isLoading" ng-click="startUploading()">Upload</button>
-             <p>{{uploadMessage}}</p>
-         </form>
+        <div ng-switch-when="upload">
+        	<input type="text" ng-model="myModelObj">
+       		<input type="file" ng-file-select="onFileSelect($files)" >
+       		<button ng-click="upload.abort()">Cancel Upload</button>
+        </div>
          <div ng-switch-when="link"><a class="btn btn-large" href="" ng-click="go(elm.type, elm.id, required.value); requiredClose()">View</a></div>
-         
 	</div>
+	<div>{{required}}</div>
 </div>
 <div class="modal-footer">
 	<button class="btn cancel" ng-click="requiredCancel()">Cancel</button>
-	<button class="btn" ng-click="requiredSave(elm, required.id); requiredClose()" ng-hide="required.type==='link'">Save</button>
+	<button class="btn" ng-click="requiredSave(elm, required); requiredClose()" ng-hide="required.type==='link'">Save</button>
 </div>

@@ -97,7 +97,7 @@
 	
 	<div class="row margin-top">
 		<div class="col-md-12">
-			<h3>global report</h3>
+			<h3>reports</h3>
 			<table class="table table-condensed">
 				<thead>
 				<tr>
@@ -105,7 +105,7 @@
 				</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr ng-repeat="report in reports">
 						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{report.type}}</td>
 						<td><strong>{{report.name}}</strong></td>
 						<td><span class="label label-default">{{report.info}}</span></td>
