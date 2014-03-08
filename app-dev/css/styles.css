@@ -233,6 +233,8 @@ h5 .badge  {
 	padding: 1px 6px;
 	margin-right: 4px;
 	line-height:23px;
+	font-weight: normal;
+	font-style: normal;
 }
 
 h6, h3, text.nv-legend-text {
@@ -496,12 +498,16 @@ th h6 a:hover span {
 	background-color: white;
 }
 
+a .icon {
+	text-decoration: none;
+}
 
 .icon {
 	font-size: 16px;
 	line-height:16px;
 	margin: 0;
 	vertical-align: middle;
+	display: inline;
 }
 
 .lead.icon {
@@ -532,13 +538,8 @@ thead .icon {
 }
 
 .btn-icon {
-	padding:0 2px 1px 3px;
-	margin:-5px 0 -3px;
-}
-.btn .icon {
-/*	margin-bottom: -3px;
-	display: inline-block;
-	margin-top: -3px;*/
+	padding:0 3px 2px 4px;
+	margin:-6px 0 -2px;
 }
 
 .completed {
@@ -822,6 +823,11 @@ a.accordion-toggle h4, tab-heading h4 {
 .nav > li > a:focus {
   background-color: white;
 }
+
+.nav-tabs {
+	border-bottom: 1px solid #bebeb6;
+}
+
 .nav-tabs > li > a {
   border: 1px solid #bebeb6;
 	padding-top: 0px;
@@ -1258,9 +1264,11 @@ button.toast-close-button {
 	color: #9e9e8e;
 }
 .label-neutral .icon {
-	margin-right: 3px;
+	
 	vertical-align: text-top;
-}
+	margin-top:2px;
+	
+	display: inline-block;}
 
 .center {
 	margin: 0 auto;

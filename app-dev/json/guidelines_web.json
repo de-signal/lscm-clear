@@ -7,6 +7,22 @@
 			"name": "Add a new order",
 			"id": "add-order",
 			"description": "To ulpoad a BW file, follow these steps.", 
+			"relateds_txt": "BW file is attached to the order page", 
+			"relateds": {
+				"order": [
+					{
+						"type": "upload",
+						"name": "BW.xls",
+						"guideline": {
+							"name": "1. Add order",
+							"url": {
+								"page": "process",
+								"anchor": "add-order"
+							}
+						}
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
@@ -31,26 +47,7 @@
 				{
 					"from": "From the \"Add Order\" page",
 					"description": "When the file is processed, you are automatically redirected on the newly created order.", 
-					"img": "backoffice-add_order-05.jpg", 
-					"elements_required_txt": "BW file is attached to the order page", 
-					"elements_required": [
-						{
-							"type": "order", 
-							"conditions": [
-								{
-									"type": "upload",
-									"name": "BW.xls",
-									"guideline": {
-										"name": "1. Add order",
-										"url": {
-											"page": "process",
-											"anchor": "add-order"
-										}
-									}
-								}
-							]
-						}
-					]
+					"img": "backoffice-add_order-05.jpg"
 				}
 			]
 		}, 
@@ -59,172 +56,163 @@
 			"type": "upload",
 			"id": "download-file",
 			"description": "", 
+			"relateds_txt": "Page types and their belonging files to download", 
+			"relateds": {
+				"order": [
+					{
+						"type": "upload",
+						"name": "Consolidation.xls",
+						"guideline": {
+							"name": "1.1 Consolidation",
+							"url": {
+								"page": "process",
+								"anchor": "consolidation"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Stickers.pdf",
+						"guideline": {
+							"name": "2. Order placed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "VPL-draft.xls",
+						"guideline": {
+							"name": "2. Order placed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}
+				],
+				"shipment": [ 
+					{
+						"type": "upload",
+						"name": "RFC-draft.xls",
+						"guideline": {
+							"name": "4. Order completed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Quotation.pdf",
+						"guideline": {
+							"name": "4. Order completed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "RFC-freight-forwarder.xls",
+						"guideline": {
+							"name": "5. Box ready for collection",
+							"url": {
+								"page": "process",
+								"anchor": "box-ready-for-collection"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Packing-list.pdf",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Commercial-invoice.pdf",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Form-C16.pdf",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "CCVO.pdf",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Draft-MAWB-BL.pdf",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}, 
+					{
+						"type": "upload",
+						"name": "Export-kit.zip",
+						"guideline": {
+							"name": "9. Ready for green light",
+							"url": {
+								"page": "process",
+								"anchor": "ready-for-green-light"
+							}
+						}
+					}
+				],
+				"box": [ 
+					{
+						"type": "upload",
+						"name": "Shipping-marks.pdf",
+						"guideline": {
+							"name": "4. Order completed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
 					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the file you want to download.", 
-					"img": "backoffice-download_file-01.jpg", 
-					"elements_required_txt": "Page types and their belonging files to download", 
-					"elements_required": [
-						{
-							"type": "order", 
-							"conditions": [
-								{
-									"type": "upload",
-									"name": "Consolidation.xls",
-									"guideline": {
-										"name": "1.1 Consolidation",
-										"url": {
-											"page": "process",
-											"anchor": "consolidation"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Stickers.pdf",
-									"guideline": {
-										"name": "2. Order placed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "VPL-draft.xls",
-									"guideline": {
-										"name": "2. Order placed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}
-							]
-						},
-						{
-							"type": "shipment", 
-							"conditions": [ 
-								{
-									"type": "upload",
-									"name": "RFC-draft.xls",
-									"guideline": {
-										"name": "4. Order completed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Quotation.pdf",
-									"guideline": {
-										"name": "4. Order completed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "RFC-freight-forwarder.xls",
-									"guideline": {
-										"name": "5. Box ready for collection",
-										"url": {
-											"page": "process",
-											"anchor": "box-ready-for-collection"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Packing-list.pdf",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Commercial-invoice.pdf",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Form-C16.pdf",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "CCVO.pdf",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Draft-MAWB-BL.pdf",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}, 
-								{
-									"type": "upload",
-									"name": "Export-kit.zip",
-									"guideline": {
-										"name": "9. Ready for green light",
-										"url": {
-											"page": "process",
-											"anchor": "ready-for-green-light"
-										}
-									}
-								}
-							]
-						},
-						{
-							"type": "box", 
-							"conditions": [ 
-								{
-									"type": "upload",
-									"name": "Shipping-marks.pdf",
-									"guideline": {
-										"name": "4. Order completed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}
-							]
-						}
-					]
+					"img": "backoffice-download_file-01.jpg"
 				},
 				{
 					"from": "From the element's page", 
@@ -237,57 +225,51 @@
 			"name": "Upload a file",
 			"type": "upload",
 			"id": "upload-file",
-			"description": " ", 
+			"description": " ",
+			"relateds_txt": "Page types and their belonging files to upload", 
+			"relateds": {
+				"order": [
+					{
+						"type": "upload",
+						"name": "Consolidation.xls",
+						"guideline": {
+							"name": "1.1. Consolidation",
+							"url": {
+								"page": "process",
+								"anchor": "consolidation"
+							}
+						}
+					},
+					{
+						"type": "upload",
+						"name": "VPL-draft.xls",
+						"guideline": {
+							"name": "2. Order placed",
+							"url": {
+								"page": "process",
+								"anchor": "order-placed"
+							}
+						}
+					}
+				],
+				"shipment": [ 
+					{
+						"type": "upload",
+						"name": "RFC-draft.xls",
+						"guideline": {
+							"name": "4. Order completed",
+							"url": {
+								"page": "process",
+								"anchor": "order-completed"
+							}
+						}
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
-					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the file you want to upload.", 
-					"elements_required_txt": "Page types and their belonging files to upload", 
-					"elements_required": [
-						{
-							"type": "order", 
-							"conditions": [
-								{
-									"type": "upload",
-									"name": "Consolidation.xls",
-									"guideline": {
-										"name": "1.1. Consolidation",
-										"url": {
-											"page": "process",
-											"anchor": "consolidation"
-										}
-									}
-								},
-								{
-									"type": "upload",
-									"name": "VPL-draft.xls",
-									"guideline": {
-										"name": "2. Order placed",
-										"url": {
-											"page": "process",
-											"anchor": "order-placed"
-										}
-									}
-								}
-							]
-						},
-						{
-							"type": "shipment", 
-							"conditions": [ 
-								{
-									"type": "upload",
-									"name": "RFC-draft.xls",
-									"guideline": {
-										"name": "4. Order completed",
-										"url": {
-											"page": "process",
-											"anchor": "order-completed"
-										}
-									}
-								}
-							]
-						}
-					],  
+					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the file you want to upload.",  
 					"img": "backoffice-upload_file-01.jpg"
 				}, 
 				{
@@ -322,52 +304,49 @@
 			"type": "text",
 			"id": "fill-input",
 			"description": " ", 
+			"relateds_txt": "Page types and their belonging input fields to fill in", 
+			"relateds": {
+				"shipment": [
+					{
+						"type": "text",
+						"name": "PO service",
+						"guideline": {
+							"name": "4. Order completed",
+							"url": {
+								"page": "process",
+								"anchor": "order-completed"
+							}
+						}
+					},
+					{
+						"type": "text",
+						 "name": "MF",
+						 "guideline": {
+						 	"name": "9. Ready for green light",
+						 	"url": {
+						 		"page": "process",
+						 		"anchor": "ready-for-green-light"
+						 	}
+						 }
+					},
+					{
+						"type": "text",
+						 "name": "BA",
+						 "guideline": {
+						 	"name": "9. Ready for green light",
+						 	"url": {
+						 		"page": "process",
+						 		"anchor": "ready-for-green-light"
+						 	}
+						 }
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
 					"description": "Click on \"Tracking\" or \"Search\" the page to which belongs the input you want to fill in.", 
-					"img": "backoffice-fill_input-01.jpg", 
-					"elements_required_txt": "Page types and their belonging input fields to fill in", 
-					"elements_required": [
-						{
-							"type": "shipment", 
-							"conditions": [
-								{
-									"type": "text",
-									"name": "PO service",
-									"guideline": {
-										"name": "4. Order completed",
-										"url": {
-											"page": "process",
-											"anchor": "order-completed"
-										}
-									}
-								},
-								{
-									"type": "text",
-									 "name": "MF",
-									 "guideline": {
-									 	"name": "9. Ready for green light",
-									 	"url": {
-									 		"page": "process",
-									 		"anchor": "ready-for-green-light"
-									 	}
-									 }
-								},
-								{
-									"type": "text",
-									 "name": "BA",
-									 "guideline": {
-									 	"name": "9. Ready for green light",
-									 	"url": {
-									 		"page": "process",
-									 		"anchor": "ready-for-green-light"
-									 	}
-									 }
-								}
-							]
-						}
-					]
+					"img": "backoffice-fill_input-01.jpg"
 				}, 
 				{
 					"from": "From the element's page", 
@@ -391,30 +370,27 @@
 			"type": "checkbox",
 			"id": "check-condition",
 			"description": " ", 
+			"relateds_txt": "Page types and their belonging checkbox", 
+			"relateds": {
+				"shipment": [
+					{
+						"type": "checkbox",
+						"name": "Custom released",
+						"guideline": {
+							"name": "14. Shipment arrived",
+							"url": {
+								"page": "process",
+								"anchor": "shipment-arrived"
+							}
+						}
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
 					"description": "Click on \"Tracking\" or \"Search\" the page to which belongs the checkbox you want to check.", 
-					"img": "backoffice-check_condition-01.jpg", 
-					"elements_required_txt": "Page types and their belonging checkbox", 
-					"elements_required": [
-						{
-							"type": "shipment", 
-							"conditions": [
-								{
-									"type": "checkbox",
-									"name": "Custom released",
-									"guideline": {
-										"name": "14. Shipment arrived",
-										"url": {
-											"page": "process",
-											"anchor": "shipment-arrived"
-										}
-									}
-								}
-							]
-						}
-					]
+					"img": "backoffice-check_condition-01.jpg"
 				}, 
 				{
 					"from": "From the element's page", 
@@ -438,63 +414,60 @@
 			"type": "date",
 			"id": "select-date",
 			"description": " ", 
+			"relateds_txt": "Page types and their belonging dates fields", 
+			"relateds": {
+				"shipment": [
+					{
+						"type": "date",
+						"name": "Booking date",
+						"guideline": {
+							"name": "5. Box ready for collection",
+							"url": {
+								"page": "process",
+								"anchor": "box-ready-for-collection"
+							}
+						}
+					},
+					{
+						"type": "date",
+						"name": "ETA",
+						"guideline": {
+							"name": "5. Box ready for collection",
+							"url": {
+								"page": "process",
+								"anchor": "box-ready-for-collection"
+							}
+						}
+					}, 
+					{
+						"type": "date",
+						"name": "Booking date",
+						"guideline": {
+							"name": "10. Green light approved",
+							"url": {
+								"page": "process",
+								"anchor": "green_light_approved"
+							}
+						}
+					},
+					{
+						"type": "date",
+						"name": "ATA",
+						"guideline": {
+							"name": "13. Shipment departed",
+							"url": {
+								"page": "process",
+								"anchor": "shipment-departed"
+							}
+						}
+					}
+				]
+			}, 
 			"steps": [
 				{
 					"from": "From the main menu", 
 					"description": "Click on \"Tracking\" or \"Search\" to access the page to which belongs the date you want to select.", 
-					"img": "backoffice-select_date-01.jpg", 
-					"elements_required_txt": "Page types and their belonging dates fields", 
-					"elements_required": [
-						{
-							"type": "shipment", 
-							"conditions": [
-								{
-									"type": "date",
-									"name": "Booking date",
-									"guideline": {
-										"name": "5. Box ready for collection",
-										"url": {
-											"page": "process",
-											"anchor": "box-ready-for-collection"
-										}
-									}
-								},
-								{
-									"type": "date",
-									"name": "ETA",
-									"guideline": {
-										"name": "5. Box ready for collection",
-										"url": {
-											"page": "process",
-											"anchor": "box-ready-for-collection"
-										}
-									}
-								}, 
-								{
-									"type": "date",
-									"name": "Booking date",
-									"guideline": {
-										"name": "10. Green light approved",
-										"url": {
-											"page": "process",
-											"anchor": "green_light_approved"
-										}
-									}
-								},
-								{
-									"type": "date",
-									"name": "ATA",
-									"guideline": {
-										"name": "13. Shipment departed",
-										"url": {
-											"page": "process",
-											"anchor": "shipment-departed"
-										}
-									}
-								}
-							]
-						}
-					]
+					"img": "backoffice-select_date-01.jpg"
 				}, 
 				{
 					"from": "From the element's page", 

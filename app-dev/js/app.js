@@ -10,6 +10,7 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		
 //		Static pages 
+		$routeProvider.when('/bug-list', {templateUrl: 'partials/bug-list.html', controller: 'BugListCtrl' });
 		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/dashboard.html', controller: 'StaticDashboardCtrl', reloadOnSearch: false});
 		$routeProvider.when('/static-indicators', {templateUrl: 'partials/indicators.html', controller: 'StaticIndicatorsCtrl'});
 		$routeProvider.when('/static-documents/:type', {templateUrl: 'partials/documents.html', controller: 'StaticDocumentsCtrl', reloadOnSearch: false});
@@ -21,8 +22,7 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/static-search', {templateUrl: 'partials/search.html', controller: 'StaticSearchCtrl', reloadOnSearch: false});
 		$routeProvider.when('/guidelines', {templateUrl: 'partials/guidelines.html', controller: 'GuidelinesCtrl'});
 		$routeProvider.when('/guidelines/process', {templateUrl: 'partials/guidelines-process.html', controller: 'GuidelinesProcessCtrl'});
-		$routeProvider.when('/guidelines/web', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesWebCtrl'});
-		$routeProvider.when('/guidelines/mobile', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesMobileCtrl'});
+		$routeProvider.when('/guidelines/:id', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesDetailCtrl'});
 		
 		$routeProvider.when('/user', {templateUrl: 'partials/user-profile.html', controller: 'UserProfileCtrl'});
 		$routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: 'DashboardCtrl', reloadOnSearch: false});

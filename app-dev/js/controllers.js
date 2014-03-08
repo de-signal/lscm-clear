@@ -69,6 +69,12 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
+	.controller('BugListCtrl', ['$scope', 'Bugs', function($scope, Bugs) {
+		Bugs.query( function(bugs) { 
+			$scope.bugs = bugs;
+		});
+	}])
+	
 	.controller('DashboardCtrl', ['$location', '$scope', '$timeout', 'E1', 'ClearFn', 'Utils', function($location, $scope, $timeout, E1, ClearFn, Utils) {
 		
 		ClearFn.listsReady('init');
@@ -198,7 +204,9 @@ angular.module('clearApp.controllers', [])
 		$scope.listFiltersLoad = function(listConfig) {
 			ClearListsFn.listFiltersLoad(listConfig).then( function(filters) {
 				$scope.filters = filters;
-				$scope.filters.tmp.filtersOpen = false; 
+				$scope.filters.tmp.ModificationsOpen = false; 
+				$scope.filters.tmp.selection = [];
+				$scope.filters.tmp.propertyUpdate = {};
 			}); 
 		}
 		
@@ -231,8 +239,49 @@ angular.module('clearApp.controllers', [])
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope.filters.date[param].opened = true;
-		};
+		}
 		
+		$scope.selectionAll = function(elms) {
+			for (var i in elms) {
+				var idx = $scope.filters.tmp.selection.indexOf(elms[i].id);
+				if (idx === -1) {
+			    	$scope.filters.tmp.selection.push(elms[i].id);
+			    }
+			}
+		}
+		
+		$scope.selectionNone = function(elms) {
+			for (var i in elms) {
+				var idx = $scope.filters.tmp.selection.indexOf(elms[i].id);
+				if (idx > -1) {
+			    	$scope.filters.tmp.selection.splice(idx, 1);
+			    }
+			}
+		}
+		
+		$scope.selectionInverse = function(elms) {
+			for (var i in elms) {
+				$scope.selectionToggle(elms[i].id);
+			}
+		}
+		
+		$scope.selectionToggle = function (id) {
+			var idx = $scope.filters.tmp.selection.indexOf(id);
+			if (idx > -1) { // is currently selected
+				$scope.filters.tmp.selection.splice(idx, 1);
+			} else { // is newly selected
+				$scope.filters.tmp.selection.push(id);
+			}
+		};
+		  
+		$scope.listPropertySave = function (list, idsArray, property) {
+			ClearListsFn.listPropertySave(list, idsArray, property);
+			$scope.filters.tmp.ModificationsOpen = false; 
+			$scope.filters.tmp.selection = [];
+			$scope.filters.tmp.propertyUpdate = {};
+		}
+		
+		$scope.stopPropagation = ClearFn.stopPropagation;
 		$scope.dateToTimestamp = Utils.dateToTimestamp;
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
 		$scope.trackingToggle = ClearFn.trackingToggle;
@@ -263,6 +312,7 @@ angular.module('clearApp.controllers', [])
 				$scope.listsConfig[i].id = $scope.types[i].id; 
 				$scope.listsConfig[i].type = $scope.types[i].id;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
+				$scope.listsConfig[i].display.modifications = true; 
 			}
 			ClearFn.listsReady('parent'); 
 		});
@@ -892,8 +942,15 @@ angular.module('clearApp.controllers', [])
 		};
 	}])
 	
-	.controller('GuidelinesWebCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesWeb', function($scope, $location, $anchorScroll, $timeout, GuidelinesWeb) {
-		GuidelinesWeb.get(function(elm) {
+	.controller('GuidelinesDetailCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$routeParams', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, $routeParams, GuidelinesWeb, GuidelinesMobile) {
+		
+		$scope.types = ["order", "shipment", "box", "item"];
+		var resource; 
+		
+		if ($routeParams.id === 'web') resource = GuidelinesWeb; 
+		if ($routeParams.id === 'mobile') resource = GuidelinesMobile; 
+		
+		resource.get(function(elm) {
 			$scope.elm = elm; 
 			$timeout(function() {
 				$anchorScroll();
@@ -905,20 +962,6 @@ angular.module('clearApp.controllers', [])
 			console.log('anchor: ', anchor);
 			$anchorScroll();
 		}
-	}])
-	
-	.controller('GuidelinesMobileCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, GuidelinesMobile) {
-		GuidelinesMobile.get(function(elm) {
-			$scope.elm = elm; 
-			$timeout(function() {
-				$anchorScroll();
-			}, 500);
-		});
-		
-		$scope.scrollTo = function(anchor) {
-			$location.hash(anchor);
-			$anchorScroll();
-		}	
 	}])
 	
 	.controller('News', ['$scope', function($scope) {

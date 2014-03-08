@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Toasters", 
+		"type": "Bug", 
+		"description": "Renseigner les paramètres dans les headers HTTP après mise à jour des propriétés et conditions", 
+		"date": "", 
+		"status": "Open" 
+	}, 
+	{
+		"name": "Pagination", 
+		"type": "Bug", 
+		"description": "Renseigner les paramètres dans les headers HTTP pour l'affichage de la pagination", 
+		"date": "", 
+		"status": "Open" 
+	}
+]

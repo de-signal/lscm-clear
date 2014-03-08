@@ -10,7 +10,8 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id', 
 			{ format:'@format', type:'@type', id:'@id' }, 
 			{
-				update: { method: 'PUT' }
+				update: { method: 'PUT' }, 
+				updateList: { method: 'PUT', isArray: true },
 			});
 	}])
 	.factory('Utils', function(){
@@ -89,7 +90,7 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	})
 	
-	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'E1', 'E2', 'IRs', 'IRsFilters', 'PODs', 'PODsFilters', 'NCRs', 'NCRsFilters', 'Utils', function($filter, $rootScope, $location, $q, E1, E2, IRs, IRsFilters, PODs, PODsFilters, NCRs, NCRsFilters, Utils){
+	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'toaster', 'E1', 'E2', 'IRs', 'IRsFilters', 'PODs', 'PODsFilters', 'NCRs', 'NCRsFilters', 'Utils', function($filter, $rootScope, $location, $q, toaster, E1, E2, IRs, IRsFilters, PODs, PODsFilters, NCRs, NCRsFilters, Utils){
 		
 		return {
 			listElementsLoad: function (listConfig) {
@@ -124,6 +125,7 @@ angular.module('clearApp.services', ['ngResource'])
 						filters.badges = that.listFiltersBadgesInit(listConfig.urlParams, listConfig.filters, values);
 						filters.date = that.listFiltersDateInit(listConfig.urlParams, listConfig.filters);
 						filters.tmp = that.listFiltersTmpInit(listConfig.urlParams, listConfig.filters, values);
+						filters.tmp.filtersOpen = false; 
 						q.resolve(filters);
 					}
 				);
@@ -190,6 +192,20 @@ angular.module('clearApp.services', ['ngResource'])
 				if (!urlParams.hasOwnProperty('related_reference')) { 
 					delete urlParams['related_to'];
 				}
+			}, 
+			listPropertySave: function(list, idsArray, property) {
+				var ids = idsArray.join();
+				var elm = Utils.objectByKey(list.elements, 'id', idsArray[0]);
+				
+				elm.$update({ 'ids': ids, 'propertyName': property.name, 'propertyValue': property.value }, function(elm, response) {
+					var propertyMessage; 
+					
+					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated";
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated";
+					
+					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, response("X-Clear-updatedPropertyName"));
+				}); 
 			}
 		}
 	}])
@@ -213,8 +229,12 @@ angular.module('clearApp.services', ['ngResource'])
 				} 
 			}, 
 			listsUrlSet: function(urlParams, listId, listConfig) {
-				
 				var urlPage = $location.search();
+//				var urlReplace = false; 
+//				
+//				if (Utils.isEmpty(urlPage)) { 
+//					urlReplace = true; 
+//				}
 				
 				if (listConfig.listCode) {
 					var urlList = {}		
@@ -238,7 +258,8 @@ angular.module('clearApp.services', ['ngResource'])
 					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
 					$location.search(urlParams);
 				} 
-				$location.replace();			
+//				if (urlReplace) 
+					$location.replace();			
 				listConfig.urlParams = urlParams; 	
 				return listConfig; 
 			},
@@ -300,6 +321,9 @@ angular.module('clearApp.services', ['ngResource'])
 	//                $log.info('Modal dismissed at: ' + new Date());
 					});
 				}
+			}, 
+			stopPropagation: function($event) {
+				if ($event.stopPropagation) $event.stopPropagation();
 			}, 
 			trackingToggle: function(elm, $event) {
 				if ($event.stopPropagation) $event.stopPropagation(); 
@@ -519,11 +543,17 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('Elms', ['$resource', function($resource){
 		return $resource('json/elms.json');
 	}])
+	.factory('Bugs', ['$resource', function($resource){
+		return $resource('json/bugs.json');
+	}])
 	.factory('ElmsListsConfig', ['$resource', function($resource){
 		return $resource('json/elmsConfig.json');
 	}])
 	.factory('DocumentsConfig', ['$resource', function($resource){
 		return $resource('json/documentsConfig.json');
+	}])
+	.factory('filtersModifyOrders', ['$resource', function($resource){
+		return $resource('json/filters_modify_order.json');
 	}])
 	.factory('Elm', ['$resource', function($resource){
 		return $resource('json/elm.json');

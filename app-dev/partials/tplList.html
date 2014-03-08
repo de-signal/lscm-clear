@@ -4,22 +4,12 @@
 <div ng-show="loaded">
 
 	<div class="row hide">
-	   	<div class="col-md-3">
-	   		<pre><small>
-list.urlParams: {{list.urlParams | json}}
-			</small></pre>
-		</div>
-		<div class="col-md-3">
-			<pre><small>			
-filters.badges: {{filters.badges | json}}
-			</small></pre>
-	    </div>
-	    <div class="col-md-3">
+	    <div class="col-md-6">
 	    	<pre><small>
 filters.date: {{filters.date | json}}
 	    	</small></pre>
 	    </div>
-	    <div class="col-md-3">
+	    <div class="col-md-6">
 	    	<pre><small>
 filters.tmp: {{filters.tmp | json}}
 			</small></pre>
@@ -141,16 +131,55 @@ filters.tmp: {{filters.tmp | json}}
 							</div>
 						
 						</accordion-group>
-						<accordion-group is-open="filters.tmp.ModificationsOpen" ng-if="list.display.batch">
+						<accordion-group is-open="filters.tmp.ModificationsOpen" ng-if="list.display.modifications">
 					    	<accordion-heading>
 					    		Modifications
 					    	</accordion-heading>
 					
 							<div class="row">
 								<div class="col-md-4">
-									Select
+									<legend>Selection </legend>
+									<a class="btn btn-default btn-s" ng-click="selectionAll(list.elements)">All</a>
+									<a class="btn btn-default btn-s" ng-click="selectionNone(list.elements)">None</a>
+									<a class="btn btn-default btn-s" ng-click="selectionInverse(list.elements)">Inverse</a>
+								</div>
+								<div class="col-md-8">
+									<legend>Property </legend>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Name</label>
+												<select class="form-control" ng-model="filters.tmp.propertyUpdate" ng-options="prop as prop.name group by prop.group for prop in filters.values.properties track by prop.name">
+													<option value="">---</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">{{filters.tmp.propertyUpdate.name}}</label>
+												<span ng-switch="filters.tmp.propertyUpdate.type">
+													<select class="form-control" ng-model="filters.tmp.propertyUpdate.value" ng-options="value for value in filters.tmp.propertyUpdate.values"  ng-switch-when="select">
+														<option value="">---</option>
+													</select>
+													<input class="form-control" type="text" ng-model="filters.tmp.propertyUpdate.value" ng-switch-when="text">
+													<div class="input-group" ng-switch-when="date">
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.propertyUpdate.value" is-open="filters.date.propertyUpdate.opened" show-weeks="false" ng-change="filters.tmp.propertyUpdate.value = dateToTimestamp(filters.date.propertyUpdate.value)" />
+														<span class="input-group-btn">
+															<button class="btn" ng-click="calOpen($event, 'propertyUpdate')"><i class="icon i-condition-date"></i></button>
+														</span>
+													</div>
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+							<div class="row">
+							    <div class="col-md-12">
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave(list, filters.tmp.selection, filters.tmp.propertyUpdate)">Modify</button>
+								</div>
+							</div>
+							
 						</accordion-group>
 						
 					</accordion>
@@ -167,6 +196,7 @@ filters.tmp: {{filters.tmp | json}}
 	<table class="table table-condensed" ng-if="list.elements">
 		<thead>
 			<tr>
+				<th ng-if="list.display.modifications"></th>
 				<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'reference'"></i>
 					</a></h6></th>
@@ -185,6 +215,7 @@ filters.tmp: {{filters.tmp | json}}
 		</thead>
 		<tbody>
 			<tr  ng-repeat="elm in list.elements" ng-click="go(elm.type, elm.id)" class="pointer over">
+				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectionToggle(elm.id)" ng-checked="filters.tmp.selection.indexOf(elm.id) > -1" value="elm.id"></td>
 				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
 				<td ng-if="colmunChrono"><small>{{elm.chrono}}</small></td>
 				<td><strong><small>{{elm.milestone}}</small></strong></td>

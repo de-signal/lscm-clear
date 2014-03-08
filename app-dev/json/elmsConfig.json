@@ -2,7 +2,8 @@
 	"format": "elements", 
 	"display": { 
 		"filters" : true, 
-		"tracking": true 
+		"tracking": true, 
+		"modifications": true
 	}, 
 	"urlInit": {
 		"sortBy": "status", 
