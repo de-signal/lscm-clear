@@ -139,9 +139,9 @@ filters.tmp: {{filters.tmp | json}}
 							<div class="row">
 								<div class="col-md-4">
 									<legend>Selection </legend>
-									<a class="btn btn-default btn-s" ng-click="selectionAll(list.elements)">All</a>
-									<a class="btn btn-default btn-s" ng-click="selectionNone(list.elements)">None</a>
-									<a class="btn btn-default btn-s" ng-click="selectionInverse(list.elements)">Inverse</a>
+									<a class="btn btn-default btn-xs" ng-click="selectionAll(list.elements)">All</a>
+									<a class="btn btn-default btn-xs" ng-click="selectionNone(list.elements)">None</a>
+									<a class="btn btn-default btn-xs" ng-click="selectionInverse(list.elements)">Inverse</a>
 								</div>
 								<div class="col-md-8">
 									<legend>Property </legend>
@@ -176,7 +176,7 @@ filters.tmp: {{filters.tmp | json}}
 							</div>
 							<div class="row">
 							    <div class="col-md-12">
-									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave(list, filters.tmp.selection, filters.tmp.propertyUpdate)">Modify</button>
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave(list, filters.tmp.selection, filters.tmp.propertyUpdate)" ng-disabled="filters.tmp.selection.length < 1">Modify</button>
 								</div>
 							</div>
 							

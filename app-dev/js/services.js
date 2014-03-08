@@ -11,7 +11,7 @@ angular.module('clearApp.services', ['ngResource'])
 			{ format:'@format', type:'@type', id:'@id' }, 
 			{
 				update: { method: 'PUT' }, 
-				updateList: { method: 'PUT', isArray: true },
+				updateList: { method: 'PUT', isArray: true }
 			});
 	}])
 	.factory('Utils', function(){
@@ -104,11 +104,10 @@ angular.module('clearApp.services', ['ngResource'])
 			 	resources[listConfig.resource].query( listQuery, function(elements, response) {
 			 		list.pagination = { 
 						'itemsPerPage': listConfig.urlInit.limit, 
-						'page': response("X-Clear-currentPage"), 
 						'pagesCount': response("X-Clear-pagesCount"), 
 						'elementsCount': response("X-Clear-elementsCount")
 					} 
-					console.log("pagesCount: " + list.pagination.pagesCount + ", currentPage: " + list.pagination.currentPage + ", elementsCount: " + list.pagination.elementsCount);
+					console.log("pagesCount: " + list.pagination.pagesCount + ", elementsCount: " + list.pagination.elementsCount);
 					list.elements = elements; 
 					q.resolve(list);
 				});
@@ -194,17 +193,22 @@ angular.module('clearApp.services', ['ngResource'])
 				}
 			}, 
 			listPropertySave: function(list, idsArray, property) {
-				var ids = idsArray.join();
-				var elm = Utils.objectByKey(list.elements, 'id', idsArray[0]);
-				
-				elm.$update({ 'ids': ids, 'propertyName': property.name, 'propertyValue': property.value }, function(elm, response) {
+				var elements = []
+				for (var i in idsArray) {
+					elements.push(Utils.objectByKey(list.elements, 'id', idsArray[i]));
+				}
+
+				E2.updateList({ 'type': list.type, 'id': 'updateList', 'format': list.format, 'ids': idsArray.join(), 'propertyId': property.id, 'propertyValue': property.value }, elements, function(elms, response) {
 					var propertyMessage; 
+					var elementsType = list.elements.length + " " + list.type; 
 					
-					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
-					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated";
-					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated";
+					if (response("X-Clear-updatedElements")) elementsType = "on " + response("X-Clear-updatedElements");
 					
-					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, response("X-Clear-updatedPropertyName"));
+					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated properties" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated" + elementsType;
+					
+					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
 				}); 
 			}
 		}
@@ -332,14 +336,14 @@ angular.module('clearApp.services', ['ngResource'])
 			propertySave: function(elm, property, group) {
 				var self=this;
 				$rootScope.currentGroup = group;
-				elm.$update({ 'propertyName': property.name, 'propertyValue': property.value }, function(elm, response) {
+				elm.$update({ 'propertyId': property.id, 'propertyValue': property.value }, function(elm, response) {
 					var propertyMessage; 
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
 					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated";
 					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated";
 					
-					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, response("X-Clear-updatedPropertyName"));
+					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
 					
 					elm = self.detailUpdate(elm);
 				});
@@ -347,7 +351,7 @@ angular.module('clearApp.services', ['ngResource'])
 			requiredSave: function (elm, required) {
 				var self=this;
 				
-				elm.$update({ 'requiredName': required.name, 'requiredValue': required.value }, function(elm, response) {
+				elm.$update({ 'requiredId': required.id, 'requiredValue': required.value }, function(elm, response) {
 					var requiredMessage, milestoneMessage; 
 					
 					if (response("X-Clear-updatedRequired")==="success") requiredMessage = "Updated condition";
@@ -358,7 +362,7 @@ angular.module('clearApp.services', ['ngResource'])
 					else if (response("X-Clear-updatedMilestone")==="warning") propertyMessage = "Milestone has not been updated";
 					else if (response("X-Clear-updatedMilestone")==="error") milestoneMessage = "Milestone has not been updated";
 					
-					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, response("X-Clear-updatedRequiredName"));
+					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, required.name);
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
 					
 					elm = self.detailUpdate(elm);
