@@ -649,21 +649,12 @@ angular.module('clearApp.controllers', [])
 				    for (var i = 0; i < $files.length; i++) {
 				      var file = $files[i];
 				      $scope.upload = $upload.upload({
-				        url: '/index_rest.php/api/clear/v2/elements/'+ elm.type + '/' + elm.id + '?required=' + required.id, //upload.php script, node.js route, or servlet url
-				        // method: POST or PUT,
-				        // headers: {'headerKey': 'headerValue'},
-				        // withCredentials: true,
+				        url: '/index_rest.php/api/clear/v2/elements/'+ elm.type + '/' + elm.id + '?required=' + required.id,
 				        data: {myObj: $scope.myModelObj},
 				        file: file,
-				        // file: $files, //upload multiple files, this feature only works in HTML5 FromData browsers
-				        /* set file formData name for 'Content-Desposition' header. Default: 'file' */
-				        //fileFormDataName: myFile, //OR for HTML5 multiple upload only a list: ['name1', 'name2', ...]
-				        /* customize how data is added to formData. See #40#issuecomment-28612000 for example */
-				        //formDataAppender: function(formData, key, val){} //#40#issuecomment-28612000
 				      }).progress(function(evt) {
 				        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 				      }).success(function(data, status, headers, config) {
-				        // file is uploaded successfully
 				        console.log(data);
 				      });
 				      //.error(...)
@@ -713,15 +704,69 @@ angular.module('clearApp.controllers', [])
 		
 	}])
 	
-	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', 'E2', function($scope, $filter, $routeParams, E2) {
+	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'E1', function($scope, $filter, $routeParams, $modal, E2, E1) {
 		$scope.loaded = false;
 		E2.get({'format': 'documents', 'type': 'ir', 'id': $routeParams.id}, function(doc) {
+			for(var i in doc.boxes) {
+				var box = doc.boxes[i]; 
+				for (var j in box.items) {
+					var item = box.items[j];
+					if (item.image) {
+						item.image.urlResource = "/index_rest.php/api/clear/v1/file/" + item.image.url; 
+						item.image.thumbResource = "/index_rest.php/api/clear/v1/file/" + item.image.thumb;
+//						E1.get({'type': 'file', 'id': item.image.url}, function(img) {
+//						});
+					}
+				}
+				box.itemsGroupBy4 = $filter('groupBy')(box.items, 4);
+			}
 			$scope.doc = doc;
 			$scope.loaded = true;
-			for(var i=0, lenI=doc.boxes.length; i < lenI;i++) {
-				$scope.doc.boxes[i].itemsGroupBy4 = $filter('groupBy')(doc.boxes[i].items, 4);
-			}
 		});
+		// /index_rest.php/api/clear/v1/file/301512686"
+	}])
+	
+	.controller('StaticInspectionReportCtrl', ['$scope', '$filter', '$modal', 'IR', function($scope, $filter, $modal, IR) {
+		$scope.loaded = false;
+		$scope.doc = IR.get(function(doc) {
+			for(var i in doc.boxes) {
+				var box = doc.boxes[i]; 
+				for (var j in box.items) {
+					var item = box.items[j];
+					if (item.image) {
+						item.image.urlResource = "img/" + item.image.url;
+						item.image.thumbResource = "img/" + item.image.thumb;
+					}
+				}
+				box.itemsGroupBy4 = $filter('groupBy')(box.items, 4);
+			}
+			$scope.loaded = true;
+		});
+		$scope.open = function (item) {            
+			var modalInstance = $modal.open({
+				templateUrl: 'partials/tplModalIrImg.html',
+				controller: 'TplModalIrImgCtrl',
+				resolve: {
+				  item: function () {
+					return item;
+				  }
+				}
+			});
+			modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+			}, function () {
+//                $log.info('Modal dismissed at: ' + new Date());
+			});
+		};
+	}])
+	
+	
+	.controller('TplModalIrImgCtrl', ['$scope', '$modalInstance', 'item', function ($scope, $modalInstance, item) {	
+		console.log('item: ', item); 
+		$scope.item = item; 
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
 	}])
 	
 	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', function($scope, $routeParams, E2, $modal) {
@@ -751,57 +796,6 @@ angular.module('clearApp.controllers', [])
 				});
 			}
 		}; 
-	}])
-	
-	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E2', function($scope, $routeParams, ClearFn, E2) {
-		$scope.loaded = false;
-		E2.get({'format': 'documents', 'type': 'pod', 'id': $routeParams.id}, function(doc) {
-			$scope.doc = doc;
-			$scope.loaded = true;
-			
-		});
-		$scope.go = ClearFn.go;
-	}])
-	
-	.controller('StaticIndicatorsCtrl', ['$scope', 'StaticIndicators', 'ChartsConfig', function($scope, StaticIndicators, ChartsConfig) {
-		
-		$scope.loaded = false;
-		
-		$scope.charts = [];
-		
-		StaticIndicators.query(function(charts){
-			for(var i = 0, len = charts.length; i < len; ++i) {
-				ChartsConfig.chartFn(charts[i]); 
-				$scope.charts[charts[i].id] = charts[i];
-			}
-			$scope.loaded = true;
-			console.log('charts: ', charts);
-		});	
-		$scope.colors = ChartsConfig.colors;
-		$scope.tooltips = ChartsConfig.tooltips;	
-		
-	}])
-	
-	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', 'StaticGlobalReports', function($location, $scope, ClearFn, StaticDashboardList, StaticGlobalReports) {
-		$scope.loaded = false;
-		StaticGlobalReports.query( function(docs){
-			$scope.report = docs[docs.length-1];
-		});
-		StaticDashboardList.query( function(list) {
-			$scope.list = list;
-			$scope.loaded = true;
-		});
-		$scope.go = ClearFn.go;
-	}])
-	
-	.controller('StaticInspectionReportCtrl', ['$scope', '$filter', 'IR', function($scope, $filter, IR) {
-		$scope.loaded = false;
-		$scope.doc = IR.get(function(doc) {
-			for(var i=0, len=doc.boxes.length;i<len;i++) {
-				$scope.doc.boxes[i].itemsGroupBy4 = $filter('groupBy')(doc.boxes[i].items, 4);
-			}
-			$scope.loaded = true;
-		});
 	}])
 	
 	.controller('StaticNonComplianceReportCtrl', ['$location', '$scope', 'NCR', '$modal', function($location, $scope, NCR, $modal) {
@@ -844,7 +838,6 @@ angular.module('clearApp.controllers', [])
 			var message = $scope.comment.message;
 			
 			doc.comments.push({ "date": date, "status": type, "message": message}); 
-			console.log("saved -> date", date, "/ status", type, "/ message", message); 
 			doc.$save({'type': 'ncr', 'id': doc.id, 'update':type}, function(p, response) {});
 			$modalInstance.close();
 		};
@@ -854,6 +847,47 @@ angular.module('clearApp.controllers', [])
 		};
 	}])
 	
+	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E2', function($scope, $routeParams, ClearFn, E2) {
+		$scope.loaded = false;
+		E2.get({'format': 'documents', 'type': 'pod', 'id': $routeParams.id}, function(doc) {
+			$scope.doc = doc;
+			$scope.loaded = true;
+			
+		});
+		$scope.go = ClearFn.go;
+	}])
+	
+	.controller('StaticIndicatorsCtrl', ['$scope', 'StaticIndicators', 'ChartsConfig', function($scope, StaticIndicators, ChartsConfig) {
+		
+		$scope.loaded = false;
+		
+		$scope.charts = [];
+		
+		StaticIndicators.query(function(charts){
+			for(var i = 0, len = charts.length; i < len; ++i) {
+				ChartsConfig.chartFn(charts[i]); 
+				$scope.charts[charts[i].id] = charts[i];
+			}
+			$scope.loaded = true;
+			console.log('charts: ', charts);
+		});	
+		$scope.colors = ChartsConfig.colors;
+		$scope.tooltips = ChartsConfig.tooltips;	
+		
+	}])
+	
+	.controller('StaticDashboardCtrl', ['$location', '$scope', 'ClearFn', 'StaticDashboardList', 'StaticGlobalReports', function($location, $scope, ClearFn, StaticDashboardList, StaticGlobalReports) {
+		$scope.loaded = false;
+		StaticGlobalReports.query( function(docs){
+			$scope.report = docs[docs.length-1];
+		});
+		StaticDashboardList.query( function(list) {
+			$scope.list = list;
+			$scope.loaded = true;
+		});
+		$scope.go = ClearFn.go;
+	}])
+		
 	.controller('StaticProofOfDeliveryCtrl', ['$location', '$scope', 'ClearFn', 'POD', function($location, $scope, ClearFn, POD) {
 		$scope.loaded = false;
 		POD.get(function(doc) {

@@ -7527,3 +7527,8 @@ Interactive Layer
 .i-caret-l:before {
   content: "\e03a";
 }
+
+/* line 221, ../scss/_icons.scss */
+.i-question:before {
+  content: "\e03b";
+}

@@ -70,6 +70,7 @@
 						<h2 class="type-bold">
 							<span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
 							<span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+							<span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
 						</h2>
 					</div>
 				</div>
@@ -119,9 +120,10 @@
 				<div ng-repeat="itemsGroup in box.itemsGroupBy4" class="row">
 				    <div ng-repeat="item in itemsGroup" class="col-md-3">
 				    	<div class="element margin-top">
-					    	<span class="pull-right icon-conform" ng-show="item.conform"><i class="icon i-check success"></i></span>
+				    		<span class="pull-right icon-conform" ng-show="item.conform === 'pending'"><i class="icon i-question default"></i></span>
+					    	<span class="pull-right icon-conform" ng-show="item.conform === true"><i class="icon i-check success"></i></span>
 					    	<span class="pull-right icon-conform" ng-show="!item.conform"><i class="icon i-cross important"></i></span>
-					    	<h6>item</h6>
+					    	<h6>item {{item.conform}}</h6>
 					    	<h5><span class="label label-item">{{item.reference}}</span> <a class="btn" ng-href="item/{{item.id}}" alt="Item details"><i class="icon i-external-link"></i></a></h5>
 					    	<span class="pull-right label label-ncr" ng-show="item.non_compliance"><a ng-href="documents/non-compliance-report/{{item.non_compliance_report.id}}" alt="Non compliance report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[item.non_compliance_report.status]"></i></a></span>
 					    	<h6>description</h6>
@@ -131,7 +133,7 @@
 					    	<h6>material supplier</h6>
 					    	<p>{{item.material_supplier}}</p>
 					    	<h6>photo</h6>
-					    	<div class="image-wrapper"><img ng-src="{{item.image.url}}" alt="{{item.image.name}}" /></div>
+					    	<div class="image-wrapper"><a ng-click="open(item)" ng-if="item.image"><img ng-src="{{item.image.thumbResource}}" alt="{{item.image.name}}" /></a></div>
 					    </div>
 				    </div>
 				</div>

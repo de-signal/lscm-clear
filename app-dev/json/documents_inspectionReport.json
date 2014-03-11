@@ -19,7 +19,7 @@
     "document": {
         "name": "130930_ref_ir",
         "type": "pdf",
-        "url": "img/temp_vert.jpg",
+        "url": "temp_vert.jpg",
         "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
     },
     "non_compliance_reports": {
@@ -28,8 +28,9 @@
     	"open": 1
     },
     "conformity": {
-    	"true": 3, 
-		"false": 3
+    	"true": 342, 
+		"false": 13, 
+		"pending": 23
     },
     "boxes": [
         {
@@ -45,7 +46,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_horiz.jpg"
+                        "url": "temp_horiz.jpg", 
+                        "thumb":  "temp_horiz.jpg"
                     }, 
                     "non_compliance": true,
                     "non_compliance_report": {
@@ -54,7 +56,7 @@
                     	"document": {
                     	    "name": "130930_ref_ncr",
                     	    "type": "pdf",
-                    	    "url": "img/temp_vert.jpg",
+                    	    "url": "temp_vert.jpg",
                     	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
                     	}
                     }, 
@@ -65,13 +67,8 @@
                     "reference": "S029-B015-I0015",
 	                "description": "Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
 	                "material": "Condimentum Nibh Vulputate",
-	                "material_supplier": "Condimentum Justo",
-                    "image": {
-                        "name": "130930_ref_NCR_photo",
-                        "type": "jpg",
-                        "url": "img/temp_vert.jpg"
-                    }, 
-                   "conform": false
+	                "material_supplier": "Condimentum Justo", 
+                   "conform": "pending"
                 },
                 {
                     "id": 6,
@@ -82,7 +79,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_horiz.jpg"
+                        "url": "temp_horiz.jpg", 
+                        "thumb":  "temp_horiz.jpg"
                     }, 
                    "conform": true
                 },
@@ -95,7 +93,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 },
@@ -108,7 +107,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 }
@@ -124,7 +124,7 @@
             	"document": {
             	    "name": "130930_ref_ncr",
             	    "type": "pdf",
-            	    "url": "img/temp_vert.jpg",
+            	    "url": "temp_vert.jpg",
             	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
             	}
             },
@@ -138,7 +138,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 },
@@ -151,7 +152,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 },
@@ -164,7 +166,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 }
@@ -183,7 +186,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 },
@@ -196,7 +200,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                    "conform": true
                 },
@@ -209,7 +214,8 @@
                     "image": {
                         "name": "130930_ref_NCR_photo",
                         "type": "jpg",
-                        "url": "img/temp_vert.jpg"
+                        "url": "temp_vert.jpg", 
+                        "thumb": "temp_vert.jpg"
                     }, 
                     "non_compliance": true,
                     "non_compliance_report": {
@@ -218,7 +224,7 @@
                     	"document": {
                     	    "name": "130930_ref_ncr",
                     	    "type": "pdf",
-                    	    "url": "img/temp_vert.jpg",
+                    	    "url": "temp_vert.jpg",
                     	    "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
                     	}
                     }

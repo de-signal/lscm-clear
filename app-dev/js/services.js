@@ -104,6 +104,7 @@ angular.module('clearApp.services', ['ngResource'])
 			 	resources[listConfig.resource].query( listQuery, function(elements, response) {
 			 		list.pagination = { 
 						'itemsPerPage': listConfig.urlInit.limit, 
+						'page': listConfig.urlParams.page,
 						'pagesCount': response("X-Clear-pagesCount"), 
 						'elementsCount': response("X-Clear-elementsCount")
 					} 

@@ -4,15 +4,20 @@
 
 <div class="container margin-top">
 
-	<div class="row" ng-repeat="bug in bugs">
+	<div class="row filet-top" ng-repeat="bug in bugs">
 		<div class="col-md-2">
 			<h4>{{bug.name}}</h4>
+			<span class="label label-default">{{bug.date}}</span> <span class="label label-warning">{{bug.status}}</span>
 		</div>
 		<div class="col-md-2">
-			<span class="label label-default">{{bug.date*1000 | date:'dd.MM.yy' }}</span> <span class="label label-warning">{{bug.status}}</span>
+			<h6>pages</h6>
+			<ul><li ng-repeat="page in bug.pages">{{page}}</li></ul>
 		</div>
 		<div class="col-md-8">
+			<h6>descritpion</h6>
 			<p>{{bug.description}}</p>
+			<h6>solution</h6>
+			<p>{{bug.solution}}</p>
 		</div>
 	</div>
 

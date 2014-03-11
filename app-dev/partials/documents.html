@@ -119,6 +119,7 @@
 								<td ng-if="page.type==='ir'">
 								    <span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
 								    <span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+								    <span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
 								</td>
 								<td ng-if="page.type==='ncr' || page.type==='ir'">
 								    <i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i>
