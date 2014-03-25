@@ -32,7 +32,7 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/search', {templateUrl: 'partials/search.html', controller: 'SearchCtrl', reloadOnSearch: false});
 		$routeProvider.when('/documents/:type', {templateUrl: 'partials/documents.html', controller: 'DocumentsCtrl', reloadOnSearch: false});
 		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'InspectionReportCtrl'});
-		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-nonComplianceReport.html', controller: 'NonComplianceReportCtrl'});
+		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-nonConformityReport.html', controller: 'NonComplianceReportCtrl'});
 		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'ProofOfDeliveryCtrl'});
 		$routeProvider.when('/add-order', {templateUrl: 'partials/add_order.html', controller: 'AddOrderCtrl'});
 		$routeProvider.when('/:type/', {templateUrl: 'partials/elements.html', controller: 'ElementsCtrl', reloadOnSearch: false});

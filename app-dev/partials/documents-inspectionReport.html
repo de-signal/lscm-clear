@@ -78,11 +78,11 @@
 			<div class="row margin-top">
 				<div class="col-md-12">
 					<div class="filet">
-						<h6>Non-compliance reports</h6>
+						<h6>Non-conformity reports</h6>
 						<h2 class="type-bold">
-							<span ng-show="doc.non_compliance_reports.closed" class="filet-right"><i class="icon i-disc success"></i> {{doc.non_compliance_reports.closed}}</span>
-							<span ng-show="doc.non_compliance_reports.open" class="filet-right"><i class="icon i-disc warning"></i> {{doc.non_compliance_reports.open}}</span>
-							<span ng-show="doc.non_compliance_reports.late" class="filet-right"><i class="icon i-disc important"></i> {{doc.non_compliance_reports.late}}</span>
+							<span ng-show="doc.non_conformity_reports.closed" class="filet-right"><i class="icon i-disc success"></i> {{doc.non_conformity_reports.closed}}</span>
+							<span ng-show="doc.non_conformity_reports.open" class="filet-right"><i class="icon i-disc warning"></i> {{doc.non_conformity_reports.open}}</span>
+							<span ng-show="doc.non_conformity_reports.late" class="filet-right"><i class="icon i-disc important"></i> {{doc.non_conformity_reports.late}}</span>
 						</h2>
 					</div>
 				</div>
@@ -115,7 +115,7 @@
 		<div class="col-md-12">
 			<h3>inspected boxes</h3>
 			<div class="elements-group margin-top" ng-repeat="box in doc.boxes">
-				<span class="pull-right label label-ncr" ng-show="box.non_compliance_report"><a ng-href="documents/non-compliance-report/{{box.non_compliance_report.id}}" alt="Non compliance report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[box.non_compliance_report.status]"></i></a></span>
+				<span class="pull-right label label-ncr" ng-show="box.non_conformity_report"><a ng-href="documents/ncr/{{box.non_conformity_report.id}}" alt="Non-conformity report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[box.non_conformity_report.status]"></i></a></span>
 				<h2>{{$index+1}}. <span class="label label-box">{{box.reference}}</span><a class="btn" ng-href="box/{{box.id}}" alt="Box details"><i class="icon i-external-link"></i></a></h2>
 				<div ng-repeat="itemsGroup in box.itemsGroupBy4" class="row">
 				    <div ng-repeat="item in itemsGroup" class="col-md-3">
@@ -125,7 +125,7 @@
 					    	<span class="pull-right icon-conform" ng-show="!item.conform"><i class="icon i-cross important"></i></span>
 					    	<h6>item {{item.conform}}</h6>
 					    	<h5><span class="label label-item">{{item.reference}}</span> <a class="btn" ng-href="item/{{item.id}}" alt="Item details"><i class="icon i-external-link"></i></a></h5>
-					    	<span class="pull-right label label-ncr" ng-show="item.non_compliance"><a ng-href="documents/non-compliance-report/{{item.non_compliance_report.id}}" alt="Non compliance report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[item.non_compliance_report.status]"></i></a></span>
+					    	<span class="pull-right label label-ncr" ng-show="item.non_conformity"><a ng-href="documents/ncr/{{item.non_conformity_report.id}}" alt="Non-conformity report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[item.non_conformity_report.status]"></i></a></span>
 					    	<h6>description</h6>
 					    	<p>{{item.description}}</p>
 					    	<h6>material</h6>

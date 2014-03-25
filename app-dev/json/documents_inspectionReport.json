@@ -22,7 +22,7 @@
         "url": "temp_vert.jpg",
         "info": "Maecenas sed diam eget risus varius blandit sit amet non magna."
     },
-    "non_compliance_reports": {
+    "non_conformity_reports": {
     	"closed": 3, 
     	"late": 3, 
     	"open": 1
@@ -49,8 +49,8 @@
                         "url": "temp_horiz.jpg", 
                         "thumb":  "temp_horiz.jpg"
                     }, 
-                    "non_compliance": true,
-                    "non_compliance_report": {
+                    "non_conformity": true,
+                    "non_conformity_report": {
                     	"id": 6,
                     	"status": "open",
                     	"document": {
@@ -117,8 +117,8 @@
         {
             "id": 9,
             "reference": "54656",
-            "non_compliance": true,
-            "non_compliance_report": {
+            "non_conformity": true,
+            "non_conformity_report": {
             	"id": 6,
             	"status": "open",
             	"document": {
@@ -217,8 +217,8 @@
                         "url": "temp_vert.jpg", 
                         "thumb": "temp_vert.jpg"
                     }, 
-                    "non_compliance": true,
-                    "non_compliance_report": {
+                    "non_conformity": true,
+                    "non_conformity_report": {
                     	"id": 6,
                     	"status": "late",
                     	"document": {

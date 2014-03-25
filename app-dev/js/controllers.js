@@ -161,8 +161,13 @@ angular.module('clearApp.controllers', [])
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
 	}])
 	
-	.controller('AddOrderCtrl', function() {
-	})
+	.controller('AddOrderCtrl', [ '$timeout', function($timeout) {
+		$scope.buttonDisable = function () {
+			$timeout(function() {
+				$scope.buttonDisabled = true;
+			}, 10);
+		}
+	}])
 	
 	.controller('ListCtrl', ['$scope', 'Utils', 'ClearFn', 'ClearListsFn', function($scope, Utils, ClearFn, ClearListsFn) {
 		
@@ -570,7 +575,7 @@ angular.module('clearApp.controllers', [])
 		
 		switch (type) {
 			case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; break;
-			case 'ncr': $scope.page= {'name': 'Non compliance reports', 'type': type }; break;
+			case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; break;
 			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;	
 		}
 		

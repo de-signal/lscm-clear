@@ -525,13 +525,13 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/documents_inspectionReport.json');
 	}])
 	.factory('NCRs', ['$resource', function($resource){
-		return $resource('json/documents_nonComplianceReports.json');
+		return $resource('json/documents_nonConformityReports.json');
 	}])
 	.factory('NCRsFilters', ['$resource', function($resource){
-		return $resource('json/documents_nonComplianceReports_filters.json');
+		return $resource('json/documents_nonConformityReports_filters.json');
 	}])
 	.factory('NCR', ['$resource', function($resource){
-		return $resource('json/documents_nonComplianceReport.json');
+		return $resource('json/documents_nonConformityReport.json');
 	}])
 	.factory('PODs', ['$resource', function($resource){
 		return $resource('json/documents_proofsOfDelivery.json');

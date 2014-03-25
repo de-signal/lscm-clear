@@ -23,11 +23,14 @@
 				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<div class="filet">
 				<h6>status</h6>
 				<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>
 			</div>
+		</div>
+		<div class="col-md-1">
+			<img ng-src="{{elm.qrCodeGoogle}}" alt="QR code" class="clearfix"/>
 		</div>
 	</div>
 	
@@ -100,8 +103,7 @@
 		<div class="col-md-3">
 			<div class="filet">
 				<h6>description</h6>
-				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}:</strong> {{value}}</span></p>
-				<p><img ng-src="{{elm.qrCodeGoogle}}" alt="QR code" class="clearfix"/></p>
+				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong> {{value}}</span></p>
 				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
 		</div>
