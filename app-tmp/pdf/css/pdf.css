@@ -153,7 +153,10 @@ body {
 .margin-bottom {
 	margin-bottom: 12pt;
 }
-.border-top {
+.margin-top {
+	margin-top: 24pt;
+}
+.table>tbody>tr>td.border-top {
 	border-top: 1px solid black;
 }
 .align-right {

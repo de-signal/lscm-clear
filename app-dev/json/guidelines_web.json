@@ -101,7 +101,7 @@
 							"name": "4. Order completed",
 							"url": {
 								"page": "process",
-								"anchor": "order-placed"
+								"anchor": "order-completed"
 							}
 						}
 					}, 
@@ -112,7 +112,7 @@
 							"name": "4. Order completed",
 							"url": {
 								"page": "process",
-								"anchor": "order-placed"
+								"anchor": "order-completed"
 							}
 						}
 					}, 

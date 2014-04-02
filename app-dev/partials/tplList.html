@@ -11,7 +11,7 @@ filters.date: {{filters.date | json}}
 	    </div>
 	    <div class="col-md-6">
 	    	<pre><small>
-list.pagination: {{list.pagination | json}}
+list: {{list | json}}
 			</small></pre>
 	    </div><!--/col-->
 	</div><!--/row-->
@@ -197,10 +197,11 @@ list.pagination: {{list.pagination | json}}
 		<thead>
 			<tr>
 				<th ng-if="list.display.modifications"></th>
+				<th ng-if="listShipment"><h6><span>type</span></h6></th>
 				<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'reference'"></i>
 					</a></h6></th>
-				<th ng-if="colmunChrono"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
+				<th ng-if="listShipment"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'chrono'"></i>
 					</a></h6></th>
 				<th><h6><a ng-click="listSort('milestone')"><span>milestone</span>
@@ -216,8 +217,9 @@ list.pagination: {{list.pagination | json}}
 		<tbody>
 			<tr  ng-repeat="elm in list.elements" ng-click="go(elm.type, elm.id)" class="pointer over">
 				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectionToggle(elm.id)" ng-checked="filters.tmp.selection.indexOf(elm.id) > -1" value="elm.id"></td>
+				<td ng-if="listShipment"><span class="label label-shipment">{{elm.specifications_shipment.type}}</span></td>
 				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
-				<td ng-if="colmunChrono"><small>{{elm.chrono}}</small></td>
+				<td ng-if="listShipment"><small>{{elm.specifications_shipment.chrono}}</small></td>
 				<td><strong><small>{{elm.milestone}}</small></strong></td>
 				<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
 				<td><ul class="inline">

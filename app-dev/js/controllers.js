@@ -200,7 +200,7 @@ angular.module('clearApp.controllers', [])
 			ClearListsFn.listElementsLoad(listConfig).then( function(list) {
 				$scope.list = list;
 				if(listConfig.type ==='shipment' || listConfig.type ==='shipmentIn' || listConfig.type ==='shipmentOut') {
-					$scope.colmunChrono = true; 
+					$scope.listShipment = true; 
 				}
 				$scope.loaded = true;
 			});
@@ -318,6 +318,41 @@ angular.module('clearApp.controllers', [])
 				$scope.listsConfig[i].type = $scope.types[i].id;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
 				$scope.listsConfig[i].display.modifications = true; 
+			}
+			ClearFn.listsReady('parent'); 
+		});
+		
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			var typeIndex = Utils.objectIndexbyKey($scope.types, 'id', listId); 
+			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex])); 
+		});
+	}])
+	
+	.controller('StaticTrackingCtrl', ['$scope', '$location', 'Utils', 'ClearFn', 'ElmsListsConfig', function($scope, $location, Utils, ClearFn, ElmsListsConfig){
+		
+		ClearFn.listsReady('init'); 
+		
+		$scope.types=[	
+			{"name": "Orders", "id": "order", 'url': 'O' }, 
+			{"name": "Shipments", "id": "shipment", 'url': 'S' }, 
+			{"name": "Boxes", "id": "box", 'url': 'B'  }, 
+			{"name": "Items", "id": "item", 'url': 'I'  }
+		];		
+		
+		$scope.listsConfig = [];
+		ElmsListsConfig.get( function(config) {	
+			for (var i in $scope.types) {
+				$scope.listsConfig[i] = Utils.clone(config);
+				$scope.listsConfig[i].id = $scope.types[i].id; 
+				$scope.listsConfig[i].type = $scope.types[i].id;
+				$scope.listsConfig[i].listCode = $scope.types[i].url; 
+				$scope.listsConfig[i].display.modifications = true; 
+				switch ($scope.types[i].id) {
+					case 'order': $scope.listsConfig[i].resource = '6'; break;
+					case 'shipment': $scope.listsConfig[i].resource = '7'; break;
+					case 'box': $scope.listsConfig[i].resource = '8'; break;
+					case 'item': $scope.listsConfig[i].resource = '9'; break;
+				}
 			}
 			ClearFn.listsReady('parent'); 
 		});
@@ -576,7 +611,8 @@ angular.module('clearApp.controllers', [])
 		switch (type) {
 			case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; break;
 			case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; break;
-			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;	
+			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;
+			case 'archives': $scope.page= {'name': 'Archives', 'type': type }; break;		
 		}
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
@@ -597,8 +633,9 @@ angular.module('clearApp.controllers', [])
 			$scope.listsConfig[0].id = "documents";
 			switch (type) {
 				case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; $scope.listsConfig[0].resource = '10'; break;
-				case 'ncr': $scope.page= {'name': 'Non compliance reports', 'type': type }; $scope.listsConfig[0].resource = '11'; break;
-				case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; $scope.listsConfig[0].resource = '12'; break;	
+				case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; $scope.listsConfig[0].resource = '11'; break;
+				case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; $scope.listsConfig[0].resource = '12'; break;
+				case 'archives': $scope.page= {'name': 'Archives', 'type': type }; $scope.listsConfig[0].resource = '13'; break;		
 			}
 			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
 			ClearFn.listsReady('parent'); 
@@ -774,7 +811,7 @@ angular.module('clearApp.controllers', [])
 		};
 	}])
 	
-	.controller('NonComplianceReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', function($scope, $routeParams, E2, $modal) {
+	.controller('NonConformityReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', function($scope, $routeParams, E2, $modal) {
 		$scope.loaded = false;
 		E2.get({'format': 'documents', 'type': 'ncr', 'id': $routeParams.id}, function(doc) {
 			$scope.doc = doc;
@@ -803,7 +840,7 @@ angular.module('clearApp.controllers', [])
 		}; 
 	}])
 	
-	.controller('StaticNonComplianceReportCtrl', ['$location', '$scope', 'NCR', '$modal', function($location, $scope, NCR, $modal) {
+	.controller('StaticNonConformityReportCtrl', ['$location', '$scope', 'NCR', '$modal', function($location, $scope, NCR, $modal) {
 		$scope.loaded = false;
 		NCR.get(function(doc){
 			$scope.doc = doc;

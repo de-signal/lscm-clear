@@ -92,19 +92,17 @@
 			
 			<div class="row">
 				<div class="col-md-12">			
-					<table class="table table-condensed" >
+					<table class="table table-condensed" ng-if="page.type==='ncr'">
 						<thead>
 							<tr>
-								<th><h6>order</h6></th><th><h6>shipment</h6></th><th><h6>user</h6></th>
-								<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>location</h6></th>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>location</h6></th>
 								<th><h6>created</h6></th>
-								<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>modified</h6></th>
-								<th ng-if="page.type==='ir'"><h6>boxes</h6></th>
-								<th ng-if="page.type==='ir'"><h6>conformity</h6></th>
-								<th ng-if="page.type==='ncr' || page.type==='ir'"><h6>status</h6></th>
-								<th ng-if="page.type==='ncr'"><h6>element</h6></th>
-								<th ng-if="page.type==='pod'"><h6>collection</h6></th>
-								<th ng-if="page.type==='pod'"><h6>delivery</h6></th>
+								<th><h6>modified</h6></th>
+								<th><h6>status</h6></th>
+								<th><h6>element</h6></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -112,25 +110,94 @@
 								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
 								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
 								<td><small>{{doc.user}}</small></td>
-								<td ng-if="page.type==='ncr' || page.type==='ir'"><small>{{doc.location}}</small></td>
+								<td><small>{{doc.location}}</small></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-								<td ng-if="page.type==='ncr' || page.type==='ir'"><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-								<td ng-if="page.type==='ir'">{{doc.boxes.length}}</td>
-								<td ng-if="page.type==='ir'">
-								    <span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
-								    <span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
-								    <span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
-								</td>
-								<td ng-if="page.type==='ncr' || page.type==='ir'">
-								    <i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i>
-								</td>
-								<td ng-if="page.type==='ncr'"><span class="label" ng-class="{shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.element.type]">{{doc.element.reference}}</span></td>
-								
-								<td ng-if="page.type==='pod'"><small>{{doc.collection.company.name}}</small></td>
-								<td ng-if="page.type==='pod'"><small>{{doc.delivery.company.name}}</small></td>
+								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i></td>
+								<td><span class="label" ng-class="{shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.element.type]">{{doc.element.reference}}</span></td>
 							</tr>
 						</tbody>
 					</table>
+					<table class="table table-condensed" ng-if="page.type==='ir'">
+						<thead>
+							<tr>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>location</h6></th>
+								<th><h6>created</h6></th>
+								<th><h6>modified</h6></th>
+								<th><h6>boxes</h6></th>
+								<th><h6>conformity</h6></th>
+								<th><h6>status</h6></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
+								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.location}}</small></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td>{{doc.boxes.length}}</td>
+								<td><span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
+								    <span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+								    <span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
+								</td>
+								<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i></td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table table-condensed" ng-if="page.type==='pod'">
+						<thead>
+							<tr>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>created</h6></th>
+								<th><h6>collection</h6></th>
+								<th><h6>delivery</h6></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
+								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.collection.company.name}}</small></td>
+								<td><small>{{doc.delivery.company.name}}</small></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<table class="table table-condensed" ng-if="page.type==='archives'">
+						<thead>
+						<tr>
+							<th><h6>related to </h6></th>
+							<th><h6>type </h6></th>
+							<th><h6>name</h6></th>
+							<th><h6>created</h6></th>
+							<th><h6>modified</h6></th>
+							<th><h6>user</h6></th>
+							<th><h6>info</h6></th>
+							<th><h6></h6></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements">
+								<td><span class="label" ng-class="{order: 'label-order', shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.related.type]">{{doc.related.reference}}</span></td>
+								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
+								<td><strong>{{doc.name}}</strong></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.user}}</small></td>
+								<td><span class="label label-default">{{doc.info}}</span></td>
+								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
+							</tr>
+						</tbody>
+					</table>	
 					<div ng-if="list.pagination.pagesCount>1">
 						<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 					</div>

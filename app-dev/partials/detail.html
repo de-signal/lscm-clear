@@ -5,7 +5,7 @@
 	<h1 class="container">
 		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i>
 		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDeleteOpen(elm, $event)' ></i>
-		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}}</h1>
+		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
 </div>
 
 <div class="container margin-top" ng-show="loaded" ng-class="{true:'anim'}[elm.anim]">
@@ -14,6 +14,7 @@
 			<div class="filet">
 				<h6>reference</h6>
 				<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -104,7 +105,6 @@
 			<div class="filet">
 				<h6>description</h6>
 				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong> {{value}}</span></p>
-				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
 			</div>
 		</div>
 		<div class="col-md-3" ng-repeat="chart in elm.charts">
@@ -144,13 +144,22 @@
 			<table class="table table-condensed">
 				<thead>
 				<tr>
-					<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>info</h6></th><th><h6></h6></th>
+					<th><h6>type </h6></th>
+					<th><h6>name</h6></th>
+					<th><h6>created</h6></th>
+					<th><h6>modified</h6></th>
+					<th><h6>user</h6></th>
+					<th><h6>info</h6></th>
+					<th><h6></h6></th>
 				</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="document in elm.documents">
 						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{document.type}}</td>
 						<td><strong>{{document.name}}</strong></td>
+						<td><small>{{document.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td><small>{{document.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td><small>{{document.user}}</small></td>
 						<td><span class="label label-default">{{document.info}}</span></td>
 						<td><a ng-href="{{document.url}}" class='btn btn-sm'>Download</a></td>
 					</tr>

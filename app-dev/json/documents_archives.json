@@ -1,0 +1,34 @@
+[
+	{
+	    "related": {
+	    	"type": "order", 
+	    	"reference": "345678543", 
+	    	"id": 1
+	    }, 
+	    "name": "proof of delivery",
+	    "user": "generated",
+	    "type": "pdf",
+	    "url": "/app/docs/pod.pdf",
+	    "info": "Donec ullamcorper nulla non",
+	    "dates": {
+	        "created": 1375907474,
+	        "modified": 1375908474
+	    } 
+	},
+	{
+	    "related": {
+	    	"type": "shipment", 
+	    	"reference": "345678543", 
+	    	"id": 1
+	    }, 
+	    "name": "an excel document",
+	    "user": "LSCM Operation team",
+	    "type": "xls",
+	    "url": "/app/docs/test.xls",
+	    "info": "Aenean lacinia bibendum",
+	    "dates": {
+	        "created": 1375907474,
+	        "modified": 1375908474
+	    }
+	}
+]

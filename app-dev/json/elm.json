@@ -1,5 +1,5 @@
 {
-    "type": "order",
+    "type": "shipment",
     "id": 1,
     "reference": "0101010109292", 
     "tracking": true,
@@ -7,6 +7,10 @@
     "milestone": "Departed",
     "deletable": true,
     "delay": -5,
+    "specifications_shipment": {
+    	"chrono": "4567865", 
+    	"type": "Out"
+    },  
     "timeline": [
     	{
     		"name": "In preparation", 
@@ -27,6 +31,7 @@
     		"completed": false
     	}
     ],
+    "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.", 
     "infos": [ 
     	{ "vendor": "HYUNDAI HEAVY INDUSTRIES CO.,LTD." },
     	{ "country": "South Korea" },
@@ -861,15 +866,25 @@
     "documents": [
         {
             "name": "proof of delivery",
+            "user": "generated",
             "type": "pdf",
             "url": "/app/docs/pod.pdf",
-            "info": "Donec ullamcorper nulla non"
+            "info": "Donec ullamcorper nulla non",
+            "dates": {
+                "created": 1375907474,
+                "modified": 1375908474
+            } 
         },
         {
-            "name": "an excell document",
+            "name": "an excel document",
+            "user": "LSCM Operation team",
             "type": "xls",
             "url": "/app/docs/test.xls",
-            "info": "Aenean lacinia bibendum"
+            "info": "Aenean lacinia bibendum",
+            "dates": {
+                "created": 1375907474,
+                "modified": 1375908474
+            }
         }
     ]
 }

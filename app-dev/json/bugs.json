@@ -29,8 +29,8 @@
 	{
 		"name": "Upload BW", 
 		"pages": [ "add order" ], 
-		"type": "Improvement", 
-		"description": "Problèmes lors de l'upload de BW: si l'utilisateur change de page avant la fin du processus et pas retour visuel du processus en cours.", 
+		"type": "Bug", 
+		"description": "Aucun retour visuel de l'upload en cours et problèmes si l'utilisateur change de page avant la fin.", 
 		"solution": "Intégrer l'upload de BW à l'application. (voir detail ici: https://trello.com/c/bqGOBtHy/61-file-upload-w-processing-server-side).", 
 		"date": "2013.11.06", 
 		"status": "Open" 
@@ -49,7 +49,7 @@
 		"pages": [ "detail" ], 
 		"type": "Improvement", 
 		"description": "Les icones des groupes de propriété ne sont pas affichées dans la page détail.", 
-		"solution": "Renseigner le json avec les noms des groupes (disponibles dans elm.json)", 
+		"solution": "Renseigner le json avec les noms des groupes (disponibles dans elm.json). Voir exemple ici : /app/static-detail", 
 		"date": "2014.01.19", 
 		"status": "Open" 
 	}, 
