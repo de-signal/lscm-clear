@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.16-build.32+sha.6636f1d
+ * @license AngularJS v1.2.17-build.113+sha.373078a
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -203,6 +203,9 @@ function shallowClearAndCopy(src, dst) {
  *
  *     On failure, the promise is resolved with the {@link ng.$http http response} object, without
  *     the `resource` property.
+ *
+ *     If an interceptor object was provided, the promise will instead be resolved with the value
+ *     returned by the interceptor.
  *
  *   - `$resolved`: `true` after first server interaction is completed (either with success or
  *      rejection), `false` before that. Knowing if the Resource has been resolved is useful in

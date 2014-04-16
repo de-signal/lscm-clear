@@ -18,7 +18,6 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "angular": "~1.2.9",
     "d3": "3.x"
   }
 }

@@ -1,25 +1,21 @@
 [
 	{	
-		"title": "13.11.13 / updated test", 
-		"content": "Sass is a CSS pre-processor. It expands the CSS Language with powerful features which allows to write a more concise and maintainable code than CSS. ", 
+		"title": "16.04.14 / Eiffage", 
+		"content": "In FCA, Green light received 04/04. Pending for Form M and BA n° from Total + RFQ to freight forwarder", 
 		"style": "warning" 
-	}, 
-	{
-		"title": "25.11.13 / re-test update", 
-		"content": "PhoneGap is an open source framework to create mobile apps from any web apps using standardized web APIs: HTML, CSS, and JavaScript."
 	},
 	{
-		"title": "20.11.13 / B", 
-		"content": "Grunt is a javaScript task runner. After configuration, Grunt handles automation of repetitive tasks like minification, compilation, unit testing, linting.", 
+		"title": "16.04.14 / CHR 008 PO 4560103916", 
+		"content": "Pending for Po service IN CHR 008 4560103916 - LEWA", 
 		"style": "success" 
 	}, 
 	{
-		"title": "22.11.13 / C", 
-		"content": "Bower is a package manager for the web. It offers a generic, unopinionated solution to the front-end package management.", 
-		"style": "error" 
+		"title": "16.04.14 / CHR 004 PO 4560103080", 
+		"content": "Inspection done, pending for missing items to be sent by vendor (NCR open), once received repacking & RFQ to be done."
 	}, 
 	{
-		"title": "24.11.13 / testo", 
-		"content": "Git is a version control software made to track the evolutions of a collaborative programming project. The default Git application has no graphical interface. It relies on the Terminal."
+		"title": "16.04.14 / CHR 032  PO 4560107329", 
+		"content": "No BW received, special request from Vendor to FCA without complete integration in SAP. As per discution with Vendor, we get confirmation that 1 of their staff will come in FCA for the labelling.", 
+		"style": "error" 
 	}
 ]

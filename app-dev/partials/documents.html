@@ -172,14 +172,13 @@
 						</tbody>
 					</table>
 					
-					<table class="table table-condensed" ng-if="page.type==='archives'">
+					<table class="table table-condensed" ng-if="page.type==='archive'">
 						<thead>
 						<tr>
 							<th><h6>related to </h6></th>
 							<th><h6>type </h6></th>
 							<th><h6>name</h6></th>
 							<th><h6>created</h6></th>
-							<th><h6>modified</h6></th>
 							<th><h6>user</h6></th>
 							<th><h6>info</h6></th>
 							<th><h6></h6></th>
@@ -191,7 +190,6 @@
 								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
 								<td><strong>{{doc.name}}</strong></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 								<td><small>{{doc.user}}</small></td>
 								<td><span class="label label-default">{{doc.info}}</span></td>
 								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>

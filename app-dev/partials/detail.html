@@ -147,7 +147,6 @@
 					<th><h6>type </h6></th>
 					<th><h6>name</h6></th>
 					<th><h6>created</h6></th>
-					<th><h6>modified</h6></th>
 					<th><h6>user</h6></th>
 					<th><h6>info</h6></th>
 					<th><h6></h6></th>
@@ -158,7 +157,6 @@
 						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{document.type}}</td>
 						<td><strong>{{document.name}}</strong></td>
 						<td><small>{{document.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-						<td><small>{{document.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 						<td><small>{{document.user}}</small></td>
 						<td><span class="label label-default">{{document.info}}</span></td>
 						<td><a ng-href="{{document.url}}" class='btn btn-sm'>Download</a></td>

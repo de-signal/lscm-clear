@@ -612,7 +612,7 @@ angular.module('clearApp.controllers', [])
 			case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; break;
 			case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; break;
 			case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; break;
-			case 'archives': $scope.page= {'name': 'Archives', 'type': type }; break;		
+			case 'archive': $scope.page= {'name': 'Archives', 'type': type }; break;		
 		}
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
@@ -635,7 +635,7 @@ angular.module('clearApp.controllers', [])
 				case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; $scope.listsConfig[0].resource = '10'; break;
 				case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; $scope.listsConfig[0].resource = '11'; break;
 				case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; $scope.listsConfig[0].resource = '12'; break;
-				case 'archives': $scope.page= {'name': 'Archives', 'type': type }; $scope.listsConfig[0].resource = '13'; break;		
+				case 'archive': $scope.page= {'name': 'Archives', 'type': type }; $scope.listsConfig[0].resource = '13'; break;		
 			}
 			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
 			ClearFn.listsReady('parent'); 
