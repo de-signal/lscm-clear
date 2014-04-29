@@ -120,7 +120,7 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: 'app-dev/components/bootstrap-sass/vendor/assets/stylesheets/',
 						src: [
-							'bootstrap/*'
+							'bootstrap/**'
 						],
 						dest: 'app-dev/lib/scss/'
 					}
