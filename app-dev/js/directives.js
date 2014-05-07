@@ -90,6 +90,7 @@ angular.module('clearApp.directives', [])
 				case 'email': elem.addClass('i\-condition\-email'); break;
 				case 'link': elem.addClass('i\-condition\-link'); break;
 				case 'scan': elem.addClass('i\-condition\-scan'); break;
+				case 'imi': elem.addClass('i\-condition\-imi'); break;
 			}
 	  	};
 	});

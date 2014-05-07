@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.17-build.149+sha.21428e5
+ * @license AngularJS v1.2.17-build.160+sha.31bdb60
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68,7 +68,7 @@ function minErr(module) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.2.17-build.149+sha.21428e5/' +
+    message = message + '\nhttp://errors.angularjs.org/1.2.17-build.160+sha.31bdb60/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i-2) + '=' +
@@ -1918,7 +1918,7 @@ function setupModuleLoader(window) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.2.17-build.149+sha.21428e5',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.2.17-build.160+sha.31bdb60',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 2,
   dot: 17,
@@ -3128,7 +3128,7 @@ HashMap.prototype = {
  *
  * Sometimes you want to get access to the injector of a currently running Angular app
  * from outside Angular. Perhaps, you want to inject and compile some markup after the
- * application has been bootstrapped. You can do this using extra `injector()` added
+ * application has been bootstrapped. You can do this using the extra `injector()` added
  * to JQuery/jqLite elements. See {@link angular.element}.
  *
  * *This is fairly rare but could be the case if a third party library is injecting the
@@ -3241,7 +3241,7 @@ function annotate(fn) {
  * minification, and obfuscation tools since these tools change the argument names.
  *
  * ## `$inject` Annotation
- * By adding a `$inject` property onto a function the injection parameters can be specified.
+ * By adding an `$inject` property onto a function the injection parameters can be specified.
  *
  * ## Inline
  * As an array of injection names, where the last item in the array is the function to call.
@@ -3278,7 +3278,7 @@ function annotate(fn) {
  * @name $injector#has
  *
  * @description
- * Allows the user to query if the particular service exist.
+ * Allows the user to query if the particular service exists.
  *
  * @param {string} Name of the service to query.
  * @returns {boolean} returns true if injector has given service.
@@ -3288,8 +3288,8 @@ function annotate(fn) {
  * @ngdoc method
  * @name $injector#instantiate
  * @description
- * Create a new instance of JS type. The method takes a constructor function invokes the new
- * operator and supplies all of the arguments to the constructor function as specified by the
+ * Create a new instance of JS type. The method takes a constructor function, invokes the new
+ * operator, and supplies all of the arguments to the constructor function as specified by the
  * constructor annotation.
  *
  * @param {Function} Type Annotated constructor function.
@@ -3902,7 +3902,7 @@ function createInjector(modulesToLoad) {
  * @requires $rootScope
  *
  * @description
- * When called, it checks current value of `$location.hash()` and scroll to related element,
+ * When called, it checks current value of `$location.hash()` and scrolls to the related element,
  * according to rules specified in
  * [Html5 spec](http://dev.w3.org/html5/spec/Overview.html#the-indicated-part-of-the-document).
  *
@@ -6998,7 +6998,9 @@ function directiveNormalize(name) {
  * element attributes. The values reflect current binding state `{{ }}`. The normalization is
  * needed since all of these are treated as equivalent in Angular:
  *
+ * ```
  *    <span ng:bind="a" ng-bind="a" data-ng-bind="a" x-ng-bind="a">
+ * ```
  */
 
 /**
@@ -11714,7 +11716,7 @@ function $$RAFProvider(){ //rAF
  *
  * Loop operations are optimized by using while(count--) { ... }
  *   - this means that in order to keep the same order of execution as addition we have to add
- *     items to the array at the beginning (shift) instead of at the end (push)
+ *     items to the array at the beginning (unshift) instead of at the end (push)
  *
  * Child scopes are created and removed often
  *   - Using an array would be slow since inserts in middle are expensive so we use linked list

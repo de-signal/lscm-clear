@@ -7782,3 +7782,8 @@ Interactive Layer
 .i-question:before {
   content: "\e03b";
 }
+
+/* line 224, ../scss/_icons.scss */
+.i-condition-imi:before {
+  content: "\e03c";
+}

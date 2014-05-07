@@ -4,12 +4,13 @@
 
 angular.module('clearApp.controllers', [])
 
-	.controller('UserCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 
-		function ($scope, $route, toaster, $cookieStore, authService, $http, E1) {
+	.controller('UserCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 'ClearFn',  
+		function ($scope, $route, toaster, $cookieStore, authService, $http, E1, ClearFn) {
 		var credentials;
 
 		if ($cookieStore.get("token")) {
 			credentials = $cookieStore.get("token"); 
+			ClearFn.updateToken(credentials.replace('OAuth ',''));
 			$http.defaults.headers.common['Authorization'] = credentials;
 			$scope.loggedIn=true;
 			console.log('connect from cookie: ', $http.defaults.headers.common);
@@ -21,6 +22,7 @@ angular.module('clearApp.controllers', [])
 		$scope.login = function() {
 			$http.post('../oauth/oauth.php', {ignoreAuthModule: true, login: $scope.username, password: $scope.password})
 				.success(function(data, status, headers, config) {
+					ClearFn.updateToken(data.access_token);
 					credentials = 'OAuth '+ data.access_token;
 					$cookieStore.remove("token");
 					if($scope.remember) {
@@ -161,7 +163,7 @@ angular.module('clearApp.controllers', [])
 		$scope.modalConditionOpen = ClearFn.modalConditionOpen; 
 	}])
 	
-	.controller('AddOrderCtrl', [ '$timeout', function($timeout) {
+	.controller('AddOrderCtrl', [ '$timeout', '$scope', function($timeout, $scope) {
 		$scope.buttonDisable = function () {
 			$timeout(function() {
 				$scope.buttonDisabled = true;
@@ -403,7 +405,6 @@ angular.module('clearApp.controllers', [])
 			
 			if (elm.timeline) {
 				var timelineAnim = function(i) {
-					console.log('anim: ', i);
 					if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
 				}
 				var loops = 0;
@@ -423,7 +424,7 @@ angular.module('clearApp.controllers', [])
 			}
 			
 			$scope.listsConfig = [];
-			ElmsListsConfig.get( function(config) {
+			ElmsListsConfig.get(function(config) {
 				for (var i in elm.related) {
 					$scope.listsConfig[i] = Utils.clone(config);
 					$scope.listsConfig[i].urlInit.related = elm.type; 
@@ -746,7 +747,7 @@ angular.module('clearApp.controllers', [])
 		
 	}])
 	
-	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'E1', function($scope, $filter, $routeParams, $modal, E2, E1) {
+	.controller('InspectionReportCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'E1', 'ClearFn', function($scope, $filter, $routeParams, $modal, E2, E1, ClearFn) {
 		$scope.loaded = false;
 		E2.get({'format': 'documents', 'type': 'ir', 'id': $routeParams.id}, function(doc) {
 			for(var i in doc.boxes) {
@@ -754,8 +755,9 @@ angular.module('clearApp.controllers', [])
 				for (var j in box.items) {
 					var item = box.items[j];
 					if (item.image) {
-						item.image.urlResource = "/index_rest.php/api/clear/v1/file/" + item.image.url; 
-						item.image.thumbResource = "/index_rest.php/api/clear/v1/file/" + item.image.thumb;
+						item.image.urlResource = "/index_rest.php/api/clear/v1/file/" + item.image.url + '?oauth_token=' + ClearFn.returnToken(); 
+						item.image.thumbResource = "/index_rest.php/api/clear/v1/file/" + item.image.thumb + '?oauth_token=' + ClearFn.returnToken();
+						
 //						E1.get({'type': 'file', 'id': item.image.url}, function(img) {
 //						});
 					}
@@ -765,6 +767,22 @@ angular.module('clearApp.controllers', [])
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
+		$scope.open = function (item) {            
+			var modalInstance = $modal.open({
+				templateUrl: 'partials/tplModalIrImg.html',
+				controller: 'TplModalIrImgCtrl',
+				resolve: {
+				  item: function () {
+					return item;
+				  }
+				}
+			});
+			modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+			}, function () {
+//                $log.info('Modal dismissed at: ' + new Date());
+			});
+		};
 		// /index_rest.php/api/clear/v1/file/301512686"
 	}])
 	
@@ -811,9 +829,10 @@ angular.module('clearApp.controllers', [])
 		};
 	}])
 	
-	.controller('NonConformityReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', function($scope, $routeParams, E2, $modal) {
+	.controller('NonConformityReportCtrl', ['$scope', '$routeParams', 'E2', '$modal', 'ClearFn', function($scope, $routeParams, E2, $modal, ClearFn) {
 		$scope.loaded = false;
 		E2.get({'format': 'documents', 'type': 'ncr', 'id': $routeParams.id}, function(doc) {
+			doc.element.image.url = doc.element.image.url + '?oauth_token=' + ClearFn.returnToken();
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
@@ -892,6 +911,7 @@ angular.module('clearApp.controllers', [])
 	.controller('ProofOfDeliveryCtrl', ['$scope', '$routeParams', 'ClearFn', 'E2', function($scope, $routeParams, ClearFn, E2) {
 		$scope.loaded = false;
 		E2.get({'format': 'documents', 'type': 'pod', 'id': $routeParams.id}, function(doc) {
+			doc.signature.image.url = doc.signature.image.url + '?oauth_token=' + ClearFn.returnToken();
 			$scope.doc = doc;
 			$scope.loaded = true;
 			

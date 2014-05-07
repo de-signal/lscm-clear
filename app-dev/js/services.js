@@ -217,9 +217,15 @@ angular.module('clearApp.services', ['ngResource'])
 	
 	.factory('ClearFn', ['$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($rootScope, $location, $modal, $q, toaster, Utils){
 		
-		var parentReady, listsReady=[]; 
+		var parentReady, listsReady=[], token; 
 		
 		return {
+			updateToken: function(t) {
+				token = t;
+			},
+			returnToken: function() {
+				return token;
+			},
 			listsReady: function(p) {
 				if (p == 'init') { 
 					parentReady=false; listsReady = [] 
@@ -266,6 +272,7 @@ angular.module('clearApp.services', ['ngResource'])
 			detailUpdate: function(elm) {
 				var self = this;
 				self.propertiesDate(elm); 
+				self.detailUrlUpdate(elm); 
 				self.qrCodeGoogle(elm);
 				self.detailTimeline(elm);
 				for (var index in elm.charts) {
@@ -277,6 +284,15 @@ angular.module('clearApp.services', ['ngResource'])
 				if (!elm.anim && elm.timeline) {
 					for (var i = 0; i < 4; i++) {
 						if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
+					}
+				} 
+				return elm;
+			}, 
+			detailUrlUpdate: function(elm) {
+				if (elm.documents) {
+					for (var i in elm.documents) {
+						elm.documents[i].url = elm.documents[i].url + '?oauth_token=' + token;
+						console.log('tokenUrl: ', elm.documents[i].url); 
 					}
 				} 
 				return elm;
