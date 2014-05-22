@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.17-build.160+sha.31bdb60
+ * @license AngularJS v1.2.17-build.198+sha.a0dbd95
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -632,7 +632,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  *  // Route: /Chapter/:chapterId/Section/:sectionId
  *  //
  *  // Then
- *  $routeParams ==> {chapterId:1, sectionId:2, search:'moby'}
+ *  $routeParams ==> {chapterId:'1', sectionId:'2', search:'moby'}
  * ```
  */
 function $RouteParamsProvider() {

@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.17-build.160+sha.31bdb60
+ * @license AngularJS v1.2.17-build.198+sha.a0dbd95
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -714,7 +714,7 @@ angular.module('ngAnimate', ['ng'])
            * @function
            * @description Adds and/or removes the given CSS classes to and from the element.
            * Once complete, the done() callback will be fired (if provided).
-           * @param {DOMElement} element the element which will it's CSS classes changed
+           * @param {DOMElement} element the element which will its CSS classes changed
            *   removed from it
            * @param {string} add the CSS classes which will be added to the element
            * @param {string} remove the CSS class which will be removed from the element
