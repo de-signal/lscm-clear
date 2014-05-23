@@ -8,7 +8,7 @@
 			<fieldset>
 				<div class="radio" ng-repeat="type in types">
 					<label class="control-label">
-						<input type="radio" ng-model="urlPage.type" value="{{type.id}}" ng-change="urlSet({'type': urlPage.type }, 'searchResult')"> <h4>{{type.name}}</h4>
+						<input type="radio" ng-model="urlPage.type" value="{{type.type}}" ng-change="urlSet({'type': urlPage.type }, 'searchResult')"> <h4>{{type.name}}</h4>
 					</label>
 				</div>
 			</fieldset>

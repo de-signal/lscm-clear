@@ -3,7 +3,7 @@
 /* Directives */
 
 angular.module('clearApp.directives', [])
-	.directive('clearAuth', function() {
+	.directive('clearAuth', ['$http', function($http) {
 		return {
 			restrict: 'A',
 			link: function(scope, elem, attrs) {
@@ -17,7 +17,7 @@ angular.module('clearApp.directives', [])
 				});
 			}
 		}
-	})
+	}])
 	.directive('appVersion', ['version', function(version) {
 		return function(scope, elem, attrs) {
 			elem.text(version);

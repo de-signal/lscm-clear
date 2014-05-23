@@ -6,12 +6,12 @@ angular.module('clearApp.controllers', [])
 
 	.controller('UserCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 'ClearFn',  
 		function ($scope, $route, toaster, $cookieStore, authService, $http, E1, ClearFn) {
-		var credentials;
+		var token;
 
 		if ($cookieStore.get("token")) {
-			credentials = $cookieStore.get("token"); 
-			ClearFn.updateToken(credentials.replace('OAuth ',''));
-			$http.defaults.headers.common['Authorization'] = credentials;
+			token = $cookieStore.get("token"); 
+			ClearFn.updateToken(token.replace('OAuth ',''));
+			$http.defaults.headers.common['Authorization'] = token;
 			$scope.loggedIn=true;
 			console.log('connect from cookie: ', $http.defaults.headers.common);
 			E1.get({'type': 'user'}, function(user) { 
@@ -20,22 +20,26 @@ angular.module('clearApp.controllers', [])
 		} 
 
 		$scope.login = function() {
+			$cookieStore.remove("token");
 			$http.post('../oauth/oauth.php', {ignoreAuthModule: true, login: $scope.username, password: $scope.password})
 				.success(function(data, status, headers, config) {
 					ClearFn.updateToken(data.access_token);
-					credentials = 'OAuth '+ data.access_token;
-					$cookieStore.remove("token");
+					token = 'OAuth '+ data.access_token;
 					if($scope.remember) {
-						$cookieStore.put("token", credentials);
+						$cookieStore.put("token", token);
 					} 
-					$http.defaults.headers.common['Authorization'] = credentials;
-					authService.loginConfirmed();
+					$http.defaults.headers.common['Authorization'] = token;
 					console.log('connect from form: ', $http.defaults.headers.common);
 					E1.get({'type': 'user'}, function(user) {
-						toaster.pop('success', 'Welcome', user.first_name + ' ' + user.name);
+						var httpConfig = function(req) {
+							req.headers.Authorization = token;
+							return req;
+						};
+						var userName = user.first_name + ' ' + user.name;
+						toaster.pop('success', 'Welcome', userName);
 						$scope.user = user;
+						authService.loginConfirmed(userName, httpConfig);
 					});
-					
 				})
 				.error(function(data, status, headers, config) {
 					toaster.pop('error', 'Error', headers("X-clear-login"));
@@ -43,12 +47,11 @@ angular.module('clearApp.controllers', [])
 			}
 		
 		$scope.logout = function () {
-			$http.post('../oauth/oauth.php', {action: 'logout', token: credentials})
+			$http.post('../oauth/oauth.php', {action: 'logout', token: token})
 				.success(function(data, status, headers, config) {
 					$cookieStore.remove("token");
 					delete $http.defaults.headers.common['Authorization'];
 					$route.reload();
-					$scope.loggedIn=false;
 					console.log('logout: ', $http.defaults.headers.common);
 					toaster.pop('success', 'Logged out');
 				})
@@ -56,13 +59,6 @@ angular.module('clearApp.controllers', [])
 					console.log('status error :', status, ' / logout failed');
 				});
 			}
-		
-		$scope.logoutTest = function () {
-			$cookieStore.remove("token");
-			$http.defaults.headers.common['Authorization'] = ''; 
-			$route.reload();
-			console.log('logout');
-		}
 	}])
 	
 	.controller('UserProfileCtrl', ['$scope', 'E1', function($scope, E1) {
@@ -305,19 +301,19 @@ angular.module('clearApp.controllers', [])
 		ClearFn.listsReady('init'); 
 		
 		$scope.types=[	
-			{"name": "Orders", "id": "order", 'url': 'O' }, 
-			{"name": "Shipments", "id": "shipment", 'url': 'S' }, 
-			{"name": "Boxes", "id": "box", 'url': 'B'  }, 
-			{"name": "Items", "id": "item", 'url': 'I'  }
+			{"name": "Orders", "type": "order", 'url': 'O' }, 
+			{"name": "Shipments", "type": "shipment", 'url': 'S' }, 
+			{"name": "Boxes", "type": "box", 'url': 'B'  }, 
+			{"name": "Items", "type": "item", 'url': 'I'  }
 		];		
 		
 		$scope.listsConfig = [];
 		ElmsListsConfig.get( function(config) {	
 			for (var i in $scope.types) {
 				$scope.listsConfig[i] = Utils.clone(config);
-				$scope.listsConfig[i].resource = '2'; 
-				$scope.listsConfig[i].id = $scope.types[i].id; 
-				$scope.listsConfig[i].type = $scope.types[i].id;
+				$scope.listsConfig[i].resource = '2';  
+				$scope.listsConfig[i].type = $scope.types[i].type;
+				$scope.listsConfig[i].id = $scope.types[i].type;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
 				$scope.listsConfig[i].display.modifications = true; 
 			}
@@ -325,7 +321,7 @@ angular.module('clearApp.controllers', [])
 		});
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			var typeIndex = Utils.objectIndexbyKey($scope.types, 'id', listId); 
+			var typeIndex = Utils.objectIndexbyKey($scope.types, 'type', listId); 
 			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex])); 
 		});
 	}])
@@ -335,21 +331,21 @@ angular.module('clearApp.controllers', [])
 		ClearFn.listsReady('init'); 
 		
 		$scope.types=[	
-			{"name": "Orders", "id": "order", 'url': 'O' }, 
-			{"name": "Shipments", "id": "shipment", 'url': 'S' }, 
-			{"name": "Boxes", "id": "box", 'url': 'B'  }, 
-			{"name": "Items", "id": "item", 'url': 'I'  }
+			{"name": "Orders", "type": "order", 'url': 'O' }, 
+			{"name": "Shipments", "type": "shipment", 'url': 'S' }, 
+			{"name": "Boxes", "type": "box", 'url': 'B'  }, 
+			{"name": "Items", "type": "item", 'url': 'I'  }
 		];		
 		
 		$scope.listsConfig = [];
 		ElmsListsConfig.get( function(config) {	
 			for (var i in $scope.types) {
 				$scope.listsConfig[i] = Utils.clone(config);
-				$scope.listsConfig[i].id = $scope.types[i].id; 
-				$scope.listsConfig[i].type = $scope.types[i].id;
+				$scope.listsConfig[i].type = $scope.types[i].type;
+				$scope.listsConfig[i].id = $scope.types[i].type;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
 				$scope.listsConfig[i].display.modifications = true; 
-				switch ($scope.types[i].id) {
+				switch ($scope.types[i].type) {
 					case 'order': $scope.listsConfig[i].resource = '6'; break;
 					case 'shipment': $scope.listsConfig[i].resource = '7'; break;
 					case 'box': $scope.listsConfig[i].resource = '8'; break;
@@ -360,7 +356,7 @@ angular.module('clearApp.controllers', [])
 		});
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			var typeIndex = Utils.objectIndexbyKey($scope.types, 'id', listId); 
+			var typeIndex = Utils.objectIndexbyKey($scope.types, 'type', listId); 
 			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex])); 
 		});
 	}])
@@ -427,8 +423,8 @@ angular.module('clearApp.controllers', [])
 			ElmsListsConfig.get(function(config) {
 				for (var i in elm.related) {
 					$scope.listsConfig[i] = Utils.clone(config);
-					$scope.listsConfig[i].urlInit.related = elm.type; 
-					$scope.listsConfig[i].urlInit.related_id = elm.id; 
+					$scope.listsConfig[i].related = elm.type; 
+					$scope.listsConfig[i].related_id = elm.id; 
 					$scope.listsConfig[i].type = elm.related[i].type;
 					$scope.listsConfig[i].id = elm.related[i].type;
 					$scope.listsConfig[i].resource = '2'; 
@@ -438,6 +434,7 @@ angular.module('clearApp.controllers', [])
 						case 'box': $scope.listsConfig[i].listCode = 'B'; break;
 						case 'item': $scope.listsConfig[i].listCode = 'I'; break;
 					}
+					console.log('listsConfig[i]: ', $scope.listsConfig[i]); 
 				}
 				ClearFn.listsReady('parent'); 
 			}); 
@@ -503,8 +500,8 @@ angular.module('clearApp.controllers', [])
 			ElmsListsConfig.get( function(config) {
 				for (var i in elm.related) {
 					$scope.listsConfig[i] = Utils.clone(config);
-					$scope.listsConfig[i].urlInit.related = elm.type; 
-					$scope.listsConfig[i].urlInit.related_id = elm.id; 
+					$scope.listsConfig[i].related = elm.type; 
+					$scope.listsConfig[i].related_id = elm.id; 
 					$scope.listsConfig[i].type = elm.related[i].type;
 					$scope.listsConfig[i].id = elm.related[i].type;
 					$scope.listsConfig[i].resource = '2'; 
@@ -545,11 +542,11 @@ angular.module('clearApp.controllers', [])
 		} 
 		
 		$scope.types=[	
-			{"name": "Orders", "id": "order" }, 
-			{"name": "Shipments in", "id": "shipmentIn" }, 
-			{"name": "Shipments out", "id": "shipmentOut" }, 
-			{"name": "Boxes", "id": "box" }, 
-			{"name": "Items", "id": "item" }
+			{"name": "Orders", "type": "order" }, 
+			{"name": "Shipments in", "type": "shipmentIn" }, 
+			{"name": "Shipments out", "type": "shipmentOut" }, 
+			{"name": "Boxes", "type": "box" }, 
+			{"name": "Items", "type": "item" }
 		];		
 		
 		$scope.listsConfig = [];
@@ -617,7 +614,7 @@ angular.module('clearApp.controllers', [])
 		}
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
 		});
 	}])
 	
@@ -631,19 +628,18 @@ angular.module('clearApp.controllers', [])
 		DocumentsConfig.get( function(config) {
 			$scope.listsConfig[0] = config; 
 			$scope.listsConfig[0].type = type;
-			$scope.listsConfig[0].id = "documents";
 			switch (type) {
 				case 'ir': $scope.page= {'name': 'Inspection reports', 'type': type }; $scope.listsConfig[0].resource = '10'; break;
 				case 'ncr': $scope.page= {'name': 'Non-conformity reports', 'type': type }; $scope.listsConfig[0].resource = '11'; break;
 				case 'pod': $scope.page= {'name': 'Proofs of delivery', 'type': type }; $scope.listsConfig[0].resource = '12'; break;
 				case 'archive': $scope.page= {'name': 'Archives', 'type': type }; $scope.listsConfig[0].resource = '13'; break;		
 			}
-			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].type);
 			ClearFn.listsReady('parent'); 
 		}); 
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + listId, ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
 		});
 		
 	}])

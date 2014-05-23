@@ -99,7 +99,12 @@ angular.module('clearApp.services', ['ngResource'])
 				var q=$q.defer();
 				var listQuery = { 'type': listConfig.type, 'format': listConfig.format }; 
 				
-				listQuery = Utils.collect(listQuery, listConfig.urlParams); 				
+				listQuery = Utils.collect(listQuery, listConfig.urlParams); 
+				
+				if (listConfig.related) {
+					listQuery.related = listConfig.related; 
+					listQuery.related_id = listConfig.related_id; 
+				}		
 				
 			 	resources[listConfig.resource].query( listQuery, function(elements, response) {
 			 		list.pagination = { 
