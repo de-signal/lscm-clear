@@ -275,7 +275,7 @@ th {
 
 /* line 22, ../lib/scss/bootstrap/_scaffolding.scss */
 html {
-  font-size: 62.5%;
+  font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -328,6 +328,7 @@ img {
 /* line 81, ../lib/scss/bootstrap/_scaffolding.scss */
 .img-responsive {
   display: block;
+  width: 100% \9;
   max-width: 100%;
   height: auto;
 }
@@ -348,6 +349,7 @@ img {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
+  width: 100% \9;
   max-width: 100%;
   height: auto;
 }
@@ -412,7 +414,7 @@ h6 .small,
 .h6 .small {
   font-weight: normal;
   line-height: 1;
-  color: #999999;
+  color: #777777;
 }
 
 /* line 26, ../lib/scss/bootstrap/_type.scss */
@@ -494,7 +496,7 @@ p {
 .lead {
   margin-bottom: 20px;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
@@ -510,41 +512,61 @@ small,
   font-size: 85%;
 }
 
-/* line 82, ../lib/scss/bootstrap/_type.scss */
+/* line 84, ../lib/scss/bootstrap/_type.scss */
 cite {
   font-style: normal;
 }
 
-/* line 85, ../lib/scss/bootstrap/_type.scss */
+/* line 89, ../lib/scss/bootstrap/_type.scss */
 mark,
 .mark {
   background-color: #fcf8e3;
   padding: .2em;
 }
 
-/* line 91, ../lib/scss/bootstrap/_type.scss */
+/* line 95, ../lib/scss/bootstrap/_type.scss */
 .text-left {
   text-align: left;
 }
 
-/* line 92, ../lib/scss/bootstrap/_type.scss */
+/* line 96, ../lib/scss/bootstrap/_type.scss */
 .text-right {
   text-align: right;
 }
 
-/* line 93, ../lib/scss/bootstrap/_type.scss */
+/* line 97, ../lib/scss/bootstrap/_type.scss */
 .text-center {
   text-align: center;
 }
 
-/* line 94, ../lib/scss/bootstrap/_type.scss */
+/* line 98, ../lib/scss/bootstrap/_type.scss */
 .text-justify {
   text-align: justify;
 }
 
-/* line 97, ../lib/scss/bootstrap/_type.scss */
+/* line 99, ../lib/scss/bootstrap/_type.scss */
+.text-nowrap {
+  white-space: nowrap;
+}
+
+/* line 102, ../lib/scss/bootstrap/_type.scss */
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+/* line 103, ../lib/scss/bootstrap/_type.scss */
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+/* line 104, ../lib/scss/bootstrap/_type.scss */
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+/* line 107, ../lib/scss/bootstrap/_type.scss */
 .text-muted {
-  color: #999999;
+  color: #777777;
 }
 
 /* line 5, ../lib/scss/bootstrap/mixins/_text-emphasis.scss */
@@ -597,7 +619,7 @@ a.text-danger:hover {
   color: #843534;
 }
 
-/* line 114, ../lib/scss/bootstrap/_type.scss */
+/* line 124, ../lib/scss/bootstrap/_type.scss */
 .bg-primary {
   color: #fff;
 }
@@ -652,20 +674,20 @@ a.bg-danger:hover {
   background-color: #e4b9b9;
 }
 
-/* line 133, ../lib/scss/bootstrap/_type.scss */
+/* line 143, ../lib/scss/bootstrap/_type.scss */
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
 
-/* line 145, ../lib/scss/bootstrap/_type.scss */
+/* line 155, ../lib/scss/bootstrap/_type.scss */
 ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
 }
-/* line 149, ../lib/scss/bootstrap/_type.scss */
+/* line 159, ../lib/scss/bootstrap/_type.scss */
 ul ul,
 ul ol,
 ol ul,
@@ -673,41 +695,41 @@ ol ol {
   margin-bottom: 0;
 }
 
-/* line 157, ../lib/scss/bootstrap/_type.scss */
+/* line 167, ../lib/scss/bootstrap/_type.scss */
 .list-unstyled, .list-inline {
   padding-left: 0;
   list-style: none;
 }
 
-/* line 163, ../lib/scss/bootstrap/_type.scss */
+/* line 173, ../lib/scss/bootstrap/_type.scss */
 .list-inline {
   margin-left: -5px;
 }
-/* line 167, ../lib/scss/bootstrap/_type.scss */
+/* line 177, ../lib/scss/bootstrap/_type.scss */
 .list-inline > li {
   display: inline-block;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-/* line 175, ../lib/scss/bootstrap/_type.scss */
+/* line 185, ../lib/scss/bootstrap/_type.scss */
 dl {
   margin-top: 0;
   margin-bottom: 20px;
 }
 
-/* line 180, ../lib/scss/bootstrap/_type.scss */
+/* line 190, ../lib/scss/bootstrap/_type.scss */
 dt,
 dd {
   line-height: 1.42857;
 }
 
-/* line 183, ../lib/scss/bootstrap/_type.scss */
+/* line 193, ../lib/scss/bootstrap/_type.scss */
 dt {
   font-weight: bold;
 }
 
-/* line 186, ../lib/scss/bootstrap/_type.scss */
+/* line 196, ../lib/scss/bootstrap/_type.scss */
 dd {
   margin-left: 0;
 }
@@ -722,7 +744,7 @@ dd {
   clear: both;
 }
 @media (min-width: 768px) {
-  /* line 201, ../lib/scss/bootstrap/_type.scss */
+  /* line 211, ../lib/scss/bootstrap/_type.scss */
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -732,55 +754,55 @@ dd {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  /* line 208, ../lib/scss/bootstrap/_type.scss */
+  /* line 218, ../lib/scss/bootstrap/_type.scss */
   .dl-horizontal dd {
     margin-left: 180px;
   }
 }
 
-/* line 221, ../lib/scss/bootstrap/_type.scss */
+/* line 231, ../lib/scss/bootstrap/_type.scss */
 abbr[title],
 abbr[data-original-title] {
   cursor: help;
-  border-bottom: 1px dotted #999999;
+  border-bottom: 1px dotted #777777;
 }
 
-/* line 225, ../lib/scss/bootstrap/_type.scss */
+/* line 235, ../lib/scss/bootstrap/_type.scss */
 .initialism {
   font-size: 90%;
   text-transform: uppercase;
 }
 
-/* line 231, ../lib/scss/bootstrap/_type.scss */
+/* line 241, ../lib/scss/bootstrap/_type.scss */
 blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
   border-left: 5px solid #eeeeee;
 }
-/* line 240, ../lib/scss/bootstrap/_type.scss */
+/* line 250, ../lib/scss/bootstrap/_type.scss */
 blockquote p:last-child,
 blockquote ul:last-child,
 blockquote ol:last-child {
   margin-bottom: 0;
 }
-/* line 249, ../lib/scss/bootstrap/_type.scss */
+/* line 259, ../lib/scss/bootstrap/_type.scss */
 blockquote footer,
 blockquote small,
 blockquote .small {
   display: block;
   font-size: 80%;
   line-height: 1.42857;
-  color: #999999;
+  color: #777777;
 }
-/* line 255, ../lib/scss/bootstrap/_type.scss */
+/* line 265, ../lib/scss/bootstrap/_type.scss */
 blockquote footer:before,
 blockquote small:before,
 blockquote .small:before {
   content: '\2014 \00A0';
 }
 
-/* line 265, ../lib/scss/bootstrap/_type.scss */
+/* line 275, ../lib/scss/bootstrap/_type.scss */
 .blockquote-reverse,
 blockquote.pull-right {
   padding-right: 15px;
@@ -789,7 +811,7 @@ blockquote.pull-right {
   border-left: 0;
   text-align: right;
 }
-/* line 276, ../lib/scss/bootstrap/_type.scss */
+/* line 286, ../lib/scss/bootstrap/_type.scss */
 .blockquote-reverse footer:before,
 .blockquote-reverse small:before,
 .blockquote-reverse .small:before,
@@ -798,7 +820,7 @@ blockquote.pull-right small:before,
 blockquote.pull-right .small:before {
   content: '';
 }
-/* line 277, ../lib/scss/bootstrap/_type.scss */
+/* line 287, ../lib/scss/bootstrap/_type.scss */
 .blockquote-reverse footer:after,
 .blockquote-reverse small:after,
 .blockquote-reverse .small:after,
@@ -808,13 +830,13 @@ blockquote.pull-right .small:after {
   content: '\00A0 \2014';
 }
 
-/* line 285, ../lib/scss/bootstrap/_type.scss */
+/* line 295, ../lib/scss/bootstrap/_type.scss */
 blockquote:before,
 blockquote:after {
   content: "";
 }
 
-/* line 290, ../lib/scss/bootstrap/_type.scss */
+/* line 300, ../lib/scss/bootstrap/_type.scss */
 address {
   margin-bottom: 20px;
   font-style: normal;
@@ -847,8 +869,14 @@ kbd {
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+/* line 32, ../lib/scss/bootstrap/_code.scss */
+kbd kbd {
+  padding: 0;
+  font-size: 100%;
+  box-shadow: none;
+}
 
-/* line 34, ../lib/scss/bootstrap/_code.scss */
+/* line 40, ../lib/scss/bootstrap/_code.scss */
 pre {
   display: block;
   padding: 9.5px;
@@ -862,7 +890,7 @@ pre {
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
-/* line 48, ../lib/scss/bootstrap/_code.scss */
+/* line 54, ../lib/scss/bootstrap/_code.scss */
 pre code {
   padding: 0;
   font-size: inherit;
@@ -872,7 +900,7 @@ pre code {
   border-radius: 0;
 }
 
-/* line 59, ../lib/scss/bootstrap/_code.scss */
+/* line 65, ../lib/scss/bootstrap/_code.scss */
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
@@ -945,7 +973,7 @@ pre code {
   clear: both;
 }
 
-/* line 14, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 11, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -953,1063 +981,1063 @@ pre code {
   padding-right: 15px;
 }
 
-/* line 33, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 27, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-1 {
   width: 8.33333%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-2 {
   width: 16.66667%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-3 {
   width: 25%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-4 {
   width: 33.33333%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-5 {
   width: 41.66667%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-6 {
   width: 50%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-7 {
   width: 58.33333%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-8 {
   width: 66.66667%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-9 {
   width: 75%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-10 {
   width: 83.33333%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-11 {
   width: 91.66667%;
 }
 
-/* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-12 {
   width: 100%;
 }
 
-/* line 61, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 55, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-0 {
   right: auto;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-1 {
   right: 8.33333%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-2 {
   right: 16.66667%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-3 {
   right: 25%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-4 {
   right: 33.33333%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-5 {
   right: 41.66667%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-6 {
   right: 50%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-7 {
   right: 58.33333%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-8 {
   right: 66.66667%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-9 {
   right: 75%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-10 {
   right: 83.33333%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-11 {
   right: 91.66667%;
 }
 
-/* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-pull-12 {
   right: 100%;
 }
 
-/* line 51, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 45, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-0 {
   left: auto;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-1 {
   left: 8.33333%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-2 {
   left: 16.66667%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-3 {
   left: 25%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-4 {
   left: 33.33333%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-5 {
   left: 41.66667%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-6 {
   left: 50%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-7 {
   left: 58.33333%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-8 {
   left: 66.66667%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-9 {
   left: 75%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-10 {
   left: 83.33333%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-11 {
   left: 91.66667%;
 }
 
-/* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-push-12 {
   left: 100%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-0 {
   margin-left: 0%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-1 {
   margin-left: 8.33333%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-2 {
   margin-left: 16.66667%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-3 {
   margin-left: 25%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-4 {
   margin-left: 33.33333%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-5 {
   margin-left: 41.66667%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-6 {
   margin-left: 50%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-7 {
   margin-left: 58.33333%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-8 {
   margin-left: 66.66667%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-9 {
   margin-left: 75%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-10 {
   margin-left: 83.33333%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-11 {
   margin-left: 91.66667%;
 }
 
-/* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+/* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
 .col-xs-offset-12 {
   margin-left: 100%;
 }
 
 @media (min-width: 768px) {
-  /* line 33, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 27, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-1 {
     width: 8.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-2 {
     width: 16.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-3 {
     width: 25%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-4 {
     width: 33.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-5 {
     width: 41.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-6 {
     width: 50%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-7 {
     width: 58.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-8 {
     width: 66.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-9 {
     width: 75%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-10 {
     width: 83.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-11 {
     width: 91.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-12 {
     width: 100%;
   }
 
-  /* line 61, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 55, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-0 {
     right: auto;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-1 {
     right: 8.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-2 {
     right: 16.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-3 {
     right: 25%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-4 {
     right: 33.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-5 {
     right: 41.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-6 {
     right: 50%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-7 {
     right: 58.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-8 {
     right: 66.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-9 {
     right: 75%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-10 {
     right: 83.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-11 {
     right: 91.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-pull-12 {
     right: 100%;
   }
 
-  /* line 51, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 45, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-0 {
     left: auto;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-1 {
     left: 8.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-2 {
     left: 16.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-3 {
     left: 25%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-4 {
     left: 33.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-5 {
     left: 41.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-6 {
     left: 50%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-7 {
     left: 58.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-8 {
     left: 66.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-9 {
     left: 75%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-10 {
     left: 83.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-11 {
     left: 91.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-push-12 {
     left: 100%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-0 {
     margin-left: 0%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-1 {
     margin-left: 8.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-2 {
     margin-left: 16.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-3 {
     margin-left: 25%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-4 {
     margin-left: 33.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-5 {
     margin-left: 41.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-6 {
     margin-left: 50%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-7 {
     margin-left: 58.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-8 {
     margin-left: 66.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-9 {
     margin-left: 75%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-10 {
     margin-left: 83.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-11 {
     margin-left: 91.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-sm-offset-12 {
     margin-left: 100%;
   }
 }
 @media (min-width: 992px) {
-  /* line 33, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 27, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: left;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-1 {
     width: 8.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-2 {
     width: 16.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-3 {
     width: 25%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-4 {
     width: 33.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-5 {
     width: 41.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-6 {
     width: 50%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-7 {
     width: 58.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-8 {
     width: 66.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-9 {
     width: 75%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-10 {
     width: 83.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-11 {
     width: 91.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-12 {
     width: 100%;
   }
 
-  /* line 61, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 55, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-0 {
     right: auto;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-1 {
     right: 8.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-2 {
     right: 16.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-3 {
     right: 25%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-4 {
     right: 33.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-5 {
     right: 41.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-6 {
     right: 50%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-7 {
     right: 58.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-8 {
     right: 66.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-9 {
     right: 75%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-10 {
     right: 83.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-11 {
     right: 91.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-pull-12 {
     right: 100%;
   }
 
-  /* line 51, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 45, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-0 {
     left: auto;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-1 {
     left: 8.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-2 {
     left: 16.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-3 {
     left: 25%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-4 {
     left: 33.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-5 {
     left: 41.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-6 {
     left: 50%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-7 {
     left: 58.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-8 {
     left: 66.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-9 {
     left: 75%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-10 {
     left: 83.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-11 {
     left: 91.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-push-12 {
     left: 100%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-0 {
     margin-left: 0%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-1 {
     margin-left: 8.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-2 {
     margin-left: 16.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-3 {
     margin-left: 25%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-4 {
     margin-left: 33.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-5 {
     margin-left: 41.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-6 {
     margin-left: 50%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-7 {
     margin-left: 58.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-8 {
     margin-left: 66.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-9 {
     margin-left: 75%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-10 {
     margin-left: 83.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-11 {
     margin-left: 91.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-md-offset-12 {
     margin-left: 100%;
   }
 }
 @media (min-width: 1200px) {
-  /* line 33, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 27, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: left;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-1 {
     width: 8.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-2 {
     width: 16.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-3 {
     width: 25%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-4 {
     width: 33.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-5 {
     width: 41.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-6 {
     width: 50%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-7 {
     width: 58.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-8 {
     width: 66.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-9 {
     width: 75%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-10 {
     width: 83.33333%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-11 {
     width: 91.66667%;
   }
 
-  /* line 41, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 35, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-12 {
     width: 100%;
   }
 
-  /* line 61, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 55, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-0 {
     right: auto;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-1 {
     right: 8.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-2 {
     right: 16.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-3 {
     right: 25%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-4 {
     right: 33.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-5 {
     right: 41.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-6 {
     right: 50%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-7 {
     right: 58.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-8 {
     right: 66.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-9 {
     right: 75%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-10 {
     right: 83.33333%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-11 {
     right: 91.66667%;
   }
 
-  /* line 56, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 50, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-pull-12 {
     right: 100%;
   }
 
-  /* line 51, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 45, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-0 {
     left: auto;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-1 {
     left: 8.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-2 {
     left: 16.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-3 {
     left: 25%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-4 {
     left: 33.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-5 {
     left: 41.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-6 {
     left: 50%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-7 {
     left: 58.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-8 {
     left: 66.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-9 {
     left: 75%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-10 {
     left: 83.33333%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-11 {
     left: 91.66667%;
   }
 
-  /* line 46, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 40, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-push-12 {
     left: 100%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-0 {
     margin-left: 0%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-1 {
     margin-left: 8.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-2 {
     margin-left: 16.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-3 {
     margin-left: 25%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-4 {
     margin-left: 33.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-5 {
     margin-left: 41.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-6 {
     margin-left: 50%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-7 {
     margin-left: 58.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-8 {
     margin-left: 66.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-9 {
     margin-left: 75%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-10 {
     margin-left: 83.33333%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-11 {
     margin-left: 91.66667%;
   }
 
-  /* line 66, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
+  /* line 60, ../lib/scss/bootstrap/mixins/_grid-framework.scss */
   .col-lg-offset-12 {
     margin-left: 100%;
   }
 }
 /* line 6, ../lib/scss/bootstrap/_tables.scss */
 table {
-  max-width: 100%;
   background-color: transparent;
 }
 
-/* line 10, ../lib/scss/bootstrap/_tables.scss */
+/* line 9, ../lib/scss/bootstrap/_tables.scss */
 th {
   text-align: left;
 }
 
-/* line 17, ../lib/scss/bootstrap/_tables.scss */
+/* line 16, ../lib/scss/bootstrap/_tables.scss */
 .table {
   width: 100%;
+  max-width: 100%;
   margin-bottom: 20px;
 }
 /* line 26, ../lib/scss/bootstrap/_tables.scss */
@@ -2209,7 +2237,7 @@ table th[class*="col-"] {
     width: 100%;
     margin-bottom: 15px;
     overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     border: 1px solid #dddddd;
     -webkit-overflow-scrolling: touch;
@@ -2365,16 +2393,16 @@ output {
 }
 /* line 102, ../lib/scss/bootstrap/mixins/_vendor-prefixes.scss */
 .form-control::-moz-placeholder {
-  color: #999999;
+  color: #777777;
   opacity: 1;
 }
 /* line 104, ../lib/scss/bootstrap/mixins/_vendor-prefixes.scss */
 .form-control:-ms-input-placeholder {
-  color: #999999;
+  color: #777777;
 }
 /* line 105, ../lib/scss/bootstrap/mixins/_vendor-prefixes.scss */
 .form-control::-webkit-input-placeholder {
-  color: #999999;
+  color: #777777;
 }
 /* line 143, ../lib/scss/bootstrap/_forms.scss */
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -2393,7 +2421,7 @@ input[type="search"] {
   -webkit-appearance: none;
 }
 
-/* line 179, ../lib/scss/bootstrap/_forms.scss */
+/* line 181, ../lib/scss/bootstrap/_forms.scss */
 input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
@@ -2401,57 +2429,64 @@ input[type="month"] {
   line-height: 34px;
   line-height: 1.42857 \0;
 }
-/* line 184, ../lib/scss/bootstrap/_forms.scss */
-input[type="date"].input-sm, .input-group-sm > input[type="date"].form-control,
+/* line 186, ../lib/scss/bootstrap/_forms.scss */
+input[type="date"].input-sm, .form-horizontal .form-group-sm input[type="date"].form-control, .input-group-sm > input[type="date"].form-control,
 .input-group-sm > input[type="date"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="date"].btn,
 input[type="time"].input-sm,
+.form-horizontal .form-group-sm input[type="time"].form-control,
 .input-group-sm > input[type="time"].form-control,
 .input-group-sm > input[type="time"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="time"].btn,
 input[type="datetime-local"].input-sm,
+.form-horizontal .form-group-sm input[type="datetime-local"].form-control,
 .input-group-sm > input[type="datetime-local"].form-control,
 .input-group-sm > input[type="datetime-local"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
 input[type="month"].input-sm,
+.form-horizontal .form-group-sm input[type="month"].form-control,
 .input-group-sm > input[type="month"].form-control,
 .input-group-sm > input[type="month"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="month"].btn {
   line-height: 30px;
 }
-/* line 187, ../lib/scss/bootstrap/_forms.scss */
-input[type="date"].input-lg, .input-group-lg > input[type="date"].form-control,
+/* line 189, ../lib/scss/bootstrap/_forms.scss */
+input[type="date"].input-lg, .form-horizontal .form-group-lg input[type="date"].form-control, .input-group-lg > input[type="date"].form-control,
 .input-group-lg > input[type="date"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="date"].btn,
 input[type="time"].input-lg,
+.form-horizontal .form-group-lg input[type="time"].form-control,
 .input-group-lg > input[type="time"].form-control,
 .input-group-lg > input[type="time"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="time"].btn,
 input[type="datetime-local"].input-lg,
+.form-horizontal .form-group-lg input[type="datetime-local"].form-control,
 .input-group-lg > input[type="datetime-local"].form-control,
 .input-group-lg > input[type="datetime-local"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="datetime-local"].btn,
 input[type="month"].input-lg,
+.form-horizontal .form-group-lg input[type="month"].form-control,
 .input-group-lg > input[type="month"].form-control,
 .input-group-lg > input[type="month"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="month"].btn {
   line-height: 46px;
 }
 
-/* line 198, ../lib/scss/bootstrap/_forms.scss */
+/* line 200, ../lib/scss/bootstrap/_forms.scss */
 .form-group {
   margin-bottom: 15px;
 }
 
-/* line 208, ../lib/scss/bootstrap/_forms.scss */
+/* line 210, ../lib/scss/bootstrap/_forms.scss */
 .radio,
 .checkbox {
+  position: relative;
   display: block;
   min-height: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 214, ../lib/scss/bootstrap/_forms.scss */
+/* line 217, ../lib/scss/bootstrap/_forms.scss */
 .radio label,
 .checkbox label {
   padding-left: 20px;
@@ -2460,22 +2495,23 @@ input[type="month"].input-lg,
   cursor: pointer;
 }
 
-/* line 224, ../lib/scss/bootstrap/_forms.scss */
+/* line 227, ../lib/scss/bootstrap/_forms.scss */
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
-  float: left;
+  position: absolute;
   margin-left: -20px;
+  margin-top: 4px \9;
 }
 
-/* line 229, ../lib/scss/bootstrap/_forms.scss */
+/* line 234, ../lib/scss/bootstrap/_forms.scss */
 .radio + .radio,
 .checkbox + .checkbox {
   margin-top: -5px;
 }
 
-/* line 235, ../lib/scss/bootstrap/_forms.scss */
+/* line 240, ../lib/scss/bootstrap/_forms.scss */
 .radio-inline,
 .checkbox-inline {
   display: inline-block;
@@ -2486,30 +2522,53 @@ input[type="month"].input-lg,
   cursor: pointer;
 }
 
-/* line 244, ../lib/scss/bootstrap/_forms.scss */
+/* line 249, ../lib/scss/bootstrap/_forms.scss */
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
   margin-top: 0;
   margin-left: 10px;
 }
 
-/* line 259, ../lib/scss/bootstrap/_forms.scss */
-input[type="radio"][disabled], fieldset[disabled] input[type="radio"],
-input[type="checkbox"][disabled], fieldset[disabled]
-input[type="checkbox"],
-.radio[disabled], fieldset[disabled]
-.radio,
-.radio-inline[disabled], fieldset[disabled]
-.radio-inline,
-.checkbox[disabled], fieldset[disabled]
-.checkbox,
-.checkbox-inline[disabled], fieldset[disabled]
+/* line 262, ../lib/scss/bootstrap/_forms.scss */
+input[type="radio"][disabled], input[type="radio"].disabled, fieldset[disabled] input[type="radio"],
+input[type="checkbox"][disabled],
+input[type="checkbox"].disabled, fieldset[disabled]
+input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+/* line 270, ../lib/scss/bootstrap/_forms.scss */
+.radio-inline.disabled, fieldset[disabled] .radio-inline,
+.checkbox-inline.disabled, fieldset[disabled]
 .checkbox-inline {
   cursor: not-allowed;
 }
 
+/* line 279, ../lib/scss/bootstrap/_forms.scss */
+.radio.disabled label, fieldset[disabled] .radio label,
+.checkbox.disabled label, fieldset[disabled]
+.checkbox label {
+  cursor: not-allowed;
+}
+
+/* line 291, ../lib/scss/bootstrap/_forms.scss */
+.form-control-static {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 0;
+}
+/* line 299, ../lib/scss/bootstrap/_forms.scss */
+.form-control-static.input-lg, .form-horizontal .form-group-lg .form-control-static.form-control, .input-group-lg > .form-control-static.form-control,
+.input-group-lg > .form-control-static.input-group-addon,
+.input-group-lg > .input-group-btn > .form-control-static.btn, .form-control-static.input-sm, .form-horizontal .form-group-sm .form-control-static.form-control, .input-group-sm > .form-control-static.form-control,
+.input-group-sm > .form-control-static.input-group-addon,
+.input-group-sm > .input-group-btn > .form-control-static.btn {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* line 67, ../lib/scss/bootstrap/mixins/_forms.scss */
-.input-sm, .input-group-sm > .form-control,
+.input-sm, .form-horizontal .form-group-sm .form-control, .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn {
   height: 30px;
@@ -2520,7 +2579,7 @@ input[type="checkbox"],
 }
 
 /* line 75, ../lib/scss/bootstrap/mixins/_forms.scss */
-select.input-sm, .input-group-sm > select.form-control,
+select.input-sm, .form-horizontal .form-group-sm select.form-control, .input-group-sm > select.form-control,
 .input-group-sm > select.input-group-addon,
 .input-group-sm > .input-group-btn > select.btn {
   height: 30px;
@@ -2528,10 +2587,11 @@ select.input-sm, .input-group-sm > select.form-control,
 }
 
 /* line 81, ../lib/scss/bootstrap/mixins/_forms.scss */
-textarea.input-sm, .input-group-sm > textarea.form-control,
+textarea.input-sm, .form-horizontal .form-group-sm textarea.form-control, .input-group-sm > textarea.form-control,
 .input-group-sm > textarea.input-group-addon,
 .input-group-sm > .input-group-btn > textarea.btn,
 select[multiple].input-sm,
+.form-horizontal .form-group-sm select[multiple].form-control,
 .input-group-sm > select[multiple].form-control,
 .input-group-sm > select[multiple].input-group-addon,
 .input-group-sm > .input-group-btn > select[multiple].btn {
@@ -2539,7 +2599,7 @@ select[multiple].input-sm,
 }
 
 /* line 67, ../lib/scss/bootstrap/mixins/_forms.scss */
-.input-lg, .input-group-lg > .form-control,
+.input-lg, .form-horizontal .form-group-lg .form-control, .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
   height: 46px;
@@ -2550,7 +2610,7 @@ select[multiple].input-sm,
 }
 
 /* line 75, ../lib/scss/bootstrap/mixins/_forms.scss */
-select.input-lg, .input-group-lg > select.form-control,
+select.input-lg, .form-horizontal .form-group-lg select.form-control, .input-group-lg > select.form-control,
 .input-group-lg > select.input-group-addon,
 .input-group-lg > .input-group-btn > select.btn {
   height: 46px;
@@ -2558,26 +2618,27 @@ select.input-lg, .input-group-lg > select.form-control,
 }
 
 /* line 81, ../lib/scss/bootstrap/mixins/_forms.scss */
-textarea.input-lg, .input-group-lg > textarea.form-control,
+textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input-group-lg > textarea.form-control,
 .input-group-lg > textarea.input-group-addon,
 .input-group-lg > .input-group-btn > textarea.btn,
 select[multiple].input-lg,
+.form-horizontal .form-group-lg select[multiple].form-control,
 .input-group-lg > select[multiple].form-control,
 .input-group-lg > select[multiple].input-group-addon,
 .input-group-lg > .input-group-btn > select[multiple].btn {
   height: auto;
 }
 
-/* line 279, ../lib/scss/bootstrap/_forms.scss */
+/* line 320, ../lib/scss/bootstrap/_forms.scss */
 .has-feedback {
   position: relative;
 }
-/* line 284, ../lib/scss/bootstrap/_forms.scss */
+/* line 325, ../lib/scss/bootstrap/_forms.scss */
 .has-feedback .form-control {
   padding-right: 42.5px;
 }
 
-/* line 289, ../lib/scss/bootstrap/_forms.scss */
+/* line 330, ../lib/scss/bootstrap/_forms.scss */
 .form-control-feedback {
   position: absolute;
   top: 25px;
@@ -2590,8 +2651,8 @@ select[multiple].input-lg,
   text-align: center;
 }
 
-/* line 300, ../lib/scss/bootstrap/_forms.scss */
-.input-lg + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback,
+/* line 341, ../lib/scss/bootstrap/_forms.scss */
+.input-lg + .form-control-feedback, .form-horizontal .form-group-lg .form-control + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback,
 .input-group-lg > .input-group-addon + .form-control-feedback,
 .input-group-lg > .input-group-btn > .btn + .form-control-feedback {
   width: 46px;
@@ -2599,8 +2660,8 @@ select[multiple].input-lg,
   line-height: 46px;
 }
 
-/* line 305, ../lib/scss/bootstrap/_forms.scss */
-.input-sm + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
+/* line 346, ../lib/scss/bootstrap/_forms.scss */
+.input-sm + .form-control-feedback, .form-horizontal .form-group-sm .form-control + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
 .input-group-sm > .input-group-addon + .form-control-feedback,
 .input-group-sm > .input-group-btn > .btn + .form-control-feedback {
   width: 30px;
@@ -2704,12 +2765,12 @@ select[multiple].input-lg,
   color: #a94442;
 }
 
-/* line 328, ../lib/scss/bootstrap/_forms.scss */
-.form-control-static {
-  margin-bottom: 0;
+/* line 365, ../lib/scss/bootstrap/_forms.scss */
+.has-feedback label.sr-only ~ .form-control-feedback {
+  top: 0;
 }
 
-/* line 338, ../lib/scss/bootstrap/_forms.scss */
+/* line 375, ../lib/scss/bootstrap/_forms.scss */
 .help-block {
   display: block;
   margin-top: 5px;
@@ -2718,24 +2779,24 @@ select[multiple].input-lg,
 }
 
 @media (min-width: 768px) {
-  /* line 363, ../lib/scss/bootstrap/_forms.scss */
+  /* line 400, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .form-group, .navbar-form .form-group {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 370, ../lib/scss/bootstrap/_forms.scss */
+  /* line 407, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .form-control, .navbar-form .form-control {
     display: inline-block;
     width: auto;
     vertical-align: middle;
   }
-  /* line 376, ../lib/scss/bootstrap/_forms.scss */
+  /* line 413, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .input-group, .navbar-form .input-group {
     display: inline-table;
     vertical-align: middle;
   }
-  /* line 382, ../lib/scss/bootstrap/_forms.scss */
+  /* line 419, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .input-group .input-group-addon, .navbar-form .input-group .input-group-addon,
   .form-inline .input-group .input-group-btn,
   .navbar-form .input-group .input-group-btn,
@@ -2743,39 +2804,44 @@ select[multiple].input-lg,
   .navbar-form .input-group .form-control {
     width: auto;
   }
-  /* line 388, ../lib/scss/bootstrap/_forms.scss */
+  /* line 425, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .input-group > .form-control, .navbar-form .input-group > .form-control {
     width: 100%;
   }
-  /* line 392, ../lib/scss/bootstrap/_forms.scss */
+  /* line 429, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .control-label, .navbar-form .control-label {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 401, ../lib/scss/bootstrap/_forms.scss */
+  /* line 438, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .radio, .navbar-form .radio,
   .form-inline .checkbox,
   .navbar-form .checkbox {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 0;
     vertical-align: middle;
   }
-  /* line 409, ../lib/scss/bootstrap/_forms.scss */
+  /* line 444, ../lib/scss/bootstrap/_forms.scss */
+  .form-inline .radio label, .navbar-form .radio label,
+  .form-inline .checkbox label,
+  .navbar-form .checkbox label {
+    padding-left: 0;
+  }
+  /* line 449, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .radio input[type="radio"], .navbar-form .radio input[type="radio"],
   .form-inline .checkbox input[type="checkbox"],
   .navbar-form .checkbox input[type="checkbox"] {
-    float: none;
+    position: relative;
     margin-left: 0;
   }
-  /* line 418, ../lib/scss/bootstrap/_forms.scss */
+  /* line 458, ../lib/scss/bootstrap/_forms.scss */
   .form-inline .has-feedback .form-control-feedback, .navbar-form .has-feedback .form-control-feedback {
     top: 0;
   }
 }
 
-/* line 438, ../lib/scss/bootstrap/_forms.scss */
+/* line 478, ../lib/scss/bootstrap/_forms.scss */
 .form-horizontal .radio,
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
@@ -2784,12 +2850,12 @@ select[multiple].input-lg,
   margin-bottom: 0;
   padding-top: 7px;
 }
-/* line 446, ../lib/scss/bootstrap/_forms.scss */
+/* line 486, ../lib/scss/bootstrap/_forms.scss */
 .form-horizontal .radio,
 .form-horizontal .checkbox {
   min-height: 27px;
 }
-/* line 451, ../lib/scss/bootstrap/_forms.scss */
+/* line 491, ../lib/scss/bootstrap/_forms.scss */
 .form-horizontal .form-group {
   margin-left: -15px;
   margin-right: -15px;
@@ -2803,23 +2869,30 @@ select[multiple].input-lg,
 .form-horizontal .form-group:after {
   clear: both;
 }
-/* line 455, ../lib/scss/bootstrap/_forms.scss */
-.form-horizontal .form-control-static {
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
 @media (min-width: 768px) {
-  /* line 463, ../lib/scss/bootstrap/_forms.scss */
+  /* line 498, ../lib/scss/bootstrap/_forms.scss */
   .form-horizontal .control-label {
     text-align: right;
     margin-bottom: 0;
     padding-top: 7px;
   }
 }
-/* line 474, ../lib/scss/bootstrap/_forms.scss */
+/* line 509, ../lib/scss/bootstrap/_forms.scss */
 .form-horizontal .has-feedback .form-control-feedback {
   top: 0;
   right: 15px;
+}
+@media (min-width: 768px) {
+  /* line 520, ../lib/scss/bootstrap/_forms.scss */
+  .form-horizontal .form-group-lg .control-label {
+    padding-top: 14.3px;
+  }
+}
+@media (min-width: 768px) {
+  /* line 530, ../lib/scss/bootstrap/_forms.scss */
+  .form-horizontal .form-group-sm .control-label {
+    padding-top: 6px;
+  }
 }
 
 /* line 9, ../lib/scss/bootstrap/_buttons.scss */
@@ -3057,7 +3130,7 @@ select[multiple].input-lg,
 }
 /* line 113, ../lib/scss/bootstrap/_buttons.scss */
 .btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
-  color: #999999;
+  color: #777777;
   text-decoration: none;
 }
 
@@ -3089,16 +3162,14 @@ select[multiple].input-lg,
 .btn-block {
   display: block;
   width: 100%;
-  padding-left: 0;
-  padding-right: 0;
 }
 
-/* line 148, ../lib/scss/bootstrap/_buttons.scss */
+/* line 146, ../lib/scss/bootstrap/_buttons.scss */
 .btn-block + .btn-block {
   margin-top: 5px;
 }
 
-/* line 156, ../lib/scss/bootstrap/_buttons.scss */
+/* line 154, ../lib/scss/bootstrap/_buttons.scss */
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
@@ -3230,7 +3301,7 @@ tbody.collapse.in {
 
 /* line 103, ../lib/scss/bootstrap/_dropdowns.scss */
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
-  color: #999999;
+  color: #777777;
 }
 
 /* line 110, ../lib/scss/bootstrap/_dropdowns.scss */
@@ -3269,10 +3340,11 @@ tbody.collapse.in {
   padding: 3px 20px;
   font-size: 12px;
   line-height: 1.42857;
-  color: #999999;
+  color: #777777;
+  white-space: nowrap;
 }
 
-/* line 161, ../lib/scss/bootstrap/_dropdowns.scss */
+/* line 162, ../lib/scss/bootstrap/_dropdowns.scss */
 .dropdown-backdrop {
   position: fixed;
   left: 0;
@@ -3282,20 +3354,20 @@ tbody.collapse.in {
   z-index: 990;
 }
 
-/* line 171, ../lib/scss/bootstrap/_dropdowns.scss */
+/* line 172, ../lib/scss/bootstrap/_dropdowns.scss */
 .pull-right > .dropdown-menu {
   right: 0;
   left: auto;
 }
 
-/* line 184, ../lib/scss/bootstrap/_dropdowns.scss */
+/* line 185, ../lib/scss/bootstrap/_dropdowns.scss */
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
   border-top: 0;
   border-bottom: 4px solid;
   content: "";
 }
-/* line 190, ../lib/scss/bootstrap/_dropdowns.scss */
+/* line 191, ../lib/scss/bootstrap/_dropdowns.scss */
 .dropup .dropdown-menu,
 .navbar-fixed-bottom .dropdown .dropdown-menu {
   top: auto;
@@ -3304,12 +3376,12 @@ tbody.collapse.in {
 }
 
 @media (min-width: 768px) {
-  /* line 204, ../lib/scss/bootstrap/_dropdowns.scss */
+  /* line 205, ../lib/scss/bootstrap/_dropdowns.scss */
   .navbar-right .dropdown-menu {
     right: 0;
     left: auto;
   }
-  /* line 209, ../lib/scss/bootstrap/_dropdowns.scss */
+  /* line 210, ../lib/scss/bootstrap/_dropdowns.scss */
   .navbar-right .dropdown-menu-left {
     left: 0;
     right: auto;
@@ -3549,13 +3621,18 @@ tbody.collapse.in {
 .btn-group-justified > .btn-group .btn {
   width: 100%;
 }
+/* line 220, ../lib/scss/bootstrap/_button-groups.scss */
+.btn-group-justified > .btn-group .dropdown-menu {
+  left: auto;
+}
 
-/* line 232, ../lib/scss/bootstrap/_button-groups.scss */
+/* line 236, ../lib/scss/bootstrap/_button-groups.scss */
 [data-toggle="buttons"] > .btn > input[type="radio"],
 [data-toggle="buttons"] > .btn > input[type="checkbox"] {
   position: absolute;
   z-index: -1;
   opacity: 0;
+  filter: alpha(opacity=0);
 }
 
 /* line 7, ../lib/scss/bootstrap/_input-groups.scss */
@@ -3579,20 +3656,20 @@ tbody.collapse.in {
   margin-bottom: 0;
 }
 
-/* line 52, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 56, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon,
 .input-group-btn,
 .input-group .form-control {
   display: table-cell;
 }
-/* line 55, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 59, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),
 .input-group .form-control:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
 
-/* line 61, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 65, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon,
 .input-group-btn {
   width: 1%;
@@ -3600,7 +3677,7 @@ tbody.collapse.in {
   vertical-align: middle;
 }
 
-/* line 69, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 73, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon {
   padding: 6px 12px;
   font-size: 14px;
@@ -3612,29 +3689,29 @@ tbody.collapse.in {
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
-/* line 81, ../lib/scss/bootstrap/_input-groups.scss */
-.input-group-addon.input-sm,
+/* line 85, ../lib/scss/bootstrap/_input-groups.scss */
+.input-group-addon.input-sm, .form-horizontal .form-group-sm .input-group-addon.form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .input-group-addon.btn {
   padding: 5px 10px;
   font-size: 12px;
   border-radius: 3px;
 }
-/* line 86, ../lib/scss/bootstrap/_input-groups.scss */
-.input-group-addon.input-lg,
+/* line 90, ../lib/scss/bootstrap/_input-groups.scss */
+.input-group-addon.input-lg, .form-horizontal .form-group-lg .input-group-addon.form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .input-group-addon.btn {
   padding: 10px 16px;
   font-size: 18px;
   border-radius: 6px;
 }
-/* line 94, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 98, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon input[type="radio"],
 .input-group-addon input[type="checkbox"] {
   margin-top: 0;
 }
 
-/* line 106, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 110, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group .form-control:first-child,
 .input-group-addon:first-child,
 .input-group-btn:first-child > .btn,
@@ -3646,12 +3723,12 @@ tbody.collapse.in {
   border-top-right-radius: 0;
 }
 
-/* line 109, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 113, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon:first-child {
   border-right: 0;
 }
 
-/* line 118, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 122, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group .form-control:last-child,
 .input-group-addon:last-child,
 .input-group-btn:last-child > .btn,
@@ -3663,35 +3740,35 @@ tbody.collapse.in {
   border-top-left-radius: 0;
 }
 
-/* line 121, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 125, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-addon:last-child {
   border-left: 0;
 }
 
-/* line 127, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 131, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn {
   position: relative;
   font-size: 0;
   white-space: nowrap;
 }
-/* line 136, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 140, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn > .btn {
   position: relative;
 }
-/* line 138, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 142, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn > .btn + .btn {
   margin-left: -1px;
 }
-/* line 144, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 148, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn > .btn:hover, .input-group-btn > .btn:focus, .input-group-btn > .btn:active {
   z-index: 2;
 }
-/* line 152, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 156, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .btn-group {
   margin-right: -1px;
 }
-/* line 158, ../lib/scss/bootstrap/_input-groups.scss */
+/* line 162, ../lib/scss/bootstrap/_input-groups.scss */
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {
   margin-left: -1px;
@@ -3730,11 +3807,11 @@ tbody.collapse.in {
 }
 /* line 31, ../lib/scss/bootstrap/_navs.scss */
 .nav > li.disabled > a {
-  color: #999999;
+  color: #777777;
 }
 /* line 35, ../lib/scss/bootstrap/_navs.scss */
 .nav > li.disabled > a:hover, .nav > li.disabled > a:focus {
-  color: #999999;
+  color: #777777;
   text-decoration: none;
   background-color: transparent;
   cursor: not-allowed;
@@ -4029,6 +4106,8 @@ tbody.collapse.in {
   right: 0;
   left: 0;
   z-index: 1030;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 @media (min-width: 768px) {
   /* line 139, ../lib/scss/bootstrap/_navbar.scss */
@@ -4038,20 +4117,20 @@ tbody.collapse.in {
   }
 }
 
-/* line 150, ../lib/scss/bootstrap/_navbar.scss */
+/* line 151, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-fixed-top {
   top: 0;
   border-width: 0 0 1px;
 }
 
-/* line 154, ../lib/scss/bootstrap/_navbar.scss */
+/* line 155, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-fixed-bottom {
   bottom: 0;
   margin-bottom: 0;
   border-width: 1px 0 0;
 }
 
-/* line 163, ../lib/scss/bootstrap/_navbar.scss */
+/* line 164, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-brand {
   float: left;
   padding: 15px 15px;
@@ -4059,18 +4138,18 @@ tbody.collapse.in {
   line-height: 20px;
   height: 50px;
 }
-/* line 171, ../lib/scss/bootstrap/_navbar.scss */
+/* line 172, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
 @media (min-width: 768px) {
-  /* line 177, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 178, ../lib/scss/bootstrap/_navbar.scss */
   .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
   }
 }
 
-/* line 189, ../lib/scss/bootstrap/_navbar.scss */
+/* line 190, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-toggle {
   position: relative;
   float: right;
@@ -4083,40 +4162,40 @@ tbody.collapse.in {
   border: 1px solid transparent;
   border-radius: 4px;
 }
-/* line 202, ../lib/scss/bootstrap/_navbar.scss */
+/* line 203, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-toggle:focus {
   outline: 0;
 }
-/* line 207, ../lib/scss/bootstrap/_navbar.scss */
+/* line 208, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-toggle .icon-bar {
   display: block;
   width: 22px;
   height: 2px;
   border-radius: 1px;
 }
-/* line 213, ../lib/scss/bootstrap/_navbar.scss */
+/* line 214, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
 @media (min-width: 768px) {
-  /* line 189, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 190, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-toggle {
     display: none;
   }
 }
 
-/* line 228, ../lib/scss/bootstrap/_navbar.scss */
+/* line 229, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-nav {
   margin: 7.5px -15px;
 }
-/* line 231, ../lib/scss/bootstrap/_navbar.scss */
+/* line 232, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
 }
 @media (max-width: 767px) {
-  /* line 239, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 240, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -4126,53 +4205,53 @@ tbody.collapse.in {
     border: 0;
     box-shadow: none;
   }
-  /* line 248, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 249, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu > li > a,
   .navbar-nav .open .dropdown-menu .dropdown-header {
     padding: 5px 15px 5px 25px;
   }
-  /* line 251, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 252, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu > li > a {
     line-height: 20px;
   }
-  /* line 254, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 255, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-nav .open .dropdown-menu > li > a:focus {
     background-image: none;
   }
 }
 @media (min-width: 768px) {
-  /* line 228, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 229, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav {
     float: left;
     margin: 0;
   }
-  /* line 266, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 267, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav > li {
     float: left;
   }
-  /* line 268, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 269, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav > li > a {
     padding-top: 15px;
     padding-bottom: 15px;
   }
-  /* line 274, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 275, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 288, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 289, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-left {
     float: left !important;
   }
 
-  /* line 291, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 292, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-right {
     float: right !important;
   }
 }
-/* line 302, ../lib/scss/bootstrap/_navbar.scss */
+/* line 303, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-form {
   margin-left: -15px;
   margin-right: -15px;
@@ -4185,13 +4264,13 @@ tbody.collapse.in {
   margin-bottom: 8px;
 }
 @media (max-width: 767px) {
-  /* line 314, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 315, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-form .form-group {
     margin-bottom: 5px;
   }
 }
 @media (min-width: 768px) {
-  /* line 302, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 303, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-form {
     width: auto;
     border: 0;
@@ -4202,265 +4281,265 @@ tbody.collapse.in {
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  /* line 334, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 335, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-form.navbar-right:last-child {
     margin-right: -15px;
   }
 }
 
-/* line 344, ../lib/scss/bootstrap/_navbar.scss */
+/* line 345, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-nav > li > .dropdown-menu {
   margin-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
-/* line 349, ../lib/scss/bootstrap/_navbar.scss */
+/* line 350, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-/* line 358, ../lib/scss/bootstrap/_navbar.scss */
+/* line 359, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-btn {
   margin-top: 8px;
   margin-bottom: 8px;
 }
-/* line 361, ../lib/scss/bootstrap/_navbar.scss */
+/* line 362, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 364, ../lib/scss/bootstrap/_navbar.scss */
+/* line 365, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn {
   margin-top: 14px;
   margin-bottom: 14px;
 }
 
-/* line 374, ../lib/scss/bootstrap/_navbar.scss */
+/* line 375, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-text {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 @media (min-width: 768px) {
-  /* line 374, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 375, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-text {
     float: left;
     margin-left: 15px;
     margin-right: 15px;
   }
-  /* line 383, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 384, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-text.navbar-right:last-child {
     margin-right: 0;
   }
 }
 
-/* line 393, ../lib/scss/bootstrap/_navbar.scss */
+/* line 394, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
 }
-/* line 397, ../lib/scss/bootstrap/_navbar.scss */
+/* line 398, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-brand {
   color: #777777;
 }
-/* line 400, ../lib/scss/bootstrap/_navbar.scss */
+/* line 401, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #5e5e5e;
   background-color: transparent;
 }
-/* line 406, ../lib/scss/bootstrap/_navbar.scss */
+/* line 407, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-text {
   color: #777777;
 }
-/* line 411, ../lib/scss/bootstrap/_navbar.scss */
+/* line 412, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > li > a {
   color: #777777;
 }
-/* line 415, ../lib/scss/bootstrap/_navbar.scss */
+/* line 416, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #333333;
   background-color: transparent;
 }
-/* line 423, ../lib/scss/bootstrap/_navbar.scss */
+/* line 424, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
   color: #555555;
   background-color: #e7e7e7;
 }
-/* line 431, ../lib/scss/bootstrap/_navbar.scss */
+/* line 432, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
   color: #cccccc;
   background-color: transparent;
 }
-/* line 438, ../lib/scss/bootstrap/_navbar.scss */
+/* line 439, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-toggle {
   border-color: #dddddd;
 }
-/* line 441, ../lib/scss/bootstrap/_navbar.scss */
+/* line 442, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
   background-color: #dddddd;
 }
-/* line 444, ../lib/scss/bootstrap/_navbar.scss */
+/* line 445, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #888888;
 }
-/* line 450, ../lib/scss/bootstrap/_navbar.scss */
+/* line 451, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
   border-color: #e7e7e7;
 }
-/* line 460, ../lib/scss/bootstrap/_navbar.scss */
+/* line 461, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #e7e7e7;
   color: #555555;
 }
 @media (max-width: 767px) {
-  /* line 469, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 470, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #777777;
   }
-  /* line 472, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 473, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #333333;
     background-color: transparent;
   }
-  /* line 480, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 481, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555555;
     background-color: #e7e7e7;
   }
-  /* line 488, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 489, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: #cccccc;
     background-color: transparent;
   }
 }
-/* line 502, ../lib/scss/bootstrap/_navbar.scss */
+/* line 503, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-link {
   color: #777777;
 }
-/* line 504, ../lib/scss/bootstrap/_navbar.scss */
+/* line 505, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .navbar-link:hover {
   color: #333333;
 }
-/* line 509, ../lib/scss/bootstrap/_navbar.scss */
+/* line 510, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .btn-link {
   color: #777777;
 }
-/* line 512, ../lib/scss/bootstrap/_navbar.scss */
+/* line 513, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .btn-link:hover, .navbar-default .btn-link:focus {
   color: #333333;
 }
-/* line 518, ../lib/scss/bootstrap/_navbar.scss */
+/* line 519, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-default .btn-link[disabled]:hover, .navbar-default .btn-link[disabled]:focus, fieldset[disabled] .navbar-default .btn-link:hover, fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 
-/* line 527, ../lib/scss/bootstrap/_navbar.scss */
+/* line 528, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse {
   background-color: #222222;
   border-color: #090909;
 }
-/* line 531, ../lib/scss/bootstrap/_navbar.scss */
+/* line 532, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: #777777;
 }
-/* line 534, ../lib/scss/bootstrap/_navbar.scss */
+/* line 535, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
   color: white;
   background-color: transparent;
 }
-/* line 540, ../lib/scss/bootstrap/_navbar.scss */
+/* line 541, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-text {
-  color: #999999;
+  color: #777777;
 }
-/* line 545, ../lib/scss/bootstrap/_navbar.scss */
+/* line 546, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a {
-  color: #999999;
+  color: #777777;
 }
-/* line 549, ../lib/scss/bootstrap/_navbar.scss */
+/* line 550, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
   color: white;
   background-color: transparent;
 }
-/* line 557, ../lib/scss/bootstrap/_navbar.scss */
+/* line 558, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
   color: white;
   background-color: #090909;
 }
-/* line 565, ../lib/scss/bootstrap/_navbar.scss */
+/* line 566, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > .disabled > a, .navbar-inverse .navbar-nav > .disabled > a:hover, .navbar-inverse .navbar-nav > .disabled > a:focus {
   color: #444444;
   background-color: transparent;
 }
-/* line 573, ../lib/scss/bootstrap/_navbar.scss */
+/* line 574, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-toggle {
   border-color: #333333;
 }
-/* line 576, ../lib/scss/bootstrap/_navbar.scss */
+/* line 577, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
   background-color: #333333;
 }
-/* line 579, ../lib/scss/bootstrap/_navbar.scss */
+/* line 580, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-toggle .icon-bar {
   background-color: white;
 }
-/* line 585, ../lib/scss/bootstrap/_navbar.scss */
+/* line 586, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
   border-color: #101010;
 }
-/* line 594, ../lib/scss/bootstrap/_navbar.scss */
+/* line 595, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
   background-color: #090909;
   color: white;
 }
 @media (max-width: 767px) {
-  /* line 603, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 604, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #090909;
   }
-  /* line 606, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 607, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
     background-color: #090909;
   }
-  /* line 609, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 610, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-    color: #999999;
+    color: #777777;
   }
-  /* line 612, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 613, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
     color: white;
     background-color: transparent;
   }
-  /* line 620, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 621, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: white;
     background-color: #090909;
   }
-  /* line 628, ../lib/scss/bootstrap/_navbar.scss */
+  /* line 629, ../lib/scss/bootstrap/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: #444444;
     background-color: transparent;
   }
 }
-/* line 637, ../lib/scss/bootstrap/_navbar.scss */
+/* line 638, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-link {
-  color: #999999;
+  color: #777777;
 }
-/* line 639, ../lib/scss/bootstrap/_navbar.scss */
+/* line 640, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-link:hover {
   color: white;
 }
-/* line 644, ../lib/scss/bootstrap/_navbar.scss */
+/* line 645, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .btn-link {
-  color: #999999;
+  color: #777777;
 }
-/* line 647, ../lib/scss/bootstrap/_navbar.scss */
+/* line 648, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus {
   color: white;
 }
-/* line 653, ../lib/scss/bootstrap/_navbar.scss */
+/* line 654, ../lib/scss/bootstrap/_navbar.scss */
 .navbar-inverse .btn-link[disabled]:hover, .navbar-inverse .btn-link[disabled]:focus, fieldset[disabled] .navbar-inverse .btn-link:hover, fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #444444;
 }
@@ -4528,7 +4607,7 @@ tbody.collapse.in {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #999999;
+  color: #777777;
   background-color: white;
   border-color: #dddddd;
   cursor: not-allowed;
@@ -4622,7 +4701,7 @@ tbody.collapse.in {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  color: #999999;
+  color: #777777;
   background-color: white;
   cursor: not-allowed;
 }
@@ -4659,11 +4738,11 @@ a.label:hover, a.label:focus {
 
 /* line 44, ../lib/scss/bootstrap/_labels.scss */
 .label-default {
-  background-color: #999999;
+  background-color: #777777;
 }
 /* line 8, ../lib/scss/bootstrap/mixins/_labels.scss */
 .label-default[href]:hover, .label-default[href]:focus {
-  background-color: gray;
+  background-color: #5e5e5e;
 }
 
 /* line 48, ../lib/scss/bootstrap/_labels.scss */
@@ -4723,7 +4802,7 @@ a.label:hover, a.label:focus {
   vertical-align: baseline;
   white-space: nowrap;
   text-align: center;
-  background-color: #999999;
+  background-color: #777777;
   border-radius: 10px;
 }
 /* line 22, ../lib/scss/bootstrap/_badges.scss */
@@ -4774,6 +4853,7 @@ a.badge:hover, a.badge:focus {
 .thumbnail > img,
 .thumbnail a > img {
   display: block;
+  width: 100% \9;
   max-width: 100%;
   height: auto;
   margin-left: auto;
@@ -4818,19 +4898,21 @@ a.thumbnail.active {
   margin-top: 5px;
 }
 
-/* line 40, ../lib/scss/bootstrap/_alerts.scss */
-.alert-dismissable {
+/* line 41, ../lib/scss/bootstrap/_alerts.scss */
+.alert-dismissable,
+.alert-dismissible {
   padding-right: 35px;
 }
-/* line 44, ../lib/scss/bootstrap/_alerts.scss */
-.alert-dismissable .close {
+/* line 45, ../lib/scss/bootstrap/_alerts.scss */
+.alert-dismissable .close,
+.alert-dismissible .close {
   position: relative;
   top: -2px;
   right: -21px;
   color: inherit;
 }
 
-/* line 56, ../lib/scss/bootstrap/_alerts.scss */
+/* line 57, ../lib/scss/bootstrap/_alerts.scss */
 .alert-success {
   background-color: #dff0d8;
   border-color: #d6e9c6;
@@ -4845,7 +4927,7 @@ a.thumbnail.active {
   color: #2b542c;
 }
 
-/* line 59, ../lib/scss/bootstrap/_alerts.scss */
+/* line 60, ../lib/scss/bootstrap/_alerts.scss */
 .alert-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
@@ -4860,7 +4942,7 @@ a.thumbnail.active {
   color: #245269;
 }
 
-/* line 62, ../lib/scss/bootstrap/_alerts.scss */
+/* line 63, ../lib/scss/bootstrap/_alerts.scss */
 .alert-warning {
   background-color: #fcf8e3;
   border-color: #faebcc;
@@ -4875,7 +4957,7 @@ a.thumbnail.active {
   color: #66512c;
 }
 
-/* line 65, ../lib/scss/bootstrap/_alerts.scss */
+/* line 66, ../lib/scss/bootstrap/_alerts.scss */
 .alert-danger {
   background-color: #f2dede;
   border-color: #ebccd1;
@@ -4890,19 +4972,31 @@ a.thumbnail.active {
   color: #843534;
 }
 
-@keyframes progress-bar-stripes {
-  /* line 10, ../lib/scss/bootstrap/_progress-bars.scss */
+@-webkit-keyframes progress-bar-stripes {
+  /* line 11, ../lib/scss/bootstrap/_progress-bars.scss */
   from {
     background-position: 40px 0;
   }
 
-  /* line 11, ../lib/scss/bootstrap/_progress-bars.scss */
+  /* line 12, ../lib/scss/bootstrap/_progress-bars.scss */
   to {
     background-position: 0 0;
   }
 }
 
-/* line 20, ../lib/scss/bootstrap/_progress-bars.scss */
+@keyframes progress-bar-stripes {
+  /* line 17, ../lib/scss/bootstrap/_progress-bars.scss */
+  from {
+    background-position: 40px 0;
+  }
+
+  /* line 18, ../lib/scss/bootstrap/_progress-bars.scss */
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* line 27, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress {
   overflow: hidden;
   height: 20px;
@@ -4913,7 +5007,7 @@ a.thumbnail.active {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* line 30, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 37, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar {
   float: left;
   width: 0%;
@@ -4930,72 +5024,74 @@ a.thumbnail.active {
   transition: width 0.6s ease;
 }
 
-/* line 44, ../lib/scss/bootstrap/_progress-bars.scss */
-.progress-striped .progress-bar {
+/* line 56, ../lib/scss/bootstrap/_progress-bars.scss */
+.progress-striped .progress-bar,
+.progress-bar-striped {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 40px 40px;
 }
 
-/* line 50, ../lib/scss/bootstrap/_progress-bars.scss */
-.progress.active .progress-bar {
+/* line 66, ../lib/scss/bootstrap/_progress-bars.scss */
+.progress.active .progress-bar,
+.progress-bar.active {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
   -o-animation: progress-bar-stripes 2s linear infinite;
   animation: progress-bar-stripes 2s linear infinite;
 }
 
-/* line 57, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 73, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar[aria-valuenow="1"], .progress-bar[aria-valuenow="2"] {
   min-width: 30px;
 }
-/* line 61, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 77, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar[aria-valuenow="0"] {
-  color: #999999;
+  color: #777777;
   min-width: 30px;
   background-color: transparent;
   background-image: none;
   box-shadow: none;
 }
 
-/* line 75, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 91, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar-success {
   background-color: #5cb85c;
 }
-/* line 5, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
+/* line 7, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-success {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 79, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 95, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar-info {
   background-color: #5bc0de;
 }
-/* line 5, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
+/* line 7, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-info {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 83, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 99, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar-warning {
   background-color: #f0ad4e;
 }
-/* line 5, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
+/* line 7, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-warning {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 87, ../lib/scss/bootstrap/_progress-bars.scss */
+/* line 103, ../lib/scss/bootstrap/_progress-bars.scss */
 .progress-bar-danger {
   background-color: #d9534f;
 }
-/* line 5, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
+/* line 7, ../lib/scss/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-danger {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -5098,7 +5194,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 /* line 74, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item.disabled, .list-group-item.disabled:hover, .list-group-item.disabled:focus {
   background-color: #eeeeee;
-  color: #999999;
+  color: #777777;
 }
 /* line 79, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item.disabled .list-group-item-heading, .list-group-item.disabled:hover .list-group-item-heading, .list-group-item.disabled:focus .list-group-item-heading {
@@ -5106,7 +5202,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 }
 /* line 82, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item.disabled .list-group-item-text, .list-group-item.disabled:hover .list-group-item-text, .list-group-item.disabled:focus .list-group-item-text {
-  color: #999999;
+  color: #777777;
 }
 /* line 90, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
@@ -5115,11 +5211,17 @@ a.list-group-item:hover, a.list-group-item:focus {
   background-color: #428bca;
   border-color: #428bca;
 }
-/* line 97, ../lib/scss/bootstrap/_list-group.scss */
-.list-group-item.active .list-group-item-heading, .list-group-item.active:hover .list-group-item-heading, .list-group-item.active:focus .list-group-item-heading {
+/* line 99, ../lib/scss/bootstrap/_list-group.scss */
+.list-group-item.active .list-group-item-heading,
+.list-group-item.active .list-group-item-heading > small,
+.list-group-item.active .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading,
+.list-group-item.active:hover .list-group-item-heading > small,
+.list-group-item.active:hover .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading,
+.list-group-item.active:focus .list-group-item-heading > small,
+.list-group-item.active:focus .list-group-item-heading > .small {
   color: inherit;
 }
-/* line 100, ../lib/scss/bootstrap/_list-group.scss */
+/* line 102, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
   color: #e1edf7;
 }
@@ -5228,13 +5330,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   border-color: #a94442;
 }
 
-/* line 122, ../lib/scss/bootstrap/_list-group.scss */
+/* line 124, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item-heading {
   margin-top: 0;
   margin-bottom: 5px;
 }
 
-/* line 126, ../lib/scss/bootstrap/_list-group.scss */
+/* line 128, ../lib/scss/bootstrap/_list-group.scss */
 .list-group-item-text {
   margin-bottom: 0;
   line-height: 1.3;
@@ -5324,18 +5426,24 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   border-top-width: 0;
 }
 
-/* line 98, ../lib/scss/bootstrap/_panels.scss */
+/* line 89, ../lib/scss/bootstrap/_panels.scss */
+.list-group + .panel-footer {
+  border-top-width: 0;
+}
+
+/* line 101, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table,
-.panel > .table-responsive > .table {
+.panel > .table-responsive > .table,
+.panel > .panel-collapse > .table {
   margin-bottom: 0;
 }
-/* line 103, ../lib/scss/bootstrap/_panels.scss */
+/* line 106, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-/* line 110, ../lib/scss/bootstrap/_panels.scss */
+/* line 113, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
 .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
@@ -5346,7 +5454,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
   border-top-left-radius: 3px;
 }
-/* line 114, ../lib/scss/bootstrap/_panels.scss */
+/* line 117, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
 .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
@@ -5357,13 +5465,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
   border-top-right-radius: 3px;
 }
-/* line 122, ../lib/scss/bootstrap/_panels.scss */
+/* line 125, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:last-child,
 .panel > .table-responsive:last-child > .table:last-child {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-/* line 129, ../lib/scss/bootstrap/_panels.scss */
+/* line 132, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
 .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
@@ -5374,7 +5482,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
   border-bottom-left-radius: 3px;
 }
-/* line 133, ../lib/scss/bootstrap/_panels.scss */
+/* line 136, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
 .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
@@ -5385,22 +5493,22 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
   border-bottom-right-radius: 3px;
 }
-/* line 140, ../lib/scss/bootstrap/_panels.scss */
+/* line 143, ../lib/scss/bootstrap/_panels.scss */
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive {
   border-top: 1px solid #dddddd;
 }
-/* line 144, ../lib/scss/bootstrap/_panels.scss */
+/* line 147, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table > tbody:first-child > tr:first-child th,
 .panel > .table > tbody:first-child > tr:first-child td {
   border-top: 0;
 }
-/* line 148, ../lib/scss/bootstrap/_panels.scss */
+/* line 151, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-bordered,
 .panel > .table-responsive > .table-bordered {
   border: 0;
 }
-/* line 155, ../lib/scss/bootstrap/_panels.scss */
+/* line 158, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-bordered > thead > tr > th:first-child,
 .panel > .table-bordered > thead > tr > td:first-child,
 .panel > .table-bordered > tbody > tr > th:first-child,
@@ -5415,7 +5523,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
   border-left: 0;
 }
-/* line 159, ../lib/scss/bootstrap/_panels.scss */
+/* line 162, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-bordered > thead > tr > th:last-child,
 .panel > .table-bordered > thead > tr > td:last-child,
 .panel > .table-bordered > tbody > tr > th:last-child,
@@ -5430,7 +5538,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
   border-right: 0;
 }
-/* line 168, ../lib/scss/bootstrap/_panels.scss */
+/* line 171, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-bordered > thead > tr:first-child > td,
 .panel > .table-bordered > thead > tr:first-child > th,
 .panel > .table-bordered > tbody > tr:first-child > td,
@@ -5441,7 +5549,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {
   border-bottom: 0;
 }
-/* line 177, ../lib/scss/bootstrap/_panels.scss */
+/* line 180, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-bordered > tbody > tr:last-child > td,
 .panel > .table-bordered > tbody > tr:last-child > th,
 .panel > .table-bordered > tfoot > tr:last-child > td,
@@ -5452,43 +5560,43 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {
   border-bottom: 0;
 }
-/* line 183, ../lib/scss/bootstrap/_panels.scss */
+/* line 186, ../lib/scss/bootstrap/_panels.scss */
 .panel > .table-responsive {
   border: 0;
   margin-bottom: 0;
 }
 
-/* line 195, ../lib/scss/bootstrap/_panels.scss */
+/* line 198, ../lib/scss/bootstrap/_panels.scss */
 .panel-group {
   margin-bottom: 20px;
 }
-/* line 199, ../lib/scss/bootstrap/_panels.scss */
+/* line 202, ../lib/scss/bootstrap/_panels.scss */
 .panel-group .panel {
   margin-bottom: 0;
   border-radius: 4px;
 }
-/* line 202, ../lib/scss/bootstrap/_panels.scss */
+/* line 205, ../lib/scss/bootstrap/_panels.scss */
 .panel-group .panel + .panel {
   margin-top: 5px;
 }
-/* line 207, ../lib/scss/bootstrap/_panels.scss */
+/* line 210, ../lib/scss/bootstrap/_panels.scss */
 .panel-group .panel-heading {
   border-bottom: 0;
 }
-/* line 209, ../lib/scss/bootstrap/_panels.scss */
-.panel-group .panel-heading + .panel-collapse .panel-body {
+/* line 212, ../lib/scss/bootstrap/_panels.scss */
+.panel-group .panel-heading + .panel-collapse > .panel-body {
   border-top: 1px solid #dddddd;
 }
-/* line 213, ../lib/scss/bootstrap/_panels.scss */
+/* line 216, ../lib/scss/bootstrap/_panels.scss */
 .panel-group .panel-footer {
   border-top: 0;
 }
-/* line 215, ../lib/scss/bootstrap/_panels.scss */
+/* line 218, ../lib/scss/bootstrap/_panels.scss */
 .panel-group .panel-footer + .panel-collapse .panel-body {
   border-bottom: 1px solid #dddddd;
 }
 
-/* line 223, ../lib/scss/bootstrap/_panels.scss */
+/* line 226, ../lib/scss/bootstrap/_panels.scss */
 .panel-default {
   border-color: #dddddd;
 }
@@ -5502,12 +5610,17 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #dddddd;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-default > .panel-heading .badge {
+  color: whitesmoke;
+  background-color: #333333;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #dddddd;
 }
 
-/* line 226, ../lib/scss/bootstrap/_panels.scss */
+/* line 229, ../lib/scss/bootstrap/_panels.scss */
 .panel-primary {
   border-color: #428bca;
 }
@@ -5521,12 +5634,17 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #428bca;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-primary > .panel-heading .badge {
+  color: #428bca;
+  background-color: white;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #428bca;
 }
 
-/* line 229, ../lib/scss/bootstrap/_panels.scss */
+/* line 232, ../lib/scss/bootstrap/_panels.scss */
 .panel-success {
   border-color: #d6e9c6;
 }
@@ -5540,12 +5658,17 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-success > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #d6e9c6;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-success > .panel-heading .badge {
+  color: #dff0d8;
+  background-color: #3c763d;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-success > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #d6e9c6;
 }
 
-/* line 232, ../lib/scss/bootstrap/_panels.scss */
+/* line 235, ../lib/scss/bootstrap/_panels.scss */
 .panel-info {
   border-color: #bce8f1;
 }
@@ -5559,12 +5682,17 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #bce8f1;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-info > .panel-heading .badge {
+  color: #d9edf7;
+  background-color: #31708f;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-info > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #bce8f1;
 }
 
-/* line 235, ../lib/scss/bootstrap/_panels.scss */
+/* line 238, ../lib/scss/bootstrap/_panels.scss */
 .panel-warning {
   border-color: #faebcc;
 }
@@ -5578,12 +5706,17 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-warning > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #faebcc;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-warning > .panel-heading .badge {
+  color: #fcf8e3;
+  background-color: #8a6d3b;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-warning > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #faebcc;
 }
 
-/* line 238, ../lib/scss/bootstrap/_panels.scss */
+/* line 241, ../lib/scss/bootstrap/_panels.scss */
 .panel-danger {
   border-color: #ebccd1;
 }
@@ -5597,7 +5730,12 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-danger > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ebccd1;
 }
-/* line 16, ../lib/scss/bootstrap/mixins/_panels.scss */
+/* line 14, ../lib/scss/bootstrap/mixins/_panels.scss */
+.panel-danger > .panel-heading .badge {
+  color: #f2dede;
+  background-color: #a94442;
+}
+/* line 20, ../lib/scss/bootstrap/mixins/_panels.scss */
 .panel-danger > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #ebccd1;
 }
@@ -5668,8 +5806,7 @@ button.close {
 /* line 16, ../lib/scss/bootstrap/_modals.scss */
 .modal {
   display: none;
-  overflow: auto;
-  overflow-y: scroll;
+  overflow: hidden;
   position: fixed;
   top: 0;
   right: 0;
@@ -5679,33 +5816,35 @@ button.close {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-/* line 33, ../lib/scss/bootstrap/_modals.scss */
+/* line 32, ../lib/scss/bootstrap/_modals.scss */
 .modal.fade .modal-dialog {
-  -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
-  -o-transform: translate(0, -25%);
-  transform: translate(0, -25%);
+  -webkit-transform: translate3d(0, -25%, 0);
+  transform: translate3d(0, -25%, 0);
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 37, ../lib/scss/bootstrap/_modals.scss */
+/* line 36, ../lib/scss/bootstrap/_modals.scss */
 .modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
-/* line 41, ../lib/scss/bootstrap/_modals.scss */
+/* line 38, ../lib/scss/bootstrap/_modals.scss */
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* line 44, ../lib/scss/bootstrap/_modals.scss */
 .modal-dialog {
   position: relative;
   width: auto;
   margin: 10px;
 }
 
-/* line 48, ../lib/scss/bootstrap/_modals.scss */
+/* line 51, ../lib/scss/bootstrap/_modals.scss */
 .modal-content {
   position: relative;
   background-color: white;
@@ -5718,7 +5857,7 @@ button.close {
   outline: 0;
 }
 
-/* line 61, ../lib/scss/bootstrap/_modals.scss */
+/* line 64, ../lib/scss/bootstrap/_modals.scss */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -5728,42 +5867,42 @@ button.close {
   z-index: 1040;
   background-color: black;
 }
-/* line 70, ../lib/scss/bootstrap/_modals.scss */
+/* line 73, ../lib/scss/bootstrap/_modals.scss */
 .modal-backdrop.fade {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-/* line 71, ../lib/scss/bootstrap/_modals.scss */
+/* line 74, ../lib/scss/bootstrap/_modals.scss */
 .modal-backdrop.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
 
-/* line 76, ../lib/scss/bootstrap/_modals.scss */
+/* line 79, ../lib/scss/bootstrap/_modals.scss */
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
   min-height: 16.42857px;
 }
 
-/* line 82, ../lib/scss/bootstrap/_modals.scss */
+/* line 85, ../lib/scss/bootstrap/_modals.scss */
 .modal-header .close {
   margin-top: -2px;
 }
 
-/* line 87, ../lib/scss/bootstrap/_modals.scss */
+/* line 90, ../lib/scss/bootstrap/_modals.scss */
 .modal-title {
   margin: 0;
   line-height: 1.42857;
 }
 
-/* line 94, ../lib/scss/bootstrap/_modals.scss */
+/* line 97, ../lib/scss/bootstrap/_modals.scss */
 .modal-body {
   position: relative;
   padding: 15px;
 }
 
-/* line 100, ../lib/scss/bootstrap/_modals.scss */
+/* line 103, ../lib/scss/bootstrap/_modals.scss */
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -5778,21 +5917,21 @@ button.close {
 .modal-footer:after {
   clear: both;
 }
-/* line 107, ../lib/scss/bootstrap/_modals.scss */
+/* line 110, ../lib/scss/bootstrap/_modals.scss */
 .modal-footer .btn + .btn {
   margin-left: 5px;
   margin-bottom: 0;
 }
-/* line 112, ../lib/scss/bootstrap/_modals.scss */
+/* line 115, ../lib/scss/bootstrap/_modals.scss */
 .modal-footer .btn-group .btn + .btn {
   margin-left: -1px;
 }
-/* line 116, ../lib/scss/bootstrap/_modals.scss */
+/* line 119, ../lib/scss/bootstrap/_modals.scss */
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
 }
 
-/* line 122, ../lib/scss/bootstrap/_modals.scss */
+/* line 125, ../lib/scss/bootstrap/_modals.scss */
 .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;
@@ -5802,25 +5941,25 @@ button.close {
 }
 
 @media (min-width: 768px) {
-  /* line 133, ../lib/scss/bootstrap/_modals.scss */
+  /* line 136, ../lib/scss/bootstrap/_modals.scss */
   .modal-dialog {
     width: 600px;
     margin: 30px auto;
   }
 
-  /* line 137, ../lib/scss/bootstrap/_modals.scss */
+  /* line 140, ../lib/scss/bootstrap/_modals.scss */
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 
-  /* line 142, ../lib/scss/bootstrap/_modals.scss */
+  /* line 145, ../lib/scss/bootstrap/_modals.scss */
   .modal-sm {
     width: 300px;
   }
 }
 @media (min-width: 992px) {
-  /* line 146, ../lib/scss/bootstrap/_modals.scss */
+  /* line 149, ../lib/scss/bootstrap/_modals.scss */
   .modal-lg {
     width: 900px;
   }
@@ -6023,7 +6162,7 @@ button.close {
   margin-left: -11px;
   border-bottom-width: 0;
   border-top-color: #999999;
-  border-top-color: rgba(0, 0, 0, 0.05);
+  border-top-color: rgba(0, 0, 0, 0.25);
   bottom: -11px;
 }
 /* line 78, ../lib/scss/bootstrap/_popovers.scss */
@@ -6041,7 +6180,7 @@ button.close {
   margin-top: -11px;
   border-left-width: 0;
   border-right-color: #999999;
-  border-right-color: rgba(0, 0, 0, 0.05);
+  border-right-color: rgba(0, 0, 0, 0.25);
 }
 /* line 93, ../lib/scss/bootstrap/_popovers.scss */
 .popover.right > .arrow:after {
@@ -6057,7 +6196,7 @@ button.close {
   margin-left: -11px;
   border-top-width: 0;
   border-bottom-color: #999999;
-  border-bottom-color: rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.25);
   top: -11px;
 }
 /* line 108, ../lib/scss/bootstrap/_popovers.scss */
@@ -6075,7 +6214,7 @@ button.close {
   margin-top: -11px;
   border-right-width: 0;
   border-left-color: #999999;
-  border-left-color: rgba(0, 0, 0, 0.05);
+  border-left-color: rgba(0, 0, 0, 0.25);
 }
 /* line 124, ../lib/scss/bootstrap/_popovers.scss */
 .popover.left > .arrow:after {
@@ -6146,6 +6285,8 @@ button.close {
 /* line 54, ../lib/scss/bootstrap/_utilities.scss */
 .affix {
   position: fixed;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 @-ms-viewport {
@@ -6157,7 +6298,7 @@ button.close {
   display: none !important;
 }
 
-/* line 41, ../lib/scss/bootstrap/_responsive-utilities.scss */
+/* line 42, ../lib/scss/bootstrap/_responsive-utilities.scss */
 .visible-xs-block,
 .visible-xs-inline,
 .visible-xs-inline-block,
@@ -6196,21 +6337,21 @@ button.close {
   }
 }
 @media (max-width: 767px) {
-  /* line 48, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 49, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-xs-block {
     display: block !important;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 53, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 54, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-xs-inline {
     display: inline !important;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 58, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 59, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-xs-inline-block {
     display: inline-block !important;
   }
@@ -6239,21 +6380,21 @@ button.close {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  /* line 67, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 68, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-sm-block {
     display: block !important;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  /* line 72, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 73, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-sm-inline {
     display: inline !important;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  /* line 77, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 78, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-sm-inline-block {
     display: inline-block !important;
   }
@@ -6282,21 +6423,21 @@ button.close {
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  /* line 86, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 87, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-md-block {
     display: block !important;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  /* line 91, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 92, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-md-inline {
     display: inline !important;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  /* line 96, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 97, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-md-inline-block {
     display: inline-block !important;
   }
@@ -6325,21 +6466,21 @@ button.close {
   }
 }
 @media (min-width: 1200px) {
-  /* line 105, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 106, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-lg-block {
     display: block !important;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 110, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 111, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-lg-inline {
     display: inline !important;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 115, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 116, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-lg-inline-block {
     display: inline-block !important;
   }
@@ -6396,34 +6537,34 @@ button.close {
     display: table-cell !important;
   }
 }
-/* line 149, ../lib/scss/bootstrap/_responsive-utilities.scss */
+/* line 150, ../lib/scss/bootstrap/_responsive-utilities.scss */
 .visible-print-block {
   display: none !important;
 }
 @media print {
-  /* line 149, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 150, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-print-block {
     display: block !important;
   }
 }
 
-/* line 156, ../lib/scss/bootstrap/_responsive-utilities.scss */
+/* line 157, ../lib/scss/bootstrap/_responsive-utilities.scss */
 .visible-print-inline {
   display: none !important;
 }
 @media print {
-  /* line 156, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 157, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-print-inline {
     display: inline !important;
   }
 }
 
-/* line 163, ../lib/scss/bootstrap/_responsive-utilities.scss */
+/* line 164, ../lib/scss/bootstrap/_responsive-utilities.scss */
 .visible-print-inline-block {
   display: none !important;
 }
 @media print {
-  /* line 163, ../lib/scss/bootstrap/_responsive-utilities.scss */
+  /* line 164, ../lib/scss/bootstrap/_responsive-utilities.scss */
   .visible-print-inline-block {
     display: inline-block !important;
   }

@@ -90,7 +90,7 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	})
 	
-	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'toaster', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Utils', function($filter, $rootScope, $location, $q, toaster, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Utils){
+	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'toaster', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Utils', 'ClearFn', function($filter, $rootScope, $location, $q, toaster, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Utils, ClearFn){
 		
 		return {
 			listElementsLoad: function (listConfig) {
@@ -114,6 +114,11 @@ angular.module('clearApp.services', ['ngResource'])
 						'elementsCount': response("X-Clear-elementsCount")
 					} 
 					console.log("pagesCount: " + list.pagination.pagesCount + ", elementsCount: " + list.pagination.elementsCount);
+					for (var i in elements) {
+						if (elements[i].url) {
+							elements[i].url = elements[i].url + '?oauth_token=' + ClearFn.returnToken();
+						}
+					}
 					list.elements = elements; 
 					q.resolve(list);
 				});
@@ -297,7 +302,6 @@ angular.module('clearApp.services', ['ngResource'])
 				if (elm.documents) {
 					for (var i in elm.documents) {
 						elm.documents[i].url = elm.documents[i].url + '?oauth_token=' + token;
-						console.log('tokenUrl: ', elm.documents[i].url); 
 					}
 				} 
 				return elm;
