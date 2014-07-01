@@ -1005,71 +1005,6 @@ fieldset {
 
 /* AngularJS-Toaster */
 
-.toast-title {
-	font-weight: bold;
-}
-.toast-message {
-	-ms-word-wrap: break-word;
-	word-wrap: break-word;
-}
-.toast-message a,
-.toast-message label {
-	color: #ffffff;
-}
-.toast-message a:hover {
-	color: #cccccc;
-	text-decoration: none;
-}
-.toast-close-button {
-	position: relative;
-	right: -0.3em;
-	top: -0.3em;
-	float: right;
-	font-size: 20px;
-	font-weight: bold;
-	color: #ffffff;
-	-webkit-text-shadow: 0 1px 0 #ffffff;
-	text-shadow: 0 1px 0 #ffffff;
-	opacity: 0.8;
-	filter: alpha(opacity=80);
-}
-.toast-close-button:hover,
-.toast-close-button:focus {
-	color: #000000;
-	text-decoration: none;
-	cursor: pointer;
-	opacity: 0.4;
-	filter: alpha(opacity=40);
-}
-
-/*Additional properties for button version
- iOS requires the button element instead of an anchor tag.
- If you want the anchor version, it requires `href="#"`.*/
-button.toast-close-button {
-	padding: 0;
-	cursor: pointer;
-	background: transparent;
-	border: 0;
-	-webkit-appearance: none;
-}
-.toast-top-full-width {
-	top: 0;
-	right: 0;
-	width: 100%;
-}
-.toast-bottom-full-width {
-	bottom: 0;
-	right: 0;
-	width: 100%;
-}
-.toast-top-left {
-	top: 0px;
-	left: 12px;
-}
-.toast-top-right {
-	top: 0px;
-	right: 12px;
-}
 .toast-top-center {
 	margin-left: -150px;
 	top: 68px;
@@ -1080,39 +1015,38 @@ button.toast-close-button {
 	bottom: 0px;
 	left: 50%;
 }
-.toast-bottom-right {
-	right: 12px;
-	bottom: 12px;
-}
-.toast-bottom-left {
-	bottom: 12px;
-	left: 12px;
-}
-#toast-container {
-	position: fixed;
-	z-index: 999998;
-}
-#toast-container * {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
 #toast-container > div {
 	margin:5px 0;
 	padding: 15px 15px 15px 15px;
-	width: 300px;
-	background-position: 15px center;
-	background-repeat: no-repeat;
-	color: #ffffff;
-}
-#toast-container > div > :hover {
+	-moz-border-radius: 0 0 0 0;
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+	-moz-box-shadow: 0 0 0 white;
+	-webkit-box-shadow: 0 0 0 white;
+	box-shadow: 0 0 0 white;
 	opacity: 1;
-	cursor: pointer;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	filter: alpha(opacity=100);
 }
-#toast-container.toast-top-full-width > div,
-#toast-container.toast-bottom-full-width > div {
-	width: 96%;
-	margin: auto;
+#toast-container > :hover {
+	-moz-box-shadow: 0 0 0 white;
+	-webkit-box-shadow: 0 0 0 white;
+	box-shadow: 0 0 0 white;
+}
+#toast-container > .toast-info {
+  background-image: none !important;
+}
+#toast-container > .toast-wait {
+  background-image: none !important;
+}
+#toast-container > .toast-error {
+  background-image: none !important;
+}
+#toast-container > .toast-success {
+  background-image: none !important;
+}
+#toast-container > .toast-warning {
+  background-image: none !important;
 }
 .toast {
 	background-color: #030303;
@@ -1126,16 +1060,16 @@ button.toast-close-button {
 .toast-info {
 	background-color: #2f96b4;
 }
+.toast-wait {
+  background-color: #2f96b4;
+}
 .toast-warning {
 	background-color: #f0ad4e;
 }
 /*Responsive Design*/
 @media all and (max-width: 320px) {
-	#toast-container > div > div {
+	#toast-container > div {
 		width: 128px;
-	}
-	.toast-top-center {
-		margin-left: -64px;
 	}
 }
 
@@ -1147,18 +1081,19 @@ button.toast-close-button {
 	-ms-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 	-o-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 	transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-} 
-
-#toast-container > div.ng-enter.ng-enter-active, 
-#toast-container > div.ng-leave {
-    opacity: 0.8;
 }
 
-#toast-container > div.ng-leave.ng-leave-active,
-#toast-container > div.ng-enter {
-    opacity: 0;
+#loading-bar .bar {
+  background: #ffcb32;
+  height: 4px;
 }
-
+#loading-bar .peg {
+  box-shadow: 0 0 10px #ffcb32, 0 0 5px #ffcb32;
+}
+#loading-bar-spinner .spinner-icon {
+  border-top-color:  #ffcb32;
+  border-left-color: #ffcb32;
+}
 .collapse {
 	position: inherit;
 }
