@@ -1,6 +1,5 @@
 /* @override 
 	http://dev-clear.ofon2.com/app-dev/css/styles.css */
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,300);
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;

@@ -207,9 +207,9 @@ list: {{list | json}}
 				<th><h6><a ng-click="listSort('milestone')"><span>milestone</span>
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'milestone'"></i>
 					</a></h6></th>
-				<th><h6><a ng-click="listSort('status')"><span>status</span>
+				<!--<th><h6><a ng-click="listSort('status')"><span>status</span>
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'status'"></i>
-					</a></h6></th>
+					</a></h6></th>-->
 				<th><h6>conditions</h6></th>
 				<th ng-if="display.tracking"><h6>tracking</h6></th>
 			</tr>
@@ -221,7 +221,7 @@ list: {{list | json}}
 				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
 				<td ng-if="listShipment"><small>{{elm.specifications_shipment.chrono}}</small></td>
 				<td><strong><small>{{elm.milestone}}</small></strong></td>
-				<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
+				<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
 				<td><ul class="inline">
 				<li ng-repeat="required in elm.required">
 				<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>

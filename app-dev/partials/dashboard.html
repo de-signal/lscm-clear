@@ -52,9 +52,9 @@
 						<th><h6><a ng-click="listSort('milestone')"><span>milestone</span> 
 							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'milestone'"></i>
 							</a></h6></th>
-						<th><h6><a ng-click="listSort('status')"><span>status</span> 
+						<!--<th><h6><a ng-click="listSort('status')"><span>status</span> 
 							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'status'"></i>
-							</a></h6></th>
+							</a></h6></th>-->
 						<th><h6>required</h6></th>
 						<th><h6><a ng-click="listSort('departure_location')"><span>departure</span> 
 							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'departure_location'"></i>
@@ -76,7 +76,7 @@
 						<td><small>{{elm.chrono}}</small></td>
 						<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
 						<td><strong><small>{{elm.milestone}}</small></strong></td>
-						<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>
+						<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
 						<td><ul class="inline">
 						<li ng-repeat="required in elm.required">
 						<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
