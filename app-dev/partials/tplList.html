@@ -3,15 +3,15 @@
 
 <div ng-show="loaded">
 
-	<div class="row hide">
+	<div class="row">
 	    <div class="col-md-6">
 	    	<pre><small>
-filters.date: {{filters.date | json}}
+list.urlParams: {{list.urlParams | json}}
 	    	</small></pre>
 	    </div>
 	    <div class="col-md-6">
 	    	<pre><small>
-list: {{list | json}}
+filters.tmp: {{filters.tmp | json}}
 			</small></pre>
 	    </div><!--/col-->
 	</div><!--/row-->
@@ -30,7 +30,13 @@ list: {{list | json}}
 								<div class="col-md-4">
 									<fieldset>
 										<legend>Reference </legend>
-										<input type="text" ng-model="list.urlParams.reference" class="form-control">
+										<div class="form-group">
+											<input type="text" ng-model="list.urlParams.reference" class="form-control">
+										</div>
+										<div class="form-group" ng-if="list.type === 'shipment' || list.type === 'shipmentIn' || list.type === 'shipmentOut'">
+											<label class="control-label">Vector reference</label>
+											<input type="text" ng-model="list.urlParams.vector_reference" class="form-control">
+										</div>
 									</fieldset>
 								</div>
 								
@@ -139,9 +145,17 @@ list: {{list | json}}
 							<div class="row">
 								<div class="col-md-4">
 									<legend>Selection </legend>
-									<a class="btn btn-default btn-xs" ng-click="selectionAll(list.elements)">All</a>
-									<a class="btn btn-default btn-xs" ng-click="selectionNone(list.elements)">None</a>
-									<a class="btn btn-default btn-xs" ng-click="selectionInverse(list.elements)">Inverse</a>
+									<div class="form-group">
+										<a class="btn btn-default btn-xs" ng-click="selectAll()">All</a>
+										<a class="btn btn-default btn-xs" ng-click="selectNone()">None</a>
+										<a class="btn btn-default btn-xs" ng-click="selectInverse()">Inverse</a>
+									</div>
+									<div class="form-group" ng-if="filters.tmp.selectGlobalBtn">
+										<a class="btn btn-default btn-xs" ng-click="selectGlobalOn()">Select {{list.pagination.elementsCount}} {{list.name}} </a>
+									</div>
+									<div ng-if="filters.tmp.selectGlobalConfirm">
+										{{list.pagination.elementsCount}} {{list.name}} selected.
+									</div>
 								</div>
 								<div class="col-md-8">
 									<legend>Property </legend>
@@ -176,7 +190,7 @@ list: {{list | json}}
 							</div>
 							<div class="row">
 							    <div class="col-md-12">
-									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave(list, filters.tmp.selection, filters.tmp.propertyUpdate)" ng-disabled="filters.tmp.selection.length < 1">Modify</button>
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave()" ng-disabled="!filters.tmp.propertyUpdate.value || filters.tmp.ids.length < 1">Modify</button>
 								</div>
 							</div>
 							
@@ -216,7 +230,7 @@ list: {{list | json}}
 		</thead>
 		<tbody>
 			<tr  ng-repeat="elm in list.elements" ng-click="go(elm.type, elm.id)" class="pointer over">
-				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectionToggle(elm.id)" ng-checked="filters.tmp.selection.indexOf(elm.id) > -1" value="elm.id"></td>
+				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectToggle(elm.id)" ng-checked="filters.tmp.ids.indexOf(elm.id) > -1" value="elm.id"></td>
 				<td ng-if="listShipment"><span class="label label-shipment">{{elm.specifications_shipment.type}}</span></td>
 				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
 				<td ng-if="listShipment"><small>{{elm.specifications_shipment.chrono}}</small></td>

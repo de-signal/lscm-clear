@@ -7,8 +7,8 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
 	.factory('E2', ['$resource', function($resource) {
-		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id', 
-			{ format:'@format', type:'@type', id:'@id' }, 
+		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id/:action', 
+			{ format:'@format', type:'@type', id:'@id', action:'@action' }, 
 			{
 				update: { method: 'PUT' }, 
 				updateList: { method: 'PUT', isArray: true }
@@ -97,7 +97,8 @@ angular.module('clearApp.services', ['ngResource'])
 				var resources = { "1": E1, "2": E2, "6": ElmsOrder, "7": ElmsShipment, "8": ElmsBox, "9": ElmsItem, "10": IRs, "11": PODs, "12": NCRs, "13": Archives }; 
 				var list = listConfig;
 				var q=$q.defer();
-				var listQuery = { 'type': listConfig.type, 'format': listConfig.format }; 
+				var listQuery = { 'type': listConfig.type }; 
+				if (listConfig.format) listQuery.format = listConfig.format; 
 				
 				listQuery = Utils.collect(listQuery, listConfig.urlParams); 
 				
@@ -129,8 +130,10 @@ angular.module('clearApp.services', ['ngResource'])
 				var that = this;
 				var filters = {}; 
 				var q=$q.defer();
-				resources[listConfig.resource].get({'format': listConfig.format, 'type': listConfig.type, 'id': 'filter'}, 
-					function(values) { 
+				var listQuery = { 'type': listConfig.type, 'id': 'filter' }; 
+				if (listConfig.format) listQuery.format = listConfig.format; 
+				
+				resources[listConfig.resource].get( listQuery, function(values) { 
 						filters.values = values; 
 						filters.badges = that.listFiltersBadgesInit(listConfig.urlParams, listConfig.filters, values);
 						filters.date = that.listFiltersDateInit(listConfig.urlParams, listConfig.filters);
@@ -203,13 +206,24 @@ angular.module('clearApp.services', ['ngResource'])
 					delete urlParams['related_to'];
 				}
 			}, 
-			listPropertySave: function(list, idsArray, property) {
-				var elements = []
+			listPropertySave: function(list, idsArray, propertyUpdate, selectGlobal, urlParams) {
+				var elements = []; 
+				var parameters = { 
+					'type': list.type, 
+					'action': 'updateList', 
+					'format': list.format, 
+					'ids': idsArray.join(), 
+					'propertyUpdateId': propertyUpdate.id, 
+					'propertyUpdateVal': propertyUpdate.value
+				}; 
+				
 				for (var i in idsArray) {
 					elements.push(Utils.objectByKey(list.elements, 'id', idsArray[i]));
 				}
+				
+				if (selectGlobal) parameters = Utils.collect(parameters, urlParams); 
 
-				E2.updateList({ 'type': list.type, 'id': 'updateList', 'format': list.format, 'ids': idsArray.join(), 'propertyId': property.id, 'propertyValue': property.value }, elements, function(elms, response) {
+				E2.updateList(parameters, elements, function(elms, response) {
 					var propertyMessage; 
 					var elementsType = list.elements.length + " " + list.type; 
 					
@@ -357,7 +371,7 @@ angular.module('clearApp.services', ['ngResource'])
 			propertySave: function(elm, property, group) {
 				var self=this;
 				$rootScope.currentGroup = group;
-				elm.$update({ 'propertyId': property.id, 'propertyValue': property.value }, function(elm, response) {
+				elm.$update({ 'propertyUpdateId': property.id, 'propertyUpdateVal': property.value }, function(elm, response) {
 					var propertyMessage; 
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";

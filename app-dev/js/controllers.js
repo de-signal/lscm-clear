@@ -78,7 +78,6 @@ angular.module('clearApp.controllers', [])
 		ClearFn.listsReady('init');
 		$scope.listsConfig = [{
 			"resource": "1", 
-			"format": "", 
 			"type": "dashboard",
 			"id": "dashboard",  
 			"display": { 
@@ -208,7 +207,7 @@ angular.module('clearApp.controllers', [])
 			ClearListsFn.listFiltersLoad(listConfig).then( function(filters) {
 				$scope.filters = filters;
 				$scope.filters.tmp.ModificationsOpen = false; 
-				$scope.filters.tmp.selection = [];
+				$scope.filters.tmp.ids = [];
 				$scope.filters.tmp.propertyUpdate = {};
 			}); 
 		}
@@ -244,43 +243,59 @@ angular.module('clearApp.controllers', [])
 			$scope.filters.date[param].opened = true;
 		}
 		
-		$scope.selectionAll = function(elms) {
+		$scope.selectAll = function() {
+			var elms = $scope.list.elements; 
+			$scope.filters.tmp.ids = [];
 			for (var i in elms) {
-				var idx = $scope.filters.tmp.selection.indexOf(elms[i].id);
-				if (idx === -1) {
-			    	$scope.filters.tmp.selection.push(elms[i].id);
-			    }
+				if (!isNaN(i)) {
+					$scope.filters.tmp.ids.push(elms[i].id);
+				}
+			}
+			if ($scope.list.pagination.pagesCount > 1) {
+				$scope.filters.tmp.selectGlobalBtn = true; 
 			}
 		}
 		
-		$scope.selectionNone = function(elms) {
-			for (var i in elms) {
-				var idx = $scope.filters.tmp.selection.indexOf(elms[i].id);
-				if (idx > -1) {
-			    	$scope.filters.tmp.selection.splice(idx, 1);
-			    }
-			}
+		$scope.selectNone = function() {
+			var elms = $scope.list.elements; 
+			$scope.filters.tmp.ids = [];
+			$scope.selectGlobalOff();
 		}
 		
-		$scope.selectionInverse = function(elms) {
+		$scope.selectInverse = function() {
+			var elms = $scope.list.elements; 
 			for (var i in elms) {
-				$scope.selectionToggle(elms[i].id);
+				$scope.selectToggle(elms[i].id);
 			}
+			$scope.selectGlobalOff();
 		}
 		
-		$scope.selectionToggle = function (id) {
-			var idx = $scope.filters.tmp.selection.indexOf(id);
+		$scope.selectToggle = function (id) {
+			var idx = $scope.filters.tmp.ids.indexOf(id);
 			if (idx > -1) { // is currently selected
-				$scope.filters.tmp.selection.splice(idx, 1);
+				$scope.filters.tmp.ids.splice(idx, 1);
 			} else { // is newly selected
-				$scope.filters.tmp.selection.push(id);
+				$scope.filters.tmp.ids.push(id);
 			}
+			$scope.selectGlobalOff(); 
 		};
+		
+		$scope.selectGlobalOn = function() {
+			$scope.filters.tmp.selectGlobal = true;
+			$scope.filters.tmp.selectGlobalConfirm = true;
+			$scope.filters.tmp.selectGlobalBtn = false;
+		}
+		
+		$scope.selectGlobalOff = function() {
+			$scope.filters.tmp.selectGlobalBtn = false;
+			$scope.filters.tmp.selectGlobalConfirm = false;
+		}
 		  
-		$scope.listPropertySave = function (list, idsArray, property) {
-			ClearListsFn.listPropertySave(list, idsArray, property);
+		$scope.listPropertySave = function () {
+			ClearListsFn.listPropertySave($scope.list, $scope.filters.tmp.ids, $scope.filters.tmp.propertyUpdate, $scope.filters.tmp.selectGlobal, $scope.list.urlParams);
+			$scope.selectGlobalOff(); 
 			$scope.filters.tmp.ModificationsOpen = false; 
-			$scope.filters.tmp.selection = [];
+			$scope.filters.tmp.ids = [];
 			$scope.filters.tmp.propertyUpdate = {};
 		}
 		
@@ -314,6 +329,7 @@ angular.module('clearApp.controllers', [])
 				$scope.listsConfig[i].resource = '2';  
 				$scope.listsConfig[i].type = $scope.types[i].type;
 				$scope.listsConfig[i].id = $scope.types[i].type;
+				$scope.listsConfig[i].name = $scope.types[i].name;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
 				$scope.listsConfig[i].display.modifications = true; 
 			}
@@ -343,6 +359,7 @@ angular.module('clearApp.controllers', [])
 				$scope.listsConfig[i] = Utils.clone(config);
 				$scope.listsConfig[i].type = $scope.types[i].type;
 				$scope.listsConfig[i].id = $scope.types[i].type;
+				$scope.listsConfig[i].name = $scope.types[i].name;
 				$scope.listsConfig[i].listCode = $scope.types[i].url; 
 				$scope.listsConfig[i].display.modifications = true; 
 				switch ($scope.types[i].type) {
@@ -427,6 +444,7 @@ angular.module('clearApp.controllers', [])
 					$scope.listsConfig[i].related_id = elm.id; 
 					$scope.listsConfig[i].type = elm.related[i].type;
 					$scope.listsConfig[i].id = elm.related[i].type;
+					$scope.listsConfig[i].name = elm.related[i].name;
 					$scope.listsConfig[i].resource = '2'; 
 					switch (elm.related[i].type) {
 						case 'order': $scope.listsConfig[i].listCode = 'O'; break;
@@ -504,6 +522,7 @@ angular.module('clearApp.controllers', [])
 					$scope.listsConfig[i].related_id = elm.id; 
 					$scope.listsConfig[i].type = elm.related[i].type;
 					$scope.listsConfig[i].id = elm.related[i].type;
+					$scope.listsConfig[i].name = elm.related[i].name;
 					$scope.listsConfig[i].resource = '2'; 
 					switch (elm.related[i].type) {
 						case 'order': $scope.listsConfig[i].listCode = 'O'; break;
@@ -530,7 +549,8 @@ angular.module('clearApp.controllers', [])
 		$scope.urlSet = function(urlParams, listId) {
 			var type = urlParams.type || $location.search().type;
 			if (type) {
-				$scope.listsConfig[0].type = type; 
+				$scope.listsConfig[0].type = type;
+				$scope.listsConfig[0].name = $scope.types[Utils.objectIndexbyKey($scope.types, "type", type)].name;  
 				var listConfig = ClearFn.listsUrlSet(urlParams, listId, $scope.listsConfig[0]); 
 				$scope.$broadcast('event:listLoad_' + listId, listConfig);
 				$scope.urlPage = listConfig.urlParams;
@@ -579,7 +599,8 @@ angular.module('clearApp.controllers', [])
 		$scope.listsConfig = [];
 		ElmsListsConfig.get( function(config) {
 			$scope.listsConfig[0] = config; 
-			$scope.listsConfig[0].type = type; 
+			$scope.listsConfig[0].type = type;
+			$scope.listsConfig[0].name = $scope.name;  
 			$scope.listsConfig[0].id = "elements";
 			$scope.listsConfig[0].resource = '2'; 
 			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
