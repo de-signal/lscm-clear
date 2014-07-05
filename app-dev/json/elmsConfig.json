@@ -1,5 +1,11 @@
 { 
 	"format": "elements", 
+	"types": [	
+		{"name": "Orders", "type": "order", "url": "O" }, 
+		{"name": "Shipments", "type": "shipment", "url": "S" }, 
+		{"name": "Boxes", "type": "box", "url": "B"  }, 
+		{"name": "Items", "type": "item", "url": "I"  }
+	], 
 	"display": { 
 		"filters" : true, 
 		"tracking": true, 
@@ -12,6 +18,7 @@
 	},
 	"filters": [
 		{ "name": "Reference", "id": "reference"}, 
+		{ "name": "Vector reference", "id": "vector_reference"}, 
 		{ "name": "Milestone name", "id": "milestone_name" }, 
 		{ "name": "Milestone planning", "id": "milestone_planning" }, 
 		{ "name": "Milestone status", "id": "milestone_status" }, 

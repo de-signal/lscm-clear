@@ -3,7 +3,7 @@
 
 <div ng-show="loaded">
 
-	<div class="row">
+	<div class="row hide">
 	    <div class="col-md-6">
 	    	<pre><small>
 list.urlParams: {{list.urlParams | json}}
@@ -238,7 +238,7 @@ filters.tmp: {{filters.tmp | json}}
 				<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
 				<td><ul class="inline">
 				<li ng-repeat="required in elm.required">
-				<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
+				<span ng-click='modalCondition(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 				</li>
 				</ul></td>
 				<td ng-if="display.tracking"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i></td>

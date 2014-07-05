@@ -1,0 +1,75 @@
+<div class="header bg-generic">
+	<h1 class="container">Alert</h1>
+</div>
+
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
+
+	<div class="row">
+		<div class="col-md-3">
+	    	<div class="row">
+	    		<div class="col-md-12">
+		    		<div class="filet">
+		    			<h6>related to</h6>
+		    			<h2><span class="label" ng-class="{order: 'label-order', shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.related.type]">{{doc.related.reference}}</span><a class="btn" ng-href="order/{{doc.related.id}}"><i class="icon i-external-link"></i></a></h2>
+		    		</div>
+		    	</div>
+	    	</div>
+	    	<div class="row margin-top">
+	    		<div class="col-md-12">
+		    		<div class="filet">
+		    			<h6>user</h6>
+		    			<h2>{{doc.user}}</h2>
+		    		</div>
+		    	</div>
+	    	</div>
+	    </div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>name</h6>
+						<h2 class="type-bold">{{doc.name}}</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>date</h6>
+						<h2 class="type-bold">{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>status</h6>
+						<h2><i class="icon i-disc" ng-class="{error:'error', warning:'warning', success:'success'}[doc.status]" tooltip="{{doc.status}}"></i>
+						</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>active</h6>
+						<h2><i class="icon default" ng-class="{true:'i-check', false:'i-cross'}[doc.active]"></i></h2>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>info</h3>
+			<h2>{{doc.info}}</h2>			
+		</div>
+	</div>
+
+</div>

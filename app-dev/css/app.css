@@ -7432,7 +7432,7 @@ Interactive Layer
   font-style: normal;
 }
 
-/* line 15, ../scss/_icons.scss */
+/* line 13, ../scss/_icons.scss */
 [data-icon]:before {
   font-family: "clear" !important;
   content: attr(data-icon);
@@ -7446,7 +7446,7 @@ Interactive Layer
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* line 29, ../scss/_icons.scss */
+/* line 27, ../scss/_icons.scss */
 [class^="i-"]:before,
 [class*=" i-"]:before {
   font-family: "clear" !important;
@@ -7460,312 +7460,352 @@ Interactive Layer
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* line 41, ../scss/_icons.scss */
+/* line 39, ../scss/_icons.scss */
 .i-element-box:before {
   content: "\e000";
 }
 
-/* line 44, ../scss/_icons.scss */
+/* line 42, ../scss/_icons.scss */
 .i-property-repacking:before {
   content: "\e001";
 }
 
-/* line 47, ../scss/_icons.scss */
+/* line 45, ../scss/_icons.scss */
 .i-property-procurement:before {
   content: "\e002";
 }
 
-/* line 50, ../scss/_icons.scss */
+/* line 48, ../scss/_icons.scss */
 .i-property-shipping:before {
   content: "\e003";
 }
 
-/* line 53, ../scss/_icons.scss */
+/* line 51, ../scss/_icons.scss */
 .i-property-shipping-posthub:before {
   content: "\e004";
 }
 
-/* line 56, ../scss/_icons.scss */
+/* line 54, ../scss/_icons.scss */
 .i-property-shipping-prehub:before {
   content: "\e005";
 }
 
-/* line 59, ../scss/_icons.scss */
+/* line 57, ../scss/_icons.scss */
 .i-property-comments:before {
   content: "\e006";
 }
 
-/* line 62, ../scss/_icons.scss */
+/* line 60, ../scss/_icons.scss */
 .i-phone:before {
   content: "\e007";
 }
 
-/* line 65, ../scss/_icons.scss */
+/* line 63, ../scss/_icons.scss */
 .i-property-catalogue:before {
   content: "\e008";
 }
 
-/* line 68, ../scss/_icons.scss */
+/* line 66, ../scss/_icons.scss */
 .i-element-item:before {
   content: "\e009";
 }
 
-/* line 71, ../scss/_icons.scss */
+/* line 69, ../scss/_icons.scss */
 .i-property-aspect:before {
   content: "\e00a";
 }
 
-/* line 74, ../scss/_icons.scss */
+/* line 72, ../scss/_icons.scss */
 .i-document-pod:before {
   content: "\e00b";
 }
 
-/* line 77, ../scss/_icons.scss */
+/* line 75, ../scss/_icons.scss */
 .i-condition-text:before {
   content: "\e00c";
 }
 
-/* line 80, ../scss/_icons.scss */
+/* line 78, ../scss/_icons.scss */
 .i-search:before {
   content: "\e00d";
 }
 
-/* line 83, ../scss/_icons.scss */
+/* line 81, ../scss/_icons.scss */
 .i-condition-link:before {
   content: "\e00e";
 }
 
-/* line 86, ../scss/_icons.scss */
+/* line 84, ../scss/_icons.scss */
 .i-condition-upload:before {
   content: "\e00f";
 }
 
-/* line 89, ../scss/_icons.scss */
+/* line 87, ../scss/_icons.scss */
 .i-condition-document:before {
   content: "\e010";
 }
 
-/* line 92, ../scss/_icons.scss */
+/* line 90, ../scss/_icons.scss */
 .i-condition-email:before {
   content: "\e011";
 }
 
-/* line 95, ../scss/_icons.scss */
+/* line 93, ../scss/_icons.scss */
 .i-property-documentation:before {
   content: "\e012";
 }
 
-/* line 98, ../scss/_icons.scss */
+/* line 96, ../scss/_icons.scss */
 .i-computer:before {
   content: "\e013";
 }
 
-/* line 101, ../scss/_icons.scss */
+/* line 99, ../scss/_icons.scss */
 .i-element-shipment:before {
   content: "\e014";
 }
 
-/* line 104, ../scss/_icons.scss */
+/* line 102, ../scss/_icons.scss */
 .i-property-location:before {
   content: "\e015";
 }
 
-/* line 107, ../scss/_icons.scss */
+/* line 105, ../scss/_icons.scss */
 .i-element-order:before {
   content: "\e016";
 }
 
-/* line 110, ../scss/_icons.scss */
+/* line 108, ../scss/_icons.scss */
 .i-property-validation:before {
   content: "\e017";
 }
 
-/* line 113, ../scss/_icons.scss */
+/* line 111, ../scss/_icons.scss */
 .i-condition-date:before {
   content: "\e018";
 }
 
-/* line 116, ../scss/_icons.scss */
+/* line 114, ../scss/_icons.scss */
 .i-property-qa-qc:before {
   content: "\e019";
 }
 
-/* line 119, ../scss/_icons.scss */
+/* line 117, ../scss/_icons.scss */
 .i-property-reference:before {
   content: "\e01a";
 }
 
-/* line 122, ../scss/_icons.scss */
+/* line 120, ../scss/_icons.scss */
 .i-chevron-big-r:before {
   content: "\e01b";
 }
 
-/* line 125, ../scss/_icons.scss */
+/* line 123, ../scss/_icons.scss */
 .i-chevron-big-d:before {
   content: "\e01c";
 }
 
-/* line 128, ../scss/_icons.scss */
+/* line 126, ../scss/_icons.scss */
 .i-chevron-big-u:before {
   content: "\e01d";
 }
 
-/* line 131, ../scss/_icons.scss */
+/* line 129, ../scss/_icons.scss */
 .i-chevron-big-l:before {
   content: "\e01e";
 }
 
-/* line 134, ../scss/_icons.scss */
+/* line 132, ../scss/_icons.scss */
 .i-chevron-medium-d:before {
   content: "\e01f";
 }
 
-/* line 137, ../scss/_icons.scss */
+/* line 135, ../scss/_icons.scss */
 .i-chevron-medium-u:before {
   content: "\e020";
 }
 
-/* line 140, ../scss/_icons.scss */
+/* line 138, ../scss/_icons.scss */
 .i-chevron-medium-l:before {
   content: "\e021";
 }
 
-/* line 143, ../scss/_icons.scss */
+/* line 141, ../scss/_icons.scss */
 .i-chevron-medium-r:before {
   content: "\e022";
 }
 
-/* line 146, ../scss/_icons.scss */
+/* line 144, ../scss/_icons.scss */
 .i-document-ncr:before {
   content: "\e023";
 }
 
-/* line 149, ../scss/_icons.scss */
+/* line 147, ../scss/_icons.scss */
 .i-user:before {
   content: "\e024";
 }
 
-/* line 152, ../scss/_icons.scss */
+/* line 150, ../scss/_icons.scss */
 .i-help:before {
   content: "\e025";
 }
 
-/* line 155, ../scss/_icons.scss */
+/* line 153, ../scss/_icons.scss */
 .i-qr-code:before {
   content: "\e026";
 }
 
-/* line 158, ../scss/_icons.scss */
+/* line 156, ../scss/_icons.scss */
 .i-tracking-untracked:before {
   content: "\e027";
 }
 
-/* line 161, ../scss/_icons.scss */
+/* line 159, ../scss/_icons.scss */
 .i-tracking-tracked:before {
   content: "\e028";
 }
 
-/* line 164, ../scss/_icons.scss */
+/* line 162, ../scss/_icons.scss */
 .i-condition-checkbox:before {
   content: "\e02a";
 }
 
-/* line 167, ../scss/_icons.scss */
+/* line 165, ../scss/_icons.scss */
 .i-document-ir:before {
   content: "\e02b";
 }
 
-/* line 170, ../scss/_icons.scss */
+/* line 168, ../scss/_icons.scss */
 .i-property-transport:before {
   content: "\e029";
 }
 
-/* line 173, ../scss/_icons.scss */
+/* line 171, ../scss/_icons.scss */
 .i-document-pod:before {
   content: "\e02e";
 }
 
-/* line 176, ../scss/_icons.scss */
+/* line 174, ../scss/_icons.scss */
 .i-external-link:before {
   content: "\e02f";
 }
 
-/* line 179, ../scss/_icons.scss */
+/* line 177, ../scss/_icons.scss */
 .i-cross:before {
   content: "\e00b";
 }
 
-/* line 182, ../scss/_icons.scss */
+/* line 180, ../scss/_icons.scss */
 .i-check:before {
   content: "\e030";
 }
 
-/* line 185, ../scss/_icons.scss */
+/* line 183, ../scss/_icons.scss */
 .i-disc:before {
   content: "\e031";
 }
 
-/* line 188, ../scss/_icons.scss */
+/* line 186, ../scss/_icons.scss */
 .i-circle:before {
   content: "\e032";
 }
 
-/* line 191, ../scss/_icons.scss */
+/* line 189, ../scss/_icons.scss */
 .i-caret-r:before {
   content: "\e02c";
 }
 
-/* line 194, ../scss/_icons.scss */
+/* line 192, ../scss/_icons.scss */
 .i-caret-d:before {
   content: "\e02d";
 }
 
-/* line 197, ../scss/_icons.scss */
+/* line 195, ../scss/_icons.scss */
 .i-property-scope-and-delay:before {
   content: "\e033";
 }
 
-/* line 200, ../scss/_icons.scss */
+/* line 198, ../scss/_icons.scss */
 .i-infos:before {
   content: "\e034";
 }
 
-/* line 203, ../scss/_icons.scss */
+/* line 201, ../scss/_icons.scss */
 .i-transportation-boat:before {
   content: "\e035";
 }
 
-/* line 206, ../scss/_icons.scss */
+/* line 204, ../scss/_icons.scss */
 .i-transportation-plane:before {
   content: "\e036";
 }
 
-/* line 209, ../scss/_icons.scss */
+/* line 207, ../scss/_icons.scss */
 .i-transportation-truck:before {
   content: "\e037";
 }
 
-/* line 212, ../scss/_icons.scss */
-.i-trash:before {
-  content: "\e038";
-}
-
-/* line 215, ../scss/_icons.scss */
+/* line 210, ../scss/_icons.scss */
 .i-caret-u:before {
   content: "\e039";
 }
 
-/* line 218, ../scss/_icons.scss */
+/* line 213, ../scss/_icons.scss */
 .i-caret-l:before {
   content: "\e03a";
 }
 
-/* line 221, ../scss/_icons.scss */
+/* line 216, ../scss/_icons.scss */
 .i-question:before {
   content: "\e03b";
 }
 
-/* line 224, ../scss/_icons.scss */
+/* line 219, ../scss/_icons.scss */
 .i-condition-imi:before {
   content: "\e03c";
+}
+
+/* line 222, ../scss/_icons.scss */
+.i-dollar:before {
+  content: "\e03e";
+}
+
+/* line 225, ../scss/_icons.scss */
+.i-chart:before {
+  content: "\e03d";
+}
+
+/* line 228, ../scss/_icons.scss */
+.i-synced:before {
+  content: "\e03f";
+}
+
+/* line 231, ../scss/_icons.scss */
+.i-users:before {
+  content: "\e040";
+}
+
+/* line 234, ../scss/_icons.scss */
+.i-add:before {
+  content: "\e042";
+}
+
+/* line 237, ../scss/_icons.scss */
+.i-alert:before {
+  content: "\e043";
+}
+
+/* line 240, ../scss/_icons.scss */
+.i-alert-add:before {
+  content: "\e044";
+}
+
+/* line 243, ../scss/_icons.scss */
+.i-edit:before {
+  content: "\e041";
+}
+
+/* line 246, ../scss/_icons.scss */
+.i-trash:before {
+  content: "\e045";
 }

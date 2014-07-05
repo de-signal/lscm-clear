@@ -30,7 +30,7 @@
 							<td><small>{{elm.milestone}}</small></td>
 							<td><ul class="inline">
 							<li ng-repeat="required in elm.required">
-							<span ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
+							<span ng-click='modalCondition(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
 							</li>
 							</ul></td>
 							<td><small>{{elm.departure.location}}</small></td>
@@ -48,20 +48,38 @@
 <div class="bottom">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-9">
-						<ul>
-							<li ng-repeat="new in news | filter:{ index: newsCurrent }" class="news-anim" ng-class="new.style">
-								<h6>{{new.title}}</h6>
-								<p class="lead">{{new.content}}</p>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-					</div>
-				</div>
-				
+			<div class="col-md-9">
+				<ul>
+					<li ng-repeat="alert in alerts | filter:{ index: alertCurrent }" class="alert-anim">
+						<div class="elements-group bg-default" ng-class="{info:'bg-info', error:'bg-error', warning:'bg-warning', success:'bg-success'}[alert.status]">
+							<div class="row">
+							
+								<div class="col-md-4">
+									<div class="element">										
+										<h6>related to </h6>
+										<h5><span class="label" ng-class="{order: 'label-order', shipment:'label-shipment', box:'label-box', item:'label-item'}[alert.related.type]">{{alert.related.reference}}</span></h5>
+										
+										<h6>by</h6>
+										<p>{{alert.user.first_name}} {{alert.user.name}}</p>
+								
+										<h6>date</h6>
+										<p>{{alert.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</p>
+										
+									</div>
+								</div>
+			
+								<div class="col-md-8 aa-text">
+									<h2 class="type-bold">
+										{{alert.name}}</h2>
+									<p class="lead">{{alert.info}}</p>
+								</div>
+							
+							</div>
+						</div>
+					</li>
+				</ul>			
+			</div>
+			<div class="col-md-3">
 			</div>
 		</div>
 	</div>

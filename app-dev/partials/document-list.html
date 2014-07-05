@@ -8,6 +8,19 @@
 		</div>
 		
 		<div class="container margin-top" ng-show="loaded">
+		<div class="row hide">
+			    <div class="col-md-6">
+			    	<pre><small>
+		list.urlParams: {{list.urlParams | json}}
+			    	</small></pre>
+			    </div>
+			    <div class="col-md-6">
+			    	<pre><small>
+		filters.values: {{filters.values | json}}
+					</small></pre>
+			    </div><!--/col-->
+			</div><!--/row-->
+		
 	<div class="row" ng-if="list.display.filters">
 		<div class="col-md-12">
 			<div class="row">
@@ -23,7 +36,7 @@
 				    					<legend>Related to </legend>
 				    					<div class="radio" ng-repeat="related in filters.values.related.type.values">		
 					    					<label class="control-label">
-					    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related}}"> {{related}} 
+					    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related}}"> {{related}} {{filters.values.related.type.values}}
 					    					</label>
 					    				</div>
 					    				<div class="form-group" ng-show="list.urlParams.related_to">
@@ -91,7 +104,8 @@
 	</div>
 			
 			<div class="row">
-				<div class="col-md-12">			
+				<div class="col-md-12">
+					
 					<table class="table table-condensed" ng-if="page.type==='ncr'">
 						<thead>
 							<tr>
@@ -118,6 +132,7 @@
 							</tr>
 						</tbody>
 					</table>
+					
 					<table class="table table-condensed" ng-if="page.type==='ir'">
 						<thead>
 							<tr>
@@ -149,6 +164,7 @@
 							</tr>
 						</tbody>
 					</table>
+					
 					<table class="table table-condensed" ng-if="page.type==='pod'">
 						<thead>
 							<tr>
@@ -195,7 +211,8 @@
 								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
 							</tr>
 						</tbody>
-					</table>	
+					</table>
+						
 					<div ng-if="list.pagination.pagesCount>1">
 						<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 					</div>

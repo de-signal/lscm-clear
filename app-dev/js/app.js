@@ -9,34 +9,25 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$locationProvider.hashPrefix('!');
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		
-//		Static pages 
-		$routeProvider.when('/bug-list', {templateUrl: 'partials/bug-list.html', controller: 'BugListCtrl' });
-		$routeProvider.when('/static-dashboard', {templateUrl: 'partials/dashboard.html', controller: 'StaticDashboardCtrl', reloadOnSearch: false});
-		$routeProvider.when('/static-indicators', {templateUrl: 'partials/indicators.html', controller: 'StaticIndicatorsCtrl'});
-		$routeProvider.when('/static-documents/:type', {templateUrl: 'partials/documents.html', controller: 'StaticDocumentsCtrl', reloadOnSearch: false});
-		$routeProvider.when('/documents/ir/static', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'StaticInspectionReportCtrl'});
-		$routeProvider.when('/documents/ncr/static', {templateUrl: 'partials/documents-nonConformityReport.html', controller: 'StaticNonConformityReportCtrl'});
-		$routeProvider.when('/documents/pod/static', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'StaticProofOfDeliveryCtrl'});
-		$routeProvider.when('/static-tracking', {templateUrl: 'partials/tracking.html', controller: 'StaticTrackingCtrl', reloadOnSearch: false});
-		$routeProvider.when('/static-detail', {templateUrl: 'partials/detail.html', controller: 'StaticDetailCtrl', reloadOnSearch: false});
-		$routeProvider.when('/static-search', {templateUrl: 'partials/search.html', controller: 'StaticSearchCtrl', reloadOnSearch: false});
-		$routeProvider.when('/guidelines', {templateUrl: 'partials/guidelines.html', controller: 'GuidelinesCtrl'});
+		$routeProvider.when('/bug', {templateUrl: 'partials/bugs.html', controller: 'BugsCtrl' });
+		$routeProvider.when('/guidelines', {templateUrl: 'partials/guidelines-list.html', controller: 'GuidelinesListCtrl'});
 		$routeProvider.when('/guidelines/process', {templateUrl: 'partials/guidelines-process.html', controller: 'GuidelinesProcessCtrl'});
-		$routeProvider.when('/guidelines/:id', {templateUrl: 'partials/guidelines-detail.html', controller: 'GuidelinesDetailCtrl'});
+		$routeProvider.when('/guidelines/:id', {templateUrl: 'partials/guidelines-operations.html', controller: 'GuidelinesOperationsCtrl'});
 		
-		$routeProvider.when('/user', {templateUrl: 'partials/user-profile.html', controller: 'UserProfileCtrl'});
+		$routeProvider.when('/user', {templateUrl: 'partials/user-detail.html', controller: 'UserDetailCtrl'});
 		$routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: 'DashboardCtrl', reloadOnSearch: false});
-		$routeProvider.when('/tv', {templateUrl: 'partials/tv.html', controller: 'TvCtrl', reloadOnSearch: false});
-		$routeProvider.when('/tracking', {templateUrl: 'partials/tracking.html', controller: 'TrackingCtrl', reloadOnSearch: false});
+		$routeProvider.when('/tv', {templateUrl: 'partials/dashboard-tv.html', controller: 'DashboardTvCtrl', reloadOnSearch: false});
+		$routeProvider.when('/tracking', {templateUrl: 'partials/element-tracking.html', controller: 'ElementTrackingCtrl', reloadOnSearch: false});
 		$routeProvider.when('/indicators', {templateUrl: 'partials/indicators.html', controller: 'IndicatorsCtrl'});
-		$routeProvider.when('/search', {templateUrl: 'partials/search.html', controller: 'SearchCtrl', reloadOnSearch: false});
-		$routeProvider.when('/documents/:type', {templateUrl: 'partials/documents.html', controller: 'DocumentsCtrl', reloadOnSearch: false});
-		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/documents-inspectionReport.html', controller: 'InspectionReportCtrl'});
-		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-nonConformityReport.html', controller: 'NonConformityReportCtrl'});
-		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/documents-proofOfDelivery.html', controller: 'ProofOfDeliveryCtrl'});
-		$routeProvider.when('/add-order', {templateUrl: 'partials/add_order.html', controller: 'AddOrderCtrl'});
-		$routeProvider.when('/:type/', {templateUrl: 'partials/elements.html', controller: 'ElementsCtrl', reloadOnSearch: false});
-		$routeProvider.when('/:type/:id', {templateUrl: 'partials/detail.html', controller: 'DetailCtrl', reloadOnSearch: false});
+		$routeProvider.when('/search', {templateUrl: 'partials/element-search.html', controller: 'ElementSearchCtrl', reloadOnSearch: false});
+		$routeProvider.when('/documents/:type', {templateUrl: 'partials/document-list.html', controller: 'DocumentListCtrl', reloadOnSearch: false});
+		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/document-ir.html', controller: 'DocumentIrCtrl'});
+		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/document-ncr.html', controller: 'DocumentNcrCtrl'});
+		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/document-pod.html', controller: 'DocumentPodCtrl'});
+		$routeProvider.when('/add-order', {templateUrl: 'partials/element-order-add.html', controller: 'ElementOrderAddCtrl'});
+		$routeProvider.when('/alerts', {templateUrl: 'partials/alert-list.html', controller: 'AlertListCtrl', reloadOnSearch: false});
+		$routeProvider.when('/:type/', {templateUrl: 'partials/element-list.html', controller: 'ElementListCtrl', reloadOnSearch: false});
+		$routeProvider.when('/:type/:id', {templateUrl: 'partials/element-detail.html', controller: 'ElementDetailCtrl', reloadOnSearch: false});
 		
 		$routeProvider.otherwise({redirectTo: '/dashboard'});
 

@@ -31,7 +31,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>location</h6>
-						<h2 class="type-bold">{{doc.location}}</h2>
+						<h2>{{doc.location}}</h2>
 					</div>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>user</h6>
-						<h2 class="type-bold">{{doc.user}}</h2>
+						<h2>{{doc.user}}</h2>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>created</h6>
-						<h2 class="type-bold">{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+						<h2>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>closed</h6>
-						<h2 class="type-bold">{{doc.dates.closed * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+						<h2>{{doc.dates.closed * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
 					</div>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 				    		<span class="pull-right icon-conform" ng-show="item.conform === 'pending'"><i class="icon i-question default"></i></span>
 					    	<span class="pull-right icon-conform" ng-show="item.conform === true"><i class="icon i-check success"></i></span>
 					    	<span class="pull-right icon-conform" ng-show="!item.conform"><i class="icon i-cross important"></i></span>
-					    	<h6>item {{item.conform}}</h6>
+					    	<h6>item</h6>
 					    	<h5><span class="label label-item">{{item.reference}}</span> <a class="btn" ng-href="item/{{item.id}}" alt="Item details"><i class="icon i-external-link"></i></a></h5>
 					    	<span class="pull-right label label-ncr" ng-show="item.non_conformity"><a ng-href="documents/ncr/{{item.non_conformity_report.id}}" alt="Non-conformity report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[item.non_conformity_report.status]"></i></a></span>
 					    	<h6>description</h6>

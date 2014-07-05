@@ -1,0 +1,104 @@
+[
+	{
+		"name": "Green light received 04/04",
+		"user": {
+			"name": "Robert",
+			"first_name": "Henri", 
+			"id": 3
+		}, 
+		"info": "Pending for Form M and BA n° from Total + RFQ to freight forwarder",
+		"id": "static", 
+		"dates": {
+			"created": 1375907474,
+			"modified": 1375908474
+		},
+		"related": {
+			"type": "order", 
+			"reference": "345678543", 
+			"id": 1
+		}
+	}, 
+	{
+		"name": "Green light received 04/04",
+		"user": {
+			"name": "Robert",
+			"first_name": "Henri", 
+			"id": 3
+		}, 
+		"info": "Pending for Form M and BA n° from Total + RFQ to freight forwarder",
+		"status": "warning",
+		"id": "static", 
+		"dates": {
+			"created": 1375907474,
+			"modified": 1375908474
+		},
+		"related": {
+			"type": "order", 
+			"reference": "345678543", 
+			"id": 1
+		}
+	}, 
+	{
+		"name": "Pending for Po service",
+		"user": {
+			"name": "Robert",
+			"first_name": "Henri", 
+			"id": 3
+		}, 
+		"info": "In FCA, Green light received 04/04. Pending for Form M and BA n° from Total + RFQ to freight forwarder",
+		"active": false,  
+		"status": "error",
+		"id": "static",
+		"dates": {
+			"created": 1375907474,
+			"modified": 1375908474
+		},
+		"related": {
+			"type": "order", 
+			"reference": "4560103916", 
+			"id": 1
+		}
+	}, 
+	{
+		"name": "Title of the third news",
+		"user": {
+			"name": "Robert",
+			"first_name": "Henri", 
+			"id": 3
+		}, 
+		"info": "Inspection done, pending for missing items to be sent by vendor (NCR open), once received repacking & RFQ to be done.",
+		"active": true,  
+		"status": "success",
+		"id": "static", 
+		"dates": {
+			"created": 1375907474,
+			"modified": 1375908474
+		},
+		"related": {
+			"type": "order", 
+			"reference": "4560103080", 
+			"id": 1
+		}
+	}, 
+	{
+		"name": "No BW received",
+		"user": {
+			"name": "Robert",
+			"first_name": "Henri", 
+			"id": 3
+		}, 
+		"info": "Special request from Vendor to FCA without complete integration in SAP. As per discution with Vendor, we get confirmation that 1 of their staff will come in FCA for the labelling. (CHR 032)",
+		"active": true,  
+		"status": "warning",
+		"id": "static", 
+		"dates": {
+			"created": 1375907474,
+			"modified": 1375908474
+		},
+		"related": {
+			"type": "order", 
+			"reference": "4560107329", 
+			"id": 1
+		}
+	}
+]

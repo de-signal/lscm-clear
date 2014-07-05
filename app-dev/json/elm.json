@@ -74,6 +74,40 @@
 			"value": 90 
 		}
     ],
+    "alerts": [
+    	{
+    		"name": "Green light received 04/04",
+    		"user": {
+    			"name": "Robert",
+    			"first_name": "Henri", 
+    			"id": 3
+    		}, 
+    		"info": "Pending for Form M and BA n° from Total + RFQ to freight forwarder",
+    		"status": "warning",
+    		"id": 10,
+    		"active": true,  
+    		"dates": {
+    			"created": 1375907474,
+    			"modified": 1375908474
+    		}
+    	}, 
+    	{
+    		"name": "Pending for Po service",
+    		"user": {
+    			"name": "Robert",
+    			"first_name": "Henri", 
+    			"id": 3
+    		},
+    		"info": "In FCA, Green light received 04/04. Pending for Form M and BA n° from Total + RFQ to freight forwarder",
+    		"active": false,  
+    		"status": "error",
+    		"id": 12,
+    		"dates": {
+    			"created": 1375907474,
+    			"modified": 1375908474
+    		} 
+    	}
+    ], 
     "required": [
         {
             "id": 1234,

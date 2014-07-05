@@ -1,0 +1,36 @@
+{
+    "related": {
+        "type": {
+            "type": "select",
+            "values": [
+                "order",
+                "shipment"
+            ]
+        },
+        "reference": {
+            "type": "text",
+            "value": "Reference"
+        }
+    },
+    "statuses": {
+        "type": "select", 
+        "values": [ "success", "warning", "error" ]
+    },
+    "users": {
+        "type": "select",
+        "values": [
+            {
+                "id": "14",
+                "name": "Admin CLEAR"
+            }
+        ]
+    },
+    "dates": {
+        "from": {
+            "type": "date"
+        },
+        "to": {
+            "type": "date"
+        }
+    }
+}

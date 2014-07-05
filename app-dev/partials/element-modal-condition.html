@@ -4,15 +4,19 @@
 <div class="modal-body">
 	<h4><i class="lead icon" required-icon></i> {{required.name}}</h4>
 	<div ng-switch on="required.type">
-		<label class="form-horizontal" ng-switch-when="text">
-			<input type="text" ng-model="required.value">
-		</label>
-		<label class="form-horizontal" ng-switch-when="imi">
+		<form ng-switch-when="text">
+			<div class="form-group">
+				<input type="text" ng-model="required.value" class="form-control">
+			</div>
+		</form>
+		<div class="checkbox" ng-switch-when="checkbox" >
+			<label>
+				<input type="checkbox" ng-model="required.value" ng-checked="required.value"> {{required.name}}
+			</label>
+		</div>
+		<div ng-switch-when="imi">
 			{{required.value}}
-		</label>
-		<label class="checkbox" ng-switch-when="checkbox" >
-			<input type="checkbox" ng-model="required.value" ng-checked="required.value"> {{required.name}}
-		</label>
+		</div>
 		<div ng-switch-when="date">
 			<div ng-model="required.dt">
 			        <datepicker show-weeks="false"></datepicker>
@@ -26,11 +30,16 @@
         </div>
         <button ng-switch-when="email" class="btn btn-large" type="button">Send e-mail</button>
         
-       <div ng-switch-when="upload">
-       	<input type="text" ng-model="myModelObj">
-       		<input type="file" ng-file-select="onFileSelect($files)" >
-       		<button ng-click="upload.abort()">Cancel Upload</button>
-       </div>
+			<form ng-switch-when="upload">
+				<div class="form-group">
+<!--				<input type="text" ng-model="myModelObj">-->
+	       			<input type="file" ng-file-select="onFileSelect($files)">
+				</div>
+				<div ng-if="progressShow" class="form-group">
+<!--				<button ng-click="upload.abort()" class="btn">Cancel Upload</button>-->
+					{{progress}} % loaded.
+				</div>
+	       	</form>
          <div ng-switch-when="link"><a class="btn btn-large" href="" ng-click="go(elm.type, elm.id, required.value); requiredClose()">View</a></div>
          
 	</div>

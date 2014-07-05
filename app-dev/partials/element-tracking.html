@@ -4,14 +4,14 @@
 			<div class="header bg-order padding-left">
 				<h1><i class="icon i-element i-element-order"></i> {{types[0].name}}</h1>
 			</div>
-			<span ng-include="'partials/tplList.html'" onload="listInit('order')"></span>
+			<span ng-include="'partials/element-tpl-list.html'" onload="listInit('order')"></span>
 		</div>
 		
 		<div class="col-md-6" ng-controller="ListCtrl">
 			<div class="header bg-shipment padding-left">
 				<h1><i class="icon i-element i-element-shipment"></i> {{types[1].name}}</h1>
 			</div>
-			<span ng-include="'partials/tplList.html'" onload="listInit('shipment')"></span>
+			<span ng-include="'partials/element-tpl-list.html'" onload="listInit('shipment')"></span>
 		</div>
 	</div>
    	<div class="row margin-top">
@@ -19,13 +19,13 @@
    			<div class="header bg-box padding-left">
    				<h1><i class="icon i-element i-element-box"></i> {{types[2].name}}</h1>
    			</div>
-   			<span ng-include="'partials/tplList.html'" onload="listInit('box')"></span>
+   			<span ng-include="'partials/element-tpl-list.html'" onload="listInit('box')"></span>
    		</div>
    		<div class="col-md-6" ng-controller="ListCtrl">
    			<div class="header bg-item padding-left">
    				<h1><i class="icon i-element i-element-item"></i> {{types[3].name}}</h1>
    			</div>
-   			<span ng-include="'partials/tplList.html'" onload="listInit('item')"></span>
+   			<span ng-include="'partials/element-tpl-list.html'" onload="listInit('item')"></span>
    		</div>
    	</div>
 </div>

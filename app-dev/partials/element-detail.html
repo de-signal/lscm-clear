@@ -3,9 +3,11 @@
 
 <div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
 	<h1 class="container">
-		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i>
-		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDeleteOpen(elm, $event)' ></i>
-		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i> {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
+		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDelete(elm, $event)' alt="Delete"></i>
+		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="Tracking"></i>
+		<i class="icon pull-right i-alert-add icon-link" ng-click="modalAlert(elm, '', $parent.user)" alt="Create alert" ></i>
+		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i>
+		 {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
 </div>
 
 <div class="container margin-top" ng-show="loaded" ng-class="{true:'anim'}[elm.anim]">
@@ -20,7 +22,7 @@
 		<div class="col-md-6">
 			<div class="filet">
 				<h6>milestone</h6>
-				<h2>{{elm.milestone}}</h2>
+				<h2 class="type-bold">{{elm.milestone}}</h2>
 				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
 			</div>
 		</div>
@@ -116,6 +118,36 @@
 		</div>
 	</div>
 	
+	<div class="row" ng-repeat="alert in elm.alerts" ng-if="elm.alerts">
+		<div class="col-md-12">
+			<div class="elements-group margin-top bg-default" ng-class="{info:'bg-info', error:'bg-error', warning:'bg-warning', success:'bg-success'}[alert.status]">
+				<div class="row">
+				
+					<div class="col-md-3">
+						<div class="element">
+							<i class="icon pull-right" ng-class="{true:'i-check', false:'i-cross'}[alert.active]"></i>
+							<h6>created by</h6>
+							<p>{{alert.user.first_name}} {{alert.user.name}}</p>
+					
+							<h6>date</h6>
+							<p>{{alert.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</p>
+							
+						</div>
+					</div>
+
+					<div class="col-md-9 aa-text">
+						<h2 class="type-bold">
+							<i class="icon pull-right i-trash icon-link" ng-click='modalAlertDelete(elm, alert)' ></i> 
+							<i class="icon pull-right icon-link i-edit" ng-click='modalAlert(elm, alert, $parent.user)'></i>
+							{{alert.name}}</h2>
+						<p class="lead">{{alert.info}}</p>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="row margin-top" ng-if="elm.required">
 		<div class="col-md-12">
 			<h3>conditions</h3>
@@ -130,7 +162,7 @@
 						<td><i class="lead icon" required-icon></i></td>
 						<td><strong>{{required.name}}</strong></td>
 						<td><span class="label label-default" status="{{elm.status}}"  required-status editable="{{required.editable}}" completed="{{required.completed}}">{{required.message}}</span></td>
-						<td><button class='btn btn-sm' ng-click='modalConditionOpen(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
+						<td><button class='btn btn-sm' ng-click='modalCondition(elm, required, $event)' ng-disabled='!required.editable'>Update</button></td>
 					</tr>
 				</tbody>
 			</table>			
@@ -239,7 +271,7 @@
 			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
 			        <tab-heading><h4>{{related.name}} ({{related.quantity}})</h4></tab-heading>
 			        <span ng-controller="ListCtrl">
-			            <span ng-include="'partials/tplList.html'" onload="listInit(related.type)"></span>
+			            <span ng-include="'partials/element-tpl-list.html'" onload="listInit(related.type)"></span>
 			        </span>
 			    </tab>
             </tabset>			

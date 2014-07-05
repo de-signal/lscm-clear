@@ -90,11 +90,11 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	})
 	
-	.factory('ClearListsFn', ['$filter', '$rootScope', '$location', '$q', 'toaster', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Utils', 'ClearFn', function($filter, $rootScope, $location, $q, toaster, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Utils, ClearFn){
+	.factory('ClearList', ['$filter', '$rootScope', '$location', '$q', 'toaster', 'Utils', 'ClearToken', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Alerts', 'FiltersAlerts', 'Dashboard', function($filter, $rootScope, $location, $q, toaster, Utils, ClearToken, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Alerts, FiltersAlerts, Dashboard){
 		
 		return {
 			listElementsLoad: function (listConfig) {
-				var resources = { "1": E1, "2": E2, "6": ElmsOrder, "7": ElmsShipment, "8": ElmsBox, "9": ElmsItem, "10": IRs, "11": PODs, "12": NCRs, "13": Archives }; 
+				var resources = { "1": E1, "2": E2, "6": ElmsOrder, "7": ElmsShipment, "8": ElmsBox, "9": ElmsItem, "10": IRs, "11": PODs, "12": NCRs, "13": Archives, "14": Alerts, "15": Dashboard }; 
 				var list = listConfig;
 				var q=$q.defer();
 				var listQuery = { 'type': listConfig.type }; 
@@ -117,16 +117,17 @@ angular.module('clearApp.services', ['ngResource'])
 					console.log("pagesCount: " + list.pagination.pagesCount + ", elementsCount: " + list.pagination.elementsCount);
 					for (var i in elements) {
 						if (elements[i].url) {
-							elements[i].url = elements[i].url + '?oauth_token=' + ClearFn.returnToken();
+							elements[i].url = elements[i].url + '?oauth_token=' + ClearToken.returnToken();
 						}
 					}
 					list.elements = elements; 
+					console.log('elements: ', elements); 
 					q.resolve(list);
 				});
 				return q.promise;
 			},
 			listFiltersLoad: function(listConfig) {
-				var resources = { "1": E1, "2": E2, "6": FiltersOrder, "7": FiltersShipment, "8": FiltersBox, "9": FiltersItem, "10": FiltersIRs, "11": FiltersPODs, "12": FiltersNCRs, "13": FiltersArchives }; 
+				var resources = { "1": E1, "2": E2, "6": FiltersOrder, "7": FiltersShipment, "8": FiltersBox, "9": FiltersItem, "10": FiltersIRs, "11": FiltersPODs, "12": FiltersNCRs, "13": FiltersArchives, "14": FiltersAlerts }; 
 				var that = this;
 				var filters = {}; 
 				var q=$q.defer();
@@ -230,8 +231,8 @@ angular.module('clearApp.services', ['ngResource'])
 					if (response("X-Clear-updatedElements")) elementsType = "on " + response("X-Clear-updatedElements");
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated properties" + elementsType;
-					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated" + elementsType;
-					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property was not updated" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property was not updated" + elementsType;
 					
 					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
 				}); 
@@ -239,9 +240,9 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	}])
 	
-	.factory('ClearFn', ['$rootScope', '$location', '$modal', '$q', 'toaster', 'Utils', function($rootScope, $location, $modal, $q, toaster, Utils){
+	.factory('ClearToken', function(){
 		
-		var parentReady, listsReady=[], token; 
+		var token; 
 		
 		return {
 			updateToken: function(t) {
@@ -249,7 +250,15 @@ angular.module('clearApp.services', ['ngResource'])
 			},
 			returnToken: function() {
 				return token;
-			},
+			}
+		}
+	})
+			
+	.factory('ClearUrl', ['$rootScope', '$location', 'Utils', function($rootScope, $location, Utils){
+		
+		var parentReady, listsReady=[]; 
+		
+		return {
 			listsReady: function(p) {
 				if (p == 'init') { 
 					parentReady=false; listsReady = [] 
@@ -289,22 +298,28 @@ angular.module('clearApp.services', ['ngResource'])
 					$location.search(urlParams);
 				} 
 //				if (urlReplace) 
-					$location.replace();			
+				$location.replace();			
 				listConfig.urlParams = urlParams; 	
 				return listConfig; 
-			},
-			detailUpdate: function(elm) {
+			}
+		}
+	}])
+	
+	.factory('ClearElement', ['$rootScope', '$modal', '$location', 'ClearToken', 'toaster', 'Utils', function($rootScope, $modal, $location, ClearToken, toaster, Utils){
+		
+		return {
+			elementUpdate: function(elm) {
 				var self = this;
 				self.propertiesDate(elm); 
-				self.detailUrlUpdate(elm); 
+				self.elementUpdateUrl(elm); 
 				self.qrCodeGoogle(elm);
-				self.detailTimeline(elm);
+				self.elementTimeline(elm);
 				for (var index in elm.charts) {
 					self.colorScaleConfig(elm.charts[index], elm.charts[index].value);
 				}
 				return elm;
 			}, 
-			detailTimeline: function(elm) {
+			elementTimeline: function(elm) {
 				if (!elm.anim && elm.timeline) {
 					for (var i = 0; i < 4; i++) {
 						if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
@@ -312,20 +327,20 @@ angular.module('clearApp.services', ['ngResource'])
 				} 
 				return elm;
 			}, 
-			detailUrlUpdate: function(elm) {
+			elementUpdateUrl: function(elm) {
 				if (elm.documents) {
 					for (var i in elm.documents) {
-						elm.documents[i].url = elm.documents[i].url + '?oauth_token=' + token;
+						elm.documents[i].url = elm.documents[i].url + '?oauth_token=' + ClearToken.returnToken;
 					}
 				} 
 				return elm;
 			}, 
-			modalDeleteOpen: function (elm, $event) {   
+			modalDelete: function (elm, $event) {   
 				console.log('delete');          
 				if ($event.stopPropagation) $event.stopPropagation();
 				var modalInstance = $modal.open({
-					templateUrl: 'partials/tplModalDelete.html',
-					controller: 'TplModalDeleteCtrl',
+					templateUrl: 'partials/element-modal-delete.html',
+					controller: 'ElementModalDeleteCtrl',
 					resolve: {
 					  elm: function () {
 						return elm;
@@ -338,12 +353,12 @@ angular.module('clearApp.services', ['ngResource'])
 //                $log.info('Modal dismissed at: ' + new Date());
 				});
 			}, 
-			modalConditionOpen: function (elm, required, $event) {            
+			modalCondition: function (elm, required, $event) {            
 				if ($event.stopPropagation) $event.stopPropagation();
 				if (required.editable || !required.completed) {
 					var modalInstance = $modal.open({
-						templateUrl: 'partials/tplModalCondition.html',
-						controller: 'TplModalConditionCtrl',
+						templateUrl: 'partials/element-modal-condition.html',
+						controller: 'ElementModalConditionCtrl',
 						resolve: {
 						  required: function () {
 							return required;
@@ -361,12 +376,100 @@ angular.module('clearApp.services', ['ngResource'])
 					});
 				}
 			}, 
-			stopPropagation: function($event) {
-				if ($event.stopPropagation) $event.stopPropagation();
+			modalAlert: function(elm, alert, user) {
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/element-modal-alert.html',
+					controller: 'ElementModalAlertCtrl',
+					resolve: {
+					  elm: function () {
+						return elm;
+					  }, 
+					  alert: function () {
+					  	return alert;
+					  }, 
+					  user: function () {
+					  	return user;
+					  }
+					}
+				});
+				modalInstance.result.then(function (selectedItem) {
+//					$scope.selected = selectedItem;
+				}, function () {
+//					$log.info('Modal dismissed at: ' + new Date());
+				});
+			},
+			modalAlertDelete: function(elm, alert) {
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/element-modal-alert-delete.html',
+					controller: 'ElementModalAlertDeleteCtrl',
+					resolve: {
+					  elm: function () {
+						return elm;
+					  }, 
+					  alert: function () {
+					  	return alert;
+					  }
+					}
+				});
+				modalInstance.result.then(function (selectedItem) {
+//					$scope.selected = selectedItem;
+				}, function () {
+//					$log.info('Modal dismissed at: ' + new Date());
+				});
 			}, 
 			trackingToggle: function(elm, $event) {
 				if ($event.stopPropagation) $event.stopPropagation(); 
 				elm.tracking=!elm.tracking;
+			}, 
+			alertSave: function(elm, alert, user) {
+				var self=this;
+				alert.user = { 
+					"first_name": user.first_name, 
+					"name": user.name, 
+					"id": user.id
+				}
+				
+				if (!alert.dates) alert.dates = []; 
+				
+				alert.dates.modified = Utils.dateToTimestamp(new Date()); 
+				console.log ('save alert : ', alert);   
+				
+				if (alert.id) { 
+					elm.alerts[Utils.objectIndexbyKey(elm.alerts, "id", alert.id)] = alert; 
+				} else { 
+					if (elm.alerts) {
+						elm.alerts[elm.alerts.length] = alert;
+					} else {
+						elm.alerts = []; 
+						elm.alerts[0] = alert; 
+					}
+					alert.id = "new"; 
+				}
+			
+				elm.$update({ 'alertUpdateId': alert.id }, function(elm, response) {
+					var alertMessage; 
+					
+					if (response("X-Clear-updatedAlert")==="success") alertMessage = "Updated alert";
+					else if (response("X-Clear-updatedAlert")==="warning") alertMessage = "Alert was not updated";
+					else if (response("X-Clear-updatedAlert")==="error") alertMessage = "Alert was not updated";
+					
+					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
+					
+					elm = self.elementUpdate(elm);
+				});
+			}, 
+			alertDelete: function(elm, alert) {
+				elm.$update({ 'alertDeleteId': alert.id }, function(elm, response) {
+					var alertMessage; 
+					
+					if (response("X-Clear-updatedAlert")==="success") alertMessage = "Deleted alert";
+					else if (response("X-Clear-updatedAlert")==="warning") alertMessage = "Alert was not deleted";
+					else if (response("X-Clear-updatedAlert")==="error") alertMessage = "Alert was not deleted";
+					
+					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
+					
+					elm = self.elementUpdate(elm);
+				});
 			}, 
 			propertySave: function(elm, property, group) {
 				var self=this;
@@ -375,12 +478,12 @@ angular.module('clearApp.services', ['ngResource'])
 					var propertyMessage; 
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Updated property";
-					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property has not been updated";
-					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property has not been updated";
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property was not updated";
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property was not updated";
 					
 					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
 					
-					elm = self.detailUpdate(elm);
+					elm = self.elementUpdate(elm);
 				});
 			}, 
 			requiredSave: function (elm, required) {
@@ -390,27 +493,18 @@ angular.module('clearApp.services', ['ngResource'])
 					var requiredMessage, milestoneMessage; 
 					
 					if (response("X-Clear-updatedRequired")==="success") requiredMessage = "Updated condition";
-					else if (response("X-Clear-updatedRequired")==="warning") propertyMessage = "Condition has not been updated";
-					else if (response("X-Clear-updatedRequired")==="error") requiredMessage = "Condition has not been updated";
+					else if (response("X-Clear-updatedRequired")==="warning") propertyMessage = "Condition was not updated";
+					else if (response("X-Clear-updatedRequired")==="error") requiredMessage = "Condition was not updated";
 					
 					if (response("X-Clear-updatedMilestone")==="success") milestoneMessage = "Updated milestone";
-					else if (response("X-Clear-updatedMilestone")==="warning") propertyMessage = "Milestone has not been updated";
-					else if (response("X-Clear-updatedMilestone")==="error") milestoneMessage = "Milestone has not been updated";
+					else if (response("X-Clear-updatedMilestone")==="warning") propertyMessage = "Milestone was not updated";
+					else if (response("X-Clear-updatedMilestone")==="error") milestoneMessage = "Milestone was not updated";
 					
 					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), requiredMessage, required.name);
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
 					
-					elm = self.detailUpdate(elm);
+					elm = self.elementUpdate(elm);
 				});
-			}, 
-			go: function (type, id, related) {
-				$rootScope.tvScreen = false;
-				$location.$$search = {};
-				$location.path( type + '/' + id )
-				if (related) {
-					$location.search('related_type_active', related).hash('related');
-				}
-				console.log('go ->', type, id, related);
 			}, 
 			propertiesDate: function (elm){
 				// init date properties from unix timestamp to javascript date
@@ -468,6 +562,97 @@ angular.module('clearApp.services', ['ngResource'])
 				elm.label = labelFn(value);
 				
 				return elm;
+			}, 
+			go: function (type, id, related) {
+				$rootScope.tvScreen = false;
+				$location.$$search = {};
+				$location.path( type + '/' + id )
+				if (related) {
+					$location.search('related_type_active', related).hash('related');
+				}
+				console.log('go ->', type, id, related);
+			}
+		}
+	}])
+	
+	.factory('ClearAlert', ['$rootScope', '$modal', 'Utils', function($rootScope, $modal, Utils){
+		
+		var parentReady, listsReady=[], token; 
+		
+		return {
+			alertModalEdit: function(alerts, alert, user) { 
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/alert-modal-edit.html',
+					controller: 'AlertModalEditCtrl',
+					resolve: {
+					  alerts: function () {
+					  	return alerts;
+					  }, 
+					  alert: function () {
+					  	return alert;
+					  }, 
+					  user: function () {
+					  	return user;
+					  }
+					}
+				});
+				modalInstance.result.then(function (selectedItem) {
+//					$scope.selected = selectedItem;
+				}, function () {
+//					$log.info('Modal dismissed at: ' + new Date());
+				});
+			}, 
+			alertModalDelete: function(alerts, alert) {
+				var modalInstance = $modal.open({
+					templateUrl: 'partials/alert-modal-delete.html',
+					controller: 'AlertModalDeleteCtrl',
+					resolve: { 
+					  alerts: function () {
+					  	return alerts;
+					  }, 
+					  alert: function () {
+					  	return alert;
+					  }
+					}
+				});
+				modalInstance.result.then(function (selectedItem) {
+//					$scope.selected = selectedItem;
+				}, function () {
+//					$log.info('Modal dismissed at: ' + new Date());
+				});
+			}, 
+			alertSave: function(alerts, alert, user) {
+				alert.user = { 
+					"first_name": user.first_name, 
+					"name": user.name, 
+					"id": user.id
+				}
+				
+				alert.dates.modified = Utils.dateToTimestamp(new Date());  
+				
+				var alertIndex = Utils.objectIndexbyKey(alerts, "id", alert.id); 
+				alerts[alertIndex] = alert; 
+						
+				alerts[alertIndex].$update({ 'alertUpdateId': alert.id }, function(elm, response) {
+					var alertMessage; 
+					
+					if (response("X-Clear-updatedAlert")==="success") alertMessage = "Updated alert";
+					else if (response("X-Clear-updatedAlert")==="warning") alertMessage = "Alert was not updated";
+					else if (response("X-Clear-updatedAlert")==="error") alertMessage = "Alert was not updated";
+					
+					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
+				});
+			}, 
+			alertDelete: function(alerts, alert) {
+				alerts.$updateList({ 'alertDeleteId': alert.id }, function(elm, response) {
+					var alertMessage; 
+					
+					if (response("X-Clear-updatedAlert")==="success") alertMessage = "Deleted alert";
+					else if (response("X-Clear-updatedAlert")==="warning") alertMessage = "Alert was not deleted";
+					else if (response("X-Clear-updatedAlert")==="error") alertMessage = "Alert was not deleted";
+					
+					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
+				});
 			}
 		}
 	}])
@@ -543,10 +728,10 @@ angular.module('clearApp.services', ['ngResource'])
 			}
 		}
 	})
-	.factory('StaticDashboardList', ['$resource', function($resource){
+	.factory('Dashboard', ['$resource', function($resource){
 		return $resource('json/elms_tv.json');
 	}])
-	.factory('StaticGlobalReports', ['$resource', function($resource){
+	.factory('GlobalReports', ['$resource', function($resource){
 		return $resource('json/global_reports.json');
 	}])
 	.factory('IRs', ['$resource', function($resource){
@@ -570,6 +755,15 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('FiltersArchives', ['$resource', function($resource){
 		return $resource('json/documents_archives_filters.json');
 	}])
+	.factory('Alert', ['$resource', function($resource){
+		return $resource('json/alert.json');
+	}])
+	.factory('Alerts', ['$resource', function($resource){
+		return $resource('json/alerts.json');
+	}])
+	.factory('FiltersAlerts', ['$resource', function($resource){
+		return $resource('json/alerts_filters.json');
+	}])
 	.factory('NCR', ['$resource', function($resource){
 		return $resource('json/documents_nonConformityReport.json');
 	}])
@@ -582,7 +776,7 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('POD', ['$resource', function($resource){
 		return $resource('json/documents_proofOfDelivery.json');
 	}])
-	.factory('StaticIndicators', ['$resource', function($resource){
+	.factory('Indicators', ['$resource', function($resource){
 		 return $resource('json/indicators.json');
 	}])
 	.factory('Elms', ['$resource', function($resource){
@@ -617,6 +811,9 @@ angular.module('clearApp.services', ['ngResource'])
 	}])
 	.factory('ElmsListsConfig', ['$resource', function($resource){
 		return $resource('json/elmsConfig.json');
+	}])
+	.factory('AlertsConfig', ['$resource', function($resource){
+		return $resource('json/alertsConfig.json');
 	}])
 	.factory('DocumentsConfig', ['$resource', function($resource){
 		return $resource('json/documentsConfig.json');

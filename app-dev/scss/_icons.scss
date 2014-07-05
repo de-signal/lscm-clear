@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 @font-face {
   font-family: "clear";
   src:url("fonts/clear.eot");
@@ -209,9 +207,6 @@
 .i-transportation-truck:before {
   content: "\e037";
 }
-.i-trash:before {
-  content: "\e038";
-}
 .i-caret-u:before {
   content: "\e039";
 }
@@ -223,4 +218,31 @@
 }
 .i-condition-imi:before {
   content: "\e03c";
+}
+.i-dollar:before {
+  content: "\e03e";
+}
+.i-chart:before {
+  content: "\e03d";
+}
+.i-synced:before {
+  content: "\e03f";
+}
+.i-users:before {
+  content: "\e040";
+}
+.i-add:before {
+  content: "\e042";
+}
+.i-alert:before {
+  content: "\e043";
+}
+.i-alert-add:before {
+  content: "\e044";
+}
+.i-edit:before {
+  content: "\e041";
+}
+.i-trash:before {
+  content: "\e045";
 }

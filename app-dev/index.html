@@ -40,10 +40,12 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="controls col-sm-offset-4 col-sm-8">
-							<label class="checkbox">
-								<input type="checkbox" ng-model="remember">Remember me
-							</label>
+						<div class="col-sm-offset-4 col-sm-8">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="remember">Remember me
+								</label>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -83,6 +85,7 @@
 								<li><a href="tracking">Tracking</a></li>
 								<li><a href="indicators">Indicators</a></li>
 								<li><a href="search">Search</a></li>
+								<li><a href="alerts">Alerts</a></li>
 								<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li><a href="documents/ir">Inspection reports</a></li>
@@ -115,15 +118,17 @@
 					</div>
 					<div class="col-md-3">
 						<p class="static-links margin-top"><small>Static pages<br />
-							<a href="static-dashboard">Dashboard</a> / 
-							<a href="static-tracking">Tracking</a> / 
-							<a href="static-detail">Detail</a> / 
-							<a href="static-indicators">Indicators</a><br />
-							<a href="static-documents/ir">Inspection reports</a> / 
-							<a href="static-documents/ncr">Non-compliance reports</a> / 
-							<a href="static-documents/pod">Proofs of delivery</a>/ 
-							<a href="static-documents/archive">Archives</a></small></p>
-						<p class="static-links"><small><a href="bug-list">Bug list</a></small></p>
+							<a href="dashboard?static=true">Dashboard</a> / 
+							<a href="tv?static=true">Tv</a> / 
+							<a href="tracking?static=true">Tracking</a> / 
+							<a href="shipment/static">Element</a> / 
+							<a href="indicators?static=true">Indicators</a><br />
+							<a href="documents/ir?static=true">Inspection reports</a> / 
+							<a href="documents/ncr?static=true">Non-compliance reports</a> / 
+							<a href="documents/pod?static=true">Proofs of delivery</a> / 
+							<a href="documents/archive?static=true">Archives</a> /
+							<a href="alerts?static=true">Alerts</a></small></p>
+						<p class="static-links"><small><a href="bug">Bugs</a></small></p>
 					</div>
 					<div class="col-md-3">
 						<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2013</small></p>
