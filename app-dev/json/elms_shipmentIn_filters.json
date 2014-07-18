@@ -1,68 +1,152 @@
 {
     "plannings": [
-        "initial",
-        "forecasted",
-        "actuel"
+        { "name": "Initial", "id": "initial" },
+        { "name": "Forecasted", "id": "forecasted" },
+        { "name": "Actual", "id": "actual" }
     ],
     "statuses": [
-        "default",
-        "late",
-        "upcoming"
+        { "name": "Default", "id": "default" }, 
+        { "name": "Late", "id": "late" }, 
+        { "name": "Upcoming", "id": "upcoming" }
     ],
     "milestones": [
-            "planned",
-            "forecasted in",
-            "booked in",
-            "collected",
-            "received",
-            "dispatched"
+            { "name": "Planned", "id": "planned" }, 
+            { "name": "Forecasted in", "id": "forecasted_in" }, 
+            { "name": "Booked in", "id": "booked_in" },
+            { "name": "Collected", "id": "collected" }, 
+            { "name": "Received", "id": "received" }, 
+            { "name": "Dispatched", "id": "dispatched" }
     ],
     "properties": [
             {
-                "id": "collection_address",
-                "name": "Collection address",
+                "id": "remark",
+                "name": "Comment",
                 "type": "text",
-                "group": "Collection"
+                "group": "Comments"
             },
             {
-                "id": "contact_name",
-                "name": "Contact name",
+                "id": "conformity_remark",
+                "name": "Conformity Remark",
                 "type": "text",
-                "group": "Collection"
+                "group": "Comments"
             },
             {
-                "id": "contact_phone",
-                "name": "Contact phone",
+                "id": "package_name",
+                "name": "Package name",
                 "type": "text",
-                "group": "Collection"
+                "group": "Documentation"
             },
             {
-                "id": "contact_email",
-                "name": "Contact email",
+                "id": "country_of_supply",
+                "name": "Country of supply",
                 "type": "text",
-                "group": "Collection"
+                "group": "Documentation"
             },
             {
-                "id": "etc",
+                "id": "mf",
+                "name": "MF",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "ba",
+                "name": "Bank account",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "currency",
+                "name": "Currency",
+                "type": "select",
+                "group": "Documentation",
+                "values": [
+                    { "name": "USD", "id": "usd" }, 
+                    { "name": "EUR", "id": "eur" }, 
+                    { "name": "GBP", "id": "gbp" }
+                ]
+            },
+            {
+                "id": "freight_value",
+                "name": "Freight value",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_company",
+                "name": "Consignee company",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_country",
+                "name": "Consignee country",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_city",
+                "name": "Consignee city",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "consignee_address",
+                "name": "Consignee address",
+                "type": "text",
+                "group": "Documentation"
+            },
+            {
+                "id": "3pl_in_charge",
+                "name": "3PL in charge",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    { "name": "LSCM", "id": "lscm" }, 
+                    { "name": "TLC", "id": "tlc" }, 
+                    { "name": "Joe Eboje", "id": "joe_eboje" }, 
+                    { "name": "Transprojet", "id": "transprojet" }, 
+                    { "name": "Others", "id": "others" }
+                ]
+            },
+            {
+                "id": "client_chrono",
+                "name": "Client chrono",
+                "type": "text",
+                "group": "Shipping"
+            },
+            {
+                "id": "ets",
                 "name": "ETC",
                 "type": "date",
                 "group": "Shipping"
             },
             {
-                "id": "atc",
+                "id": "ats",
                 "name": "ATC",
                 "type": "date",
                 "group": "Shipping"
             },
             {
-                "id": "etr",
+                "id": "eta",
                 "name": "ETA",
                 "type": "date",
                 "group": "Shipping"
             },
             {
-                "id": "atr",
+                "id": "ata",
                 "name": "ATA",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "etd",
+                "name": "ETD",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "atd",
+                "name": "ATD",
                 "type": "date",
                 "group": "Shipping"
             },
@@ -78,8 +162,8 @@
                 "type": "select",
                 "group": "Shipping",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -94,8 +178,8 @@
                 "type": "select",
                 "group": "Shipping",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -104,9 +188,9 @@
                 "type": "select",
                 "group": "Shipping",
                 "values": [
-                    "Transit T1",
-                    "Storage in",
-                    "Bonded area"
+                    { "name": "Transit T1", "id": "transit_t1" }, 
+                    { "name": "Storage in", "id": "storage_in" }, 
+                    { "name": "Bonded area", "id": "bonded_area" }
                 ]
             },
             {
@@ -134,8 +218,24 @@
                 "group": "Shipping"
             },
             {
+                "id": "greenlight_approval",
+                "name": "Greenlight Approval",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    { "name": "Requested", "id": "requested" }, 
+                    { "name": "Completed", "id": "completed" }
+                ]
+            },
+            {
+                "id": "transport_company",
+                "name": "Airline/Sailing company",
+                "type": "text",
+                "group": "Transport"
+            },
+            {
                 "id": "transport_section",
-                "name": "Trasnport section",
+                "name": "Transport section",
                 "type": "select",
                 "group": "Transport",
                 "values": [
@@ -150,9 +250,9 @@
                 "type": "select",
                 "group": "Transport",
                 "values": [
-                    "Standard",
-                    "Heavy Lift",
-                    "ODC"
+                    { "name": "Standard", "id": "standard" }, 
+                    { "name": "Heavy Lift", "id": "heavy_lift" }, 
+                    { "name": "ODC", "id": "odc" }
                 ]
             },
             {
@@ -161,10 +261,10 @@
                 "type": "select",
                 "group": "Transport",
                 "values": [
-                    "Air",
-                    "Sea",
-                    "Express",
-                    "Haulage"
+                    { "name": "Air", "id": "air" }, 
+                    { "name": "Sea", "id": "sea" }, 
+                    { "name": "Express", "id": "express" }, 
+                    { "name": "Haulage", "id": "haulage" }
                 ]
             },
             {
@@ -185,11 +285,11 @@
                 "type": "select",
                 "group": "Transport",
                 "values": [
-                    "Door to Door",
-                    "Door to Airport/port",
-                    "Clearing & Delivery",
-                    "Storage",
-                    "Inspection"
+                    { "name": "Door to Door", "id": "door_to _door" }, 
+                    { "name": "Door to Airport/port", "id": "express" }, 
+                    { "name": "Clearing & Delivery", "id": "clearing_delivery" }, 
+                    { "name": "Storage", "id": "storage" }, 
+                    { "name": "Inspection", "id": "inspection" }
                 ]
             },
             {
@@ -198,8 +298,8 @@
                 "type": "select",
                 "group": "Transport",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -228,8 +328,8 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "Awaiting Departure",
-                    "Departed"
+                    { "name": "Departed", "id": "departed" }, 
+                    { "name": "Awaiting Departure", "id": "awaiting_departure" }
                 ]
             },
             {
@@ -238,9 +338,9 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "FCA",
-                    "KCA",
-                    "NRA"
+                    { "name": "FCA", "id": "fca" }, 
+                    { "name": "KCA", "id": "kca" }, 
+                    { "name": "NRA", "id": "nra" }
                 ]
             },
             {
@@ -255,8 +355,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -265,8 +365,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -275,8 +375,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -291,8 +391,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -301,8 +401,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -311,8 +411,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -321,8 +421,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Started",
-                    "Completed"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             },
             {
@@ -331,18 +431,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Started",
-                    "Completed"
-                ]
-            },
-            {
-                "id": "has_osd",
-                "name": "OSD",
-                "type": "select",
-                "group": "QA/QC",
-                "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             }
         ]

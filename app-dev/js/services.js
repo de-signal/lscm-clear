@@ -120,13 +120,12 @@ angular.module('clearApp.services', ['ngResource'])
 							elements[i].url = elements[i].url + '?oauth_token=' + ClearToken.returnToken();
 						}
 					}
-					list.elements = elements; 
-					console.log('elements: ', elements); 
+					list.elements = elements;  
 					q.resolve(list);
 				});
 				return q.promise;
 			},
-			listFiltersLoad: function(listConfig) {
+			listFiltersLoad: function(listConfig) { 
 				var resources = { "1": E1, "2": E2, "6": FiltersOrder, "7": FiltersShipment, "8": FiltersBox, "9": FiltersItem, "10": FiltersIRs, "11": FiltersPODs, "12": FiltersNCRs, "13": FiltersArchives, "14": FiltersAlerts }; 
 				var that = this;
 				var filters = {}; 
@@ -134,12 +133,11 @@ angular.module('clearApp.services', ['ngResource'])
 				var listQuery = { 'type': listConfig.type, 'id': 'filter' }; 
 				if (listConfig.format) listQuery.format = listConfig.format; 
 				
-				resources[listConfig.resource].get( listQuery, function(values) { 
-						filters.values = values; 
-						filters.badges = that.listFiltersBadgesInit(listConfig.urlParams, listConfig.filters, values);
+				resources[listConfig.resource].get( listQuery, function(elmFilters) { 
+						filters.values = elmFilters; 
+						filters.badges = that.listFiltersBadgesInit(listConfig.urlParams, listConfig.filters, elmFilters);
 						filters.date = that.listFiltersDateInit(listConfig.urlParams, listConfig.filters);
-						filters.tmp = that.listFiltersTmpInit(listConfig.urlParams, listConfig.filters, values);
-						filters.tmp.filtersOpen = false; 
+						filters.tmp = that.listFiltersTmpInit(listConfig.urlParams, listConfig.filters, elmFilters);
 						q.resolve(filters);
 					}
 				);
@@ -147,65 +145,93 @@ angular.module('clearApp.services', ['ngResource'])
 			},
 			listFiltersDateInit: function (urlParams, listConfigFilters) {
 				var filtersDate = {};
+				var setDate = function(id) {
+					filtersDate[id] = {}; 
+					if (urlParams[id]) filtersDate[id].value = Utils.timestampToDate(urlParams[id]);
+				}
+				
 				for (var i in listConfigFilters) {
-					if (listConfigFilters[i].type === 'date') {
-						filtersDate[listConfigFilters[i].id] = {}; 
-						if (urlParams[listConfigFilters[i].id]) filtersDate[listConfigFilters[i].id].value = Utils.timestampToDate(urlParams[listConfigFilters[i].id]);
+					var filter = listConfigFilters[i];
+					if (filter.type === 'date') {
+						setDate(filter.id); 
+					}
+					if (filter.children) {
+						for (var j in filter.children) {
+							if (filter.children[j].type === 'date') {
+								setDate(filter.children[j].id); 
+							}
+						}
 					}
 				} 
 				return filtersDate; 
 			}, 
-			listFiltersTmpInit: function  (urlParams, listConfigFilters, values) {
+			listFiltersTmpInit: function  (urlParams, listConfigFilters, elmFilters) {
 				var filtersTmp = {};
 				filtersTmp.property = {}; 
-				if (urlParams.property_name) {
-					var p = values.properties;
-					filtersTmp.property = p[Utils.objectIndexbyKey(p, 'name', urlParams.property_name)];
+				if (urlParams.property_id) {
+					var p = elmFilters.properties;
+					filtersTmp.property = p[Utils.objectIndexbyKey(p, 'id', urlParams.property_id)];
 					filtersTmp.property.value;
 				}
 				return filtersTmp;
 			}, 
-			listFiltersBadgesInit: function(urlParams, listConfigFilters, filters) {
+			listFiltersBadgesInit: function(urlParams, listConfigFilters, elmFilters) {
 				var badges = [];
-				for (var i in listConfigFilters) {
-					var p = listConfigFilters[i];
-					if (urlParams.hasOwnProperty(p.id)) {
-						switch (p.type) {
-							case 'date': 
-								badges.push({'id': p.id, 'name': p.name + ': ' + $filter('date')(urlParams[p.id]*1000, 'dd.MM.yy') });
-							break;
-							case 'byId':
-								badges.push({'id': p.id, 'name': p.name + ': ' + Utils.objectByKey(filters[p.filterName].values, "id", urlParams[p.id]).name });
-							break;
-							default:
-								badges.push({'id': p.id, 'name': p.name + ': ' + urlParams[p.id] });
-						}
+				
+				var filterToString = function(filter) {
+					console.log('filter: ', filter); 
+					switch (filter.type) {
+						case 'date': 
+							return filter.name + ': ' + $filter('date')(urlParams[filter.id]*1000, 'dd.MM.yy');
+						break;
+						case 'select':
+							
+							return filter.name + ': ' + Utils.objectByKey(elmFilters[filter.reference], "id", urlParams[filter.id]).name;
+						break;
+						case 'selectProperty':
+							var propertySelected = Utils.objectByKey(elmFilters.properties, "id", urlParams.property_id); 
+							var propertySelectedValue = Utils.objectByKey(propertySelected.values, "id", urlParams[filter.id]); 
+							console.log('propertySelected: ', propertySelected, 'propertySelectedValue: ', propertySelectedValue ); 
+							return filter.name + ': ' + propertySelectedValue.name;
+						break;
+						default:
+							return filter.name + ': ' + urlParams[filter.id];
 					}
-				}				
-				if (urlParams.hasOwnProperty('related_reference')) 
-					badges.push({'id': 'related_reference', 'name': urlParams.related_to + ' reference: ' + urlParams.related_reference });
+				}
+				
+				for (var i in listConfigFilters) {
+					var filter = listConfigFilters[i];
+					if (urlParams.hasOwnProperty(filter.id)) {
+						var badgeContent = filterToString(filter); 
+						if (filter.children) {
+							for (var j in filter.children) {
+								if (urlParams.hasOwnProperty(filter.children[j].id)) {
+									badgeContent += ", " + filterToString(filter.children[j]); 
+								}
+							}
+						}
+						badges.push({'id': filter.id, 'content': badgeContent });
+					}
+				}
 				return badges;
 			}, 
 			listCleanUrl: function(urlParams) {
 				for (var i in urlParams) {
-				    if (!urlParams[i]) {
+				    if (!urlParams[i] || urlParams[i]===null) {
 				     	delete urlParams[i];
-				     	
-				     	if (urlParams[i]===null || (i === 'related_reference' && !urlParams[i])) {
-					    	delete urlParams[i]
-					    }
 				    }
 				}
-				if (!urlParams.hasOwnProperty('property_name')) {
-					delete urlParams['property_value'];
-					delete urlParams['property_from'];
-					delete urlParams['property_to'];
-					delete urlParams['property_group'];
-				}
-					
-				if (!urlParams.hasOwnProperty('related_reference')) { 
-					delete urlParams['related_to'];
-				}
+			},
+			listBadgeRemove: function(badgeId, urlParams, listConfigFilters) {
+				var filter = Utils.objectByKey(listConfigFilters, 'id', badgeId); 
+				if (urlParams.hasOwnProperty(badgeId)) {
+					if (filter.children) {
+						for (var i in filter.children) {
+							delete urlParams[filter.children[i].id];
+						}
+					}
+					delete urlParams[filter.id];
+				}				
 			}, 
 			listPropertySave: function(list, idsArray, propertyUpdate, selectGlobal, urlParams) {
 				var elements = []; 
@@ -335,8 +361,7 @@ angular.module('clearApp.services', ['ngResource'])
 				} 
 				return elm;
 			}, 
-			modalDelete: function (elm, $event) {   
-				console.log('delete');          
+			modalDelete: function (elm, $event) {        
 				if ($event.stopPropagation) $event.stopPropagation();
 				var modalInstance = $modal.open({
 					templateUrl: 'partials/element-modal-delete.html',
@@ -431,8 +456,7 @@ angular.module('clearApp.services', ['ngResource'])
 				
 				if (!alert.dates) alert.dates = []; 
 				
-				alert.dates.modified = Utils.dateToTimestamp(new Date()); 
-				console.log ('save alert : ', alert);   
+				alert.dates.modified = Utils.dateToTimestamp(new Date());  
 				
 				if (alert.id) { 
 					elm.alerts[Utils.objectIndexbyKey(elm.alerts, "id", alert.id)] = alert; 
@@ -735,19 +759,19 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/global_reports.json');
 	}])
 	.factory('IRs', ['$resource', function($resource){
-		return $resource('json/documents_inspectionReports.json');
+		return $resource('json/documents_irs.json');
 	}])
 	.factory('FiltersIRs', ['$resource', function($resource){
-		return $resource('json/documents_inspectionReports_filters.json');
+		return $resource('json/documents_irs_filters.json');
 	}])
 	.factory('IR', ['$resource', function($resource){
-		return $resource('json/documents_inspectionReport.json');
+		return $resource('json/documents_ir.json');
 	}])
 	.factory('NCRs', ['$resource', function($resource){
-		return $resource('json/documents_nonConformityReports.json');
+		return $resource('json/documents_ncrs.json');
 	}])
 	.factory('FiltersNCRs', ['$resource', function($resource){
-		return $resource('json/documents_nonConformityReports_filters.json');
+		return $resource('json/documents_ncrs_filters.json');
 	}])
 	.factory('Archives', ['$resource', function($resource){
 		return $resource('json/documents_archives.json');
@@ -765,16 +789,16 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/alerts_filters.json');
 	}])
 	.factory('NCR', ['$resource', function($resource){
-		return $resource('json/documents_nonConformityReport.json');
+		return $resource('json/documents_ncr.json');
 	}])
 	.factory('PODs', ['$resource', function($resource){
-		return $resource('json/documents_proofsOfDelivery.json');
+		return $resource('json/documents_pods.json');
 	}])
 	.factory('FiltersPODs', ['$resource', function($resource){
-		return $resource('json/documents_proofsOfDelivery_filters.json');
+		return $resource('json/documents_pods_filters.json');
 	}])
 	.factory('POD', ['$resource', function($resource){
-		return $resource('json/documents_proofOfDelivery.json');
+		return $resource('json/documents_pod.json');
 	}])
 	.factory('Indicators', ['$resource', function($resource){
 		 return $resource('json/indicators.json');
@@ -795,31 +819,28 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/elms_item.json');
 	}])
 	.factory('FiltersOrder', ['$resource', function($resource){
-		return $resource('json/filters_order.json');
+		return $resource('json/elms_order_filters.json');
 	}])
 	.factory('FiltersShipment', ['$resource', function($resource){
-		return $resource('json/filters_shipment.json');
+		return $resource('json/elms_shipment_filters.json');
 	}])
 	.factory('FiltersBox', ['$resource', function($resource){
-		return $resource('json/filters_box.json');
+		return $resource('json/elms_box_filters.json');
 	}])
 	.factory('FiltersItem', ['$resource', function($resource){
-		return $resource('json/filters_item.json');
+		return $resource('json/elms_item_filters.json');
 	}])
 	.factory('Bugs', ['$resource', function($resource){
 		return $resource('json/bugs.json');
 	}])
 	.factory('ElmsListsConfig', ['$resource', function($resource){
-		return $resource('json/elmsConfig.json');
+		return $resource('json/elms_conf.json');
 	}])
 	.factory('AlertsConfig', ['$resource', function($resource){
-		return $resource('json/alertsConfig.json');
+		return $resource('json/alerts_conf.json');
 	}])
 	.factory('DocumentsConfig', ['$resource', function($resource){
-		return $resource('json/documentsConfig.json');
-	}])
-	.factory('filtersModifyOrders', ['$resource', function($resource){
-		return $resource('json/filters_modify_order.json');
+		return $resource('json/documents_conf.json');
 	}])
 	.factory('Elm', ['$resource', function($resource){
 		return $resource('json/elm.json');

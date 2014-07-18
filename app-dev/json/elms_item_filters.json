@@ -1,29 +1,29 @@
 {
     "plannings": [
-        "initial",
-        "forecasted",
-        "actuel"
+        { "name": "Initial", "id": "initial" },
+        { "name": "Forecasted", "id": "forecasted" },
+        { "name": "Actual", "id": "actual" }
     ],
     "statuses": [
-        "default",
-        "late",
-        "upcoming"
+        { "name": "Default", "id": "default" }, 
+        { "name": "Late", "id": "late" }, 
+        { "name": "Upcoming", "id": "upcoming" }
     ],
     "milestones": [
-            "ordered",
-            "manufactured",
-            "ready for collection",
-            "collected",
-            "received",
-            "osd",
-            "ready for inspection",
-            "ready for greenlight",
-            "marshalled",
-            "departed",
-            "arrived",
-            "customs released",
-            "delivered",
-            "in stock"
+			{ "name": "ordered", "id": "ordered" }, 
+            { "name": "manufactured", "id": "manufactured" }, 
+            { "name": "ready for collection", "id": "ready_for_collection" }, 
+            { "name": "Collected", "id": "collected" }, 
+            { "name": "Received", "id": "received" }, 
+            { "name": "Osd", "id": "osd" }, 
+            { "name": "Ready for inspection", "id": "ready_for_inspection" }, 
+            { "name": "Ready for greenlight", "id": "ready_for_greenlight" }, 
+            { "name": "Marshalled", "id": "marshalled" }, 
+            { "name": "Departed", "id": "departed" }, 
+            { "name": "Arrived", "id": "arrived" }, 
+            { "name": "Customs released", "id": "customs_released" }, 
+            { "name": "Delivered", "id": "delivered" }, 
+            { "name": "In stock", "id": "in stock" }
     ],
     "properties": [
             {
@@ -38,8 +38,8 @@
                 "type": "select",
                 "group": "Reference",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -94,11 +94,11 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "Packing Zone",
-                    "Inspection zone",
-                    "Reception zone",
-                    "Departure zone",
-                    "Storage zone"
+                    { "name": "Packing Zone", "id": "packing_zone" }, 
+                    { "name": "Inspection zone", "id": "inspection_zone" }, 
+                    { "name": "Reception zone", "id": "reception_zone" }, 
+                    { "name": "Departure zone", "id": "departure_zone" }, 
+                    { "name": "Storage zone", "id": "storage_zone" }
                 ]
             },
             {
@@ -113,12 +113,12 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "N/A",
-                    "At vendor",
-                    "En route",
-                    "In warehouse",
-                    "Port/Airport",
-                    "Client"
+                	{ "name": "N/A", "id": "n_a" }, 
+                    { "name": "At vendor", "id": "at_vendor" }, 
+                    { "name": "En route", "id": "en_route" }, 
+                    { "name": "In warehouse", "id": "in_warehouse" }, 
+                    { "name": "Port/Airport", "id": "port_airport" }, 
+                    { "name": "Client", "id": "client" }
                 ]
             },
             {
@@ -133,8 +133,8 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "Awaiting Departure",
-                    "Departed"
+                    { "name": "Awaiting Departure", "id": "awaiting_departure" }, 
+                    { "name": "Departed", "id": "departed" }
                 ]
             },
             {
@@ -143,9 +143,9 @@
                 "type": "select",
                 "group": "Location",
                 "values": [
-                    "FCA",
-                    "KCA",
-                    "NRA"
+                    { "name": "FCA", "id": "fca" }, 
+                    { "name": "KCA", "id": "kca" }, 
+                    { "name": "NRA", "id": "nra" }
                 ]
             },
             {
@@ -154,8 +154,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -164,8 +164,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -174,8 +174,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -184,8 +184,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Internal",
-                    "External"
+                    { "name": "Internal", "id": "internal" }, 
+                    { "name": "External", "id": "external" }
                 ]
             },
             {
@@ -194,8 +194,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "At client",
-                    "At vendor"
+                    { "name": "At client", "id": "at_client" }, 
+                    { "name": "At vendor", "id": "at_vendor" }
                 ]
             },
             {
@@ -214,8 +214,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Started",
-                    "Completed"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             },
             {
@@ -224,8 +224,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -234,8 +234,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -244,8 +244,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Started",
-                    "Completed"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             },
             {
@@ -254,8 +254,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Started",
-                    "Completed"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             },
             {
@@ -270,8 +270,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -280,8 +280,8 @@
                 "type": "select",
                 "group": "QA/QC",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -290,8 +290,8 @@
                 "type": "select",
                 "group": "Repacking",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -300,9 +300,9 @@
                 "type": "select",
                 "group": "Repacking",
                 "values": [
-                    "Damage",
-                    "Non Compliant",
-                    "Grouping"
+                    { "name": "Damage", "id": "damage" }, 
+                    { "name": "Non Compliant", "id": "non_compliant" },
+                    { "name": "Grouping", "id": "grouping" }
                 ]
             },
             {
@@ -311,8 +311,8 @@
                 "type": "select",
                 "group": "Repacking",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -327,10 +327,10 @@
                 "type": "select",
                 "group": "Shipping",
                 "values": [
-                    "Free Movement",
-                    "Inbound",
-                    "Exported",
-                    "Imported"
+                    { "name": "Free Movement", "id": "free_movement" }, 
+                    { "name": "Inbound", "id": "inbound" }, 
+                    { "name": "Exported", "id": "exported" }, 
+                    { "name": "Imported", "id": "imported" }
                 ]
             },
             {
@@ -339,9 +339,9 @@
                 "type": "select",
                 "group": "Catalogue",
                 "values": [
-                    "Low",
-                    "Normal",
-                    "High"
+                    { "name": "Low", "id": "low" }, 
+                    { "name": "Normal", "id": "normal" }, 
+                    { "name": "High", "id": "high" }
                 ]
             },
             {
@@ -360,8 +360,8 @@
                 "type": "select",
                 "group": "Catalogue",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -370,8 +370,8 @@
                 "type": "select",
                 "group": "Catalogue",
                 "values": [
-                    "End of life",
-                    "Upon request"
+                    { "name": "End of life", "id": "end_of_life" }, 
+                    { "name": "Upon request", "id": "upon_request" }
                 ]
             },
             {
@@ -380,20 +380,20 @@
                 "type": "select",
                 "group": "Catalogue",
                 "values": [
-                    "OSP",
-                    "DCD",
-                    "Field Ops",
-                    "TOW",
-                    "LLI",
-                    "TBX",
-                    "FPSO",
-                    "OSP RP",
-                    "OSP DN",
-                    "HHI",
-                    "CSP",
-                    "Spé",
-                    "PMT",
-                    "SPS"
+                    { "name": "OSP", "id": "osp" }, 
+                    { "name": "DCD", "id": "dcd" }, 
+                    { "name": "Field Ops", "id": "fields_ops" }, 
+                    { "name": "TOW", "id": "tow" }, 
+                    { "name": "LLI", "id": "lli" }, 
+                    { "name": "TBX", "id": "tbx" }, 
+                    { "name": "FPSO", "id": "fpso" }, 
+                    { "name": "OSP RP", "id": "osp_rp" }, 
+                    { "name": "OSP DN", "id": "osp_dn" }, 
+                    { "name": "HHI", "id": "hhi" }, 
+                    { "name": "CSP", "id": "csp" }, 
+                    { "name": "Spé", "id": "spe" }, 
+                    { "name": "PMT", "id": "pmt" }, 
+                    { "name": "SPS", "id": "sps" }
                 ]
             },
             {
@@ -402,8 +402,8 @@
                 "type": "select",
                 "group": "Catalogue",
                 "values": [
-                    "Unique",
-                    "Assembled"
+                    { "name": "Unique", "id": "unique" }, 
+                    { "name": "Assembled", "id": "assembled" }
                 ]
             },
             {
@@ -424,8 +424,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Priced",
-                    "Not priced"
+                    { "name": "Priced", "id": "priced" }, 
+                    { "name": "Not priced", "id": "not_priced" }
                 ]
             },
             {
@@ -434,8 +434,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Started",
-                    "Completed"
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
                 ]
             }
         ]

@@ -1,0 +1,83 @@
+{
+	"related_to": [
+		{
+			"id": "order",
+			"name": "Order"
+		}, 
+		{
+			"id": "shipment",
+	        "name": "Shipment" 
+	    } 
+	],
+	"related_reference": {
+	    "type": "text",
+	    "value": "Reference"
+	},
+	"collections": [
+    	{ 
+	    	"id": 1,  
+	    	"name": "company name 1"
+    	}, 
+    	{
+    		"id": 2,  
+    		"name": "company name 2"
+		}, 
+		{
+			"id": 3,  
+			"name": "company name 3"
+		}, 
+		{
+			"id": 4,  
+			"name": "company name 4"
+		}
+	], 
+	"deliveries": [
+    	{ 
+    		"id": 1,  
+    		"name": "company name 1"
+    	}, 
+    	{
+    		"id": 2,  
+    		"name": "company name 2"
+    	}, 
+    	{
+    		"id": 3,  
+    		"name": "company name 3"
+    	}, 
+    	{
+    		"id": 4,  
+    		"name": "company name 4"
+    	}
+    ], 
+	"users": [ 
+    	{ 
+    		"id": 1,  
+    		"name": "Henri Robert" 
+    	}, 
+    	{
+    		"id": 2,  
+    		"name": "User 2"
+    	}, 
+    	{
+    		"id": 3,  
+    		"name": "User 3"
+    	}, 
+    	{
+    		"id": 4,  
+    		"name": "User 4"
+    	}, 
+    	{
+    		"id": 5,  
+    		"name": "User 5"
+    	}
+    ], 
+	"dates": {
+	    "from": {
+	        "type": "date"
+	    }, 
+	    "to": {
+	        "type": "date"
+	    }
+	}
+}
+

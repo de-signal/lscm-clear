@@ -106,6 +106,7 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.listFiltersLoad = function(listConfig) {
 			ClearList.listFiltersLoad(listConfig).then( function(filters) {
+				console.log('filters: ', filters); 
 				$scope.filters = filters;
 				$scope.filters.tmp.ModificationsOpen = false; 
 				$scope.filters.tmp.ids = [];
@@ -133,8 +134,7 @@ angular.module('clearApp.controllers', [])
 		}
 
 		$scope.badgeRemove = function(badge) {
-			console.log ('badge remove: ', badge); 
-			delete $scope.list.urlParams[badge];
+			ClearList.listBadgeRemove(badge, $scope.list.urlParams, $scope.list.filters); 
 			$scope.listQuery($scope.list.urlParams, $scope.list.id);; 
 		}
 
@@ -234,7 +234,7 @@ angular.module('clearApp.controllers', [])
 		
 		if ($routeParams.static) {
 			$scope.listsConfig[0].resource = "15";
-			var r = StaticGlobalReports; 
+			var r = GlobalReports; 
 			var p = {}; 
 		} else {
 			$scope.listsConfig[0].resource = "1"; 
@@ -455,7 +455,6 @@ angular.module('clearApp.controllers', [])
 					} else {
 						$scope.listsConfig[i].resource = '2'; 
 					}
-					console.log('listsConfig[i]: ', $scope.listsConfig[i]); 
 				}
 				ClearUrl.listsReady('parent'); 
 			}); 
@@ -984,7 +983,6 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.scrollTo = function(anchor) {
 			$location.hash(anchor);
-			console.log('anchor: ', anchor);
 			$anchorScroll();
 		}
 	}])

@@ -11,12 +11,12 @@
 		<div class="row hide">
 			    <div class="col-md-6">
 			    	<pre><small>
-		list.urlParams: {{list.urlParams | json}}
+list.urlParams: {{list.urlParams | json}}
 			    	</small></pre>
 			    </div>
 			    <div class="col-md-6">
 			    	<pre><small>
-		filters.values: {{filters.values | json}}
+filters.values: {{filters.date | json}}
 					</small></pre>
 			    </div><!--/col-->
 			</div><!--/row-->
@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-				    <accordion close-others="false">
+				    <accordion>
 			    	    <accordion-group>
 			    	    	<accordion-heading>
 			    	    		Filters
@@ -34,9 +34,9 @@
 			    				<div class="col-md-4">
 			    					<fieldset>
 				    					<legend>Related to </legend>
-				    					<div class="radio" ng-repeat="related in filters.values.related.type.values">		
+				    					<div class="radio" ng-repeat="related_to in filters.values.related_to">		
 					    					<label class="control-label">
-					    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related}}"> {{related}} {{filters.values.related.type.values}}
+					    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related_to.id}}"> {{related_to.name}}
 					    					</label>
 					    				</div>
 					    				<div class="form-group" ng-show="list.urlParams.related_to">
@@ -49,31 +49,31 @@
 			    				<div class="col-md-4">
 			    					<fieldset>
 				    					<legend>User </legend>
-				    					<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users.values"><option value="">---</option></select>
+				    					<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users"><option value="">---</option></select>
 				    				</fieldset>
 				    				<fieldset ng-if="filters.values.locations">
 				    					<legend>Location</legend>
-				    					<select class="form-control" ng-model="list.urlParams.location" ng-options="location.id as location.name for location in filters.values.locations.values"><option value="">---</option></select>
+				    					<select class="form-control" ng-model="list.urlParams.location" ng-options="location.id as location.name for location in filters.values.locations"><option value="">---</option></select>
 				    				</fieldset>
 				    				<fieldset ng-if="filters.values.statuses">
 				    				<legend>Status </legend>
-				    					<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses.values"><option value="">---</option></select>
+				    					<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses"><option value="">---</option></select>
 				    				</fieldset>
 				    				<fieldset ng-if="filters.values.collections">
 				    					<legend>Collection </legend>
-				    					<select class="form-control" ng-model="list.urlParams.collection" ng-options="collection.id as collection.name for collection in filters.values.collections.values"><option value="">---</option></select>
+				    					<select class="form-control" ng-model="list.urlParams.collection" ng-options="collection.id as collection.name for collection in filters.values.collections"><option value="">---</option></select>
 				    				</fieldset>
 				    				<fieldset ng-if="filters.values.deliveries">
 				    					<legend>Delivery </legend>
-				    					<select class="form-control" ng-model="list.urlParams.delivery" ng-options="delivery.id as delivery.name for delivery in filters.values.deliveries.values"><option value="">---</option></select>
+				    					<select class="form-control" ng-model="list.urlParams.delivery" ng-options="delivery.id as delivery.name for delivery in filters.values.deliveries"><option value="">---</option></select>
 				    				</fieldset>
 			    				</div>
 			    				
-			    				<div class="col-md-4">
+			    				<div class="col-md-4" ng-if="filters.date">
 			    					<fieldset>
 			    					<legend>From </legend>
 				    					<div class="input-group">
-				    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.from.value" is-open="filters.date.from.opened" show-weeks="false" max="filters.date.to.value" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
+				    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.from.value" is-open="$parent.filters.date.from.opened" show-weeks="false" max="filters.date.to.value" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
 				    						<span class="input-group-btn">
 				    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
 				    						</span>
@@ -82,7 +82,7 @@
 				    				<fieldset>
 				    					<legend>To </legend>
 				    					<div class="input-group">
-				    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.to.value" is-open="filters.date.to.opened" show-weeks="false" min="filters.date.from.value" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
+				    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.to.value" is-open="$parent.filters.date.to.opened" show-weeks="false" min="filters.date.from.value" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
 				    						<span class="input-group-btn">
 				    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
 				    						</span>
@@ -97,7 +97,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.name}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
+					<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.content}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
 				</div>
 			</div>
 		</div>

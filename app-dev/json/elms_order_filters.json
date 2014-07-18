@@ -1,20 +1,20 @@
 {
     "plannings": [
-        "initial",
-        "forecasted",
-        "actuel"
+    	{ "name": "Initial", "id": "initial" },
+    	{ "name": "Forecasted", "id": "forecasted" },
+    	{ "name": "Actual", "id": "actual" }
     ],
     "statuses": [
-        "default",
-        "late",
-        "upcoming"
+        { "name": "Default", "id": "default" }, 
+        { "name": "Late", "id": "late" }, 
+        { "name": "Upcoming", "id": "upcoming" }
     ],
     "milestones": [
-            "placed",
-            "in preparation",
-            "completed",
-            "delivered",
-            "closed"
+            { "name": "Placed", "id": "placed" }, 
+            { "name": "In preparation", "id": "in_preparation" }, 
+            { "name": "Completed", "id": "completed" }, 
+            { "name": "Delivered", "id": "delivered" },
+            { "name": "Closed", "id": "closed" } 
     ],
     "properties": [
             {
@@ -23,8 +23,8 @@
                 "type": "select",
                 "group": "Scope and delay",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -33,8 +33,8 @@
                 "type": "select",
                 "group": "Scope and delay",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -43,8 +43,8 @@
                 "type": "select",
                 "group": "Scope and delay",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -59,8 +59,8 @@
                 "type": "select",
                 "group": "Scope and delay",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -81,8 +81,8 @@
                 "type": "select",
                 "group": "Procurement",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             },
             {
@@ -97,8 +97,8 @@
                 "type": "select",
                 "group": "Validation",
                 "values": [
-                    "Checked",
-                    "Unchecked"
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
                 ]
             }
         ]

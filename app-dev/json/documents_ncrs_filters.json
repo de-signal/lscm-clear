@@ -1,0 +1,109 @@
+{
+	"related_to": [
+		{
+			"id": "order",
+			"name": "Order"
+		}, 
+		{
+			"id": "shipment",
+	        "name": "Shipment" 
+	    } 
+	],
+	"related_reference": {
+	    "type": "text",
+	    "value": "Reference"
+	},
+	"related_element": [
+		{
+			"id": "shipment",
+	        "name": "Shipment" 
+	    },
+	    {
+	    	"id": "box",
+	    	"name": "Box"
+	    }, 
+	    {
+	    	"id": "item",
+	    	"name": "Item"
+	    } 
+	 ], 
+	 "related_element_reference": {
+	    "type": "text", 
+	    "value": "reference"
+    },  
+	"locations": [ 
+    	{ 
+    		"id": 1,  
+    		"name": "warehouse" 
+    	}, 
+    	{
+    		"id": 2,  
+    		"name": "somewhere"
+    	}, 
+    	{
+    		"id": 3,  
+    		"name": "anywhere"
+    	}, 
+    	{
+    		"id": 4,  
+    		"name": "nowhere" 
+    	}, 
+    	{
+    		"id": 5,  
+    		"name": "eslewhere"
+    	}, 
+    	{
+    		"id": 6,  
+    		"name": "somewhere else"
+    	}, 
+    	{
+    		"id": 7,  
+    		"name": "here"
+    	}
+    ],
+	"statuses": [
+    	{ 
+    		"id": 1,  
+    		"name": "late"
+		}, 
+		{
+			"id": 2,  
+			"name": "open"
+		}, 
+		{
+			"id": 3,  
+			"name": "closed"
+		}
+	], 
+	"users": [ 
+    	{ 
+    		"id": 1,  
+    		"name": "Henri Robert" 
+    	}, 
+    	{
+    		"id": 2,  
+    		"name": "User 2"
+    	}, 
+    	{
+    		"id": 3,  
+    		"name": "User 3"
+    	}, 
+    	{
+    		"id": 4,  
+    		"name": "User 4"
+    	}, 
+    	{
+    		"id": 5,  
+    		"name": "User 5"
+    	}
+    ], 
+	"dates": {
+        "from": {
+            "type": "date"
+        }, 
+        "to": {
+            "type": "date"
+        }
+	}
+}
+

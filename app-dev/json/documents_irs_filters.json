@@ -13,10 +13,27 @@
         "type": "text",
         "value": "Reference"
     },
-    "statuses": [ 
-    	{ "id": "success", "name": "success" }, 
-    	{ "id": "warning", "name": "warning" },
-    	{ "id": "error", "name": "error" }
+    "locations": [
+        {
+            "id": 0,
+            "name": "OSD zone"
+        },
+        {
+            "id": 1,
+            "name": "Inspection zone"
+        },
+        {
+            "id": 2,
+            "name": "Departure zone"
+        },
+        {
+            "id": 3,
+            "name": "Reception zone"
+        },
+        {
+            "id": 4,
+            "name": "Storage zone"
+        }
     ],
     "users": [
         {

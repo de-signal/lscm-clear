@@ -20,13 +20,12 @@ filters.tmp: {{filters.tmp | json}}
 			<div class="row">
 				<div class="col-md-12">
 					<accordion close-others="true">
-					    <accordion-group is-open="filters.tmp.filtersOpen">
+					    <accordion-group>
 					    	<accordion-heading>
 					    		Filters
 					    	</accordion-heading>
 					
 							<div class="row">
-							
 								<div class="col-md-4">
 									<fieldset>
 										<legend>Reference </legend>
@@ -45,12 +44,13 @@ filters.tmp: {{filters.tmp | json}}
 										<legend>Milestone </legend>
 										<div class="form-group">
 											<label class="control-label">Name</label>
-											<select class="form-control" ng-model="list.urlParams.milestone_name" ng-options="name for name in filters.values.milestones"><option value="">---</option></select>
+											
+											<select class="form-control" ng-model="list.urlParams.milestone_id" ng-options="milestone.id as milestone.name for milestone in filters.values.milestones"><option value="">---</option></select>
 										</div>
-										<fieldset ng-show="list.urlParams.milestone_name">
+										<fieldset ng-show="list.urlParams.milestone_id">
 											<div class="form-group">
 												<label class="control-label">Planning</label>
-												<select ng-model="list.urlParams.milestone_planning" ng-options="planning for planning in filters.values.plannings" class="form-control"><option value="">---</option></select>
+												<select ng-model="list.urlParams.milestone_planning" ng-options="planning.id as planning.name for planning in filters.values.plannings" class="form-control"><option value="">---</option></select>
 											</div>
 											<span ng-show="list.urlParams.milestone_planning == 'actual' || list.urlParams.milestone_planning == 'revised'">
 												<div class="form-group">
@@ -58,11 +58,11 @@ filters.tmp: {{filters.tmp | json}}
 													<select ng-model="list.urlParams.milestone_status" ng-options="status for status in filters.values.statuses" class="form-control"><option value="">---</option></select>
 												</div>
 											</span>
-											<span ng-show="list.urlParams.milestone_planning">
+											<span ng-if="list.urlParams.milestone_planning">
 												<div class="form-group">
 													<label class="control-label">From</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_from.value" is-open="filters.date.milestone_from.opened" show-weeks="false" max="filters.date.milestone_to.value" ng-change="list.urlParams.milestone_from = dateToTimestamp(filters.date.milestone_from.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_from.value" is-open="$parent.filters.date.milestone_from.opened" show-weeks="false" max="filters.date.milestone_to.value" ng-change="list.urlParams.milestone_from = dateToTimestamp(filters.date.milestone_from.value)" />
 														<span class="input-group-btn">
 															<button class="btn" ng-click="calOpen($event, 'milestone_from')"><i class="icon i-condition-date"></i></button>
 														</span>
@@ -71,7 +71,7 @@ filters.tmp: {{filters.tmp | json}}
 												<div class="form-group">
 													<label class="control-label">To</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_to.value" is-open="filters.date.milestone_to.opened" show-weeks="false" min="filters.date.milestone_from.value" ng-change="list.urlParams.milestone_to = dateToTimestamp(filters.date.milestone_to.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_to.value" is-open="$parent.filters.date.milestone_to.opened" show-weeks="false" min="filters.date.milestone_from.value" ng-change="list.urlParams.milestone_to = dateToTimestamp(filters.date.milestone_to.value)" />
 														<span class="input-group-btn">
 															<button class="btn" ng-click="calOpen($event, 'milestone_to')"><i class="icon i-condition-date"></i></button>
 														</span>
@@ -87,7 +87,7 @@ filters.tmp: {{filters.tmp | json}}
 										<legend>Property </legend>
 										<div class="form-group">
 											<label class="control-label">Name</label>
-											<select class="form-control" ng-model="filters.tmp.property" ng-options="prop as prop.name group by prop.group for prop in filters.values.properties track by prop.name" ng-change="list.urlParams.property_name = filters.tmp.property.name">
+											<select class="form-control" ng-model="filters.tmp.property" ng-options="prop as prop.name group by prop.group for prop in filters.values.properties track by prop.name" ng-change="list.urlParams.property_id = filters.tmp.property.id">
 												<option value="">---</option>
 											</select>
 										</div>
@@ -95,7 +95,7 @@ filters.tmp: {{filters.tmp | json}}
 											<div class="form-group" ng-switch-when="select">
 												<div class="form-group">
 													<label class="control-label">{{list.urlParams.property_name}}</label>
-													<select class="form-control" ng-model="list.urlParams.property_value" ng-options="value for value in filters.tmp.property.values">
+													<select class="form-control" ng-model="list.urlParams.property_value_id" ng-options="value.id as value.name for value in filters.tmp.property.values">
 														<option value="">---</option>
 													</select>
 												</div>
@@ -108,7 +108,7 @@ filters.tmp: {{filters.tmp | json}}
 												<div class="form-group">
 													<label class="control-label">From</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.property_from.value" is-open="filters.date.property_from.opened" show-weeks="false" max="filters.date.property_to.value" ng-change="list.urlParams.property_from = dateToTimestamp(filters.date.property_from.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.property_from.value" is-open="$parent.filters.date.property_from.opened" show-weeks="false" max="filters.date.property_to.value" ng-change="list.urlParams.property_from = dateToTimestamp(filters.date.property_from.value)" />
 														<span class="input-group-btn">
 															<button class="btn" ng-click="calOpen($event, 'property_from')"><i class="icon i-condition-date"></i></button>
 														</span>
@@ -117,7 +117,7 @@ filters.tmp: {{filters.tmp | json}}
 												<div class="form-group">
 													<label class="control-label">To</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.property_to.value" is-open="filters.date.property_to.opened" show-weeks="false" min="filters.date.property_from.value" ng-change="list.urlParams.property_to = dateToTimestamp(filters.date.property_to.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.property_to.value" is-open="$parent.filters.date.property_to.opened" show-weeks="false" min="filters.date.property_from.value" ng-change="list.urlParams.property_to = dateToTimestamp(filters.date.property_to.value)" />
 														<span class="input-group-btn">
 															<button class="btn" ng-click="calOpen($event, 'property_to')"><i class="icon i-condition-date"></i></button>
 														</span>
@@ -137,7 +137,7 @@ filters.tmp: {{filters.tmp | json}}
 							</div>
 						
 						</accordion-group>
-						<accordion-group is-open="filters.tmp.ModificationsOpen" ng-if="list.display.modifications">
+						<accordion-group ng-if="list.display.modifications">
 					    	<accordion-heading>
 					    		Modifications
 					    	</accordion-heading>
@@ -201,7 +201,7 @@ filters.tmp: {{filters.tmp | json}}
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.name}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
+					<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.content}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
 				</div>
 			</div>
 		</div>
