@@ -48,23 +48,23 @@ angular.module('clearApp.directives', [])
 			}
 		}
 	})
-	.directive('requiredStatus', function() {
+	.directive('conditionStatus', function() {
 		return function(scope, elem, attrs) {    	
-			if (scope.required.completed) {
+			if (scope.condition.completed) {
 				elem.addClass('label\-success');
 			}
-			if (!scope.required.editable) {
+			if (!scope.condition.editable) {
 				elem.removeClass('label\-warning');
 				elem.removeClass('label\-danger');
 			}
 		}
 	})
-	.directive('requiredStatusBtn', function() {
+	.directive('conditionStatusBtn', function() {
 		return function(scope, elem, attrs) {    	
-			if (scope.required.completed) {
+			if (scope.condition.completed) {
 				elem.addClass('completed');
 			}
-			if (!scope.required.editable) {
+			if (!scope.condition.editable) {
 				elem.addClass('btn-off');
 			}
 		}
@@ -79,9 +79,9 @@ angular.module('clearApp.directives', [])
 			}
 	  	};
 	})
-	.directive('requiredIcon', function() {
+	.directive('conditionIcon', function() {
 		return function(scope, elem, attr) {
-			switch (scope.required.type) {
+			switch (scope.condition.type) {
 				case 'upload': elem.addClass('i\-condition\-upload'); break; 
 				case 'document': elem.addClass('i\-condition\-document'); break; 
 			  	case 'checkbox': elem.addClass('i\-condition\-checkbox'); break;

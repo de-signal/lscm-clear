@@ -1,6 +1,7 @@
 [{
-	"name": "Robert",
+	"last_name": "Robert",
 	"first_name": "Henri",
+	"id": 13, 
 	"preferences": {	
 		"search": [
 			{	"name": "type", 

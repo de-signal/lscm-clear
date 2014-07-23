@@ -1,42 +1,36 @@
 [
 	{
-	    "related": {
-	    	"type": "order", 
-	    	"reference": "345678543", 
-	    	"id": 1
-	    }, 
-	    "name": "proof of delivery",
+	    "name": "DKS logo",
+	    "id": 12, 
 	    "user": {
 	        "id": "14",
 	        "last_name": "CLEAR", 
 	        "first_name": "Admin"
 	    },
-	    "type": "pdf",
-	    "url": "/app/docs/pod.pdf",
+	    "type": "jpg",
+	    "url": "dks-logo.jpg",
 	    "info": "Donec ullamcorper nulla non",
 	    "dates": {
 	        "created": 1375907474,
 	        "modified": 1375908474
-	    } 
+	    },
+	    "url_thumb":  "img/temp_vert.jpg"
 	},
 	{
-	    "related": {
-	    	"type": "shipment", 
-	    	"reference": "345678543", 
-	    	"id": 1
-	    }, 
-	    "name": "an excel document",
+	    "name": "Persoil logo",
+	    "id": 13, 
 	    "user": {
 	        "id": "14",
 	        "last_name": "CLEAR", 
 	        "first_name": "Admin"
 	    },
-	    "type": "xls",
-	    "url": "/app/docs/test.xls",
+	    "type": "png",
+	    "url": "persoil-logo.png",
 	    "info": "Aenean lacinia bibendum",
 	    "dates": {
 	        "created": 1375907474,
 	        "modified": 1375908474
-	    }
+	    },
+	    "url_thumb":  "img/temp_horiz.jpg"
 	}
 ]

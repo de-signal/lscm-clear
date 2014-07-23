@@ -1,7 +1,11 @@
 {
 	"id": 5,
 	"location": "waarehouse", 
-	"user": "Henri Robert",
+	"user": {
+	    "id": "14",
+	    "last_name": "CLEAR", 
+	    "first_name": "Admin"
+	},
 	"dates": {
 	    "created": 1375907474, 
 	    "modified": 1379907474
@@ -12,27 +16,52 @@
 		{
 			"date": 1375907474,
 			"status": "open",
-			"message": "NCR cause: message automatically created when ncr is opened"
+			"message": "NCR cause: message automatically created when ncr is opened", 
+			"user": {
+			    "id": "14",
+			    "last_name": "CLEAR", 
+			    "first_name": "Admin"
+			}
 		}, 
 		{
 			"date": 1376907474,
 			"status": "late",
-			"message": "Status changed to \"late\". Message automatically created after x days of inactivity"
+			"message": "Status changed to \"late\". Message automatically created after x days of inactivity", 
+			"user": {
+			    "id": "14",
+			    "last_name": "CLEAR", 
+			    "first_name": "Admin"
+			}
 		}, 
 		{
 			"date": 1377907474,
 			"status": "open",
-			"message": "Message created by user, and status automatically modified to \"open\"."
+			"message": "Message created by user, and status automatically modified to \"open\".", 
+			"user": {
+			    "id": "14",
+			    "last_name": "CLEAR", 
+			    "first_name": "Admin"
+			}
 		}, 
 		{
 			"date": 1378907474,
 			"status": "open",
-			"message": "Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla."
+			"message": "Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.", 
+			"user": {
+			    "id": "14",
+			    "last_name": "CLEAR", 
+			    "first_name": "Admin"
+			}
 		}, 
 		{
 			"date": 1379907474,
 			"status": "closed",
-			"message": "Non-compliant report closed by user."
+			"message": "Non-compliant report closed by user.", 
+			"user": {
+			    "id": "14",
+			    "last_name": "CLEAR", 
+			    "first_name": "Admin"
+			}
 		} 			
 	],
 	"related": {

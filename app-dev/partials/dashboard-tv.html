@@ -15,7 +15,7 @@
 							<th><h6>chrono</h6></th>
 							<th><h6>mode</h6></th>
 							<th><h6>milestone</h6></th>
-							<th><h6>required</h6></th>
+							<th><h6>conditions</h6></th>
 							<th><h6>departure</h6></th>
 							<th><h6>ETD</h6></th>
 							<th><h6>arrival</h6></th>
@@ -25,15 +25,15 @@
 					<tbody>
 						<tr  ng-repeat="elm in list" ng-click="go('shipment', elm.id)" class="pointer over list-anim">
 							<td><span class="label label-shipment">{{elm.reference}}</span></td>
-							<td><small>{{elm.chrono}}</small></td>
+							<td class="limit"><small>{{elm.chrono}}</small></td>
 							<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
 							<td><small>{{elm.milestone}}</small></td>
 							<td><ul class="inline">
-							<li ng-repeat="required in elm.required">
-							<span ng-click='modalCondition(elm, required, $event)' ng-disabled='!required.editable'><span class="btn btn-icon" required-status-btn><i class="icon" required-icon tooltip="{{required.name}}"></i></span></span>
+							<li ng-repeat="condition in elm.required">
+							<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
 							</li>
 							</ul></td>
-							<td><small>{{elm.departure.location}}</small></td>
+							<td class="limit"><small>{{elm.departure.location}}</small></td>
 							<td><small>{{elm.departure.date * 1000 | date:'dd.MM.yy'}}</small></td>
 							<td><small>{{elm.arrival.location}}</small></td>
 							<td><small>{{elm.arrival.date * 1000 | date:'dd.MM.yy'}}</small></td>

@@ -13,6 +13,7 @@
 			{	"name": "Reference",  "id": "related_reference", "reference": "related_reference", "type": "text"}
 		]}, 
 		{ "name": "Location",  "id": "location", "reference": "locations", "type": "select" }, 
+		{ "name": "Name",  "id": "name", "reference": "name", "type": "text" }, 
 		{ "name": "User",  "id": "user", "reference": "users", "type": "select" }, 
 		{ "name": "Satus",  "id": "status", "reference": "statuses", "type": "select" }, 
 		{ "name": "Collection",  "id": "collection", "reference": "collections", "type": "select" }, 

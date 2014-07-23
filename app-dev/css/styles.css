@@ -48,6 +48,10 @@ footer {
 	margin-bottom: 0px;
 }
 
+.capitalize {
+	text-transform: capitalize;
+}
+
 @media (min-width: 992px) {
 	.content {
 		padding-top: 65px;
@@ -216,23 +220,20 @@ h2 .label,
 h2 .badge {
 	font-size:24px;
 	padding:0 8px;
-	line-height: 32px;
-	margin-right: 5px;
 }
 h2 .btn, h5 .btn {
-	padding:2px 2px 0 5px;
-	vertical-align: text-bottom;
+	padding:2px 2px 0 3px;
+	margin-left: 5px;
+	line-height: 16px;
 }
 h2 .btn i, h5 .btn i {
-	float: left;
+	
 }
 
 h5 .label,
 h5 .badge  {
 	font-size:15px;
-	padding: 1px 6px;
-	margin-right: 4px;
-	line-height:23px;
+	padding:2px 6px 1px;
 }
 
 h6, h3, text.nv-legend-text {
@@ -380,6 +381,10 @@ legend {
   color: #9e9e8e;
 }
 
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+	max-height: inherit;
+}
+
 .dropdown-menu {
 	border: 0px solid #fff;
 	*border-right-width: 0px;
@@ -480,7 +485,14 @@ thead, tfoot {
 .table > tfoot > tr > td {
 	border-top: 1px solid #c4c4ba;
 	border-bottom-style: none;
-	vertical-align: middle;
+}
+
+.table > tbody > tr > td.limit {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100px;
 }
 .table tbody tr:first-child td {
   border-top: 0px none;
@@ -495,6 +507,15 @@ th h6 a, th h6 a:hover {
 }
 th h6 a:hover span {
 	text-decoration: underline;
+}
+
+.table.middle > thead > tr > th,
+.table.middle > tbody > tr > th,
+.table.middle > tfoot > tr > th,
+.table.middle > thead > tr > td,
+.table.middle > tbody > tr > td,
+.table.middle > tfoot > tr > td {
+	vertical-align: middle;
 }
 
 .over:hover, .highlite {
@@ -541,8 +562,8 @@ thead .icon {
 }
 
 .btn-icon {
-	padding:0 3px 2px 4px;
-	margin:-6px 0 -2px;
+	padding: 3px 3px 0 4px;
+	margin: -6px 0 -4px;
 }
 
 .completed {
@@ -923,6 +944,8 @@ fieldset {
 	max-width: 100%;
 	max-height: 100%;
 }
+
+
 .label-ncr {
 	background-color: #ffcb32;
 	margin-right: -20px;

@@ -106,7 +106,6 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.listFiltersLoad = function(listConfig) {
 			ClearList.listFiltersLoad(listConfig).then( function(filters) {
-				console.log('filters: ', filters); 
 				$scope.filters = filters;
 				$scope.filters.tmp.ModificationsOpen = false; 
 				$scope.filters.tmp.ids = [];
@@ -233,7 +232,7 @@ angular.module('clearApp.controllers', [])
 		}];
 		
 		if ($routeParams.static) {
-			$scope.listsConfig[0].resource = "15";
+			$scope.listsConfig[0].resource = "5";
 			var r = GlobalReports; 
 			var p = {}; 
 		} else {
@@ -248,7 +247,7 @@ angular.module('clearApp.controllers', [])
 		});
 		 
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + $scope.listsConfig[0].id, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
 		});
 		
 		r.query(p, function(docs){
@@ -314,7 +313,7 @@ angular.module('clearApp.controllers', [])
 		$interval(alertsUpdate, 9000);
 	}])
 	
-	.controller('ElementOrderAddCtrl', [ '$timeout', '$scope', function($timeout, $scope) {
+	.controller('ElementsOrderAddCtrl', [ '$timeout', '$scope', function($timeout, $scope) {
 		$scope.buttonDisable = function () {
 			$timeout(function() {
 				$scope.buttonDisabled = true;
@@ -322,7 +321,7 @@ angular.module('clearApp.controllers', [])
 		}
 	}])
 	
-	.controller('ElementTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsListsConfig', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsListsConfig){
+	.controller('ElementsTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsListsConfig', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsListsConfig){
 		
 		ClearUrl.listsReady('init'); 
 		
@@ -344,10 +343,10 @@ angular.module('clearApp.controllers', [])
 				$scope.listsConfig[i].display.modifications = true; 
 				if ($routeParams.static) {
 					switch ($scope.types[i].type) {
-						case 'order': $scope.listsConfig[i].resource = '6'; break;
-						case 'shipment': $scope.listsConfig[i].resource = '7'; break;
-						case 'box': $scope.listsConfig[i].resource = '8'; break;
-						case 'item': $scope.listsConfig[i].resource = '9'; break;
+						case 'order': $scope.listsConfig[i].resource = '10'; break;
+						case 'shipment': $scope.listsConfig[i].resource = '11'; break;
+						case 'box': $scope.listsConfig[i].resource = '12'; break;
+						case 'item': $scope.listsConfig[i].resource = '13'; break;
 					}
 				} else {
 					$scope.listsConfig[i].resource = '2'; 
@@ -358,11 +357,11 @@ angular.module('clearApp.controllers', [])
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
 			var typeIndex = Utils.objectIndexbyKey($scope.types, 'type', listId); 
-			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex])); 
+			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[typeIndex])); 
 		});
 	}])
 	
-	.controller('ElementDetailCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E2', 'Utils', 'ClearUrl', 'ClearElement', 'ElmsListsConfig', 'Elm', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E2, Utils, ClearUrl, ClearElement, ElmsListsConfig, Elm) {
+	.controller('ElementCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E2', 'Utils', 'ClearUrl', 'ClearElement', 'ElmsListsConfig', 'Elm', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E2, Utils, ClearUrl, ClearElement, ElmsListsConfig, Elm) {
 		
 		$scope.loaded = false;
 		$scope.relatedActiveTab = {};
@@ -447,10 +446,10 @@ angular.module('clearApp.controllers', [])
 					}
 					if ($routeParams.id === 'static') {
 						switch (elm.related[i].type) {
-							case 'order': $scope.listsConfig[i].resource = '6'; break;
-							case 'shipment': $scope.listsConfig[i].resource = '7'; break;
-							case 'box': $scope.listsConfig[i].resource = '8'; break;
-							case 'item': $scope.listsConfig[i].resource = '9'; break;
+							case 'order': $scope.listsConfig[i].resource = '10'; break;
+							case 'shipment': $scope.listsConfig[i].resource = '11'; break;
+							case 'box': $scope.listsConfig[i].resource = '12'; break;
+							case 'item': $scope.listsConfig[i].resource = '13'; break;
 						}
 					} else {
 						$scope.listsConfig[i].resource = '2'; 
@@ -460,14 +459,16 @@ angular.module('clearApp.controllers', [])
 			}); 
 			$scope.$on('event:urlSet', function(event, urlParams, listId) {
 				var typeIndex = Utils.objectIndexbyKey($scope.elm.related, 'type', listId); 
-				$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[typeIndex]));
+				$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[typeIndex]));
 			});
+			
+			$scope.modalDocumentUpload = ClearElement.modalDocumentUpload; 
 			
 			$scope.loaded = true;
 		});	
 	}])
 	
-	.controller('ElementSearchCtrl', ['$scope', '$location', 'ClearUrl', 'Utils', 'ElmsListsConfig', function($scope, $location, ClearUrl, Utils, ElmsListsConfig) {
+	.controller('ElementsSearchCtrl', ['$scope', '$location', 'ClearUrl', 'Utils', 'ElmsListsConfig', function($scope, $location, ClearUrl, Utils, ElmsListsConfig) {
 		
 		ClearUrl.listsReady('init');
 		
@@ -476,7 +477,7 @@ angular.module('clearApp.controllers', [])
 			if (type) {
 				$scope.listsConfig[0].type = type;
 				$scope.listsConfig[0].name = $scope.types[Utils.objectIndexbyKey($scope.types, "type", type)].name;  
-				var listConfig = ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[0]); 
+				var listConfig = ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]); 
 				$scope.$broadcast('event:listLoad_' + listId, listConfig);
 				$scope.urlPage = listConfig.urlParams;
 				$scope.listShow=true;				
@@ -507,7 +508,7 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 		
-	.controller('ElementListCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ElmsListsConfig', function($scope, $routeParams, ClearUrl, Utils, ElmsListsConfig) {
+	.controller('ElementsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ElmsListsConfig', function($scope, $routeParams, ClearUrl, Utils, ElmsListsConfig) {
 		
 		ClearUrl.listsReady('init');
 		var type = $routeParams.type; 
@@ -532,28 +533,79 @@ angular.module('clearApp.controllers', [])
 			ClearUrl.listsReady('parent'); 
 		}); 
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
 		});
 	}])
 	
-	.controller('ElementModalConditionCtrl', ['$scope', '$upload', 'ClearElement', '$modalInstance', 'required', 'elm', function ($scope, $upload, ClearElement, $modalInstance, required, elm) {
-		$scope.required = required;
+	.controller('ElementModalDocumentUploadCtrl', ['$scope', '$upload', 'ClearElement', 'E2', '$modalInstance', 'elm', 'user', function ($scope, $upload, ClearDocument, E2, $modalInstance, elm, user) {
+		$scope.doc = {}; 
+		
+		$scope.onFileSelect = function($files) {
+			for (var i = 0; i < $files.length; i++) {
+				var file = $files[i];
+				$scope.upload = $upload.upload({
+					url: '/index_rest.php/api/clear/v2/elements/' + elm.type + '/' + elm.id + '?documentUpload=file',
+//				    	    data: {myObj: $scope.myModelObj},
+					file: file,
+				}).progress(function(evt) {
+					$scope.progressShow = true; 
+					$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+				}).success(function(data, status, headers, config) {
+					$scope.doc.value = "fileUpload"; 
+					$scope.doc.id = data.id; 
+					console.log("upload success: ", data);
+				}).error(function(error) {
+					console.log("upload error: ", error);
+				});
+					//.error(...)
+					//.then(success, error, progress); 
+				}
+				// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
+			};		
+		$scope.documentUploadSave = function(doc) {
+			ClearDocument.documentUploadSave(doc, elm, user);
+		}
+		$scope.documentUploadClose = function() {
+			$modalInstance.close();
+		}
+		 
+		$scope.documentUploadCancel = function () {
+			$modalInstance.dismiss('cancel');
+		}
+	}])
+		
+	.controller('ElementModalConditionCtrl', ['$scope', '$upload', 'ClearElement', '$modalInstance', 'condition', 'elm', function ($scope, $upload, ClearElement, $modalInstance, condition, elm) {
+		$scope.condition = condition;
 		$scope.elm = elm;
-		console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ required: ', required);
-		switch (required.type) {
+		console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ condition: ', condition);
+		switch (condition.type) {
 			case 'upload': 
+				var documentsUploaded = []; 
+				$scope.updateMethod = {}; 
+				
+				for (var i in elm.documents) {
+					if (elm.documents[i].origin === "upload") documentsUploaded.push(elm.documents[i]); 
+				}
+				
+				if (documentsUploaded.length > 0) { 
+					$scope.updateMethod.chooser = true; 
+					$scope.updateMethod.documents = documentsUploaded; 
+				} else {
+					$scope.updateMethod.type = 'upload'; 
+				}
+				
 				$scope.onFileSelect = function($files) {
 					for (var i = 0; i < $files.length; i++) {
 						var file = $files[i];
 						$scope.upload = $upload.upload({
-							url: '/index_rest.php/api/clear/v2/elements/'+ elm.type + '/' + elm.id + '?required=' + required.id,
+							url: '/index_rest.php/api/clear/v2/elements/'+ elm.type + '/' + elm.id + '?condition=' + condition.id,
 //				    	    data: {myObj: $scope.myModelObj},
 							file: file,
 						}).progress(function(evt) {
 							$scope.progressShow = true; 
 							$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
 						}).success(function(data, status, headers, config) {
-							$scope.required.value = "fileUpload"; 
+							$scope.condition.value = "fileUpload"; 
 							console.log(data);
 						});
 							//.error(...)
@@ -561,13 +613,14 @@ angular.module('clearApp.controllers', [])
 						}
 						// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
 					};
+				
 			break;
 			case 'checkbox': break;
 			case 'date':
 				$scope.minDate = new Date();
-				$scope.$watch('required.dt', function(newValue) { 
-					if (newValue) $scope.required.value = Math.floor(newValue.getTime() / 1000); 
-					console.log('required date -> name: ', $scope.required.name , '/ value: ', $scope.required.value, '/ dt: ', newValue);
+				$scope.$watch('condition.dt', function(newValue) { 
+					if (newValue) $scope.condition.value = Math.floor(newValue.getTime() / 1000); 
+					console.log('condition date -> name: ', $scope.condition.name , '/ value: ', $scope.condition.value, '/ dt: ', newValue);
 				});
 			break;
 			case 'text': break;
@@ -575,16 +628,16 @@ angular.module('clearApp.controllers', [])
 			case 'link': break;
 		}
 		
-		$scope.requiredSave = function(elm, required) { 
-			ClearElement.requiredSave(elm, required);
-			console.log('required: ', required, required.name); 
+		$scope.conditionSave = function(elm, condition) { 
+			ClearElement.conditionSave(elm, condition);
+			console.log('condition: ', condition, condition.name); 
 		}
 		
-		$scope.requiredClose = function() {
+		$scope.conditionClose = function() {
 			$modalInstance.close();
 		}
 		 
-		$scope.requiredCancel = function () {
+		$scope.conditionCancel = function () {
 			$modalInstance.dismiss('cancel');
 		}
 		
@@ -645,7 +698,7 @@ angular.module('clearApp.controllers', [])
 		}
 	}])
 		
-	.controller('AlertListCtrl', ['$scope', '$routeParams', 'ClearUrl', 'ClearAlert', 'Utils', 'AlertsConfig', '$modal', function($scope, $routeParams, ClearUrl, ClearAlert, Utils, AlertsConfig, $modal) {
+	.controller('AlertsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'ClearAlert', 'Utils', 'AlertsConfig', '$modal', function($scope, $routeParams, ClearUrl, ClearAlert, Utils, AlertsConfig, $modal) {
 		
 		ClearUrl.listsReady('init'); 
 		
@@ -653,7 +706,7 @@ angular.module('clearApp.controllers', [])
 		AlertsConfig.get( function(config) {
 			$scope.listsConfig[0] = config; 
 			if ($routeParams.static) {
-				$scope.listsConfig[0].resource = '14';
+				$scope.listsConfig[0].resource = '30';
 			} else { 
 				$scope.listsConfig[0].resource = '2'; 
 			}
@@ -666,7 +719,7 @@ angular.module('clearApp.controllers', [])
 		});
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
 		});
 		
 		$scope.alertModalEdit = ClearAlert.alertModalEdit; 
@@ -678,8 +731,11 @@ angular.module('clearApp.controllers', [])
 		$scope.alert = Utils.clone(alert);
 		$scope.statuses = [ "success", "warning", "error" ]; 
 		
-		$scope.alertSave = function(alert) {
-			ClearAlert.alertSave(alerts, alert, user); 
+		$scope.alertSave = function(a) {
+			for (var i in a) {
+				alert[i] = a[i]; 
+			}
+			ClearAlert.alertSave(alert, user); 
 		}
 		
 		$scope.modalClose = function() {
@@ -694,8 +750,8 @@ angular.module('clearApp.controllers', [])
 	.controller('AlertModalDeleteCtrl', ['$scope', '$modalInstance', 'ClearAlert', 'alerts', 'alert', function ($scope, $modalInstance, ClearAlert, alerts, alert) {
 		$scope.alert = alert;
 		
-		$scope.alertDelete = function(alert) {
-			ClearAlert.alertDelete(alerts, alert); 
+		$scope.alertDelete = function(a) {
+			ClearAlert.alertDelete(a, alerts);
 		}
 		
 		$scope.modalClose = function() {
@@ -707,7 +763,7 @@ angular.module('clearApp.controllers', [])
 		}
 	}])
 	
-	.controller('DocumentListCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'DocumentsConfig', function($scope, $routeParams, ClearUrl, Utils, DocumentsConfig) {
+	.controller('DocumentsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'ClearDocument', 'Utils', 'DocumentsConfig', function($scope, $routeParams, ClearUrl, ClearDocument, Utils, DocumentsConfig) {
 		
 		ClearUrl.listsReady('init'); 
 		
@@ -724,15 +780,17 @@ angular.module('clearApp.controllers', [])
 				case 'ir': $scope.page.name = 'Inspection reports'; break;
 				case 'ncr': $scope.page.name = 'Non-conformity reports'; break;
 				case 'pod': $scope.page.name = 'Proofs of delivery'; break;
-				case 'archive': $scope.page.name = 'Archives'; break;		
+				case 'archive': $scope.page.name = 'Archives'; break;
+				case 'media': $scope.page.name = 'Medias'; break;		
 			}
 			
-			if ($routeParams.static) {
+			if ($routeParams.static) { 
 				switch (type) {
-					case 'ir': $scope.listsConfig[0].resource = '10'; break;
-					case 'ncr': $scope.listsConfig[0].resource = '11'; break;
-					case 'pod': $scope.listsConfig[0].resource = '12'; break;
-					case 'archive': $scope.listsConfig[0].resource = '13'; break;
+					case 'ir': $scope.listsConfig[0].resource = '20'; break;
+					case 'pod': $scope.listsConfig[0].resource = '21'; break;
+					case 'ncr': $scope.listsConfig[0].resource = '22'; break;
+					case 'archive': $scope.listsConfig[0].resource = '23'; break;
+					case 'media': $scope.listsConfig[0].resource = '24'; break;
 				}
 			} else {
 				$scope.listsConfig[0].resource = '2'; 
@@ -743,8 +801,49 @@ angular.module('clearApp.controllers', [])
 		}); 
 		
 		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, listId, $scope.listsConfig[0]));
+			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
 		});
+		
+		$scope.documentModalUpload = ClearDocument.documentModalUpload; 
+		
+	}])
+	
+	.controller('DocumentModalUploadCtrl', ['$scope', '$upload', 'ClearDocument', 'E2', '$modalInstance', 'type', 'user', function ($scope, $upload, ClearDocument, E2, $modalInstance, type, user) {
+		$scope.type = type;
+		$scope.doc = new E2({});
+		
+		$scope.onFileSelect = function($files) {
+			for (var i = 0; i < $files.length; i++) {
+				var file = $files[i];
+				$scope.upload = $upload.upload({
+					url: '/index_rest.php/api/clear/v2/documents/'+ type + '?documentUpload=file',
+//				    	    data: {myObj: $scope.myModelObj},
+					file: file,
+				}).progress(function(evt) {
+					$scope.progressShow = true; 
+					$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+					console.log("upload progress: ", evt);
+				}).success(function(data, status, headers, config) {
+					$scope.doc.value = "documentUpload"; 
+					$scope.doc.id = data.id; 
+					console.log("upload success: ", data);
+				}).error(function(error) {
+					console.log("upload error: ", error);
+				})	
+					//.then(success, error, progress); 
+				}
+				// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
+			};		
+		$scope.documentUploadSave = function(doc) {
+			ClearDocument.documentUploadSave(doc, type, user);
+		}
+		$scope.documentUploadClose = function() {
+			$modalInstance.close();
+		}
+		 
+		$scope.documentUploadCancel = function () {
+			$modalInstance.dismiss('cancel');
+		}
 	}])
 	
 	.controller('IndicatorsCtrl', ['$scope', '$routeParams', 'E1', 'Indicators', 'ChartsConfig', function($scope, $routeParams, E1, Indicators, ChartsConfig) {
@@ -770,7 +869,7 @@ angular.module('clearApp.controllers', [])
 		$scope.tooltips = ChartsConfig.tooltips;
 	}])
 	
-	.controller('DocumentIrCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'IR', 'ClearToken', function($scope, $filter, $routeParams, $modal, E2, IR, ClearToken) {
+	.controller('DocumentsIrCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'IR', 'ClearToken', function($scope, $filter, $routeParams, $modal, E2, IR, ClearToken) {
 		$scope.loaded = false;
 		
 		if ($routeParams.id === 'static') {
@@ -845,7 +944,7 @@ angular.module('clearApp.controllers', [])
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
-		$scope.open = function (doc, type) {            
+		$scope.open = function (doc, user, type) {            
 			if (doc.status != 'closed') {
 				var modalInstance = $modal.open({
 					templateUrl: 'partials/document-ncr-modal-msg.html',
@@ -853,6 +952,9 @@ angular.module('clearApp.controllers', [])
 					resolve: {
 					  doc: function () {
 						return doc;
+					  },
+					  user: function () {
+					  	return user;
 					  },
 					  type: function () {
 						return type;
@@ -868,18 +970,19 @@ angular.module('clearApp.controllers', [])
 		}; 
 	}])
 	
-	.controller('DocumentNcrModalMsgCtrl', ['$scope', '$modalInstance', 'doc', 'type', function ($scope, $modalInstance, doc, type) {
+	.controller('DocumentNcrModalMsgCtrl', ['$scope', '$modalInstance', 'doc', 'user', 'type', function ($scope, $modalInstance, doc, user, type) {
 		$scope.comment = {};
 		if (type=='open') $scope.title = 'Add a comment'; 
 		else $scope.title = 'Close report'; 
 		
 		$scope.saveNcrMessage = function () {
 			var now = new Date();
-			var date = Math.floor(now.getTime() / 1000);
-			var message = $scope.comment.message;
+			var comment_date = Math.floor(now.getTime() / 1000);
+			var comment_message = $scope.comment.message;
+			var comment_user = { "first_name": user.first_name, "last_name": user.last_name, "id": user.id }; 
 			
-			doc.comments.push({ "date": date, "status": type, "message": message}); 
-			doc.$save({'type': 'ncr', 'id': doc.id, 'update':type}, function(p, response) {});
+			doc.comments.push({ "date": comment_date, "status": type, "message": comment_message, "user": comment_user }); 
+			doc.$save({'type': 'ncr', 'id': doc.id, 'update':type, 'format': 'documents' }, function(p, response) {});
 			$modalInstance.close();
 		};
 		
@@ -888,7 +991,7 @@ angular.module('clearApp.controllers', [])
 		};
 	}])
 	
-	.controller('DocumentPodCtrl', ['$scope', '$routeParams', 'ClearToken', 'E2', 'POD', function($scope, $routeParams, ClearToken, E2, POD) {
+	.controller('DocumentsPodCtrl', ['$scope', '$routeParams', 'ClearToken', 'E2', 'POD', function($scope, $routeParams, ClearToken, E2, POD) {
 		$scope.loaded = false;
 		
 		if ($routeParams.id === 'static') {
@@ -908,6 +1011,34 @@ angular.module('clearApp.controllers', [])
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
+	}])
+	
+	.controller('WarehousesCtrl', ['$scope', '$routeParams', 'ClearUrl', 'ClearAlert', 'Utils', 'AlertsConfig', '$modal', function($scope, $routeParams, ClearUrl, ClearAlert, Utils, AlertsConfig, $modal) {
+		
+		ClearUrl.listsReady('init'); 
+		
+		$scope.listsConfig = [];
+		AlertsConfig.get( function(config) {
+			$scope.listsConfig[0] = config; 
+			if ($routeParams.static) {
+				$scope.listsConfig[0].resource = '30';
+			} else { 
+				$scope.listsConfig[0].resource = '2'; 
+			}
+			
+			$scope.listsConfig[0].type = 'alert';
+			$scope.listsConfig[0].id = "alerts";
+			$scope.page= {'name': 'Alerts', 'type': 'alert' };
+			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
+			ClearUrl.listsReady('parent'); 
+		});
+		
+		$scope.$on('event:urlSet', function(event, urlParams, listId) {
+			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
+		});
+		
+		$scope.alertModalEdit = ClearAlert.alertModalEdit; 
+		$scope.alertModalDelete = ClearAlert.alertModalDelete;
 	}])
 	
 	.controller('GuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {

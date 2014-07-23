@@ -1,5 +1,7 @@
 <div class="header bg-generic bg-inspectionReport">
-	<h1 class="container"><i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
+	<h1 class="container">
+	<i class="icon pull-right i-add icon-link" ng-click="documentModalUpload(page.type, $parent.user)" alt="Upload file"  ng-if="page.type==='media'"></i>
+	<i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
 </div>
 
 <div class="row" ng-controller="ListCtrl">
@@ -32,7 +34,7 @@ filters.values: {{filters.date | json}}
 			    	    	</accordion-heading>
 			    			<div class="row">
 			    				<div class="col-md-4">
-			    					<fieldset>
+			    					<fieldset ng-if="filters.values.related_to">
 				    					<legend>Related to </legend>
 				    					<div class="radio" ng-repeat="related_to in filters.values.related_to">		
 					    					<label class="control-label">
@@ -42,6 +44,12 @@ filters.values: {{filters.date | json}}
 					    				<div class="form-group" ng-show="list.urlParams.related_to">
 					    					<label>Reference </label>
 					    					<input type="text" ng-model="list.urlParams.related_reference" class="form-control">
+					    				</div>
+					    			</fieldset>
+					    			<fieldset ng-if="filters.values.name">
+					    				<legend>Name </legend>
+					    				<div class="form-group">
+					    					<input type="text" ng-model="list.urlParams.name" class="form-control">
 					    				</div>
 					    			</fieldset>
 			    				</div>
@@ -123,7 +131,7 @@ filters.values: {{filters.date | json}}
 							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
 								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
 								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
-								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
 								<td><small>{{doc.location}}</small></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
@@ -143,7 +151,7 @@ filters.values: {{filters.date | json}}
 								<th><h6>created</h6></th>
 								<th><h6>modified</h6></th>
 								<th><h6>boxes</h6></th>
-								<th><h6>conformity</h6></th>
+								<th colspan="3"><h6>conformity</h6></th>
 								<th><h6>status</h6></th>
 							</tr>
 						</thead>
@@ -151,14 +159,14 @@ filters.values: {{filters.date | json}}
 							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
 								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
 								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
-								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
 								<td><small>{{doc.location}}</small></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 								<td>{{doc.boxes.length}}</td>
-								<td><span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
-								    <span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
-								    <span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
+								<td class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</td>
+								<td class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</td>
+								<td ><i class="icon i-question default"></i> {{doc.conformity.pending}}</td>
 								</td>
 								<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i></td>
 							</tr>
@@ -180,7 +188,7 @@ filters.values: {{filters.date | json}}
 							<tr ng-repeat="doc in list.elements" class="pointer over" ng-click="go('documents/' + page.type, doc.id)" > 
 								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
 								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
-								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 								<td><small>{{doc.collection.company.name}}</small></td>
 								<td><small>{{doc.delivery.company.name}}</small></td>
@@ -206,7 +214,33 @@ filters.values: {{filters.date | json}}
 								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
 								<td><strong>{{doc.name}}</strong></td>
 								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-								<td><small>{{doc.user}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><span class="label label-default">{{doc.info}}</span></td>
+								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					
+					<table class="table table-condensed" ng-if="page.type==='media'">
+						<thead>
+						<tr>
+							<th><h6>preview </h6></th>
+							<th><h6>type </h6></th>
+							<th><h6>name</h6></th>
+							<th><h6>created</h6></th>
+							<th><h6>user</h6></th>
+							<th><h6>info</h6></th>
+							<th><h6></h6></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements">
+								<td><div class="image-wrapper"><img ng-src="{{doc.url_thumb}}" alt="{{doc.name}}"/></div></td>
+								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
+								<td><strong>{{doc.name}}</strong></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
 								<td><span class="label label-default">{{doc.info}}</span></td>
 								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
 							</tr>

@@ -4,7 +4,11 @@
 	    "dates": {
 	        "created": 1375907474
 	    },
-	    "user": "Henri Robert",
+	    "user": {
+	        "id": "14",
+	        "last_name": "CLEAR", 
+	        "first_name": "Admin"
+	    },
 	    "collection": {
 	       "company": {
 	            "name": "Contitech Beattie Corporation Wallmann & Co"
@@ -32,7 +36,11 @@
 	    "dates": {
 	        "created": 1375907474
 	    },
-	    "user": "Henri Robert",
+	    "user": {
+	        "id": "14",
+	        "last_name": "CLEAR", 
+	        "first_name": "Admin"
+	    },
 	    "collection": {
 	       "company": {
 	            "name": "Contitech Beattie Corporation Wallmann & Co"
@@ -60,7 +68,11 @@
 	    "dates": {
 	        "created": 1375907474
 	    },
-	    "user": "Henri Robert",
+		"user": {
+	        "id": "14",
+	        "last_name": "CLEAR", 
+	        "first_name": "Admin"
+	    },
 	    "collection": {
 	       "company": {
 	            "name": "Contitech Beattie Corporation Wallmann & Co"

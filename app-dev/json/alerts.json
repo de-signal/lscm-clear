@@ -2,7 +2,7 @@
 	{
 		"name": "Green light received 04/04",
 		"user": {
-			"name": "Robert",
+			"last_name": "Robert",
 			"first_name": "Henri", 
 			"id": 3
 		}, 
@@ -21,7 +21,7 @@
 	{
 		"name": "Green light received 04/04",
 		"user": {
-			"name": "Robert",
+			"last_name": "Robert",
 			"first_name": "Henri", 
 			"id": 3
 		}, 
@@ -41,7 +41,7 @@
 	{
 		"name": "Pending for Po service",
 		"user": {
-			"name": "Robert",
+			"last_name": "Robert",
 			"first_name": "Henri", 
 			"id": 3
 		}, 
@@ -62,7 +62,7 @@
 	{
 		"name": "Title of the third news",
 		"user": {
-			"name": "Robert",
+			"last_name": "Robert",
 			"first_name": "Henri", 
 			"id": 3
 		}, 
@@ -83,7 +83,7 @@
 	{
 		"name": "No BW received",
 		"user": {
-			"name": "Robert",
+			"last_name": "Robert",
 			"first_name": "Henri", 
 			"id": 3
 		}, 

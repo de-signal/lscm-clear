@@ -363,12 +363,12 @@
                 {
                     "type": "select",
                     "name": "type service",
-                    "value": 2,
+                    "value": "2",
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true,
                     "info": "Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur."
@@ -402,10 +402,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -438,10 +438,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -474,10 +474,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -510,10 +510,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -546,10 +546,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -582,10 +582,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -618,10 +618,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -654,10 +654,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -690,10 +690,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -726,10 +726,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -762,10 +762,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -798,10 +798,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -834,10 +834,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -870,10 +870,10 @@
                     "name": "type of service",
                     "value": 3,
                     "values": [
-                        "Door to Door",
-                        "Door to Airport/port",
-                        "Clearance & Delivery",
-                        "Consolidation hub Inspection"
+                        {"name": "Door to Door", "id": "0" }, 
+                        {"name": "Door to Airport/port", "id": "1" },
+                        {"name": "Clearance & Delivery", "id": "2" },
+                        {"name": "Consolidation hub Inspection", "id": "3" }
                     ],
                     "editable": true
                 }
@@ -899,19 +899,62 @@
     ],
     "documents": [
         {
+            "id": 12, 
             "name": "proof of delivery",
-            "user": "generated",
+            "user": {
+                "id": "14",
+                "last_name": "CLEAR", 
+                "first_name": "Admin"
+            },
             "type": "pdf",
             "url": "/app/docs/pod.pdf",
             "info": "Donec ullamcorper nulla non",
             "dates": {
                 "created": 1375907474,
                 "modified": 1375908474
-            } 
+            }, 
+            "origin": "upload"  
         },
         {
+            "id": 13, 
             "name": "an excel document",
-            "user": "LSCM Operation team",
+            "user": {
+                "id": "14",
+                "last_name": "CLEAR", 
+                "first_name": "Admin"
+            },
+            "type": "xls",
+            "url": "/app/docs/test.xls",
+            "info": "Aenean lacinia bibendum",
+            "dates": {
+                "created": 1375907474,
+                "modified": 1375908474
+            }
+        },
+        {
+            "id": 14, 
+            "name": "an excel document",
+            "user": {
+                "id": "14",
+                "last_name": "CLEAR", 
+                "first_name": "Admin"
+            },
+            "type": "xls",
+            "url": "/app/docs/test.xls",
+            "info": "Aenean lacinia bibendum",
+            "dates": {
+                "created": 1375907474,
+                "modified": 1375908474
+            }
+        },
+        {
+            "id": 15, 
+            "name": "an excel document",
+            "user": {
+                "id": "14",
+                "last_name": "CLEAR", 
+                "first_name": "Admin"
+            },
             "type": "xls",
             "url": "/app/docs/test.xls",
             "info": "Aenean lacinia bibendum",

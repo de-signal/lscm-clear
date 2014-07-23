@@ -2,7 +2,11 @@
 	{
 		"id": "static",
 		"location": "warehouse", 
-		"user": "Henri Robert",
+		"user": {
+	        "id": "14",
+	        "last_name": "test", 
+	        "first_name": "Admin"
+	    },
 		"dates": {
 		    "created": 1375907474, 
 		    "modified": 1379907474
@@ -30,7 +34,11 @@
 	{
 		"id": "static",
 		"location": "warehouse", 
-		"user": "Henri Robert",
+		"user": {
+	        "id": "14",
+	        "last_name": "CLEAR", 
+	        "first_name": "Admin"
+	    },
 		"dates": {
 		    "created": 1375907474, 
 		    "modified": 1379907474
@@ -58,7 +66,11 @@
 	{
 		"id": "static",
 		"location": "warehouse", 
-		"user": "Henri Robert",
+		"user": {
+	        "id": "14",
+	        "last_name": "CLEAR", 
+	        "first_name": "Admin"
+	    },
 		"dates": {
 		    "created": 1375907474, 
 		    "modified": 1379907474

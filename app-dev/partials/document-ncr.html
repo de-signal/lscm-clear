@@ -38,7 +38,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>user</h6>
-						<h2>{{doc.user}}</h2>
+						<h2>{{doc.user.first_name + " " + doc.user.last_name }}</h2>
 					</div>
 				</div>
 			</div>
@@ -120,21 +120,25 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<table class="table table-condensed">
+								<table class="table table-condensed top">
 									<thead>
 										<tr>
-											<th><h6> </h6></th><th><h6>date</h6></th><th><h6>comment</h6></th><th><h6></h6></th>
+											<th><h6> </h6></th>
+											<th><h6>user</h6></th>
+											<th><h6>date</h6></th>
+											<th><h6>comment</h6></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr ng-repeat="comment in doc.comments">
 											<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[comment.status]" tooltip="{{comment.status}}"></i></td>
-											<td nowrap>{{comment.date * 1000 | date:'dd.MM.yy, HH:mm'}}</td>
+											<td nowrap><small>{{comment.user.first_name + " " + comment.user.last_name}}</small></td>
+											<td nowrap><small>{{comment.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
 											<td>{{comment.message}}</td>
 										</tr>
 									<tbody>
 								</table>
-								<span ng-hide="doc.status=='closed'"><a class='btn' ng-click="open(doc, 'open')">Add a comment</a> <a class='btn' target="_blank" ng-click="open(doc, 'closed')">Close report</a></span>
+								<span ng-hide="doc.status=='closed'"><a class='btn' ng-click="open(doc, user, 'open')">Add a comment</a> <a class='btn' target="_blank" ng-click="open(doc, user, 'closed')">Close report</a></span>
 							</div>
 						</div>
 					</div>		

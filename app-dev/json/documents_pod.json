@@ -1,7 +1,11 @@
 {
     "id": 5,
     "date": 1375907474,
-    "user": "Henri Robert",
+    "user": {
+        "id": "14",
+        "last_name": "CLEAR", 
+        "first_name": "Admin"
+    },
     "collection": {
         "contact": {
             "name": "M. Riebsell / M. Seltman",

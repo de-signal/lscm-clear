@@ -39,7 +39,7 @@
 				<div class="col-md-12">
 					<div class="filet">
 						<h6>user</h6>
-						<h2>{{doc.user}}</h2>
+						<h2>{{doc.user.first_name + " " + doc.user.last_name }}</h2>
 					</div>
 				</div>
 			</div>
@@ -68,9 +68,9 @@
 					<div class="filet">
 						<h6>Conformity</h6>
 						<h2 class="type-bold">
-							<span ng-show="doc.conformity.true" class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
-							<span ng-show="doc.conformity.false" class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
-							<span ng-show="doc.conformity.pending" class="filet-right"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
+							<span class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
+							<span class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+							<span class="filet-right" ng-if="doc.conformity.pending"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
 						</h2>
 					</div>
 				</div>

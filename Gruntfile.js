@@ -17,6 +17,22 @@ module.exports = function (grunt) {
 	// Define the configuration for all the tasks
 	grunt.initConfig({
 
+		// Update grunt packages
+		devUpdate: {
+	        main: {
+	            options: {
+	                updateType: 'prompt', //just report outdated packages
+	                reportUpdated: true, //don't report already updated packages
+	                semver: true, //use package.json semver rules when updating
+	                packages: { //what packages to check
+	                    devDependencies: true, //only devDependencies
+	                    dependencies: false
+	                },
+	                packageJson: null //find package.json automatically
+	            }
+	        }
+	    },
+
 		// Project settings
 		path: {
 			// configurable paths
@@ -265,9 +281,27 @@ module.exports = function (grunt) {
 					cssDir: 'app-dev/css'
 				}
 			}
+		}, 
+
+		'ftp-deploy': {
+		  app: {
+		    auth: {
+		      host: 'ftp.ofon2.com',
+		      port: 21,
+		      authKey: 'ofon2'
+		    },
+		    src: 'app/',
+		    dest: 'app/',
+		    exclusions: ['**/.DS_Store', '**/Thumbs.db']
+		  }
 		}
+
 	});
 
+
+	grunt.registerTask('dep', [
+		'devUpdate:main'
+	]);
 
 	grunt.registerTask('default', [
 		'compass:dev'
@@ -293,6 +327,7 @@ module.exports = function (grunt) {
     	'usemin',
 		'htmlmin:app',
 		'copy:hack',
-		'clean:hack'
+		'clean:hack', 
+		'ftp-deploy:app'
 	]);
 };

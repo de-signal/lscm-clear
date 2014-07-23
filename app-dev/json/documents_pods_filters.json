@@ -50,25 +50,20 @@
     	}
     ], 
 	"users": [ 
-    	{ 
-    		"id": 1,  
-    		"name": "Henri Robert" 
+    	{
+    	    "id": "14",
+    	    "last_name": "CLEAR", 
+    	    "first_name": "Admin"
     	}, 
     	{
-    		"id": 2,  
-    		"name": "User 2"
+    	    "id": "12",
+    	    "last_name": "Robert", 
+    	    "first_name": "Henri"
     	}, 
     	{
-    		"id": 3,  
-    		"name": "User 3"
-    	}, 
-    	{
-    		"id": 4,  
-    		"name": "User 4"
-    	}, 
-    	{
-    		"id": 5,  
-    		"name": "User 5"
+    	    "id": "10",
+    	    "last_name": "System", 
+    	    "first_name": "CLEAR"
     	}
     ], 
 	"dates": {

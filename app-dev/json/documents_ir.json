@@ -1,7 +1,11 @@
 {
     "id": 5,
     "location": "warehouse",
-    "user": "Henri Robert",
+    "user": {
+        "id": "14",
+        "last_name": "CLEAR", 
+        "first_name": "Admin"
+    }, 
     "related": {
         "order": {
             "id": 1,
