@@ -82,6 +82,11 @@
 								</li>
 							</ul>
 							<ul class="nav navbar-nav">
+								<li><a href="dashboard" ng-click="section = 'logistic'">Logistic</a></li>
+								<li><a href="stock/warehouses" ng-click="section = 'stock'">Stock</a></li>
+							</ul>
+							<hr />
+							<ul class="nav navbar-nav navbar-secondary" ng-show="section === 'logistic'">
 								<li><a href="tracking">Tracking</a></li>
 								<li><a href="indicators">Indicators</a></li>
 								<li><a href="search">Search</a></li>
@@ -95,9 +100,16 @@
 										<li><a href="documents/media">Medias</a></li>
 									</ul>
 								</li>
-								<li><a href="add-order">Add order</a>
-								</li>
+								<li><a href="add-order">Add order</a></li>
 							</ul>
+							<ul class="nav navbar-nav navbar-secondary" ng-show="section === 'stock'">
+								<li><a href="stock/warehouses">Warehouses</a></li>
+								<li><a href="stock/movements">Movements</a></li>
+								<li><a href="stock/replenishments">Replenishments</a></li>
+								<li><a href="stock/items">Items</a></li>
+								<li><a href="stock/indicators">Indicators</a></li>
+							</ul>
+							
 						</div><!--/.nav-collapse -->
 					</div>
 				</div>
@@ -121,7 +133,7 @@
 						
 					</div>
 					<div class="col-md-3">
-						<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2014</small></p>
+						<p class="margin-top"><small>Cloud Logistics Extranet <a href="static">App</a>lication Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2014</small></p>
 						<p class="margin-top"><img src="img/lscm_logo.png" alt="" /></p>
 					</div>
 				</div>

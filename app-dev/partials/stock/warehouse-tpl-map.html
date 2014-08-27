@@ -1,0 +1,11 @@
+<div ng-include="'img/stock/warehouse-map-4.svg'"></div>
+<div ng-style="{top: label.top, left: label.left}" ng-class="{true: 'visible', false: ''}[label.visible]" class="warehouse-map-label">
+<h6>reference</h6>
+<p>{{label.reference}}</p>
+<h6>type</h6>
+<p>{{label.type}}</p>
+<h6>filling rate</h6>
+<p>{{label.ratio}} %</p>
+<h6>quantity</h6>
+<p>{{label.quantity}} items</p>
+</div>

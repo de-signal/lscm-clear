@@ -32,48 +32,38 @@ filters.tmp: {{filters.tmp | json}}
 										<div class="form-group">
 											<input type="text" ng-model="list.urlParams.reference" class="form-control">
 										</div>
-										<div class="form-group" ng-if="list.type === 'shipment' || list.type === 'shipmentIn' || list.type === 'shipmentOut'">
-											<label class="control-label">Vector reference</label>
-											<input type="text" ng-model="list.urlParams.vector_reference" class="form-control">
-										</div>
 									</fieldset>
 								</div>
 								
 								<div class="col-md-4">
 									<fieldset>
-										<legend>Milestone </legend>
+										<legend>Location </legend>
 										<div class="form-group">
-											<label class="control-label">Name</label>
+											<label class="control-label">Warehouse</label>
 											
-											<select class="form-control" ng-model="list.urlParams.milestone_id" ng-options="milestone.id as milestone.name for milestone in filters.values.milestones"><option value="">---</option></select>
+											<select class="form-control" ng-model="list.urlParams.warehouse_id" ng-options="warehouse.id as warehouse.name for warehouse in filters.values.warehouses"><option value="">---</option></select>
 										</div>
-										<fieldset ng-show="list.urlParams.milestone_id">
+										<fieldset ng-show="list.urlParams.warehouse_id">
 											<div class="form-group">
-												<label class="control-label">Planning</label>
-												<select ng-model="list.urlParams.milestone_planning" ng-options="planning.id as planning.name for planning in filters.values.plannings" class="form-control"><option value="">---</option></select>
+												<label class="control-label">Area</label>
+												<select ng-model="list.urlParams.area_id" ng-options="area.id as area.name for area in filters.values.areas" class="form-control"><option value="">---</option></select>
 											</div>
-											<span ng-show="list.urlParams.milestone_planning == 'actual' || list.urlParams.milestone_planning == 'revised'">
-												<div class="form-group">
-													<label class="control-label">Status</label>
-													<select ng-model="list.urlParams.milestone_status" ng-options="status for status in filters.values.statuses" class="form-control"><option value="">---</option></select>
-												</div>
-											</span>
-											<span ng-if="list.urlParams.milestone_planning">
+											<span ng-if="list.urlParams.warehouse_id">
 												<div class="form-group">
 													<label class="control-label">From</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_from.value" is-open="$parent.filters.date.milestone_from.opened" show-weeks="false" max="filters.date.milestone_to.value" ng-change="list.urlParams.milestone_from = dateToTimestamp(filters.date.milestone_from.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.location_from.value" is-open="$parent.filters.date.location_from.opened" show-weeks="false" max="filters.date.location_to.value" ng-change="list.urlParams.location_from = dateToTimestamp(filters.date.location_from.value)" />
 														<span class="input-group-btn">
-															<button class="btn" ng-click="calOpen($event, 'milestone_from')"><i class="icon i-condition-date"></i></button>
+															<button class="btn" ng-click="calOpen($event, 'location_from')"><i class="icon i-condition-date"></i></button>
 														</span>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="control-label">To</label>
 													<div class="input-group">
-														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.milestone_to.value" is-open="$parent.filters.date.milestone_to.opened" show-weeks="false" min="filters.date.milestone_from.value" ng-change="list.urlParams.milestone_to = dateToTimestamp(filters.date.milestone_to.value)" />
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.location_to.value" is-open="$parent.filters.date.location_to.opened" show-weeks="false" min="filters.date.location_from.value" ng-change="list.urlParams.location_to = dateToTimestamp(filters.date.location_to.value)" />
 														<span class="input-group-btn">
-															<button class="btn" ng-click="calOpen($event, 'milestone_to')"><i class="icon i-condition-date"></i></button>
+															<button class="btn" ng-click="calOpen($event, 'location_to')"><i class="icon i-condition-date"></i></button>
 														</span>
 													</div>
 												</div>
@@ -211,37 +201,35 @@ filters.tmp: {{filters.tmp | json}}
 		<thead>
 			<tr>
 				<th ng-if="list.display.modifications"></th>
-				<th ng-if="listShipment"><h6><span>type</span></h6></th>
 				<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'reference'"></i>
 					</a></h6></th>
-				<th ng-if="listShipment"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'chrono'"></i>
+				<th><h6><a ng-click="listSort('name')"><span>description</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'name'"></i>
 					</a></h6></th>
-				<th><h6><a ng-click="listSort('milestone')"><span>milestone</span>
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'milestone'"></i>
+				<th><h6><a ng-click="listSort('supplier')"><span>supplier</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'supplier'"></i>
 					</a></h6></th>
-				<!--<th><h6><a ng-click="listSort('status')"><span>status</span>
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'status'"></i>
-					</a></h6></th>-->
-				<th><h6>conditions</h6></th>
-				<th ng-if="display.tracking"><h6>tracking</h6></th>
+				<th><h6><a ng-click="listSort('sap')"><span>SAP</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'sap'"></i>
+					</a></h6></th>
+				
+				<th><h6>quantity</h6></th>
+				<th><h6>unit</h6></th>
+				<th><h6>threshold</h6></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr  ng-repeat="elm in list.elements" ng-click="go(elm.type, elm.id)" class="pointer over">
+			<tr  ng-repeat="elm in list.elements" ng-click="go('stock/items', elm.id)" class="pointer over">
 				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectToggle(elm.id)" ng-checked="filters.tmp.ids.indexOf(elm.id) > -1" value="elm.id"></td>
-				<td ng-if="listShipment"><span class="label label-shipment">{{elm.specifications_shipment.type}}</span></td>
-				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
-				<td ng-if="listShipment"><small>{{elm.specifications_shipment.chrono}}</small></td>
-				<td class="capitalize"><strong><small>{{elm.milestone}}</small></strong></td>
+				<td><span class="label label-item">{{elm.reference}}</span></td>
+				<td><strong>{{elm.description}}</strong></td>
+				<td>{{elm.supplier.name}}</td>
 				<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
-				<td><ul class="inline">
-				<li ng-repeat="condition in elm.required">
-				<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
-				</li>
-				</ul></td>
-				<td ng-if="display.tracking"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i></td>
+				<td>{{elm.sap.reference}}</td>
+				<td>{{elm.quantity}}</td>
+				<td>{{elm.unit}}</td>
+				<td>{{elm.threshold}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -252,7 +240,7 @@ filters.tmp: {{filters.tmp | json}}
 	
 	<div class="row" ng-if="!list.elements.length">
 	    <div class="col-md-12">
-	    	No results. 
+	    	<p>No results. </p>
 	    </div>
 	</div>
 </div>

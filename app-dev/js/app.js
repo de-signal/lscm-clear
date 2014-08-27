@@ -25,6 +25,13 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/documents-ir.html', controller: 'DocumentsIrCtrl'});
 		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-ncr.html', controller: 'DocumentsNcrCtrl'});
 		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/documents-pod.html', controller: 'DocumentsPodCtrl'});
+		$routeProvider.when('/stock/warehouses', {templateUrl: 'partials/stock/warehouses.html', controller: 'WarehousesCtrl'});
+		$routeProvider.when('/stock/warehouses/:id', {templateUrl: 'partials/stock/warehouse.html', controller: 'WarehouseCtrl', reloadOnSearch: false});
+		$routeProvider.when('/stock/movements', {templateUrl: 'partials/stock/movements.html', controller: 'MovementsCtrl'});
+		$routeProvider.when('/stock/replenishments', {templateUrl: 'partials/stock/replenishments.html', controller: 'ReplenishmentsCtrl'});
+		$routeProvider.when('/stock/items', {templateUrl: 'partials/stock/items.html', controller: 'ItemsCtrl'});
+		$routeProvider.when('/stock/items/:id', {templateUrl: 'partials/stock/item.html', controller: 'ItemCtrl'});
+		$routeProvider.when('/stock/indicators', {templateUrl: 'partials/stock/indicators.html', controller: 'StockIndicatorsCtrl'});
 		$routeProvider.when('/add-order', {templateUrl: 'partials/elements-order-add.html', controller: 'ElementsOrderAddCtrl'});
 		$routeProvider.when('/alerts', {templateUrl: 'partials/alerts.html', controller: 'AlertsCtrl', reloadOnSearch: false});
 		$routeProvider.when('/:type/', {templateUrl: 'partials/elements.html', controller: 'ElementsCtrl', reloadOnSearch: false});

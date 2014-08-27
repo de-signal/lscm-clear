@@ -153,7 +153,8 @@ module.exports = function (grunt) {
 						'.htaccess',
 						'*.html',
 						'partials/{,*/}*.html',
-						'json/*'
+						'json/**/*', 
+						'img/{,*/}*.svg'
 					]
 				}, 
 				{
@@ -209,16 +210,6 @@ module.exports = function (grunt) {
 				}]
 			}
 		},
-		svgmin: {
-			app: {
-				files: [{
-					expand: true,
-					cwd: 'app-dev/img',
-					src: '{,*/}*.svg',
-					dest: 'app/img'
-				}]
-			}
-		}, 
 		htmlmin: {
 			app: {
 				options: {
@@ -317,7 +308,6 @@ module.exports = function (grunt) {
 		'clean:app',
     	'useminPrepare',
 		'imagemin:app',
-		'svgmin:app',
 		'concat',
 		'copy:app',
 		'processhtml:app',

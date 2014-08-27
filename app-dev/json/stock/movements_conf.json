@@ -1,0 +1,25 @@
+{ 
+	"type": "movement",
+	"id": "movement",
+	"display": { 
+		"filters" : true, 
+		"tracking": false, 
+		"modifications": false
+	}, 
+	"urlInit": {
+		"sortBy": "status", 
+		"sortOrder": "ASC", 
+		"limit": 12
+	},
+	"filters": [
+		{ "name": "Reference",  "id": "item_reference", "reference": "item_reference", "type": "text"},
+		{ "name": "Type", "id": "type_id", "type": "select", "reference": "types", "children": 
+			[
+				{ "name": "Origin", "id": "movement_origin", "reference": "origins", "type": "select" }, 
+				{ "name": "Destination", "id": "movement_destination", "reference": "destinations", "type": "select" }
+			] 
+		}, 
+		{ "name": "from", "id": "movement_from", "type": "date" },
+		{ "name": "to", "id": "movement_to", "type": "date" }					
+	]
+}

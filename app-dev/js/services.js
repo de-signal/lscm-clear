@@ -6,6 +6,13 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('E1', ['$resource', function($resource) {
 		return $resource('../index_rest.php/api/clear/v1/:type/:id', { type:'@type', id:'@id' });
 	}])
+	.factory('S1', ['$resource', function($resource) {
+		return $resource('../index_rest.php/api/stock/v1/:type/:id', { type:'@type', id:'@id' }, 
+		{
+			update: { method: 'PUT' }, 
+			updateList: { method: 'PUT', isArray: true }
+		});
+	}])
 	.factory('E2', ['$resource', function($resource) {
 		return $resource('../index_rest.php/api/clear/v2/:format/:type/:id/:action', 
 			{ format:'@format', type:'@type', id:'@id', action:'@action' }, 
@@ -90,11 +97,11 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	})
 	
-	.factory('ClearList', ['$filter', '$rootScope', '$q', 'toaster', 'Utils', 'ClearToken', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Medias', 'FiltersMedias', 'Alerts', 'FiltersAlerts', 'Dashboard', function($filter, $rootScope, $q, toaster, Utils, ClearToken, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Medias, FiltersMedias, Alerts, FiltersAlerts, Dashboard){
+	.factory('ClearList', ['$filter', '$rootScope', '$q', 'toaster', 'Utils', 'ClearToken', 'E1', 'E2', 'S1', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Medias', 'FiltersMedias', 'Alerts', 'FiltersAlerts', 'Dashboard', 'Items', 'FiltersItems', 'Movements', 'FiltersMovements', 'Replenishments', 'FiltersReplenishments', function($filter, $rootScope, $q, toaster, Utils, ClearToken, E1, E2, S1, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Medias, FiltersMedias, Alerts, FiltersAlerts, Dashboard, Items, FiltersItems, Movements, FiltersMovements, Replenishments, FiltersReplenishments){
 		
 		return {
 			listElementsLoad: function (listConfig) {
-				var resources = { "1": E1, "2": E2, "5": Dashboard, "10": ElmsOrder, "11": ElmsShipment, "12": ElmsBox, "13": ElmsItem, "20": IRs, "21": PODs, "22": NCRs, "23": Archives, "24": Medias, "30": Alerts }; 
+				var resources = { "1": E1, "2": E2, "3": S1, "5": Dashboard, "6": Alerts, "10": ElmsOrder, "11": ElmsShipment, "12": ElmsBox, "13": ElmsItem, "20": IRs, "21": PODs, "22": NCRs, "23": Archives, "24": Medias, '30': Movements, '31': Replenishments, '32': Items }; 
 				var list = listConfig;
 				var q=$q.defer();
 				var listQuery = { 'type': listConfig.type }; 
@@ -123,13 +130,12 @@ angular.module('clearApp.services', ['ngResource'])
 						}
 					}
 					list.elements = elements; 
-					console.log('list: ', list);  
 					q.resolve(list);
 				});
 				return q.promise;
 			},
 			listFiltersLoad: function(listConfig) { 
-				var resources = { "1": E1, "2": E2, "10": FiltersOrder, "11": FiltersShipment, "12": FiltersBox, "13": FiltersItem, "20": FiltersIRs, "21": FiltersPODs, "22": FiltersNCRs, "23": FiltersArchives, "24": FiltersMedias, "30": FiltersAlerts }; 
+				var resources = { "1": E1, "2": E2, "3": S1, "6": FiltersAlerts, "10": FiltersOrder, "11": FiltersShipment, "12": FiltersBox, "13": FiltersItem, "20": FiltersIRs, "21": FiltersPODs, "22": FiltersNCRs, "23": FiltersArchives, "24": FiltersMedias, "30": FiltersMovements, "31": FiltersReplenishments, '32': FiltersItems }; 
 				var that = this;
 				var filters = {}; 
 				var q=$q.defer();
@@ -289,57 +295,71 @@ angular.module('clearApp.services', ['ngResource'])
 	})
 			
 	.factory('ClearUrl', ['$rootScope', '$location', 'Utils', function($rootScope, $location, Utils){
-		
-		var parentReady, listsReady=[]; 
-		
+		var lists = [];
 		return {
-			listsReady: function(p) {
-				if (p == 'init') { 
-					parentReady=false; listsReady = [] 
-				} else if (p == 'parent') { 
-					parentReady=true; 
-					for (var i in listsReady) {
-						$rootScope.$broadcast('event:listReady_' + listsReady[i], listsReady[i]);
+			listReady: function(p, param) {
+				
+				var ready = function(list) {
+					if (list.id && list.conf) {
+						$rootScope.$broadcast('event:listReady_' + list.id, list.conf);
 					}
-				} else { 
-					listsReady.push(p); 
-					if (parentReady) $rootScope.$broadcast('event:listReady_' + p, p);
-				} 
+				}
+				if (p === 'init') { 
+					lists = []; 
+					for (var i in param) {
+						lists[param[i]] = {};
+					}
+				} else if (p === 'conf') { 
+					lists[param.id].conf = param;
+					ready(lists[param.id]); 
+				} else if (p === 'id') { 
+					lists[param.id].id = param.id;
+					ready(lists[param.id]); 
+				}
 			}, 
-			listsUrlSet: function(urlParams, listConfig) {
+			listsUrlSet: function(urlParams, listConf) {
 				var urlPage = $location.search();
 				
-				if (listConfig.listCode) {
+				if (listConf.listCode) {
 					var urlList = {}		
 					for (var i in urlPage) {
 						var code = i.slice(1,2); 
-						if (code === listConfig.listCode) { 
+						if (code === listConf.listCode) { 
 							var param = i.slice(3, i.length); 
 							urlList[param] = urlPage[i]; 
 							delete urlPage[i]; 
 						}
 					}
 					if (Utils.isEmpty(urlParams)) urlParams = urlList; 
-					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					urlParams = Utils.collect(listConf.urlInit, urlParams); 
 					
 					for (i in urlParams) {
-						urlPage['_' + listConfig.listCode + '_' + i] = urlParams[i]; 
+						urlPage['_' + listConf.listCode + '_' + i] = urlParams[i]; 
 					}
 					$location.search(urlPage);
 				} else {
 					if (Utils.isEmpty(urlParams)) urlParams = urlPage; 
-					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					urlParams = Utils.collect(listConf.urlInit, urlParams); 
 					$location.search(urlParams);
-				} 
-//				if (urlReplace) 
+				}
 				$location.replace();			
-				listConfig.urlParams = urlParams; 	
-				return listConfig; 
+				listConf.urlParams = urlParams; 	
+				return listConf; 
+			}, 
+			go: function (url, id, related) {
+				$rootScope.tvScreen = false;
+				$location.$$search = {};
+				$location.path( url + '/' + id );
+// remove this hack asap
+				if (related) {
+					$location.search('related_type_active', related).hash('related');
+				}
+//
 			}
 		}
 	}])
 	
-	.factory('ClearElement', ['$rootScope', '$modal', '$location', 'ClearToken', 'toaster', 'Utils', function($rootScope, $modal, $location, ClearToken, toaster, Utils){
+	.factory('ClearElement', ['$rootScope', '$modal', 'ClearToken', 'toaster', 'Utils', function($rootScope, $modal, ClearToken, toaster, Utils){
 		
 		return {
 			elementUpdate: function(elm) {
@@ -553,7 +573,9 @@ angular.module('clearApp.services', ['ngResource'])
 			}, 
 			propertySave: function(elm, property, group) {
 				var self=this;
+// remove this hack asap. no need to reference $rootScope in this function
 				$rootScope.currentGroup = group;
+//				
 				elm.$update({ 'propertyUpdateId': property.id, 'propertyUpdateVal': property.value }, function(elm, response) {
 					var propertyMessage; 
 					
@@ -644,15 +666,6 @@ angular.module('clearApp.services', ['ngResource'])
 				elm.label = labelFn(value);
 				
 				return elm;
-			}, 
-			go: function (type, id, related) {
-				$rootScope.tvScreen = false;
-				$location.$$search = {};
-				$location.path( type + '/' + id )
-				if (related) {
-					$location.search('related_type_active', related).hash('related');
-				}
-				console.log('go ->', type, id, related);
 			}
 		}
 	}])
@@ -828,17 +841,22 @@ angular.module('clearApp.services', ['ngResource'])
 			tooltips: {
 				pieChart: function(){
 					return function(key, x, y, e, graph) {
-						return  '<h6>' + key + '</h6>' + '<p>' + x + '</p>'
+						return  '<p><strong>' + key + '</strong></p>' + '<p>' + x + '</p>'
 					}
 				},
 				hBarChart: function(){
 					return function(key, x, y, e, graph) {
-						return  '<h6>' + key + '</h6>' + '<p>' +  y + '</p>'
+						return  '<p><strong>' + key + '</strong></p>' + '<p>' +  y + '</p>'
 					}
 				},
 				vBarChart: function(){
 					return function(key, x, y, e, graph) {
-						return  '<h6>' + x + ' / ' + key + '</h6>' + '<p>' +  y + '</p>'
+						return  '<p><strong>' + x + ', ' + key + '</strong></p>' + '<p>' +  y + '</p>'
+					}
+				}, 
+				lineChart: function(){
+					return function(key, x, y, e, graph) {
+				    	return  '<p><strong>' + key + '</strong></p>' + '<p>' +  y + '</p>'
 					}
 				}
 			}, 
@@ -918,6 +936,9 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('Indicators', ['$resource', function($resource){
 		 return $resource('json/indicators.json');
 	}])
+	.factory('StockIndicators', ['$resource', function($resource){
+		 return $resource('json/stock/indicators.json');
+	}])
 	.factory('Elms', ['$resource', function($resource){
 		return $resource('json/elms.json');
 	}])
@@ -948,7 +969,7 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('Bugs', ['$resource', function($resource){
 		return $resource('json/bugs.json');
 	}])
-	.factory('ElmsListsConfig', ['$resource', function($resource){
+	.factory('ElmsConf', ['$resource', function($resource){
 		return $resource('json/elms_conf.json');
 	}])
 	.factory('AlertsConfig', ['$resource', function($resource){
@@ -958,7 +979,15 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/documents_conf.json');
 	}])
 	.factory('Elm', ['$resource', function($resource){
-		return $resource('json/elm.json', 
+		return $resource('json/elm_shipment.json', 
+			{}, 
+			{
+				update: { method: 'PUT' }, 
+				updateList: { method: 'PUT', isArray: true }
+			});
+	}])
+	.factory('ElmItem', ['$resource', function($resource){
+		return $resource('json/elm_item.json', 
 			{}, 
 			{
 				update: { method: 'PUT' }, 
@@ -980,4 +1009,43 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('News', ['$resource', function($resource){
 		return $resource('json/news.json');
 	}])
+	
+	
+	.factory('Warehouse', ['$resource', function($resource){
+		return $resource('json/stock/warehouse.json');
+	}])
+	.factory('Warehouses', ['$resource', function($resource){
+		return $resource('json/stock/warehouses.json');
+	}])
+	.factory('ItemsConf', ['$resource', function($resource){
+		return $resource('json/stock/items_conf.json');
+	}])
+	.factory('FiltersItems', ['$resource', function($resource){
+		return $resource('json/stock/items_filters.json');
+	}])
+	.factory('Items', ['$resource', function($resource){
+		return $resource('json/stock/items.json');
+	}])
+	.factory('Item', ['$resource', function($resource){
+		return $resource('json/stock/item.json');
+	}])
+	.factory('MovementsConf', ['$resource', function($resource){
+		return $resource('json/stock/movements_conf.json');
+	}])
+	.factory('Movements', ['$resource', function($resource){
+		return $resource('json/stock/movements.json');
+	}])
+	.factory('FiltersMovements', ['$resource', function($resource){
+		return $resource('json/stock/movements_filters.json');
+	}])
+	.factory('ReplenishmentsConf', ['$resource', function($resource){
+		return $resource('json/stock/replenishments_conf.json');
+	}])
+	.factory('Replenishments', ['$resource', function($resource){
+		return $resource('json/stock/replenishments.json');
+	}])
+	.factory('FiltersReplenishments', ['$resource', function($resource){
+		return $resource('json/stock/replenishments_filters.json');
+	}])
+	
 	.value('version', '2.4');

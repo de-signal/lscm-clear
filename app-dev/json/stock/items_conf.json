@@ -1,9 +1,9 @@
 { 
-	"format": "elements", 
+	"type": "item", 
 	"display": { 
 		"filters" : true, 
-		"tracking": true, 
-		"modifications": true
+		"tracking": false, 
+		"modifications": false
 	}, 
 	"urlInit": {
 		"sortBy": "status", 
@@ -12,13 +12,11 @@
 	},
 	"filters": [
 		{ "name": "Reference", "id": "reference", "type": "text" }, 
-		{ "name": "Vector reference", "id": "vector_reference", "type": "text"}, 
-		{ "name": "Milestone", "id": "milestone_id", "type": "select", "reference": "milestones", "children": 
+		{ "name": "Warehouse", "id": "warehouse_id", "type": "select", "reference": "warehouses", "children": 
 			[
-				{ "name": "in", "id": "milestone_planning", "reference": "plannings", "type": "select" }, 
-				{ "name": "status", "id": "milestone_status", "reference": "statuses", "type": "select" }, 
-				{ "name": "from", "id": "milestone_from", "type": "date" },
-				{ "name": "to", "id": "milestone_to", "type": "date" }
+				{ "name": "Areas", "id": "area_id", "reference": "areas", "type": "select" }, 
+				{ "name": "from", "id": "location_from", "type": "date" },
+				{ "name": "to", "id": "location_to", "type": "date" }
 			] 
 		}, 
 		{ "name": "Property", "id": "property_id", "reference": "properties", "type": "select", "subordinate": true, "children": 

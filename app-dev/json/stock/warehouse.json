@@ -1,0 +1,164 @@
+{
+	"id": "12",
+	"type": "warehouse", 
+	"reference": "23456",
+	"name": "Ladol Lagos 1", 
+	"address": {
+		"street": "street name", 
+		"city": "Lagos", 
+		"zipcode": "345678", 
+		"country": "Nigeria"
+	}, 
+	"user": {
+		"id": "45", 
+		"first_name": "John", 
+		"last_name": "Adrew", 
+		"phone": "+123456789",
+		"email": "mo@me.com"
+	}, 
+	"areas": [
+		{
+    		"id": "45",
+    		"reference": "T56789876", 
+    		"name": "Entry control", 
+    		"type": "Shelf",
+    		"ratio": 20,  
+    		"position": "A", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "46",
+    		"reference": "O0876", 
+    		"name": "Receiving", 
+    		"type": "Shelf",
+    		"ratio": 30, 
+    		"position": "B", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "47",
+    		"reference": "T56789876", 
+    		"name": "Marshalling", 
+    		"type": "Shelf",
+    		"ratio": 50, 
+    		"position": "C", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "48",
+    		"reference": "O0876", 
+    		"name": "OSD", 
+    		"type": "Shelf",
+    		"ratio": 80, 
+    		"position": "D", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "49",
+    		"reference": "T56789876", 
+    		"name": "HL /ODC", 
+    		"type": "Shelf",
+    		"ratio": 60, 
+    		"position": "E", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "50",
+    		"reference": "T56789876", 
+    		"name": "Climate control", 
+    		"type": "Shelf",
+    		"ratio": 10, 
+    		"position": "F", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "51",
+    		"reference": "O0876", 
+    		"name": "Dangerous goods", 
+    		"type": "Shelf",
+    		"ratio": 100, 
+    		"position": "G", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "52",
+    		"reference": "T56789876", 
+    		"name": "Rack storage", 
+    		"type": "Shelf",
+    		"ratio": 90, 
+    		"position": "H", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Inspection", 
+    		"type": "Shelf",
+    		"ratio": 50, 
+    		"position": "I", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Packing", 
+    		"type": "Shelf",
+    		"ratio": 60, 
+    		"position": "J", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Consolidation", 
+    		"type": "Shelf",
+    		"ratio": 30, 
+    		"position": "K", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Shipping", 
+    		"type": "Shelf",
+    		"ratio": 15, 
+    		"position": "L", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Exit control", 
+    		"type": "Shelf",
+    		"ratio": 60, 
+    		"position": "M", 
+    		"quantity": 25
+    	}, 
+    	{
+    		"id": "53",
+    		"reference": "T56789876", 
+    		"name": "Preservation", 
+    		"type": "Shelf",
+    		"ratio": 80, 
+    		"position": "N", 
+    		"quantity": 25
+    	}
+    ],
+    "related": [
+        {
+            "name": "Items",
+            "type": "item",
+            "quantity": 150
+        },
+        {
+            "name": "Movements",
+            "type": "movement",
+            "quantity": 30
+        },
+        {
+            "name": "Replenishments",
+            "type": "replenishment",
+            "quantity": 20
+        }
+    ]   	
+}

@@ -1,9 +1,10 @@
 { 
-	"format": "elements", 
+	"type": "replenishment",
+	"id": "replenishment",
 	"display": { 
-		"filters" : true, 
-		"tracking": true, 
-		"modifications": true
+		"filters" : false, 
+		"tracking": false, 
+		"modifications": false
 	}, 
 	"urlInit": {
 		"sortBy": "status", 

@@ -1,0 +1,80 @@
+[
+    {
+    	"type": "item",
+    	"id": "static",
+    	"reference": "01010101FFF",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"quantity": 250,
+    	"threshold": 2500,
+    	"cost": 3,
+    	"unit": "piece",
+    	"supplier": {
+    		"name": "Rolls-Royce", 
+    		"id": "24"
+    	}, 
+    	"sap": { 
+    		"reference": "4567890"
+    	},
+    	"warehouse": {
+    		"id": "12", 
+    		"code": "23456", 
+    		"area": {
+    			"id": "23",
+    			"code": "T56789876", 
+    			"name": "Store"
+    		}
+    	}
+    }, 
+    {
+    	"type": "item",
+    	"id": "static",
+    	"reference": "01010101FFF",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"quantity": 250,
+    	"threshold": 2500,
+    	"cost": 3,
+    	"unit": "piece",
+    	"supplier": {
+    		"name": "Rolls-Royce", 
+    		"id": "24"
+    	}, 
+    	"sap": { 
+    		"reference": "4567890"
+    	},
+    	"warehouse": {
+    		"id": "12", 
+    		"code": "23456", 
+    		"area": {
+    			"id": "23",
+    			"code": "T56789876", 
+    			"name": "Store"
+    		}
+    	}
+    }, 
+    {
+    	"type": "item",
+    	"id": "static",
+    	"reference": "01010101FFF",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"quantity": 250,
+    	"threshold": 2500,
+    	"cost": 3,
+    	"unit": "piece",
+    	"supplier": {
+    		"name": "Rolls-Royce", 
+    		"id": "24"
+    	}, 
+    	"sap": { 
+    		"reference": "4567890"
+    	},
+    	"warehouse": {
+    		"id": "12", 
+    		"code": "23456", 
+    		"area": {
+    			"id": "23",
+    			"code": "T56789876", 
+    			"name": "Store"
+    		}
+    	}
+    }
+]

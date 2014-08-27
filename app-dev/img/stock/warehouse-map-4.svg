@@ -1,0 +1,152 @@
+<svg version="1.1"
+	 id="Calque_1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="warehouse-map.svg" inkscape:version="0.48.5 r10040"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="772px" height="516px"
+	 viewBox="0 0 772 516" enable-background="new 0 0 772 516" xml:space="preserve" class="warehouse-map">
+<g id="areas">
+	<g id="N">
+		<rect id="N-bg" x="258" y="386" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="N-name" transform="matrix(1 0 0 1 272 408)" class="area-name">Preservation</text>
+		<rect id="N-bar-bg" x="270" y="486" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="N-bar" x="272" y="488" fill="#FFCB32" ng-attr-width="{{areas['N'].ratio}}" height="12"/>
+		<rect id="N-over" x="258" y="386" fill-opacity="0"  width="128" height="128" ng-mouseover="mouseover('N')" ng-mouseleave="mouseleave('N')"/>
+	</g>
+	<g id="M">
+		<rect id="M-bg" x="2" y="386" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="M-name" transform="matrix(1 0 0 1 16 408)" class="area-name">Exit control</text>
+		<rect id="M-bar-bg" x="14" y="486" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="M-bar" x="16" y="488" fill="#FFCB32" ng-attr-width="{{areas['M'].ratio}}" height="12"/>
+		<rect id="M-over" x="2" y="386" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('M')" ng-mouseleave="mouseleave('M')"/>
+	</g>
+	<g id="L">
+		<rect id="L-bg" x="2" y="258" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="L-name" transform="matrix(1 0 0 1 16 280)" class="area-name">Shipping</text>
+		<rect id="L-bar-bg" x="14" y="358" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="L-bar" x="16" y="360" fill="#FFCB32" ng-attr-width="{{areas['L'].ratio}}" height="12"/>
+		<rect id="L-over" x="2" y="258" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('L')" ng-mouseleave="mouseleave('L')"/>
+	</g>
+	<g id="J">
+		<rect id="J-bg" x="258" y="322" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="64"/>
+		<text id="J-name" transform="matrix(1 0 0 1 272 344)" class="area-name">Packing</text>
+		<rect id="J-bar-bg" x="270" y="358" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="J-bar" x="272" y="360" fill="#FFCB32" ng-attr-width="{{areas['J'].ratio}}" height="12"/>
+		<rect id="J-over" x="258" y="322" fill-opacity="0" width="128" height="64" ng-mouseover="mouseover('J')" ng-mouseleave="mouseleave('J')"/>
+	</g>
+	<g id="I">
+		<rect id="I-bg" x="258" y="258" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="64"/>
+		<text id="I-name" transform="matrix(1 0 0 1 272 280)" class="area-name">Inspection</text>
+		<rect id="I-bar-bg" x="270" y="294" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="I-bar" x="272" y="296" fill="#FFCB32" ng-attr-width="{{areas['I'].ratio}}" height="12"/>
+		<rect id="I-over" x="258" y="258" fill-opacity="0" width="128" height="64" ng-mouseover="mouseover('I')" ng-mouseleave="mouseleave('I')"/>
+	</g>
+	<g id="K">
+		<rect id="K-bg" x="2" y="130" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="K-name" transform="matrix(1 0 0 1 16 152)" class="area-name">Consolidation</text>
+		<rect id="K-bar-bg" x="14" y="230" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="K-bar" x="16" y="232" fill="#FFCB32" ng-attr-width="{{areas['K'].ratio}}" height="12"/>
+		<rect id="K-over" x="2" y="130" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('K')" ng-mouseleave="mouseleave('K')"/>
+	</g>
+	<g id="H">
+		<rect id="H-bg" x="2" y="2" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="384" height="128"/>
+		<text id="H-name" transform="matrix(1 0 0 1 16 24)" class="area-name">Rack storage</text>
+		<rect id="H-bar-bg" x="14" y="102" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="H-bar" x="16" y="104" fill="#FFCB32" ng-attr-width="{{areas['H'].ratio}}" height="12"/>
+		<rect id="H-over" x="2" y="2" fill-opacity="0" width="384" height="128" ng-mouseover="mouseover('H')" ng-mouseleave="mouseleave('H')"/>
+	</g>
+	<g id="G">
+		<rect id="G-bg" x="386" y="2" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="G-name" transform="matrix(1 0 0 1 400 24)" class="area-name">Dangerous goods</text>
+		<rect id="G-bar-bg" x="398" y="102" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="G-bar" x="400" y="104" fill="#FFCB32" ng-attr-width="{{areas['G'].ratio}}" height="12"/>
+		<rect id="G-over" x="386" y="2" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('G')" ng-mouseleave="mouseleave('G')"/>
+	</g>
+	<g id="F">
+		<rect id="F-bg" x="642" y="2" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="F-name" transform="matrix(1 0 0 1 656 24)" class="area-name">Climate control</text>
+		<rect id="F-bar-bg" x="654" y="102" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="F-bar" x="656" y="104" fill="#FFCB32" ng-attr-width="{{areas['F'].ratio}}" height="12"/>
+		<rect id="F-over" x="642" y="2" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('F')" ng-mouseleave="mouseleave('F')"/>
+	</g>
+	<g id="E">
+		<rect id="E-bg" x="642" y="130" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="E-name" transform="matrix(1 0 0 1 656 152)" class="area-name">HL / ODC</text>
+		<rect id="E-bar-bg" x="654" y="230" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="E-bar" x="656" y="232" fill="#FFCB32" ng-attr-width="{{areas['E'].ratio}}" height="12"/>
+		<rect id="E-over" x="642" y="130" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('E')" ng-mouseleave="mouseleave('E')"/>
+	</g>
+	<g id="D">
+		<rect id="D-bg" x="642" y="258" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="D-name" transform="matrix(1 0 0 1 656 280)" class="area-name">OSD</text>
+		<rect id="D-bar-bg" x="654" y="358" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="D-bar" x="656" y="360" fill="#FFCB32" ng-attr-width="{{areas['D'].ratio}}" height="12"/>
+		<rect id="D-over" x="642" y="258" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('D')" ng-mouseleave="mouseleave('D')"/>
+	</g>
+	<g id="C">
+		<rect id="C-bg" x="386" y="258" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="C-name" transform="matrix(1 0 0 1 400 280)" class="area-name">Marshalling</text>
+		<rect id="C-bar-bg" x="398" y="358" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="C-bar" x="400" y="360" fill="#FFCB32" ng-attr-width="{{areas['C'].ratio}}" height="12"/>
+		<rect id="C-over" x="386" y="258" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('C')" ng-mouseleave="mouseleave('C')"/>
+	</g>
+	<g id="B">
+		<rect id="B-bg" x="386" y="386" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="B-name" transform="matrix(1 0 0 1 400 408)" class="area-name">Receiving</text>
+		<rect id="B-bar-bg" x="398" y="486" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="B-bar" x="400" y="488" fill="#FFCB32" ng-attr-width="{{areas['B'].ratio}}" height="12"/>
+		<rect id="B-over" x="386" y="386" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('B')" ng-mouseleave="mouseleave('B')"/>
+	</g>
+	<g id="A">
+		<rect id="A-bg" x="642" y="386" fill="#EBE8E7" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" width="128" height="128"/>
+		<text id="A-name" transform="matrix(1 0 0 1 656 408)" class="area-name">Entry control</text>
+		<rect id="A-bar-bg" x="654" y="486" fill="#FFFFFF" width="104" height="16"/>
+		<rect id="A-bar" x="656" y="488" fill="#FFCB32" ng-attr-width="{{areas['A'].ratio}}" height="12"/>
+		<rect id="A-over" x="642" y="386" fill-opacity="0" width="128" height="128" ng-mouseover="mouseover('A')" ng-mouseleave="mouseleave('A')"/>
+	</g>
+</g>
+
+<g id="path">
+	<polygon fill="#cccccc" points="182.1,487.3 194,499.2 205.9,487.3 205.9,497.4 194,509.3 182.1,497.4 	"/>
+	<polygon fill="#FFFFFF" points="182.1,461.9 194,473.8 205.9,461.9 205.9,472 194,483.9 182.1,472 	"/>
+	<polygon fill="#FFFFFF" points="182.1,436.5 194,448.4 205.9,436.5 205.9,446.6 194,458.5 182.1,446.6 	"/>
+	<polygon fill="#FFFFFF" points="182.1,411.1 194,423 205.9,411.1 205.9,421.2 194,433.1 182.1,421.2 	"/>
+	<polygon fill="#FFFFFF" points="182.1,385.7 194,397.6 205.9,385.7 205.9,395.8 194,407.7 182.1,395.8 	"/>
+	<polygon fill="#FFFFFF" points="182.1,360.3 194,372.2 205.9,360.3 205.9,370.4 194,382.3 182.1,370.4 	"/>
+	<polygon fill="#FFFFFF" points="182.1,334.9 194,346.8 205.9,334.9 205.9,345 194,356.9 182.1,345 	"/>
+	<polygon fill="#FFFFFF" points="182.1,309.6 194,321.5 205.9,309.6 205.9,319.6 194,331.6 182.1,319.6 	"/>
+	<polygon fill="#FFFFFF" points="182.1,284.2 194,296.1 205.9,284.2 205.9,294.3 194,306.2 182.1,294.3 	"/>
+	<polygon fill="#FFFFFF" points="182.1,258.8 194,270.7 205.9,258.8 205.9,268.9 194,280.8 182.1,268.9 	"/>
+	<polygon fill="#FFFFFF" points="186.8,231.5 196.1,245.5 210.2,236.2 208.2,246.1 194.1,255.4 184.8,241.4 	"/>
+	<polygon fill="#FFFFFF" points="202.4,206 205.6,222.5 222.2,219.3 216.5,227.6 200,230.8 196.8,214.3 	"/>
+	<polygon fill="#FFFFFF" points="227,188.9 223.8,205.4 240.3,208.6 232,214.2 215.4,211 218.6,194.5 	"/>
+	<polygon fill="#FFFFFF" points="256.7,183.3 247.4,197.3 261.5,206.6 251.6,208.6 237.5,199.3 246.8,185.3 	"/>
+	<polygon fill="#FFFFFF" points="284.6,184.1 272.7,196 284.6,207.9 274.5,207.9 262.6,196 274.5,184.1 	"/>
+	<polygon fill="#FFFFFF" points="310,184.1 298.1,196 310,207.9 299.9,207.9 288,196 299.9,184.1 	"/>
+	<polygon fill="#FFFFFF" points="335.4,184.1 323.5,196 335.4,207.9 325.3,207.9 313.4,196 325.3,184.1 	"/>
+	<polygon fill="#FFFFFF" points="360.8,184.1 348.9,196 360.8,207.9 350.7,207.9 338.8,196 350.7,184.1 	"/>
+	<polygon fill="#FFFFFF" points="386.2,184.1 374.3,196 386.2,207.9 376.1,207.9 364.2,196 376.1,184.1 	"/>
+	<polygon fill="#FFFFFF" points="411.5,184.1 399.6,196 411.5,207.9 401.5,207.9 389.6,196 401.5,184.1 	"/>
+	<polygon fill="#FFFFFF" points="436.9,184.1 425,196 436.9,207.9 426.8,207.9 414.9,196 426.8,184.1 	"/>
+	<polygon fill="#FFFFFF" points="462.3,184.1 450.4,196 462.3,207.9 452.2,207.9 440.3,196 452.2,184.1 	"/>
+	<polygon fill="#FFFFFF" points="487.7,184.1 475.8,196 487.7,207.9 477.6,207.9 465.7,196 477.6,184.1 	"/>
+	<polygon fill="#FFFFFF" points="513.1,184.1 501.2,196 513.1,207.9 503,207.9 491.1,196 503,184.1 	"/>
+	<polygon fill="#FFFFFF" points="540.5,188.4 526.4,197.7 535.7,211.7 525.8,209.7 516.5,195.7 530.6,186.4 	"/>
+	<polygon fill="#FFFFFF" points="566.3,203.3 549.8,206.5 553,223 544.6,217.3 541.4,200.8 557.9,197.6 	"/>
+	<polygon fill="#FFFFFF" points="583.9,227.3 567.4,224.1 564.2,240.6 558.6,232.2 561.8,215.7 578.3,218.9 	"/>
+	<polygon fill="#FFFFFF" points="590.3,256.7 576.2,247.4 567,261.4 564.9,251.5 574.2,237.5 588.3,246.8 	"/>
+	<polygon fill="#FFFFFF" points="589.9,284.5 578,272.6 566.1,284.5 566.1,274.4 578,262.5 589.9,274.4 	"/>
+	<polygon fill="#FFFFFF" points="589.9,309.9 578,298 566.1,309.9 566.1,299.8 578,287.9 589.9,299.8 	"/>
+	<polygon fill="#FFFFFF" points="589.9,335.3 578,323.4 566.1,335.3 566.1,325.2 578,313.3 589.9,325.2 	"/>
+	<polygon fill="#FFFFFF" points="589.9,360.7 578,348.7 566.1,360.7 566.1,350.6 578,338.7 589.9,350.6 	"/>
+	<polygon fill="#FFFFFF" points="589.9,386 578,374.1 566.1,386 566.1,375.9 578,364 589.9,375.9 	"/>
+	<polygon fill="#FFFFFF" points="589.9,411.4 578,399.5 566.1,411.4 566.1,401.3 578,389.4 589.9,401.3 	"/>
+	<polygon fill="#FFFFFF" points="589.9,436.8 578,424.9 566.1,436.8 566.1,426.7 578,414.8 589.9,426.7 	"/>
+	<polygon fill="#FFFFFF" points="589.9,462.2 578,450.3 566.1,462.2 566.1,452.1 578,440.2 589.9,452.1 	"/>
+	<polygon fill="#FFFFFF" points="589.9,487.6 578,475.7 566.1,487.6 566.1,477.5 578,465.6 589.9,477.5 	"/>
+	<polygon fill="#cccccc" points="589.9,513 578,501.1 566.1,513 566.1,502.9 578,491 589.9,502.9 	"/>
+</g>
+
+<g id="outline">
+	<polyline id="polyline18" fill="none" stroke="#000000" stroke-width="4" points="130,514 2,514 2,2 770,2 770,514 
+		642,514 	"/>
+	<line id="line20" fill="none" stroke="#000000" stroke-width="4" x1="258" y1="514" x2="514" y2="514"/>
+</g>
+</svg>

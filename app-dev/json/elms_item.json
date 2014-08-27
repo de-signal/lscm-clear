@@ -1,7 +1,7 @@
 [
     {
     	"type": "item",
-    	"id": 12,
+    	"id": "static",
     	"reference": "01010101FFF",
     	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
     	"tracking": "tracked",
@@ -17,11 +17,20 @@
     		{ "type": "text", "name": "input request 2", "value": "text blah 2", "message" : "Fill the field", "editable": false, "completed": false },
     		{ "type": "email", "name": "validation request", "value": "name@domain.com", "message" : "Waiting for response", "editable": true, "completed": true }, 
     		{ "type": "link", "name": "Items Update", "value": "item", "message" : "125 items to update", "editable": true, "completed": true }
-    	]
+    	], 
+    	"warehouse": {
+    		"id": "12", 
+    		"code": "23456", 
+    		"area": {
+    			"id": "23",
+    			"code": "T56789876", 
+    			"name": "Store"
+    		}
+    	}
     },
     {
     	"type": "item",
-    	"id": 1,
+    	"id": "static",
     	"reference": "0111010109292",
     	"description": "Sed posuere consectetur est at lobortis.",
     	"tracking": "tracked",
@@ -41,7 +50,7 @@
     }, 
     {
     	"type": "item",
-    	"id": 2,
+    	"id": "static",
     	"reference": "0112110109292",
     	"description": "Sed posuere consectetur est at lobortis.",
     	"tracking": "tracked",
@@ -60,7 +69,7 @@
     }, 
     {
     	"type": "item",
-    	"id": 4,
+    	"id": "static",
     	"reference": "0112010109292",
     	"description": "Sed posuere consectetur est at lobortis.",
     	"tracking": "untracked",
@@ -77,7 +86,7 @@
     }, 
     {
     	"type": "item",
-    	"id": 13,
+    	"id": "static",
     	"reference": "0121010109292",
     	"description": "Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus.",
     	"tracking": "tracked",
@@ -94,7 +103,7 @@
     },
     {
     	"type": "item",
-    	"id": 14,
+    	"id": "static",
     	"reference": "0121010109292",
     	"description": "Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus.",
     	"tracking": "untracked",
@@ -111,7 +120,7 @@
     },  
     {
     	"type": "item",
-    	"id": 23,
+    	"id": "static",
     	"reference": "0131010109292",
     	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna.",
     	"tracking": "tracked",
@@ -127,7 +136,7 @@
     }, 
     {
     	"type": "item",
-    	"id": 527,
+    	"id": "static",
     	"reference": "0141010109292",
     	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
     	"tracking": "tracked",
@@ -143,7 +152,7 @@
     }, 
     {
     	"type": "item",
-    	"id": 9,
+    	"id": "static",
     	"reference": "0151010109292",
     	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
     	"tracking": "tracked",

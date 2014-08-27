@@ -1,0 +1,442 @@
+{
+    "plannings": [
+        { "name": "Initial", "id": "initial" },
+        { "name": "Forecasted", "id": "forecasted" },
+        { "name": "Actual", "id": "actual" }
+    ],
+    "statuses": [
+        { "name": "Default", "id": "default" }, 
+        { "name": "Late", "id": "late" }, 
+        { "name": "Upcoming", "id": "upcoming" }
+    ],
+    "milestones": [
+			{ "name": "ordered", "id": "ordered" }, 
+            { "name": "manufactured", "id": "manufactured" }, 
+            { "name": "ready for collection", "id": "ready_for_collection" }, 
+            { "name": "Collected", "id": "collected" }, 
+            { "name": "Received", "id": "received" }, 
+            { "name": "Osd", "id": "osd" }, 
+            { "name": "Ready for inspection", "id": "ready_for_inspection" }, 
+            { "name": "Ready for greenlight", "id": "ready_for_greenlight" }, 
+            { "name": "Marshalled", "id": "marshalled" }, 
+            { "name": "Departed", "id": "departed" }, 
+            { "name": "Arrived", "id": "arrived" }, 
+            { "name": "Customs released", "id": "customs_released" }, 
+            { "name": "Delivered", "id": "delivered" }, 
+            { "name": "In stock", "id": "in stock" }
+    ],
+    "properties": [
+            {
+                "id": "vendor_ref",
+                "name": "Vendor reference",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "listed",
+                "name": "Listed",
+                "type": "select",
+                "group": "Reference",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "client_chrono",
+                "name": "Client chrono",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "client_ref",
+                "name": "Client reference",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "stickers_tracking_number",
+                "name": "Stickers integrator tracking number",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "stickers_delivery_date",
+                "name": "Stickers integrator delivery date",
+                "type": "date",
+                "group": "Reference"
+            },
+            {
+                "id": "stickers_delivered_to",
+                "name": "Stickers integrator delivery contact",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "in_production",
+                "name": "In Production",
+                "type": "select",
+                "group": "Reference",
+                "values": [
+                    "Started",
+                    "Completed"
+                ]
+            },
+            {
+                "id": "batch_reference",
+                "name": "Batch Reference",
+                "type": "text",
+                "group": "Reference"
+            },
+            {
+                "id": "area",
+                "name": "Area",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    { "name": "Packing Zone", "id": "packing_zone" }, 
+                    { "name": "Inspection zone", "id": "inspection_zone" }, 
+                    { "name": "Reception zone", "id": "reception_zone" }, 
+                    { "name": "Departure zone", "id": "departure_zone" }, 
+                    { "name": "Storage zone", "id": "storage_zone" }
+                ]
+            },
+            {
+                "id": "incoterm",
+                "name": "Incoterm",
+                "type": "text",
+                "group": "Location"
+            },
+            {
+                "id": "location",
+                "name": "Location",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                	{ "name": "N/A", "id": "n_a" }, 
+                    { "name": "At vendor", "id": "at_vendor" }, 
+                    { "name": "En route", "id": "en_route" }, 
+                    { "name": "In warehouse", "id": "in_warehouse" }, 
+                    { "name": "Port/Airport", "id": "port_airport" }, 
+                    { "name": "Client", "id": "client" }
+                ]
+            },
+            {
+                "id": "storage_cell_ref",
+                "name": "Storage cell",
+                "type": "text",
+                "group": "Location"
+            },
+            {
+                "id": "transfer",
+                "name": "Transfer",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    { "name": "Awaiting Departure", "id": "awaiting_departure" }, 
+                    { "name": "Departed", "id": "departed" }
+                ]
+            },
+            {
+                "id": "warehouse",
+                "name": "Warehouse",
+                "type": "select",
+                "group": "Location",
+                "values": [
+                    { "name": "FCA", "id": "fca" }, 
+                    { "name": "KCA", "id": "kca" }, 
+                    { "name": "NRA", "id": "nra" }
+                ]
+            },
+            {
+                "id": "fat_required",
+                "name": "FAT required",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "certified",
+                "name": "FAT certified",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "inspection_required",
+                "name": "Inspection required",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "inspection_type",
+                "name": "Inspection type",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Internal", "id": "internal" }, 
+                    { "name": "External", "id": "external" }
+                ]
+            },
+            {
+                "id": "inspection_location",
+                "name": "Inspection location",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "At client", "id": "at_client" }, 
+                    { "name": "At vendor", "id": "at_vendor" }
+                ]
+            },
+            {
+                "id": "inspected",
+                "name": "Inspected",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    "Conform",
+                    "Non conform"
+                ]
+            },
+            {
+                "id": "inspection_timestamp",
+                "name": "Inspection timestamp",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
+                ]
+            },
+            {
+                "id": "expeditable",
+                "name": "Expeditable",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "dg",
+                "name": "Dangerous good",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "departure_control",
+                "name": "Departure control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
+                ]
+            },
+            {
+                "id": "reception_control",
+                "name": "Reception control",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
+                ]
+            },
+            {
+                "id": "production_completion",
+                "name": "Production completion",
+                "type": "text",
+                "group": "QA/QC"
+            },
+            {
+                "id": "has_osd",
+                "name": "OSD",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "prohibited",
+                "name": "Prohibited",
+                "type": "select",
+                "group": "QA/QC",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "repacking_required",
+                "name": "Repacking required",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "repacking_cause",
+                "name": "Repacking cause",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    { "name": "Damage", "id": "damage" }, 
+                    { "name": "Non Compliant", "id": "non_compliant" },
+                    { "name": "Grouping", "id": "grouping" }
+                ]
+            },
+            {
+                "id": "repacking_done",
+                "name": "Repacking done",
+                "type": "select",
+                "group": "Repacking",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "booking_date",
+                "name": "Booking date",
+                "type": "date",
+                "group": "Shipping"
+            },
+            {
+                "id": "customs_status",
+                "name": "Customs status",
+                "type": "select",
+                "group": "Shipping",
+                "values": [
+                    { "name": "Free Movement", "id": "free_movement" }, 
+                    { "name": "Inbound", "id": "inbound" }, 
+                    { "name": "Exported", "id": "exported" }, 
+                    { "name": "Imported", "id": "imported" }
+                ]
+            },
+            {
+                "id": "priority",
+                "name": "Priority",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    { "name": "Low", "id": "low" }, 
+                    { "name": "Normal", "id": "normal" }, 
+                    { "name": "High", "id": "high" }
+                ]
+            },
+            {
+                "id": "stock_information",
+                "name": "Stock information",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    "In stock",
+                    "Not in stock"
+                ]
+            },
+            {
+                "id": "availability",
+                "name": "Availability",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    { "name": "Yes", "id": "1" }, 
+                { "name": "No", "id": "0" }
+                ]
+            },
+            {
+                "id": "sales_information",
+                "name": "Sales information",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    { "name": "End of life", "id": "end_of_life" }, 
+                    { "name": "Upon request", "id": "upon_request" }
+                ]
+            },
+            {
+                "id": "flow",
+                "name": "Item flow",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    { "name": "OSP", "id": "osp" }, 
+                    { "name": "DCD", "id": "dcd" }, 
+                    { "name": "Field Ops", "id": "fields_ops" }, 
+                    { "name": "TOW", "id": "tow" }, 
+                    { "name": "LLI", "id": "lli" }, 
+                    { "name": "TBX", "id": "tbx" }, 
+                    { "name": "FPSO", "id": "fpso" }, 
+                    { "name": "OSP RP", "id": "osp_rp" }, 
+                    { "name": "OSP DN", "id": "osp_dn" }, 
+                    { "name": "HHI", "id": "hhi" }, 
+                    { "name": "CSP", "id": "csp" }, 
+                    { "name": "Spé", "id": "spe" }, 
+                    { "name": "PMT", "id": "pmt" }, 
+                    { "name": "SPS", "id": "sps" }
+                ]
+            },
+            {
+                "id": "part_of_equipment",
+                "name": "Part of equipment",
+                "type": "select",
+                "group": "Catalogue",
+                "values": [
+                    { "name": "Unique", "id": "unique" }, 
+                    { "name": "Assembled", "id": "assembled" }
+                ]
+            },
+            {
+                "id": "order_quantity",
+                "name": "Order quantity",
+                "type": "text",
+                "group": "Catalogue"
+            },
+            {
+                "id": "packaging_quantity",
+                "name": "Packaging quantity",
+                "type": "text",
+                "group": "Catalogue"
+            },
+            {
+                "id": "price_information",
+                "name": "Price information",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    { "name": "Priced", "id": "priced" }, 
+                    { "name": "Not priced", "id": "not_priced" }
+                ]
+            },
+            {
+                "id": "rfq_delay",
+                "name": "RFQ delay",
+                "type": "select",
+                "group": "Procurement",
+                "values": [
+                    { "name": "Started", "id": "started" }, 
+                    { "name": "Completed", "id": "completed" }
+                ]
+            }
+        ]
+}
