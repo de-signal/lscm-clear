@@ -32,10 +32,6 @@ filters.tmp: {{filters.tmp | json}}
 										<div class="form-group">
 											<input type="text" ng-model="list.urlParams.reference" class="form-control">
 										</div>
-										<div class="form-group" ng-if="list.type === 'shipment' || list.type === 'shipmentIn' || list.type === 'shipmentOut'">
-											<label class="control-label">Vector reference</label>
-											<input type="text" ng-model="list.urlParams.vector_reference" class="form-control">
-										</div>
 									</fieldset>
 								</div>
 								
@@ -132,7 +128,7 @@ filters.tmp: {{filters.tmp | json}}
 							
 							<div class="row">
 							    <div class="col-md-12">
-									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listQuery(list.urlParams)">Load</button>
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
 								</div>
 							</div>
 						
@@ -211,37 +207,31 @@ filters.tmp: {{filters.tmp | json}}
 		<thead>
 			<tr>
 				<th ng-if="list.display.modifications"></th>
-				<th ng-if="listShipment"><h6><span>type</span></h6></th>
-				<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'reference'"></i>
+				<th><h6><a ng-click="listSort('element')"><span>element</span> 
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'element'"></i>
 					</a></h6></th>
-				<th ng-if="listShipment"><h6><a ng-click="listSort('chrono')"><span>chrono</span>
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'chrono'"></i>
-					</a></h6></th>
-				<th><h6><a ng-click="listSort('milestone')"><span>milestone</span>
+				<th><h6><a ng-click="listSort('milestone')"><span>milestone</span> 
 					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'milestone'"></i>
 					</a></h6></th>
-				<!--<th><h6><a ng-click="listSort('status')"><span>status</span>
-					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'status'"></i>
-					</a></h6></th>-->
-				<th><h6>conditions</h6></th>
-				<th ng-if="display.tracking"><h6>tracking</h6></th>
+				<th><h6><a ng-click="listSort('source')"><span>source</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'source'"></i>
+					</a></h6></th>
+				<th><h6><a ng-click="listSort('dest')"><span>destination</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'dest'"></i>
+					</a></h6></th>
+				<th><h6>date</h6></th>
+				<th><h6>user</h6></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr  ng-repeat="elm in list.elements" ng-click="go(elm.type, elm.id)" class="pointer over">
-				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectToggle(elm.id)" ng-checked="filters.tmp.ids.indexOf(elm.id) > -1" value="elm.id"></td>
-				<td ng-if="listShipment"><span class="label label-shipment">{{elm.specifications_shipment.type}}</span></td>
-				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></td>
-				<td ng-if="listShipment"><small>{{elm.specifications_shipment.chrono}}</small></td>
-				<td class="capitalize"><strong><small>{{elm.milestone}}</small></strong></td>
-				<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
-				<td><ul class="inline">
-				<li ng-repeat="condition in elm.required">
-				<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
-				</li>
-				</ul></td>
-				<td ng-if="display.tracking"><i class="icon" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="tracking"></i></td>
+			<tr  ng-repeat="move in list.elements" ng-click="go(move.related_to.type, move.related_to.id)" class="pointer over">
+				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectToggle(move.id)" ng-checked="filters.tmp.ids.indexOf(move.id) > -1" value="move.id"></td>
+				<td><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[move.related_to.type]">{{move.related_to.reference}}</span></td>
+				<td><small>{{move.related_to.milestone}}</small></td>
+				<td><small>{{move.zones.source.name}}</small></td>
+				<td><small>{{move.zones.dest.name}}</small></td>
+				<td><small>{{move.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+				<td><small>{{move.user.first_name + " " + move.user.last_name}}</small></td>
 			</tr>
 		</tbody>
 	</table>

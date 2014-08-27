@@ -1,5 +1,8 @@
 { 
-	"format": "elements", 
+	"format": "movements", 
+	"type": "movement",
+	"id": "movement",  
+	"listCode": "M", 
 	"display": { 
 		"filters" : true, 
 		"tracking": true, 

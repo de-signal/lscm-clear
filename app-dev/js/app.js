@@ -25,6 +25,8 @@ angular.module('clearApp', [ 'chieffancypants.loadingBar', 'http-auth-intercepto
 		$routeProvider.when('/documents/ir/:id', {templateUrl: 'partials/documents-ir.html', controller: 'DocumentsIrCtrl'});
 		$routeProvider.when('/documents/ncr/:id', {templateUrl: 'partials/documents-ncr.html', controller: 'DocumentsNcrCtrl'});
 		$routeProvider.when('/documents/pod/:id', {templateUrl: 'partials/documents-pod.html', controller: 'DocumentsPodCtrl'});
+		$routeProvider.when('/warehouses', {templateUrl: 'partials/warehouses.html', controller: 'WarehousesCtrl'});
+		$routeProvider.when('/warehouses/:id', {templateUrl: 'partials/warehouse.html', controller: 'WarehouseCtrl'});
 		$routeProvider.when('/add-order', {templateUrl: 'partials/elements-order-add.html', controller: 'ElementsOrderAddCtrl'});
 		$routeProvider.when('/alerts', {templateUrl: 'partials/alerts.html', controller: 'AlertsCtrl', reloadOnSearch: false});
 		$routeProvider.when('/:type/', {templateUrl: 'partials/elements.html', controller: 'ElementsCtrl', reloadOnSearch: false});

@@ -1,0 +1,42 @@
+<div class="header bg-generic bg-inspectionReport">
+	<h1 class="container">
+		<i class="icon i-forklift"></i> Warehouses
+	</h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+			</div>
+			
+			<div class="margin-top" ng-show="loaded">
+				<div ng-repeat="warehousesGroup in warehousesGroupBy4" class="row">
+				    <div ng-repeat="warehouse in warehousesGroup" class="col-md-3">
+				    	<div class="element margin-top">
+							<h2>{{warehouse.name}} <a class="btn" alt="Warehouse details"><i class="icon i-external-link"></i></a></h2>
+							<h6>address</h6>
+							<p>{{warehouse.address | json}}</p>
+							<h6>contact</h6>
+							<p>{{warehouse.user | json}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="container margin-top">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>movements</h3>
+		</div>
+	</div>
+	<div class="row" ng-controller="ListCtrl">
+	    <div class="col-md-12" ng-include="'partials/warehouses-tpl-movements.html'">
+		
+		</div><!--/col-->
+	</div><!--/row-->
+</div><!--/container-->

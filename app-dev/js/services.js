@@ -90,11 +90,11 @@ angular.module('clearApp.services', ['ngResource'])
 		}
 	})
 	
-	.factory('ClearList', ['$filter', '$rootScope', '$q', 'toaster', 'Utils', 'ClearToken', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Medias', 'FiltersMedias', 'Alerts', 'FiltersAlerts', 'Dashboard', function($filter, $rootScope, $q, toaster, Utils, ClearToken, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Medias, FiltersMedias, Alerts, FiltersAlerts, Dashboard){
+	.factory('ClearList', ['$filter', '$rootScope', '$q', 'toaster', 'Utils', 'ClearToken', 'E1', 'E2', 'ElmsOrder', 'FiltersOrder', 'ElmsShipment', 'FiltersShipment', 'ElmsBox', 'FiltersBox', 'ElmsItem', 'FiltersItem', 'IRs', 'FiltersIRs', 'PODs', 'FiltersPODs', 'NCRs', 'FiltersNCRs', 'Archives', 'FiltersArchives', 'Medias', 'FiltersMedias', 'Alerts', 'FiltersAlerts', 'Dashboard', 'WarehouseAreasMoves', 'FiltersWarehouseAreasMoves', 'WarehousesMoves', 'FiltersWarehousesMoves', function($filter, $rootScope, $q, toaster, Utils, ClearToken, E1, E2, ElmsOrder, FiltersOrder, ElmsShipment, FiltersShipment, ElmsBox, FiltersBox, ElmsItem, FiltersItem, IRs, FiltersIRs, PODs, FiltersPODs, NCRs, FiltersNCRs, Archives, FiltersArchives, Medias, FiltersMedias, Alerts, FiltersAlerts, Dashboard, WarehouseAreasMoves, FiltersWarehouseAreasMoves, WarehousesMoves, FiltersWarehousesMoves){
 		
 		return {
 			listElementsLoad: function (listConfig) {
-				var resources = { "1": E1, "2": E2, "5": Dashboard, "10": ElmsOrder, "11": ElmsShipment, "12": ElmsBox, "13": ElmsItem, "20": IRs, "21": PODs, "22": NCRs, "23": Archives, "24": Medias, "30": Alerts }; 
+				var resources = { "1": E1, "2": E2, "5": Dashboard, "6": Alerts, "10": ElmsOrder, "11": ElmsShipment, "12": ElmsBox, "13": ElmsItem, "20": IRs, "21": PODs, "22": NCRs, "23": Archives, "24": Medias, '30': WarehousesMoves, '31': WarehouseAreasMoves }; 
 				var list = listConfig;
 				var q=$q.defer();
 				var listQuery = { 'type': listConfig.type }; 
@@ -129,7 +129,7 @@ angular.module('clearApp.services', ['ngResource'])
 				return q.promise;
 			},
 			listFiltersLoad: function(listConfig) { 
-				var resources = { "1": E1, "2": E2, "10": FiltersOrder, "11": FiltersShipment, "12": FiltersBox, "13": FiltersItem, "20": FiltersIRs, "21": FiltersPODs, "22": FiltersNCRs, "23": FiltersArchives, "24": FiltersMedias, "30": FiltersAlerts }; 
+				var resources = { "1": E1, "2": E2, "6": FiltersAlerts, "10": FiltersOrder, "11": FiltersShipment, "12": FiltersBox, "13": FiltersItem, "20": FiltersIRs, "21": FiltersPODs, "22": FiltersNCRs, "23": FiltersArchives, "24": FiltersMedias, "30": FiltersWarehousesMoves, "31": FiltersWarehouseAreasMoves }; 
 				var that = this;
 				var filters = {}; 
 				var q=$q.defer();
@@ -289,52 +289,57 @@ angular.module('clearApp.services', ['ngResource'])
 	})
 			
 	.factory('ClearUrl', ['$rootScope', '$location', 'Utils', function($rootScope, $location, Utils){
-		
-		var parentReady, listsReady=[]; 
-		
+		var lists = [];
 		return {
-			listsReady: function(p) {
-				if (p == 'init') { 
-					parentReady=false; listsReady = [] 
-				} else if (p == 'parent') { 
-					parentReady=true; 
-					for (var i in listsReady) {
-						$rootScope.$broadcast('event:listReady_' + listsReady[i], listsReady[i]);
+			listReady: function(p, param) {
+				
+				var ready = function(list) {
+					if (list.id && list.conf) {
+						$rootScope.$broadcast('event:listReady_' + list.id, list.conf);
 					}
-				} else { 
-					listsReady.push(p); 
-					if (parentReady) $rootScope.$broadcast('event:listReady_' + p, p);
-				} 
+				}
+				if (p === 'init') { 
+					lists = []; 
+					for (var i in param) {
+						lists[param[i]] = {};
+					}
+				} else if (p === 'conf') { 
+					lists[param.id].conf = param;
+					ready(lists[param.id]); 
+				} else if (p === 'id') { 
+					lists[param.id].id = param.id;
+					ready(lists[param.id]); 
+				}
 			}, 
-			listsUrlSet: function(urlParams, listConfig) {
+			listsUrlSet: function(urlParams, listConf) {
 				var urlPage = $location.search();
 				
-				if (listConfig.listCode) {
+				if (listConf.listCode) {
 					var urlList = {}		
 					for (var i in urlPage) {
 						var code = i.slice(1,2); 
-						if (code === listConfig.listCode) { 
+						if (code === listConf.listCode) { 
 							var param = i.slice(3, i.length); 
 							urlList[param] = urlPage[i]; 
 							delete urlPage[i]; 
 						}
 					}
 					if (Utils.isEmpty(urlParams)) urlParams = urlList; 
-					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					urlParams = Utils.collect(listConf.urlInit, urlParams); 
 					
 					for (i in urlParams) {
-						urlPage['_' + listConfig.listCode + '_' + i] = urlParams[i]; 
+						urlPage['_' + listConf.listCode + '_' + i] = urlParams[i]; 
 					}
 					$location.search(urlPage);
 				} else {
 					if (Utils.isEmpty(urlParams)) urlParams = urlPage; 
-					urlParams = Utils.collect(listConfig.urlInit, urlParams); 
+					urlParams = Utils.collect(listConf.urlInit, urlParams); 
 					$location.search(urlParams);
 				} 
 //				if (urlReplace) 
 				$location.replace();			
-				listConfig.urlParams = urlParams; 	
-				return listConfig; 
+				listConf.urlParams = urlParams; 	
+				return listConf; 
 			}
 		}
 	}])
@@ -900,6 +905,24 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('Alerts', ['$resource', function($resource){
 		return $resource('json/alerts.json');
 	}])
+	.factory('Warehouse', ['$resource', function($resource){
+		return $resource('json/warehouse.json');
+	}])
+	.factory('Warehouses', ['$resource', function($resource){
+		return $resource('json/warehouses.json');
+	}])
+	.factory('WarehouseAreasMoves', ['$resource', function($resource){
+		return $resource('json/warehouse_areas_moves.json');
+	}])
+	.factory('FiltersWarehouseAreasMoves', ['$resource', function($resource){
+		return $resource('json/warehouse_areas_moves_filters.json');
+	}])
+	.factory('WarehousesMoves', ['$resource', function($resource){
+		return $resource('json/warehouses_moves.json');
+	}])
+	.factory('FiltersWarehousesMoves', ['$resource', function($resource){
+		return $resource('json/warehouses_moves_filters.json');
+	}])
 	.factory('FiltersAlerts', ['$resource', function($resource){
 		return $resource('json/alerts_filters.json');
 	}])
@@ -948,8 +971,11 @@ angular.module('clearApp.services', ['ngResource'])
 	.factory('Bugs', ['$resource', function($resource){
 		return $resource('json/bugs.json');
 	}])
-	.factory('ElmsListsConfig', ['$resource', function($resource){
+	.factory('ElmsConf', ['$resource', function($resource){
 		return $resource('json/elms_conf.json');
+	}])
+	.factory('WarehouseMovesConf', ['$resource', function($resource){
+		return $resource('json/warehouse_moves_conf.json');
 	}])
 	.factory('AlertsConfig', ['$resource', function($resource){
 		return $resource('json/alerts_conf.json');
@@ -958,7 +984,15 @@ angular.module('clearApp.services', ['ngResource'])
 		return $resource('json/documents_conf.json');
 	}])
 	.factory('Elm', ['$resource', function($resource){
-		return $resource('json/elm.json', 
+		return $resource('json/elm_shipment.json', 
+			{}, 
+			{
+				update: { method: 'PUT' }, 
+				updateList: { method: 'PUT', isArray: true }
+			});
+	}])
+	.factory('ElmItem', ['$resource', function($resource){
+		return $resource('json/elm_item.json', 
 			{}, 
 			{
 				update: { method: 'PUT' }, 

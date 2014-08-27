@@ -52,6 +52,10 @@ footer {
 	text-transform: capitalize;
 }
 
+.img-full {
+	max-width: 100%;
+}
+
 @media (min-width: 992px) {
 	.content {
 		padding-top: 65px;
@@ -1414,10 +1418,6 @@ h5 .badge-parent {
 }
 
 /* T V  */
-.tv .static-links {
-	display: none;
-}
-
 .tv .content {
 	padding-top: 0px;
 }
