@@ -901,7 +901,7 @@ angular.module('clearApp.controllers', [])
 		});
 		$scope.open = function (item) {            
 			var modalInstance = $modal.open({
-				templateUrl: 'partials/document-ir-modal-img.html',
+				templateUrl: 'partials/documents-ir-modal-img.html',
 				controller: 'DocumentIrModalImgCtrl',
 				resolve: {
 				  item: function () {
@@ -947,7 +947,7 @@ angular.module('clearApp.controllers', [])
 		$scope.open = function (doc, user, type) {            
 			if (doc.status != 'closed') {
 				var modalInstance = $modal.open({
-					templateUrl: 'partials/document-ncr-modal-msg.html',
+					templateUrl: 'partials/documents-ncr-modal-msg.html',
 					controller: 'DocumentNcrModalMsgCtrl',
 					resolve: {
 					  doc: function () {
@@ -1011,34 +1011,6 @@ angular.module('clearApp.controllers', [])
 			$scope.doc = doc;
 			$scope.loaded = true;
 		});
-	}])
-	
-	.controller('WarehousesCtrl', ['$scope', '$routeParams', 'ClearUrl', 'ClearAlert', 'Utils', 'AlertsConfig', '$modal', function($scope, $routeParams, ClearUrl, ClearAlert, Utils, AlertsConfig, $modal) {
-		
-		ClearUrl.listsReady('init'); 
-		
-		$scope.listsConfig = [];
-		AlertsConfig.get( function(config) {
-			$scope.listsConfig[0] = config; 
-			if ($routeParams.static) {
-				$scope.listsConfig[0].resource = '30';
-			} else { 
-				$scope.listsConfig[0].resource = '2'; 
-			}
-			
-			$scope.listsConfig[0].type = 'alert';
-			$scope.listsConfig[0].id = "alerts";
-			$scope.page= {'name': 'Alerts', 'type': 'alert' };
-			$scope.$broadcast('event:ListInit', $scope.listsConfig[0].id);
-			ClearUrl.listsReady('parent'); 
-		});
-		
-		$scope.$on('event:urlSet', function(event, urlParams, listId) {
-			$scope.$broadcast('event:listLoad_' + listId, ClearUrl.listsUrlSet(urlParams, $scope.listsConfig[0]));
-		});
-		
-		$scope.alertModalEdit = ClearAlert.alertModalEdit; 
-		$scope.alertModalDelete = ClearAlert.alertModalDelete;
 	}])
 	
 	.controller('GuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {

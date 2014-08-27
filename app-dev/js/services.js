@@ -662,7 +662,7 @@ angular.module('clearApp.services', ['ngResource'])
 		return {
 			alertModalEdit: function(alerts, alert, user) { 
 				var modalInstance = $modal.open({
-					templateUrl: 'partials/alert-modal-edit.html',
+					templateUrl: 'partials/alerts-modal-edit.html',
 					controller: 'AlertModalEditCtrl',
 					resolve: {
 					  alerts: function () {
@@ -684,7 +684,7 @@ angular.module('clearApp.services', ['ngResource'])
 			}, 
 			alertModalDelete: function(alerts, alert) {
 				var modalInstance = $modal.open({
-					templateUrl: 'partials/alert-modal-delete.html',
+					templateUrl: 'partials/alerts-modal-delete.html',
 					controller: 'AlertModalDeleteCtrl',
 					resolve: { 
 					  alerts: function () {
@@ -746,7 +746,7 @@ angular.module('clearApp.services', ['ngResource'])
 		return {
 			documentModalUpload: function(type, user) { 
 				var modalInstance = $modal.open({
-					templateUrl: 'partials/document-modal-upload.html',
+					templateUrl: 'partials/documents-modal-upload.html',
 					controller: 'DocumentModalUploadCtrl',
 					resolve: {
 					  type: function () {

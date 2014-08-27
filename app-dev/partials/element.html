@@ -278,7 +278,7 @@
 			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
 			        <tab-heading><h4 class="capitalize">{{related.name}} ({{related.quantity}})</h4></tab-heading>
 			        <span ng-controller="ListCtrl">
-			            <span ng-include="'partials/element-tpl-list.html'" onload="listInit(related.type)"></span>
+			            <span ng-include="'partials/elements-tpl-list.html'" onload="listInit(related.type)"></span>
 			        </span>
 			    </tab>
             </tabset>			
