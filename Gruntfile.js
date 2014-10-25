@@ -11,27 +11,29 @@ module.exports = function (grunt) {
 	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
 
-	// Time how long tasks take. Can help when optimizing build times
-	require('time-grunt')(grunt);
+  // Time how long tasks take. Can help when optimizing build times
+  require('time-grunt')(grunt);
+
+	var modRewrite = require('connect-modrewrite');
 
 	// Define the configuration for all the tasks
 	grunt.initConfig({
 
 		// Update grunt packages
 		devUpdate: {
-	        main: {
-	            options: {
-	                updateType: 'prompt', //just report outdated packages
-	                reportUpdated: true, //don't report already updated packages
-	                semver: true, //use package.json semver rules when updating
-	                packages: { //what packages to check
-	                    devDependencies: true, //only devDependencies
-	                    dependencies: false
-	                },
-	                packageJson: null //find package.json automatically
-	            }
-	        }
-	    },
+			main: {
+				options: {
+					updateType: 'prompt', //just report outdated packages
+					reportUpdated: true, //don't report already updated packages
+					semver: true, //use package.json semver rules when updating
+					packages: { //what packages to check
+						devDependencies: true, //only devDependencies
+						dependencies: false
+					},
+					packageJson: null //find package.json automatically
+				}
+			}
+		},
 
 		// Project settings
 		path: {
@@ -84,7 +86,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-
 		copy: {
 			install: { 
 				files: [
@@ -97,6 +98,7 @@ module.exports = function (grunt) {
 							'angular-cookies/angular-cookies.js', 
 							'angular-route/angular-route.js', 
 							'angular-resource/angular-resource.js', 
+							'angular-mocks/angular-mocks.js', 
 							'angular-bootstrap/ui-bootstrap-tpls.js',
 							'angular-http-auth/src/http-auth-interceptor.js', 
 							'ng-file-upload/angular-file-upload-html5-shim.js', 
@@ -105,22 +107,11 @@ module.exports = function (grunt) {
 							'd3/d3.js', 
 							'nvd3/nv.d3.js', 
 							'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js', 
-							'angular-loading-bar/build/loading-bar.js', 
-							'planetary.js/dist/planetaryjs.js',
-							'topojson/topojson.js' 
+							'angular-loading-bar/build/loading-bar.js' 
 						],
 						dest: 'app-dev/lib/js',
 						flatten: true
 					},
-					{
-						expand: true,
-						cwd: 'app-dev/components/',
-						src: [
-							'planetary.js/dist/world-110m.json'
-						],
-						dest: 'app-dev/lib/json',
-						flatten: true
-					}, 
 					{
 						expand: true,
 						cwd: 'app-dev/components/',
@@ -165,17 +156,9 @@ module.exports = function (grunt) {
 					dest: 'app/css/fonts',
 					src: [ 'css/fonts/*']
 				}]
-			}, 
-			hack: { // remove two folder-levels because of usemin mis-understanding of css relative path
-				files: [{
-					expand: true,
-					dot: true,
-					cwd: 'app/app/css',
-					dest: 'app/css',
-					src: [ '*.css']
-				}]
 			}
 		}, 
+
 		processhtml: {
 			options: {
 				commentMarker: 'update', 
@@ -187,18 +170,19 @@ module.exports = function (grunt) {
 			}
 		},
 
-		// Allow the use of non-minsafe AngularJS files. Automatically makes it
-	    // minsafe compatible so Uglify does not destroy the ng references
-	    ngmin: {
-	      dist: {
-	        files: [{
-	          expand: true,
-	          cwd: '.tmp/concat/js',
-	          src: '*.js',
-	          dest: '.tmp/concat/js'
-	        }]
-	      }
-	    },
+
+		preprocess: {
+			js : {
+				src : [ '.tmp/concat/js/app.js' ],
+				options: {
+					inline : true,
+					context : {
+						DEBUG: false
+					}
+				}
+			}
+		},
+
 		// The following *-min tasks produce minified files in the dist folder
 		imagemin: {
 			app: {
@@ -227,14 +211,12 @@ module.exports = function (grunt) {
 			}
 		},
 		// Renames files for browser caching purposes
-		rev: {
-			app: {
-				files: {
-					src: [
-						'app/js/{,*/}*.js',
-						'app/css/{,*/}*.css'
-					]
-				}
+		filerev: {
+			files: {
+				src: [
+					'app/js/{,*/}*.js',
+					'app/css/{,*/}*.css'
+				]
 			}
 		},
 
@@ -275,17 +257,52 @@ module.exports = function (grunt) {
 		}, 
 
 		'ftp-deploy': {
-		  app: {
-		    auth: {
-		      host: 'ftp.ofon2.com',
-		      port: 21,
-		      authKey: 'ofon2'
-		    },
-		    src: 'app/',
-		    dest: 'app/',
-		    exclusions: ['**/.DS_Store', '**/Thumbs.db']
-		  }
-		}
+			app: {
+			auth: {
+				host: 'ftp.ofon2.com',
+				port: 21,
+				authKey: 'ofon2'
+			},
+			src: 'app/',
+			dest: 'app/',
+			exclusions: ['**/.DS_Store', '**/Thumbs.db']
+			}
+		}, 
+
+		// The actual grunt server settings
+		connect: {
+			options: {
+				port: 9000,
+				livereload: 35729,
+				hostname: 'localhost', 
+				open: true
+			},
+			server: {
+				options: {
+					open: {
+						target: 'http://localhost:9000/app-dev/dashboard?s=1'
+					},
+					middleware: function (connect) {
+						return [
+							modRewrite(['^[^\\.]*$ /app-dev/index.html [L]']),
+							connect.static('.')
+						];
+					}
+				}
+			}
+		},
+
+		watch: {
+			dev: {
+				options: { livereload: true },
+				files: ['app-dev/js/{,*/}*.js', 'app-dev/partials/{,*/}*.html', 'app-dev/mock/*.js']
+			},
+			css: {
+				options: { livereload: true },
+				files: ['app-dev/scss/*.scss'],
+				tasks: ['default'],
+			}
+		},
 
 	});
 
@@ -306,18 +323,22 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('app', [
 		'clean:app',
-    	'useminPrepare',
+		'useminPrepare',
+		'concat:generated',
+		'preprocess:js',
 		'imagemin:app',
-		'concat',
 		'copy:app',
 		'processhtml:app',
-	    'cssmin',
-	    'uglify',
-		'rev',
-    	'usemin',
+		'cssmin:generated',
+		'uglify:generated',
+		'filerev',
+		'usemin',
 		'htmlmin:app',
-		'copy:hack',
-		'clean:hack', 
-		'ftp-deploy:app'
+		'clean:hack'
+	]);
+
+	grunt.registerTask('serve', [
+		'connect:server', 
+		'watch:dev'
 	]);
 };

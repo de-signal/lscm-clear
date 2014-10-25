@@ -1,0 +1,27 @@
+{ 
+	"format": "documents",
+	"display": { 
+		"filters" : true 
+	}, 
+	"urlInit": {
+		"sortBy": "status", 
+		"sortOrder": "ASC", 
+		"limit": 12
+	},
+	"filters": [
+		{ "name": "Related to",  "id": "related_to", "reference": "related_to", "type": "select", "subordinate": true, "children": [
+			{	"name": "Reference",  "id": "related_reference", "reference": "related_reference", "type": "text"}
+		]}, 
+		{ "name": "Related element",  "id": "related_element", "reference": "related_element", "type": "select", "subordinate": true, "children": [
+			{	"name": "Element reference",  "id": "related_element_reference", "reference": "related_element_reference", "type": "text"}
+		]}, 
+		{ "name": "Location",  "id": "location", "reference": "locations", "type": "select" }, 
+		{ "name": "Name",  "id": "name", "reference": "name", "type": "text" }, 
+		{ "name": "User",  "id": "user", "reference": "users", "type": "select" }, 
+		{ "name": "Satus",  "id": "status", "reference": "statuses", "type": "select" }, 
+		{ "name": "Collection",  "id": "collection", "reference": "collections", "type": "select" }, 
+		{ "name": "Delivery",  "id": "delivery", "reference": "deliveries", "type": "select" }, 
+		{ "name": "From",  "id": "from", "type": "date"}, 
+		{ "name": "To",  "id": "to", "type": "date"} 
+	]
+}

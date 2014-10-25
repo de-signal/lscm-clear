@@ -1,3 +1,6 @@
+/* @override 
+	http://localhost/lscm-clear.com/app-tmp/pdf/css/pdf.css */
+
 @font-face {
     font-family: 'Roboto';
     src: url('../fonts/Roboto-Regular-webfont.eot');
@@ -187,8 +190,9 @@ h2 {
 h3 {
 	font-size: 8pt;
 	border-bottom: 1px solid black;
-	padding-bottom: 6pt;
+	padding-bottom: 8pt;
 	margin-bottom: 0;
+	padding-top: 8pt;
 }
 h4 {
 	font-size: 8pt;
@@ -237,6 +241,7 @@ p {
 .sticky {
 	position: absolute;
 	bottom: 0;
+	width: 100%;
 }
 .label {
 	color: white !important;
@@ -252,6 +257,13 @@ p {
 .label-danger {
   background-color: #d9534f !important;
 }
+.label-order {
+  background-color: #fd7f23 !important;
+}
+.label-shipment {
+  background-color: #82dd2a !important;
+}
+
 .chart {
 	height: 50mm;
 }
@@ -270,3 +282,35 @@ p {
 .timeline p {
 	margin-left: 40px;
 }
+.border {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding-top: 10px;
+	margin-top: 20px;
+}
+table {
+  border-collapse: collapse;
+}
+
+tbody {
+	border-bottom: 2px solid black;
+}
+tbody::before
+{
+  content: '';
+  display: block;
+  height: 8px;
+
+}
+.neg {
+	background-color: silver;
+	color: white;
+}
+.neg p {
+	padding-left: 8px;
+}
+object.img-responsive {
+  width: 100%    !important;
+  height: auto   !important;
+}
+

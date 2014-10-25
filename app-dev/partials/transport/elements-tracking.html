@@ -1,0 +1,36 @@
+<div class="header bg-generic">
+	<h1 class="container">Tracking</h1>
+</div>
+
+<div class="container margin-top">
+	<div class="row">	
+		<div class="col-md-6" ng-controller="ListCtrl">
+			<div class="header bg-order padding-left">
+				<h1><i class="icon i-element i-element-order"></i> Orders</h1>
+			</div>
+			<span ng-include="'partials/transport/elements-tpl-list.html'" onload="listInit('order')"></span>
+		</div>
+		
+		<div class="col-md-6" ng-controller="ListCtrl">
+			<div class="header bg-shipment padding-left">
+				<h1><i class="icon i-element i-element-shipment"></i> Shipments</h1>
+			</div>
+			<span ng-include="'partials/transport/elements-tpl-list.html'" onload="listInit('shipment')"></span>
+		</div>
+	</div>
+   	<div class="row margin-top">
+   		<div class="col-md-6" ng-controller="ListCtrl">
+   			<div class="header bg-box padding-left">
+   				<h1><i class="icon i-element i-element-box"></i> Boxes</h1>
+   			</div>
+   			<span ng-include="'partials/transport/elements-tpl-list.html'" onload="listInit('box')"></span>
+   		</div>
+   		<div class="col-md-6" ng-controller="ListCtrl">
+   			<div class="header bg-item padding-left">
+   				<h1><i class="icon i-element i-element-item"></i> Items</h1>
+   			</div>
+   			<span ng-include="'partials/transport/elements-tpl-list.html'" onload="listInit('item')"></span>
+   		</div>
+   	</div>
+</div>
+   
