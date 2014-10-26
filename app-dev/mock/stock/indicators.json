@@ -1,0 +1,244 @@
+[	
+	{	
+		"id": "figuresOfTheDay", 
+		"name": "figures of the day",
+		"datas": [
+			{
+				"key": "Items in warehouse", 
+				"value": 2504
+			}, 
+			{
+				"key": "Items without technical documentation", 
+				"value": 14
+			}, 
+			{
+				"key": "Item received today", 
+				"value": 76
+			}
+		]
+	},
+	{	
+		"id": "quantity",
+	    "name": "Quantity / warehouse",
+	    "datas": [
+	        {
+	            "key": "Lagos 1",
+	            "value": 236
+	        },
+	        {
+	            "key": "Lagos 2",
+	            "value": 120
+	        },
+	        {
+	            "key": "Abuja 1",
+	            "value": 200
+	        }
+	    ]
+	},
+	{	
+		"id": "shipMonth",
+	    "name": "Ship / Month",
+	    "datas": [
+	    		{
+	    		"key": "Ship",
+	    		"values": [ [ 1401587840000 , 20] , [ 1404179840000 , 12] , [ 1406858240000 , 10] , [ 1409536640000 , 15]]
+	    }]
+	},
+	{	
+		"id": "pullOutItemMonth",
+	    "name": "Pull out items / Month",
+	    "datas": [
+	    		{
+	    		"key": "Pull out",
+	    		"values": [ [ 1401587840000 , 256] , [ 1404179840000 , 23] , [ 1406858240000 , 187] , [ 1409536640000 , 320]]
+	    }]
+	},
+	{
+	    "id": "transferPerType",
+	    "name": "Transfer per type",
+	    "datas": [
+	    	{
+	    	    "key": "transfer",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "01/06/2014", 
+	    	    		"value": 25
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/07/2014", 
+	    	    		"value": 20
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/08/2014", 
+	    	    		"value": 18
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/09/2014", 
+	    	    		"value": 125
+	    	    	}
+	    	    ]
+	    	}, 
+	    	{
+	    	    "key": "pull in",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "01/06/2014", 
+	    	    		"value": 250
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/07/2014", 
+	    	    		"value": 198
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/08/2014", 
+	    	    		"value": 115
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/09/2014", 
+	    	    		"value": 225
+	    	    	}
+	    	    ]
+	    	}, 
+	    	{
+	    	    "key": "pull out",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "01/06/2014", 
+	    	    		"value": 120
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/07/2014", 
+	    	    		"value": 54
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/08/2014", 
+	    	    		"value": 210
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/09/2014", 
+	    	    		"value": 29
+	    	    	}
+	    	    ]
+	    	}, 
+	    	{
+	    	    "key": "inner",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "01/06/2014", 
+	    	    		"value": 300
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/07/2014", 
+	    	    		"value": 250
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/08/2014", 
+	    	    		"value": 225
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/09/2014", 
+	    	    		"value": 250
+	    	    	}
+	    	    ]
+	    	}
+	    ]
+	},
+	{	
+	    "id": "itemsArea",
+	    "name": "Items / Area",
+	    "datas": [
+	        {
+	            "key": "receiving",
+	            "value": 125
+	        },
+	        {
+	            "key": "Marshalling",
+	            "value": 225
+	        },
+	        {
+	            "key": "Inspection",
+	            "value": 98
+	        },
+	        {
+	            "key": "OSD",
+	            "value": 78
+	        },
+	        {
+	            "key": "Stock",
+	            "value": 512
+	        }
+	    ]
+	},
+	{
+	    "id": "replenishments",
+	    "name": "Replenishments",
+	    "datas": [
+	    	{
+	    	    "key": "Replenishments",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "01/06/2014", 
+	    	    		"value": 25
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/07/2014", 
+	    	    		"value": 20
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/08/2014", 
+	    	    		"value": 18
+	    	    	}, 
+	    	    	{
+	    	    		"key": "01/09/2014", 
+	    	    		"value": 125
+	    	    	}
+	    	    ]
+	    	}
+	    ]
+	},
+	{	
+		"id": "globalStockValue",
+	    "name": "Global Stock Value",
+	    "datas": [
+	    		{
+	    		"key": "Value",
+	    		"values": [ [ 1401587840000 , 350000] , [ 1404179840000 , 320000] , [ 1406858240000 , 330000] , [ 1409536640000 , 340000]]
+	    }]
+	},
+	{	
+		"id": "osdGlobalValue",
+	    "name": "OSD Global Value",
+	    "datas": [
+	    		{
+	    		"key": "Value",
+	    		"values": [ [ 1401587840000 , 25000] , [ 1404179840000 , 28500] , [ 1406858240000 , 22000] , [ 1409536640000 , 32000]]
+	    }]
+	},
+	{
+	    "id": "revenues",
+	    "name": "Revenues",
+	    "datas": [
+	    	{
+	    	    "key": "Replenishments",
+	    	    "values": [
+	    	    	{
+	    	    		"key": "GE", 
+	    	    		"value": 1200056
+	    	    	}, 
+	    	    	{
+	    	    		"key": "HHI", 
+	    	    		"value": 2569841
+	    	    	}, 
+	    	    	{
+	    	    		"key": "ABB", 
+	    	    		"value": 985647
+	    	    	}, 
+	    	    	{
+	    	    		"key": "SHI", 
+	    	    		"value": 3987500
+	    	    	}
+	    	    ]
+	    	}
+	    ]
+	}
+]

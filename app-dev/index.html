@@ -4,19 +4,19 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>CLEAR | LSCM</title>
-		<!-- build:css(.) /app/css/app.css -->
-		<link rel="stylesheet" href="/app-dev/css/app.css"/>
-		<link rel="stylesheet" href="/app-dev/lib/css/loading-bar.css"/>
-		<link rel="stylesheet" href="/app-dev/lib/css/toaster.css"/>
-		<link rel="stylesheet" href="/app-dev/css/styles.css"/>
-		<!-- endbuild -->
 		<!-- update:include ../app-dev/partials/base.html -->
 		<base href="/app-dev/">
 		<!-- /update -->
+		<!-- build:css css/app.css -->
+		<link rel="stylesheet" href="css/app.css"/>
+		<link rel="stylesheet" href="lib/css/loading-bar.css"/>
+		<link rel="stylesheet" href="lib/css/toaster.css"/>
+		<link rel="stylesheet" href="css/styles.css"/>
+		<!-- endbuild -->
 		
 	</head>
 
-	<body ng-controller="UserCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen, login: !loggedIn}">
+	<body ng-controller="MainCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen, login: !loggedIn, nomenu: nomenu}">
 
 		<div id="wrap">
 		
@@ -76,28 +76,41 @@
 								<li class="dropdown">
 									<a class="dropdown-toggle" href="#"><i class="icon i-user"></i> <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li><a href="user">{{user.first_name}} {{user.name}}</a></li>
+										<li><a href="user">{{user.first_name}} {{user.last_name}}</a></li>
 										<li><a ng-click="logout()">Logout</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="nav navbar-nav">
-								<li><a href="tracking">Tracking</a></li>
-								<li><a href="indicators">Indicators</a></li>
-								<li><a href="search">Search</a></li>
-								<li><a href="alerts">Alerts</a></li>
+								<li ng-if="sections.transport"><a href="transport/dashboard" ng-click="section = 'logistic'">Transport</a></li>
+								<li ng-if="sections.stock"><a href="stock/warehouses" ng-click="section = 'stock'">Stock</a></li>
+							</ul>
+							<hr />
+							<ul class="nav navbar-nav navbar-secondary" ng-if="section === 'transport'">
+								<li><a href="transport/dashboard">Dashboard</a></li>
+								<li><a href="transport/tracking">Tracking</a></li>
+								<li><a href="transport/indicators">Indicators</a></li>
+								<li><a href="transport/search">Search</a></li>
+								<li><a href="transport/alerts">Alerts</a></li>
 								<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li><a href="documents/ir">Inspection reports</a></li>
-										<li><a href="documents/ncr">Non-conformity reports</a></li>
-										<li><a href="documents/pod">Proofs of delivery</a></li>
-										<li><a href="documents/archive">Archives</a></li>
-										<li><a href="documents/media">Medias</a></li>
+										<li><a href="transport/documents/ir">Inspection reports</a></li>
+										<li><a href="transport/documents/ncr">Non-conformity reports</a></li>
+										<li><a href="transport/documents/pod">Proofs of delivery</a></li>
+										<li><a href="transport/documents/archive">Archives</a></li>
+										<li><a href="transport/documents/media">Medias</a></li>
 									</ul>
 								</li>
-								<li><a href="add-order">Add order</a>
-								</li>
+								<li><a href="transport/add-order">Add order</a></li>
 							</ul>
+							<ul class="nav navbar-nav navbar-secondary" ng-if="section === 'stock'">
+								<li><a href="stock/warehouses">Warehouses</a></li>
+								<li><a href="stock/movements">Movements</a></li>
+								<li><a href="stock/replenishments">Replenishments</a></li>
+								<li><a href="stock/items">Items</a></li>
+								<li><a href="stock/indicators">Indicators</a></li>
+							</ul>
+							
 						</div><!--/.nav-collapse -->
 					</div>
 				</div>
@@ -144,12 +157,25 @@
 		<script src="lib/js/nv.d3.js"></script>
 		<script src="lib/js/angularjs-nvd3-directives.js"></script>
 		<!-- endbuild -->
+		<!-- build:remove -->
+		<script src="lib/js/angular-mocks.js"></script>
+		<!-- endbuild -->
 		<!-- build:js js/app.js -->
 		<script src="js/app.js"></script>
 		<script src="js/filters.js"></script>
 		<script src="js/services.js"></script>
+		<script src="js/transport/services.js"></script>
+		<script src="js/stock/services.js"></script>
 		<script src="js/controllers.js"></script>
+		<script src="js/transport/controllers.js"></script>
+		<script src="js/stock/controllers.js"></script>
 		<script src="js/directives.js"></script>
+		<script src="js/transport/directives.js"></script>
+		<script src="js/stock/directives.js"></script>
 		<!-- endbuild -->
+		<!-- build:remove -->
+		<script src="mock/mock.js"></script>
+		<!-- endbuild -->
+		
 	</body>
 </html>

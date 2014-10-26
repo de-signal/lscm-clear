@@ -1,0 +1,33 @@
+{ 
+	"type": "item", 
+	"display": { 
+		"filters" : true, 
+		"tracking": false, 
+		"modifications": false
+	}, 
+	"urlInit": {
+		"sortBy": "status", 
+		"sortOrder": "ASC", 
+		"limit": 12
+	},
+	"filters": [
+		{ "name": "Reference", "id": "reference", "type": "text" }, 
+		{ "name": "Warehouse", "id": "warehouse_id", "type": "select", "reference": "warehouses", "children": 
+			[
+				{ "name": "Areas", "id": "area_id", "reference": "areas", "type": "select" }, 
+				{ "name": "from", "id": "location_from", "type": "date" },
+				{ "name": "to", "id": "location_to", "type": "date" }
+			] 
+		}, 
+		{ "name": "Property", "id": "property_id", "reference": "properties", "type": "select", "subordinate": true, "children": 
+			[
+				{ "name": "value", "id": "property_value_id", "type": "selectProperty" }, 
+				{ "name": "value", "id": "property_value", "type": "text" }, 
+				{ "name": "type", "id": "property_type" }, 
+				{ "name": "group", "id": "property_group" }, 
+				{ "name": "from", "id": "property_from", "type": "date" }, 
+				{ "name": "to", "id": "property_to", "type": "date" }
+			] 
+		}					
+	]
+}

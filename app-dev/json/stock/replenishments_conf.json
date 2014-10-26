@@ -1,0 +1,36 @@
+{ 
+	"type": "replenishment",
+	"id": "replenishment",
+	"display": { 
+		"filters" : false, 
+		"tracking": false, 
+		"modifications": false
+	}, 
+	"urlInit": {
+		"sortBy": "status", 
+		"sortOrder": "ASC", 
+		"limit": 12
+	},
+	"filters": [
+		{ "name": "Reference", "id": "reference", "type": "text" }, 
+		{ "name": "Vector reference", "id": "vector_reference", "type": "text"}, 
+		{ "name": "Milestone", "id": "milestone_id", "type": "select", "reference": "milestones", "children": 
+			[
+				{ "name": "in", "id": "milestone_planning", "reference": "plannings", "type": "select" }, 
+				{ "name": "status", "id": "milestone_status", "reference": "statuses", "type": "select" }, 
+				{ "name": "from", "id": "milestone_from", "type": "date" },
+				{ "name": "to", "id": "milestone_to", "type": "date" }
+			] 
+		}, 
+		{ "name": "Property", "id": "property_id", "reference": "properties", "type": "select", "subordinate": true, "children": 
+			[
+				{ "name": "value", "id": "property_value_id", "type": "selectProperty" }, 
+				{ "name": "value", "id": "property_value", "type": "text" }, 
+				{ "name": "type", "id": "property_type" }, 
+				{ "name": "group", "id": "property_group" }, 
+				{ "name": "from", "id": "property_from", "type": "date" }, 
+				{ "name": "to", "id": "property_to", "type": "date" }
+			] 
+		}					
+	]
+}

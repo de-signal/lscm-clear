@@ -1,0 +1,196 @@
+[
+    {
+    	"type": "shipment",
+    	"id": "static",
+    	"reference": "010101",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"tracking": "tracked",
+    	"milestone": "planned",
+    	"delay": -5,
+    	"status": "late",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "document name", "value": "5256869855", "message" : "Waiting for upload", "editable": true, "completed": true }, 
+    		{ "type": "checkbox", "name": "draft pick up request", "value": true, "message" : "Validated", "editable": true, "completed": false },
+    		{ "type": "date", "name": "date request", "value": 1375907474, "message" : "Select date", "editable": true, "completed": true },
+    		{ "type": "date", "name": "date 2", "message" : "Select date", "editable": true, "completed": true },
+    		{ "type": "text", "name": "input request name", "value": "text blah", "message" : "Fill the field", "editable": true, "completed": false },
+    		{ "type": "text", "name": "input request 2", "value": "text blah 2", "message" : "Fill the field", "editable": false, "completed": false },
+    		{ "type": "email", "name": "validation request", "value": "name@domain.com", "message" : "Waiting for response", "editable": true, "completed": true }, 
+    		{ "type": "link", "name": "Items Update", "value": "item", "message" : "125 items to update", "editable": true, "completed": true }
+    	]
+    },
+    {
+    	"type": "shipment",
+    	"id": "2",
+    	"reference": "0111010109292",
+    	"description": "Sed posuere consectetur est at lobortis.",
+    	"tracking": "tracked",
+    	"milestone": "in preparation",
+    	"delay": -3, 
+    	"status": "late",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "document name", "value": "5256869855", "message" : "Waiting for upload", "editable": true, "completed": true }, 
+    		{ "type": "checkbox", "name": "draft pick up request", "value": true, "message" : "Validated", "editable": true, "completed": false },
+    		{ "type": "date", "name": "date request", "value": 1375907474, "message" : "Select date", "editable": true, "completed": true },
+    		{ "type": "date", "name": "date 2", "message" : "Select date", "editable": true, "completed": true },
+    		{ "type": "text", "name": "input request name", "value": "text blah", "message" : "Fill the field", "editable": true, "completed": false },
+    		{ "type": "text", "name": "input request 2", "value": "text blah 2", "message" : "Fill the field", "editable": false, "completed": false },
+    		{ "type": "email", "name": "validation request", "value": "name@domain.com", "message" : "Waiting for response", "editable": true, "completed": true }, 
+    		{ "type": "link", "name": "Items Update", "value": "item", "message" : "125 items to update", "editable": true, "completed": true }
+    	]
+    }, 
+    {
+    	"type": "shipment",
+    	"id": "3",
+    	"reference": "0112110109292",
+    	"description": "Sed posuere consectetur est at lobortis.",
+    	"tracking": "tracked",
+    	"milestone": "in preparation",
+    	"delay": 2, 
+    	"status": "upcoming",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "document name", "id": "5256869855", "editable": true, "completed": true }, 
+    		{ "type": "checkbox", "name": "draft pick up request", "editable": true, "completed": true },
+    		{ "type": "date", "name": "date request", "value": "16/05/2013", "editable": false, "completed": true  },
+    		{ "type": "text", "name": "input request", "value": "text", "editable": true, "completed": false },
+    		{ "type": "email", "name": "validation request", "value": "name@domain.com", "editable": false, "completed": true },
+    		{ "type": "link", "name": "Shipments update", "value": "shipment", "editable": true, "completed": true },
+    		{ "type": "link", "name": "Boxes update", "value": "box", "editable": true, "completed": true }
+    	]
+    }, 
+    {
+    	"type": "shipment",
+    	"id": "4",
+    	"reference": "0112010109292",
+    	"description": "Sed posuere consectetur est at lobortis.",
+    	"tracking": "untracked",
+    	"milestone": "in preparation",
+    	"delay": 10, 
+    	"status": "processing",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "document name", "id": "5256869855", "editable": true, "completed": true }, 
+    		{ "type": "checkbox", "name": "draft pick up request", "editable": true, "completed": true },
+    		{ "type": "date", "name": "date request", "value": "16/05/2013", "editable": true, "completed": true  },
+    		{ "type": "text", "name": "input request", "value": "text", "editable": true, "completed": true },
+    		{ "type": "email", "name": "validation request", "value": "name@domain.com", "editable": true, "completed": true }
+    	]
+    }, 
+    {
+    	"type": "shipment",
+    	"id": "5",
+    	"reference": "0121010109292",
+    	"description": "Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus.",
+    	"tracking": "tracked",
+    	"milestone": "Programmed",
+    	"delay": -2, 
+    	"status": "late",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "text", "name": "Draft Material Collection Note", "editable": true, "completed": false }, 
+    		{ "type": "text", "name": "Draft Material Delivery Note", "editable": true, "completed": true }, 
+    		{ "type": "text", "name": "Draft pick up Request", "editable": false, "completed": true },
+    		{ "type": "date", "name": "Date Request", "editable": false, "completed": false },
+    		{ "type": "email", "name": "Validation request", "editable": true, "completed": true }
+    	]
+    },
+    {
+    	"type": "shipment",
+    	"id": "6",
+    	"reference": "0121010109292",
+    	"description": "Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus.",
+    	"tracking": "untracked",
+    	"milestone": "Programmed",
+    	"delay": 3, 
+    	"status": "upcoming",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "Out"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "Draft Material Collection Note", "editable": true, "completed": true }, 
+    		{ "type": "text", "name": "Draft Material Delivery Note", "editable": true, "completed": true }, 
+    		{ "type": "text", "name": "Draft pick up Request", "editable": true, "completed": true },
+    		{ "type": "date", "name": "Date Request", "editable": true, "completed": true },
+    		{ "type": "email", "name": "Validation request", "editable": true, "completed": true }
+    	]
+    },  
+    {
+    	"type": "shipment",
+    	"id": "7",
+    	"reference": "0131010109292",
+    	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna.",
+    	"tracking": "tracked",
+    	"milestone": "Departed",
+    	"delay": 5, 
+    	"status": "upcoming",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "Draft Material Delivery Note", "editable": true, "completed": false },
+    		{ "type": "text", "name": "Draft Material Collection Note", "editable": true, "completed": false },
+    		{ "type": "date", "name": "Date Request", "editable": true, "completed": true },
+    		{ "type": "email", "name": "Validation request", "editable": true, "completed": true }
+    	]
+    }, 
+    {
+    	"type": "shipment",
+    	"id": "8",
+    	"reference": "0141010109292",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"tracking": "tracked",
+    	"milestone": "Dispatched",
+    	"delay": 1, 
+    	"status": "upcoming",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "Out"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "Draft Material Delivery Note", "editable": true, "completed": false },
+    		{ "type": "text", "name": "Draft Material Collection Note", "editable": true, "completed": false },
+    		{ "type": "date", "name": "Date Request", "editable": true, "completed": true },
+    		{ "type": "email", "name": "Validation request", "editable": true, "completed": true }
+    	]
+    }, 
+    {
+    	"type": "shipment",
+    	"id": "9",
+    	"reference": "0151010109292",
+    	"description": "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac.",
+    	"tracking": "tracked",
+    	"milestone": "Customs Released",
+    	"delay": 7, 
+    	"status": "processing",
+    	"specifications_shipment": {
+    		"chrono": "4567865", 
+    		"type": "In"
+    	},  
+    	"required": [ 
+    		{ "type": "upload", "name": "Draft Material Delivery Note", "editable": true, "completed": true },
+    		{ "type": "text", "name": "Draft Material Collection Note", "editable": true, "completed": false },
+    		{ "type": "date", "name": "Date Request", "editable": true, "completed": true },
+    		{ "type": "email", "name": "Validation request", "editable": true, "completed": true }
+    	]
+    }
+]

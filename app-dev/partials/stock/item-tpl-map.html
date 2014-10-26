@@ -1,0 +1,21 @@
+<div ng-include="'img/stock/warehouse-map-3.svg'"></div>
+<div ng-if="rack" class="margin-top">
+	<div class="row">
+		<div class="col-md-6">
+			<h6>Rack storage</h6>
+			<div ng-include="'img/stock/item-rack.svg'"></div>
+		</div>
+		<div class="col-md-3">
+			<h6>section</h6>
+			<p>{{rack.section}}</p>
+			<h6>high</h6>
+			<p>{{rack.high}}</p>
+			<h6>bin</h6>
+			<p>{{rack.bin}}</p>
+		</div>
+		<div class="col-md-3">
+			<h6>qr code</h6>
+			<p>{{rack.qr_code}}</p>
+		</div>
+	</div>
+</div>

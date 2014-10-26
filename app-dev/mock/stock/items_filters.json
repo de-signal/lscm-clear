@@ -1,0 +1,156 @@
+{
+    "warehouses": [
+        { "name": "Lagos 1", "id": "01" },
+        { "name": "Lagos 2", "id": "02" },
+        { "name": "Abuja", "id": "03" }
+    ],
+    "statuses": [
+        { "name": "Default", "id": "default" }, 
+        { "name": "Late", "id": "late" }, 
+        { "name": "Upcoming", "id": "upcoming" }
+    ],
+    "areas": [
+			{ "name": "Entry control", "id": "A" }, 
+            { "name": "Receiving", "id": "B" }, 
+            { "name": "Marshalling", "id": "C" }, 
+            { "name": "OSD", "id": "D" }, 
+            { "name": "HL / ODC", "id": "E" }, 
+            { "name": "Climate control", "id": "F" }, 
+            { "name": "Dangerous goods", "id": "G" }, 
+            { "name": "Rack storage", "id": "H" }, 
+            { "name": "Inspection", "id": "I" }, 
+            { "name": "Packing", "id": "J" }, 
+            { "name": "Consolidation", "id": "K" }, 
+            { "name": "Shipping", "id": "L" }, 
+            { "name": "Exit control", "id": "M" }, 
+            { "name": "Preservation", "id": "N" }
+    ],
+    "properties": [
+            {
+                "id": "volum",
+                "name": "Volume (m³)",
+                "type": "text",
+                "group": "Technical details"
+            },
+            {
+                "id": "weight",
+                "name": "Weight (Kg)",
+                "type": "text",
+                "group": "Technical details"
+            },
+            {
+                "id": "shelf_width",
+                "name": "Shelf width",
+                "type": "text",
+                "group": "Technical details"
+            },
+            {
+                "id": "shelf_height",
+                "name": "Shelf height",
+                "type": "text",
+                "group": "Technical details"
+            },
+            {
+                "id": "shelf_depth",
+                "name": "Shelf depth",
+                "type": "text",
+                "group": "Technical details"
+            },
+            {
+                "id": "end_guarentee",
+                "name": "End guarantee",
+                "type": "date",
+                "group": "Technical details"
+            },
+            {
+                "id": "expiration_date",
+                "name": "Expiration date",
+                "type": "date",
+                "group": "Technical details"
+            },
+            {
+                "id": "item_category",
+                "name": "Item category",
+                "type": "select",
+                "group": "Technical details",
+                "values": [
+                    { "name": "N/A", "id": "n_a" },
+                    { "name": "Cat 1", "id": "cat1" },
+                    { "name": "Cat 2", "id": "cat2" }
+                ]
+            },
+            {
+                "id": "maintenance_period",
+                "name": "Maintenance period",
+                "type": "text",
+                "group": "Maintenance Policy"
+            },
+            {
+                "id": "last_maintenance",
+                "name": "Last maintenance",
+                "type": "date",
+                "group": "Maintenance Policy"
+            },
+            {
+                "id": "next_maintenance",
+                "name": "Next maintenance",
+                "type": "date",
+                "group": "Maintenance Policy"
+            },
+            {
+                "id": "maintenance_type",
+                "name": "Maintenance type",
+                "type": "select",
+                "group": "Maintenance Policy",
+                "values": [
+                    { "name": "N/A", "id": "n_a" },
+                    { "name": "Cat 1", "id": "cat1" },
+                    { "name": "Cat 2", "id": "cat2" }
+                ]
+            },
+            {
+                "id": "maintenance_executor",
+                "name": "Maintenance executor",
+                "type": "select",
+                "group": "Maintenance Policy",
+                "values": [
+                	{ "name": "N/A", "id": "n_a" }, 
+                    { "name": "At vendor", "id": "at_vendor" }, 
+                    { "name": "En route", "id": "en_route" }, 
+                    { "name": "In warehouse", "id": "in_warehouse" }, 
+                    { "name": "Port/Airport", "id": "port_airport" }, 
+                    { "name": "Client", "id": "client" }
+                ]
+            },
+            {
+                "id": "calibration_certs",
+                "name": "Calibration certs",
+                "type": "select",
+                "group": "Technical Docs",
+                "values": [
+                	{ "name": "Yes", "id": "true" }, 
+                    { "name": "No", "id": "false" }
+                ]
+            },
+            {
+                "id": "presure_test_certs",
+                "name": "Presure test certs",
+                "type": "select",
+                "group": "Technical Docs",
+                "values": [
+                	{ "name": "Yes", "id": "true" }, 
+                    { "name": "No", "id": "false" }
+                ]
+            },
+            {
+                "id": "equipment_operations_manual",
+                "name": "Equipment operations manual",
+                "type": "select",
+                "group": "Technical Docs",
+                "values": [
+                	{ "name": "Yes", "id": "true" }, 
+                    { "name": "No", "id": "false" }
+                ]
+            }
+        ]
+}

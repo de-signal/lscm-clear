@@ -39,6 +39,27 @@ footer {
 #push {
 	height: 190px;
 }
+hr {
+	clear: both;
+	margin: 0 -15px;
+	border-top: 1px dotted silver;
+}
+
+.navbar-nav, hr {
+	margin: 0 -15px;
+}
+
+@media (min-width: 768px) {
+	.navbar-nav {
+		float: left;
+		margin: 0;
+	}
+	hr {
+		margin: 0; 
+	} 
+}
+
+
 .navbar-collapse {
 	max-height: inherit;
 }
@@ -46,6 +67,10 @@ footer {
 .navbar-fixed-bottom {
 	position:relative;
 	margin-bottom: 0px;
+	border-width: 0;
+}
+.navbar-secondary {
+	clear: both;
 }
 
 .capitalize {
@@ -58,7 +83,10 @@ footer {
 
 @media (min-width: 992px) {
 	.content {
-		padding-top: 65px;
+		padding-top: 110px;
+	}
+	.nomenu .content {
+		padding-top: 56px;
 	}
 	.navbar-fixed-top,
 	.navbar-fixed-bottom {
@@ -240,14 +268,14 @@ h5 .badge  {
 	padding:2px 6px 1px;
 }
 
-h6, h3, text.nv-legend-text {
+h6, h3 {
 	text-transform: lowercase;
 	font-variant: small-caps;
 	letter-spacing: 0.08em;
 	text-rendering: auto;
 }
 
-h6, text.nv-legend-text {
+h6 {
 	font-size:14px;
 }
 h6 {
@@ -359,18 +387,16 @@ legend {
 	border-bottom-color: #9e9e8e;
 	color: #9e9e8e;
 }
-.navbar-brand {
-  padding-top:20px;
-}
+
 .navbar .nav > li > a {
-	padding:15px 15px 20px;
+	padding: 20px 15px 10px;
 	text-decoration: none;
 	text-shadow: 0 1px 0 #ffffff;
-	border-top: 10px solid white;
 	color: #9e9e8e;
+	border-bottom: 5px solid white;
 }
 .navbar .nav > li > a:hover {
-	border-top-color: #ffcb32;
+	border-bottom-color: #ffcb32;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -1134,29 +1160,26 @@ fieldset {
 .nvtooltip {
   position: absolute;
   background-color: rgba(255,255,255,1.0);
-  padding: 1px;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 0 none rgba(0,0,0,0);
   z-index: 10000;
-
-  font-family: Arial;
-  font-size: 13px;
-  text-align: left;
   pointer-events: none;
 
   white-space: nowrap;
-
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
+font-variant: normal;}
 
 /*Give tooltips that old fade in transition by
 	putting a "with-transitions" class on the container div.
 */
-.nvtooltip.with-transitions, .with-transitions .nvtooltip {
+/*.nvtooltip.with-transitions, .with-transitions .nvtooltip {
   transition: opacity 250ms linear;
   -moz-transition: opacity 250ms linear;
   -webkit-transition: opacity 250ms linear;
@@ -1223,7 +1246,7 @@ fieldset {
 .nvtooltip-pending-removal {
   position: absolute;
   pointer-events: none;
-}
+}*/
 
 
 /* G U I D E L I N E S  */ 
@@ -1303,7 +1326,7 @@ h5 .badge-parent {
 }
 
 .elements-update .element {
-	background:url(../img/clear_guideline_arrow_neg_bottom_s.svg) center top no-repeat rgba(223, 223, 215, 0.75);
+	background:url(../img/guidelines/clear_guideline_arrow_neg_bottom_s.svg) center top no-repeat rgba(223, 223, 215, 0.75);
 }
 
 .elements-download .element {
@@ -1311,7 +1334,7 @@ h5 .badge-parent {
 }
 .elements-download .element:after {
 	display: inline-block;
-	background: url(../img/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
+	background: url(../img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
 	height: 50px;
 	content: "";
 	position: absolute;
@@ -1325,15 +1348,15 @@ h5 .badge-parent {
 	display: none;
 }
 .plan-left-arrow .bloc1, .plan-right-arrow .bloc1 {
-	background:url(../img/clear_guideline_arrow_end_top.svg) center bottom no-repeat;
+	background:url(../img/guidelines/clear_guideline_arrow_end_top.svg) center bottom no-repeat;
 	padding-bottom: 40px;
 }
 
 .plan-left-arrow .bloc2, .plan-right-arrow .bloc2 {
-	background:url(../img/clear_guideline_arrow_line_vert.svg) center no-repeat;
+	background:url(../img/guidelines/clear_guideline_arrow_line_vert.svg) center no-repeat;
 }
 .plan-left-arrow .bloc3, .plan-right-arrow .bloc3 {
-	background:url(../img/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
+	background:url(../img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
 	height:50px;
 	margin-bottom: 20px;
 }
@@ -1355,23 +1378,23 @@ h5 .badge-parent {
 
 @media (min-width: 992px) {
 	.plan-left-arrow .bloc1 {
-		background:url(../img/clear_guideline_arrow_end_left.svg) right 40px no-repeat;
+		background:url(../img/guidelines/clear_guideline_arrow_end_left.svg) right 40px no-repeat;
 	}
 	
 	.plan-left-arrow .bloc2, .plan-right-arrow .bloc2 {
-		background:url(../img/clear_guideline_arrow_line.svg) center 40px no-repeat;
+		background:url(../img/guidelines/clear_guideline_arrow_line.svg) center 40px no-repeat;
 	}
 	.plan-left-arrow .bloc3 {
-		background:url(../img/clear_guideline_arrow_right.svg) center 40px no-repeat;
+		background:url(../img/guidelines/clear_guideline_arrow_right.svg) center 40px no-repeat;
 		height:130px;
 		margin-bottom: 0;
 	}
 	.plan-right-arrow .bloc1 {
-		background:url(../img/clear_guideline_arrow_end_right.svg) left 40px no-repeat;
+		background:url(../img/guidelines/clear_guideline_arrow_end_right.svg) left 40px no-repeat;
 		float: right;
 	}
 	.plan-right-arrow .bloc3 {
-		background:url(../img/clear_guideline_arrow_left.svg) center 40px no-repeat;
+		background:url(../img/guidelines/clear_guideline_arrow_left.svg) center 40px no-repeat;
 		float: left;
 		height:130px;
 		margin-bottom: 0;
@@ -1577,6 +1600,56 @@ margin-bottom: 0;}
   -ms-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
 }
+
+
+/* stock/warehouse map */
+
+.warehouse-map-label {
+	
+	background-color: white;
+	position: absolute;
+	width: 150px;
+	padding: 15px 20px 5px;
+	margin-left: 35px;
+	-moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+	z-index: 1;
+	-webkit-transition: opacity 0.7s ease-out;
+	   -moz-transition: opacity 0.7s ease-out;
+	    -ms-transition: opacity 0.7s ease-out;
+	     -o-transition: opacity 0.7s ease-out;
+	        transition: opacity 0.7s ease-out;
+	opacity: 0;
+}
+
+.warehouse-map-label.visible {
+	opacity: 100;
+}
+
+
+.warehouse-map-label:after {
+content: '';
+position: absolute;
+top: -10px;
+left: 10px;
+border-bottom: 10px solid white;
+border-right: 10px solid transparent;
+border-left: 10px solid transparent;
+	z-index: 1;
+}
+
+.warehouse-map .chip {
+	font-family: 'Roboto'; 
+	font-size:18px; 
+	font-weight: 700;
+}
+.warehouse-map .area-name {
+	font-family: 'Roboto'; 
+	font-size:14px; 
+	font-weight: 700;
+}
+
 
 
 

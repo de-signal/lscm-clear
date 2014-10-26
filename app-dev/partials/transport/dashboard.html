@@ -1,0 +1,91 @@
+<div class="header bg-generic">
+	<h1 class="container">Dashboard</h1>
+</div>
+
+<div class="container margin-top">
+
+	<div class="row" ng-controller="ListCtrl">
+		<div class="col-md-12">	
+			<div class="header bg-shipment padding-left">
+				<h1><i class="icon i-element i-element-shipment"></i> Shipments</h1>
+			</div>
+			<table class="table table-condensed" >
+				<thead>
+					<tr>
+						<th><h6><a ng-click="listSort('reference')"><span>reference</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'reference'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('chrono')"><span>chrono</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'chrono'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('mode')"><span>mode</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'mode'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('milestone')"><span>milestone</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'milestone'"></i>
+							</a></h6></th>
+						<!--<th><h6><a ng-click="listSort('status')"><span>status</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'status'"></i>
+							</a></h6></th>-->
+						<th><h6>conditions</h6></th>
+						<th><h6><a ng-click="listSort('departure_location')"><span>departure</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'departure_location'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('departure_date')"><span>ETD</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'departure_date'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('arrival_location')"><span>arrival</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'arrival_location'"></i>
+							</a></h6></th>
+						<th><h6><a ng-click="listSort('arrival_date')"><span>ETA</span> 
+							<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'arrival_date'"></i>
+							</a></h6></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  ng-repeat="elm in list.elements" ng-click="go('transport/shipment', elm.id)" class="pointer over">
+						<td><span class="label label-shipment">{{elm.reference}}</span></td>
+						<td class="limit"><small>{{elm.chrono}}</small></td>
+						<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
+						<td class="capitalize"><strong><small>{{elm.milestone}}</small></strong></td>
+						<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
+						<td><ul class="inline">
+						<li ng-repeat="condition in elm.required">
+						<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
+						</li>
+						</ul></td>
+						<td class="limit"><small>{{elm.departure.location}}</small></td>
+						<td><small>{{elm.departure.date * 1000 | date:'dd.MM.yy'}}</small></td>
+						<td><small>{{elm.arrival.location}}</small></td>
+						<td><small>{{elm.arrival.date * 1000 | date:'dd.MM.yy'}}</small></td>
+					</tr>
+				</tbody>
+			</table>
+			<div ng-if="list.pagination.pagesCount>1">
+				<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+			</div>
+		</div> 	
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>reports</h3>
+			<table class="table table-condensed">
+				<thead>
+				<tr>
+					<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>info</h6></th><th><h6></h6></th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="report in reports">
+						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{report.type}}</td>
+						<td><strong>{{report.name}}</strong></td>
+						<td><span class="label label-default">{{report.info}}</span></td>
+						<td><a ng-href="{{report.url}}" class='btn btn-sm'>Download</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</div>

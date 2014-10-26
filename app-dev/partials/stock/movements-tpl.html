@@ -1,0 +1,210 @@
+<div class="margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div ng-show="loaded">
+
+	<div class="row hide">
+	    <div class="col-md-6">
+	    	<pre><small>
+list.urlParams: {{list.urlParams | json}}
+	    	</small></pre>
+	    </div>
+	    <div class="col-md-6">
+	    	<pre><small>
+filters.tmp: {{filters.tmp | json}}
+			</small></pre>
+	    </div><!--/col-->
+	</div><!--/row-->
+	<div class="row margin-top-s" ng-if="list.display.filters">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<accordion close-others="true">
+					    <accordion-group>
+					    	<accordion-heading>
+					    		Filters
+					    	</accordion-heading>
+					
+							<div class="row">
+								<div class="col-md-4">
+									<fieldset>
+										<legend>Item </legend>
+										<div class="form-group">
+											<label>Reference </label>
+											<input type="text" ng-model="list.urlParams.item_reference" class="form-control">
+										</div>
+									</fieldset>
+								</div>
+								
+								<div class="col-md-4">
+									<fieldset>
+										<legend>Movement </legend>
+										<div class="form-group">
+											<label class="control-label">Type</label>
+											
+											<select class="form-control" ng-model="list.urlParams.type_id" ng-options="type.id as type.name for type in filters.values.types"><option value="">---</option></select>
+										</div>
+										<fieldset ng-show="list.urlParams.type_id">
+											<div class="form-group">
+												<label class="control-label">Origin</label>
+												<select ng-model="list.urlParams.movement_origin" ng-options="origin.id as origin.name for origin in filters.values.origins" class="form-control"><option value="">---</option></select>
+											</div>
+											<div class="form-group">
+												<label class="control-label">Destination</label>
+												<select ng-model="list.urlParams.movement_destination" ng-options="destination.id as destination.name for destination in filters.values.destinations" class="form-control"><option value="">---</option></select>
+											</div>
+										</fieldset>
+									</fieldset>
+								</div>
+								
+								<div class="col-md-4">
+									<fieldset>
+										<legend>Date </legend>
+											<div class="form-group">
+												<label class="control-label">From</label>
+												<div class="input-group">
+													<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.movement_from.value" is-open="$parent.filters.date.movement_from.opened" show-weeks="false" max="filters.date.movement_to.value" ng-change="list.urlParams.movement_from = dateToTimestamp(filters.date.movement_from.value)" />
+													<span class="input-group-btn">
+														<button class="btn" ng-click="calOpen($event, 'movement_from')"><i class="icon i-condition-date"></i></button>
+													</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label">To</label>
+												<div class="input-group">
+													<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.movement_to.value" is-open="$parent.filters.date.movement_to.opened" show-weeks="false" min="filters.date.movement_from.value" ng-change="list.urlParams.movement_to = dateToTimestamp(filters.date.movement_to.value)" />
+													<span class="input-group-btn">
+														<button class="btn" ng-click="calOpen($event, 'movement_to')"><i class="icon i-condition-date"></i></button>
+													</span>
+												</div>
+											</div>
+										</fieldset>
+									</fieldset>
+								</div>
+								
+							</div>
+							
+							<div class="row">
+							    <div class="col-md-12">
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
+								</div>
+							</div>
+						
+						</accordion-group>
+						<accordion-group ng-if="list.display.modifications">
+					    	<accordion-heading>
+					    		Modifications
+					    	</accordion-heading>
+					
+							<div class="row">
+								<div class="col-md-4">
+									<legend>Selection </legend>
+									<div class="form-group">
+										<a class="btn btn-default btn-xs" ng-click="selectAll()">All</a>
+										<a class="btn btn-default btn-xs" ng-click="selectNone()">None</a>
+										<a class="btn btn-default btn-xs" ng-click="selectInverse()">Inverse</a>
+									</div>
+									<div class="form-group" ng-if="filters.tmp.selectGlobalBtn">
+										<a class="btn btn-default btn-xs" ng-click="selectGlobalOn()">Select {{list.pagination.elementsCount}} {{list.name}} </a>
+									</div>
+									<div ng-if="filters.tmp.selectGlobalConfirm">
+										{{list.pagination.elementsCount}} {{list.name}} selected.
+									</div>
+								</div>
+								<div class="col-md-8">
+									<legend>Property </legend>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Name</label>
+												<select class="form-control" ng-model="filters.tmp.propertyUpdate" ng-options="prop as prop.name group by prop.group for prop in filters.values.properties track by prop.name">
+													<option value="">---</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">{{filters.tmp.propertyUpdate.name}}</label>
+												<span ng-switch="filters.tmp.propertyUpdate.type">
+													<select class="form-control" ng-model="filters.tmp.propertyUpdate.value" ng-options="value.id as value.name for value in filters.tmp.propertyUpdate.values"  ng-switch-when="select">
+														<option value="">---</option>
+													</select>
+													<input class="form-control" type="text" ng-model="filters.tmp.propertyUpdate.value" ng-switch-when="text">
+													<div class="input-group" ng-switch-when="date">
+														<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.propertyUpdate.value" is-open="filters.date.propertyUpdate.opened" show-weeks="false" ng-change="filters.tmp.propertyUpdate.value = dateToTimestamp(filters.date.propertyUpdate.value)" />
+														<span class="input-group-btn">
+															<button class="btn" ng-click="calOpen($event, 'propertyUpdate')"><i class="icon i-condition-date"></i></button>
+														</span>
+													</div>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+							    <div class="col-md-12">
+									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave()" ng-disabled="!filters.tmp.propertyUpdate.value || filters.tmp.ids.length < 1">Modify</button>
+								</div>
+							</div>
+							
+						</accordion-group>
+						
+					</accordion>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.content}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<table class="table table-condensed" ng-if="list.elements">
+		<thead>
+			<tr>
+				<th ng-if="list.display.modifications"></th>
+				<th><h6>reference</h6></th>
+				<th><h6>type</h6></th>
+				<th><h6><a ng-click="listSort('origin')"><span>origin</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'origin'"></i>
+					</a></h6></th>
+				<th><h6><a ng-click="listSort('dest')"><span>destination</span>
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'dest'"></i>
+					</a></h6></th>
+				<th><h6><a ng-click="listSort('item_name')"><span>item name</span> 
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'item_name'"></i>
+					</a></h6></th>
+				<th><h6><a ng-click="listSort('item_ref')"><span>item reference</span> 
+					<i class="icon" ng-class="{ASC:'i\-caret\-u', DESC:'i\-caret\-d'}[list.urlParams.sortOrder]" ng-show="list.urlParams.sortBy === 'item_ref'"></i>
+					</a></h6></th>
+				<th><h6>quantity</h6></th>
+				<th><h6>date</h6></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr  ng-repeat="move in list.elements">
+				<td ng-if="list.display.modifications"><input type="checkbox" ng-click="stopPropagation($event); selectToggle(move.id)" ng-checked="filters.tmp.ids.indexOf(move.id) > -1" value="move.id"></td>
+				<td><small>{{move.reference}}</small></td>
+				<td><small>{{move.type}}</small></td>
+				<td><small>{{move.zones.origin.name}}</small></td>
+				<td><small>{{move.zones.dest.name}}</small></td>
+				<td>{{move.item.name}}</td>
+				<td><span class="label label-item">{{move.item.reference}}</span></td>
+				<td>{{move.item.quantity}}</td>
+				<td><small>{{move.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="list.pagination.pagesCount>1">
+		<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+	</div>
+	
+	<div class="row" ng-if="!list.elements.length">
+	    <div class="col-md-12">
+	    	<p>No results.</p> 
+	    </div>
+	</div>
+</div>

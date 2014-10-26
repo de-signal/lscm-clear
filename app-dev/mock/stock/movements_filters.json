@@ -1,0 +1,17 @@
+{
+    "types": [
+        { "name": "Pull in", "id": "pullin" },
+        { "name": "Pull out", "id": "pullout" },
+        { "name": "Inner", "id": "inner" }
+    ],
+    "origins": [
+        { "name": "Lagos 1", "id": "lagos1" }, 
+        { "name": "Lagos2", "id": "lagos2" }, 
+        { "name": "Abuja", "id": "abuja" }
+    ],
+    "destinations": [
+        { "name": "Lagos 1", "id": "lagos1" }, 
+        { "name": "Lagos2", "id": "lagos2" }, 
+        { "name": "Abuja", "id": "abuja" }
+    ]
+}

@@ -1,0 +1,349 @@
+<div class="container margin-top" ng-hide="loaded" ng-include="'partials/loader.html'" >
+</div>
+
+<div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
+	<h1 class="container capitalize">
+		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDelete(elm, $event)' alt="Delete"></i>
+		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="Tracking"></i>
+		<i class="icon pull-right i-alert-add icon-link" ng-click="modalAlert(elm, '', $parent.user)" alt="Create alert" ></i>
+		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i>
+		 {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
+</div>
+
+<div class="container margin-top" ng-show="loaded" ng-class="{true:'anim'}[elm.anim]">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>reference</h6>
+				<h2><span class="label" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[elm.type]">{{elm.reference}}</span></h2>
+				<p><a href="/index.php/milestones/update" target="_blank" ng-if="elm.type === 'shipment'" class="btn btn-sm">Modify</a></p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="filet">
+				<h6>milestone</h6>
+				<h2 class="type-bold capitalize">{{elm.milestone}}</h2>
+				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="filet">
+				<!--<h6>status</h6>
+				<h2><span class="label" ng-class="{processing:'label\-success', upcoming:'label\-warning', late:'label\-danger', none:'hide'}[elm.status]">{{elm.delay}}</span></h2>-->
+			</div>
+		</div>
+		<div class="col-md-1">
+			<img ng-src="{{elm.qrCodeGoogle}}" alt="QR code" class="clearfix"/>
+		</div>
+	</div>
+	
+	<div class="row margin-top" ng-if="elm.timeline">
+		<div class="col-md-12">
+			<div class="filet timeline">
+				<div class="row">
+					<div class="col-md-12">
+						<h6>progress</h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1"> 
+						
+					</div>
+					<div class="col-md-3 first">
+						 <h4>{{elm.timeline[0].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[0].description}}</i></span>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[0].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[1].completed]">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+					</div>
+					<div class="col-md-3">
+						 <h4>{{elm.timeline[1].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[1].description}}</i></span>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[1].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[2].completed]">
+							 <div class="timeline-circle"></div>
+							 <div class="timeline-bar"></div>
+						 </div>
+					</div>
+					<div class="col-md-3">
+						 <h4>{{elm.timeline[2].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[2].description}}</i></span>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[2].anim" ng-class="{true:'timeline\-completed', false:'timeline\-active'}[elm.timeline[3].completed]">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+					</div>
+					<div class="col-md-2 last">
+						 <h4>{{elm.timeline[3].name}}</h4>
+						 <span class="timeline-desc"><i>{{elm.timeline[3].description}}</i></span>
+						 <div class="timeline-bg">
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+						 <div ng-if="elm.timeline[3].anim" class="timeline-active" >
+						 	<div class="timeline-circle"></div>
+						 	<div class="timeline-bar"></div>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-3">
+			<div class="filet">
+				<h6>description</h6>
+				<p ng-repeat="info in elm.infos"><span ng-repeat="(key, value) in info"><strong>{{key}}: </strong> {{value}}</span></p>
+			</div>
+		</div>
+		<div class="col-md-3" ng-repeat="chart in elm.charts">
+			<div class="filet">
+				<h6>{{chart.name}}</h6>
+				<p class="type-fat" ng-style="chart.color">{{chart.value}} %</p>
+				<progressbar value="chart.value" type="{{chart.label}}"></progressbar>
+			</div>		
+		</div>
+	</div>
+	
+	<div class="row" ng-repeat="alert in elm.alerts" ng-if="elm.alerts">
+		<div class="col-md-12">
+			<div class="elements-group margin-top bg-default" ng-class="{info:'bg-info', error:'bg-error', warning:'bg-warning', success:'bg-success'}[alert.status]">
+				<div class="row">
+				
+					<div class="col-md-3">
+						<div class="element">
+							<i class="icon pull-right" ng-class="{true:'i-check', false:'i-cross'}[alert.active]"></i>
+							<h6>created by</h6>
+							<p>{{alert.user.first_name + " " + alert.user.name}}</p>
+					
+							<h6>date</h6>
+							<p>{{alert.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</p>
+							
+						</div>
+					</div>
+
+					<div class="col-md-9 aa-text">
+						<h2 class="type-bold">
+							<i class="icon pull-right i-trash icon-link" ng-click='modalAlertDelete(elm, alert)' ></i> 
+							<i class="icon pull-right icon-link i-edit" ng-click='modalAlert(elm, alert, $parent.user)'></i>
+							{{alert.name}}</h2>
+						<p class="lead">{{alert.info}}</p>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top" ng-if="elm.movements">
+		<div class="col-md-12">
+			<h3>storage</h3>
+				<table class="table middle">
+					<thead>
+					<tr>
+						<th><h6>source</h6></th>
+						<th><h6>location</h6></th>
+						<th><h6>destination</h6></th>
+						<th><h6>location</h6></th>
+						<th><h6>date</h6></th>
+						<th><h6>user</h6></th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="move in elm.movements" ng-class="{highlite: $index==0}">
+							<td><strong>{{move.zones.source.name}}</strong></td>
+							<td><small>{{move.zones.source.address.city}}, {{move.zones.source.address.country}}</small></td>
+							<td><strong>{{move.zones.dest.name}}</strong></td>
+							<td><small>{{move.zones.dest.address.city}}, {{move.zones.dest.address.country}}</small></td>
+							<td><small>{{move.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+							<td><small>{{move.user.first_name + " " + move.user.last_name}}</small></td>
+						</tr>
+					</tbody>
+				</table>
+			
+				<div class="elements-group margin-top" ng-repeat="move in elm.movements" ng-show="$index == 0">
+				<div class="row">
+					<div class="col-md-6">
+						<h6>warehouse</h6>
+						<h2>{{move.zones.dest.name}} <a class="btn" ng-href="warehouses/{{move.zones.dest.id}}" alt="Warehouse details"><i class="icon i-external-link"></i></a></h2>
+						<p><img src="img/warehouses/lscm-clear-warehouse-map-default.jpg" alt="" class="img-full"/></p>
+					</div>
+					<div class="col-md-6">
+						<h6>movements</h6>
+						<table class="table middle margin-top">
+							<thead>
+							<tr>
+								<th><h6>step</h6></th>
+								<th><h6>source </h6></th>
+								<th><h6>destination</h6></th>
+								<th><h6>date</h6></th>
+								<th><h6>user</h6></th>
+							</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="movement in move.movements" ng-class="{highlite: movement.current}">
+									<td><strong>{{movement.step}}</strong></td>
+									<td><small>{{movement.zones.source.name}}</small></td>
+									<td><small>{{movement.zones.dest.name}}</small></td>
+									<td><small>{{movement.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+									<td><small>{{movement.user.first_name + " " + movement.user.last_name}}</small></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top" ng-if="elm.required">
+		<div class="col-md-12">
+			<h3>conditions</h3>
+			<table class="table middle">
+				<thead>
+				<tr>
+					<th><h6>type </h6></th>
+					<th><h6>name</h6></th>
+					<th><h6>status</h6></th>
+					<th><h6> </h6></th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="condition in elm.required">
+						<td><i class="lead icon" condition-icon></i></td>
+						<td><strong>{{condition.name}}</strong></td>
+						<td><span class="label label-default" status="{{elm.status}}"  condition-status editable="{{condition.editable}}" completed="{{condition.completed}}">{{condition.message}}</span></td>
+						<td><button class='btn btn-sm' ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'>Update</button></td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+	</div>
+	
+	
+	<div class="row margin-top" ng-if="elm.documents">
+		<div class="col-md-12">
+			<h3></i>documents</h3>
+			<table class="table middle">
+				<thead>
+				<tr>
+					<th><h6>type </h6></th>
+					<th><h6>name</h6></th>
+					<th><h6>created</h6></th>
+					<th><h6>user</h6></th>
+					<th><h6>info</h6></th>
+					<th><h6><i class="icon pull-right i-add icon-link" ng-click="modalDocumentUpload(elm, $parent.user)" alt="Upload document" ></h6></th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="document in elm.documents">
+						<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{document.type}}</td>
+						<td><strong>{{document.name}}</strong></td>
+						<td><small>{{document.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+						<td><small>{{document.user.first_name + " " + document.user.last_name}}</small></td>
+						<td><span class="label label-default">{{document.info}}</span></td>
+						<td><a ng-href="{{document.url}}" class='btn btn-sm'>Download</a></td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>schedule</h3>
+			<table class="table table-condensed" ng-init="showCalendar=false">
+				<thead>
+					<tr>
+						<th><a href="" ng-click="showCalendar=!showCalendar" class="btn btn-mini"><i class="icon" ng-class="{true:'i\-caret\-d', false:'i\-caret\-r'}[showCalendar]"></i></a></th>
+						<th><h6>milestone </h6></th>
+						<th><h6>initial</h6></th>
+						<th><h6>forecast</h6></th>
+						<th><h6>revised</h6></th>
+						<th><h6>actual</h6></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'" ng-class="{highlite: milestone.step=='current'}" ng-show="milestone.step=='previous' || milestone.step=='next' || milestone.step=='current' || showCalendar">
+						<td>&nbsp;<i class="icon" step-icon></i></td>
+						<td><span ng-class="{previous:'light', past:'light', next:'ultralight', future:'ultralight', current:'bold'}[milestone.step]" class="capitalize">{{$index + 1}}. {{milestone.name}}</span></td>
+						<td ng-repeat="status in milestone.statuses"><span class="label label-default" status="{{status[2]}}">{{status[1]*1000 | date:'dd.MM.yy' }}</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>properties</h3>
+			<accordion close-others="false">
+			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup">
+			    	<accordion-heading><i class="icon" ng-class="['i-property-' + group.id]"></i> {{group.name}}
+			    	</accordion-heading>
+					<div class="form-horizontal">
+						<div class="form-group" ng-repeat="prop in group.set">
+							<label class="col-xs-4 control-label">{{prop.name}}</label> 
+							<span class="col-xs-4" ng-switch on="prop.type">
+								<div class="input-group" ng-switch-when="text">
+								  <input type="text" class="form-control" ng-model="prop.value" ng-disabled="!prop.editable">
+								  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, prop, group.name)">Save</button></span>
+								</div>
+								<div class="checkbox" ng-switch-when="checkbox">
+									<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)"></label>
+								</div>
+								<select ng-switch-when="select" ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)" class="form-control" ng-options="val.id as val.name for val in prop.values">
+								</select>
+								
+								<div class="input-group" ng-switch-when="date">
+									<input type="text" class="form-control" 
+										datepicker-popup="dd.MM.yy HH:mm" 
+										ng-model="prop.date" 
+										is-open="prop.opened" 
+										min="minDate" 
+										date-disabled="calDisabled(date, mode)" 
+										ng-disabled="!prop.editable" 
+										show-weeks="false"
+										ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, prop, group.name)">
+									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="icon i-condition-date"></i></button></span>
+								</div>
+							</span>
+							<span class="col-xs-4">
+								<div class="margin-top-s"><i class="icon i-infos" tooltip="{{prop.info}}" tooltip-placement="right" ng-if="prop.info"></i></div>
+							</span>
+							
+				    	</div>
+					</div>
+			    </accordion-group>
+			  </accordion>
+		</div><!--/span-->
+	</div><!--/row-->
+	
+	<div class="row margin-top" ng-if="elm.related" id="related">
+		<div class="col-md-12">
+			<h3>related</h3>
+			<tabset>
+			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
+			        <tab-heading><h4 class="capitalize">{{related.name}} ({{related.quantity}})</h4></tab-heading>
+			        <span ng-controller="ListCtrl">
+			            <span ng-include="'partials/transport/elements-tpl-list.html'" onload="listInit(related.type)"></span>
+			        </span>
+			    </tab>
+            </tabset>			
+		</div>
+	</div>
+	
+</div>
