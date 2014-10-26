@@ -4,20 +4,23 @@
 
 angular.module('clearApp.controllers', [])
 
-	.controller('MainCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', 'E1', 'ClearToken', function ($scope, $route, toaster, $cookieStore, authService, $http, E1, ClearToken) {
+	.controller('MainCtrl', ['$scope', '$route', 'toaster', '$cookieStore', 'authService', '$http', '$q', 'E1', 'ClearToken', function ($scope, $route, toaster, $cookieStore, authService, $http, $q, E1, ClearToken) {
 		
 		var token; 
-		$scope.$on('sectionUpdate', function(event, section) { 
-			console.log(section); 
-			$scope.section = section; 
-			if (section === 'sans') {
-				$scope.nomenu = true; 
-			} else {
-				$scope.nomenu = false; 
-			}
-		});
+		$scope.menu = {
+			"sub": {}, 
+			"current": ""
+		};
+		var sectionCurrent; 
+		
 		$scope.$on('loginAuto', function(event, data) { 
 			$scope.login(); 
+		});
+		
+		$scope.$on('event:sectionUpdate', function(event, section) { 
+			sectionCurrent = section; 
+			$scope.menu.sub.height = ($scope.menu.sub.visible && section != 'sans') ? true : false;
+			$scope.menu.current = $scope.menu.sub.visible ? section : $scope.menu.current; 
 		});
 		
 		if ($cookieStore.get("token")) {
@@ -28,6 +31,7 @@ angular.module('clearApp.controllers', [])
 			console.log('connect from cookie: ', $http.defaults.headers.common);
 			E1.get({'type': 'user'}, function(user) { 
 				$scope.user = user;
+				menusetup(user); 
 			});
 		} 
 
@@ -51,7 +55,7 @@ angular.module('clearApp.controllers', [])
 						toaster.pop('success', 'Welcome', userName);
 						$scope.user = user;
 						authService.loginConfirmed(userName, httpConfig);
-						$scope.sections = user.sections; 
+						menusetup(user); 
 					});
 				})
 				.error(function(data, status, headers, config) {
@@ -72,20 +76,40 @@ angular.module('clearApp.controllers', [])
 					console.log('status error :', status, ' / logout failed');
 				});
 			}
+		
+		var menusetup = function(user) {
+			$scope.sections = user.sections;
+			var sectionsVisible = 0; 
+			for (var i in $scope.sections) {
+				if ($scope.sections[i]) {
+					sectionsVisible++
+					$scope.menu.current = i; 
+				}
+			}
+			$scope.menu.sub.visible = (sectionsVisible > 1) ? true : false; 
+			$scope.$emit("event:sectionUpdate", sectionCurrent);
+		}	
+			
 	}])
 	
 	.controller('UserDetailCtrl', ['$scope', 'E1', function($scope, E1) {
 		
-		$scope.$emit("sectionUpdate", "sans");
+		$scope.$emit("event:sectionUpdate", "sans");
 		
 		E1.get({'type': 'user'}, function(user) { 
 			$scope.user = user;
 		});
 	}])
 	
-	.controller('DashboardCtrl', ['$scope', 'E1', function($scope, E1) {
+	.controller('DashboardCtrl', ['$scope', '$location', 'E1', function($scope, $location, E1) {
 		
-		$scope.$emit("sectionUpdate", "sans");
+		$scope.$emit("event:sectionUpdate", "sans");
+		
+		if ($scope.menu.current === 'transport') {
+			$location.path('/transport/dashboard'); 
+		} else if ($scope.menu.current === 'stock') {
+			$location.path('/stock/warehouse'); 
+		}
 		
 		E1.get({'type': 'user'}, function(user) { 
 			$scope.user = user;
@@ -245,7 +269,7 @@ angular.module('clearApp.controllers', [])
 	
 	.controller('GuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
 	
-		$scope.$emit("sectionUpdate", "sans");
+		$scope.$emit("event:sectionUpdate", "sans");
 		
 		GuidelinesProcess.query(function(elms) {
 			$scope.elmsProcess = elms;
@@ -262,7 +286,7 @@ angular.module('clearApp.controllers', [])
 	
 	.controller('GuidelinesProcessCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesProcess', function($scope, $location, $anchorScroll, $timeout, GuidelinesProcess) {
 	
-		$scope.$emit("sectionUpdate", "sans");
+		$scope.$emit("event:sectionUpdate", "sans");
 		
 		GuidelinesProcess.query(function(elms) {
 			$scope.elms = elms;
@@ -307,7 +331,7 @@ angular.module('clearApp.controllers', [])
 	
 	.controller('GuidelinesOperationsCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$routeParams', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, $routeParams, GuidelinesWeb, GuidelinesMobile) {
 	
-		$scope.$emit("sectionUpdate", "sans");
+		$scope.$emit("event:sectionUpdate", "sans");
 		
 		$scope.types = ["order", "shipment", "box", "item"];
 		var resource; 

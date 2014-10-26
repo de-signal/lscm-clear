@@ -82,10 +82,10 @@ hr {
 }
 
 @media (min-width: 992px) {
-	.content {
+	.submenu .content {
 		padding-top: 110px;
 	}
-	.nomenu .content {
+	.content {
 		padding-top: 56px;
 	}
 	.navbar-fixed-top,

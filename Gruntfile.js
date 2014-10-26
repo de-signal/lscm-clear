@@ -337,6 +337,10 @@ module.exports = function (grunt) {
 		'clean:hack'
 	]);
 
+	grunt.registerTask('deploy', [
+		'ftp-deploy:app'
+	]);
+
 	grunt.registerTask('serve', [
 		'connect:server', 
 		'watch:dev'

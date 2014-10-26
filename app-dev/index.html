@@ -16,7 +16,7 @@
 		
 	</head>
 
-	<body ng-controller="MainCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen, login: !loggedIn, nomenu: nomenu}">
+	<body ng-controller="MainCtrl" clear-auth ng-cloak ng-class="{tv: tvScreen, login: !loggedIn, submenu: menu.sub.height}">
 
 		<div id="wrap">
 		
@@ -81,13 +81,12 @@
 									</ul>
 								</li>
 							</ul>
-							<ul class="nav navbar-nav">
-								<li ng-if="sections.transport"><a href="transport/dashboard" ng-click="section = 'logistic'">Transport</a></li>
-								<li ng-if="sections.stock"><a href="stock/warehouses" ng-click="section = 'stock'">Stock</a></li>
+							<ul class="nav navbar-nav" ng-if="menu.sub.visible">
+								<li ng-if="sections.transport"><a href="transport/dashboard">Transport</a></li>
+								<li ng-if="sections.stock"><a href="stock/warehouses">Stock</a></li>
 							</ul>
-							<hr />
-							<ul class="nav navbar-nav navbar-secondary" ng-if="section === 'transport'">
-								<li><a href="transport/dashboard">Dashboard</a></li>
+							<hr  ng-if="menu.sub.visible" />
+							<ul class="nav navbar-nav" ng-if="menu.current === 'transport'">
 								<li><a href="transport/tracking">Tracking</a></li>
 								<li><a href="transport/indicators">Indicators</a></li>
 								<li><a href="transport/search">Search</a></li>
@@ -103,14 +102,13 @@
 								</li>
 								<li><a href="transport/add-order">Add order</a></li>
 							</ul>
-							<ul class="nav navbar-nav navbar-secondary" ng-if="section === 'stock'">
+							<ul class="nav navbar-nav" ng-if="menu.current === 'stock'">
 								<li><a href="stock/warehouses">Warehouses</a></li>
 								<li><a href="stock/movements">Movements</a></li>
 								<li><a href="stock/replenishments">Replenishments</a></li>
 								<li><a href="stock/items">Items</a></li>
 								<li><a href="stock/indicators">Indicators</a></li>
 							</ul>
-							
 						</div><!--/.nav-collapse -->
 					</div>
 				</div>

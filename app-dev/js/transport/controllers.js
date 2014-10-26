@@ -6,7 +6,7 @@ angular.module('clearApp.controllersTransport', [])
 
 	.controller('TransportDashboardCtrl', ['$location', '$scope', '$timeout', '$routeParams', 'E1', 'ClearUrl', 'Utils', function($location, $scope, $timeout, $routeParams, E1, ClearUrl, Utils) {
 			
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			ClearUrl.listReady('init', ['dashboard']);
 			
@@ -90,7 +90,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportElementCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E2', 'Utils', 'ClearUrl', 'TransportElement', 'ElmsConf', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E2, Utils, ClearUrl, TransportElement, ElmsConf) {
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			$scope.loaded = false;
 			$scope.relatedActiveTab = {};
@@ -188,7 +188,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsConf', 'E2', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsConf, E2){
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 							
 			ClearUrl.listReady('init', ['order', 'shipment', 'box', 'item']); 
 			
@@ -216,7 +216,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportSearchCtrl', ['$scope', '$location', '$timeout', 'ClearUrl', 'Utils', 'ElmsConf', 'E2', function($scope, $location, $timeout, ClearUrl, Utils, ElmsConf, E2) {
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			$timeout(function() {
 				ClearUrl.listReady('init', ['searchResult']); 
@@ -258,7 +258,7 @@ angular.module('clearApp.controllersTransport', [])
 			
 		.controller('TransportElementsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ElmsConf', 'E2', function($scope, $routeParams, ClearUrl, Utils, ElmsConf, E2) {
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			ClearUrl.listReady('init', ['elements']);
 			
@@ -449,7 +449,7 @@ angular.module('clearApp.controllersTransport', [])
 			
 		.controller('TransportAlertsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'TransportAlert', 'Utils', 'AlertsConfig', '$modal', 'E2', function($scope, $routeParams, ClearUrl, TransportAlert, Utils, AlertsConfig, $modal, E2) {
 			
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			ClearUrl.listReady('init', ['alerts']); 
 			
@@ -506,7 +506,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportDocumentsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'TransportDocument', 'Utils', 'DocumentsConfig', 'E2', function($scope, $routeParams, ClearUrl, TransportDocument, Utils, DocumentsConfig, E2) {
 			
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			ClearUrl.listReady('init', ['documents']); 
 			
@@ -575,7 +575,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportIndicatorsCtrl', ['$scope', '$routeParams', 'E1', 'ChartsConfig', function($scope, $routeParams, E1, ChartsConfig) {
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			$scope.loaded = false;
 			$scope.charts = [];
@@ -594,7 +594,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportDocumentsIrCtrl', ['$scope', '$filter', '$routeParams', '$modal', 'E2', 'ClearToken', function($scope, $filter, $routeParams, $modal, E2, ClearToken) {
 		
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			$scope.loaded = false;
 			
@@ -642,9 +642,9 @@ angular.module('clearApp.controllersTransport', [])
 			};
 		}])
 		
-		.controller('DocumentsNcrCtrl', ['$scope', '$routeParams', 'E2', '$modal', 'ClearToken', function($scope, $routeParams, E2, $modal, ClearToken) {
+		.controller('TransportDocumentsNcrCtrl', ['$scope', '$routeParams', 'E2', '$modal', 'ClearToken', function($scope, $routeParams, E2, $modal, ClearToken) {
 			
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			 
 			$scope.loaded = false;
 			
@@ -706,7 +706,7 @@ angular.module('clearApp.controllersTransport', [])
 		
 		.controller('TransportDocumentsPodCtrl', ['$scope', '$routeParams', 'ClearToken', 'E2', function($scope, $routeParams, ClearToken, E2) {
 			
-			$scope.$emit("sectionUpdate", "transport");
+			$scope.$emit("event:sectionUpdate", "transport");
 			
 			$scope.loaded = false;
 			

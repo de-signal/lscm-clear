@@ -6,7 +6,7 @@ angular.module('clearApp.controllersStock', [])
 				
 		.controller('StockWarehousesCtrl', ['$scope', '$filter', '$routeParams', 'ClearUrl', 'S1', 'Utils', function($scope, $filter, $routeParams, ClearUrl, S1, Utils) {
 			
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			
 			$scope.loaded = false;
 			
@@ -21,7 +21,7 @@ angular.module('clearApp.controllersStock', [])
 		}])
 		
 		.controller('StockMovementsCtrl', ['$scope', '$filter', '$routeParams', 'ClearUrl', 'Utils', 'MovementsConf', 'S1', function($scope, $filter, $routeParams, ClearUrl, Utils, MovementsConf, S1) {
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			
 			$scope.loaded = false;
 			ClearUrl.listReady('init', ['movements']);
@@ -39,7 +39,7 @@ angular.module('clearApp.controllersStock', [])
 		
 		.controller('StockReplenishmentsCtrl', ['$scope', '$filter', '$routeParams', 'ClearUrl', 'Utils', 'ReplenishmentsConf', 'S1', function($scope, $filter, $routeParams, ClearUrl, Utils, ReplenishmentsConf, S1) {
 		
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			
 			$scope.loaded = false;
 			ClearUrl.listReady('init', ['replenishments']);
@@ -57,7 +57,7 @@ angular.module('clearApp.controllersStock', [])
 		
 		.controller('StockItemsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ItemsConf', 'S1', function($scope, $routeParams, ClearUrl, Utils, ItemsConf, S1) {
 		
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			
 			ClearUrl.listReady('init', ['items']);
 			
@@ -78,7 +78,7 @@ angular.module('clearApp.controllersStock', [])
 		
 		.controller('StockItemCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$modal', 'S1', 'Utils', 'ClearUrl', 'TransportElement', 'ClearToken', 'ElmsConf', 'ChartsConfig', function($scope, $routeParams, $location, $interval, $timeout, $modal, S1, Utils, ClearUrl, TransportElement, ClearToken, ElmsConf, ChartsConfig) {
 		
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			$scope.loaded = false;
 			$scope.relatedActiveTab = {};
 			
@@ -138,7 +138,7 @@ angular.module('clearApp.controllersStock', [])
 		
 		.controller('StockWarehouseCtrl', ['$scope', '$routeParams', '$location', '$timeout', '$anchorScroll', '$modal', '$q', 'S1', 'Utils', 'ClearUrl', 'ReplenishmentsConf', 'MovementsConf', 'ItemsConf', function($scope, $routeParams, $location, $timeout, $anchorScroll, $modal, $q, S1, Utils, ClearUrl, ReplenishmentsConf, MovementsConf, ItemsConf) {
 		
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			
 			$scope.loaded = false;
 			$scope.relatedActiveTab = {};
@@ -182,7 +182,7 @@ angular.module('clearApp.controllersStock', [])
 		
 		.controller('StockIndicatorsCtrl', ['$scope', '$routeParams', 'S1', 'ChartsConfig', function($scope, $routeParams, S1, ChartsConfig) {
 		
-			$scope.$emit("sectionUpdate", "stock");
+			$scope.$emit("event:sectionUpdate", "stock");
 			$scope.loaded = false;
 			$scope.charts = [];
 			
