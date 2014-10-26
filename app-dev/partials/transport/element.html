@@ -148,67 +148,6 @@
 		</div>
 	</div>
 	
-	<div class="row margin-top" ng-if="elm.movements">
-		<div class="col-md-12">
-			<h3>storage</h3>
-				<table class="table middle">
-					<thead>
-					<tr>
-						<th><h6>source</h6></th>
-						<th><h6>location</h6></th>
-						<th><h6>destination</h6></th>
-						<th><h6>location</h6></th>
-						<th><h6>date</h6></th>
-						<th><h6>user</h6></th>
-					</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="move in elm.movements" ng-class="{highlite: $index==0}">
-							<td><strong>{{move.zones.source.name}}</strong></td>
-							<td><small>{{move.zones.source.address.city}}, {{move.zones.source.address.country}}</small></td>
-							<td><strong>{{move.zones.dest.name}}</strong></td>
-							<td><small>{{move.zones.dest.address.city}}, {{move.zones.dest.address.country}}</small></td>
-							<td><small>{{move.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-							<td><small>{{move.user.first_name + " " + move.user.last_name}}</small></td>
-						</tr>
-					</tbody>
-				</table>
-			
-				<div class="elements-group margin-top" ng-repeat="move in elm.movements" ng-show="$index == 0">
-				<div class="row">
-					<div class="col-md-6">
-						<h6>warehouse</h6>
-						<h2>{{move.zones.dest.name}} <a class="btn" ng-href="warehouses/{{move.zones.dest.id}}" alt="Warehouse details"><i class="icon i-external-link"></i></a></h2>
-						<p><img src="img/warehouses/lscm-clear-warehouse-map-default.jpg" alt="" class="img-full"/></p>
-					</div>
-					<div class="col-md-6">
-						<h6>movements</h6>
-						<table class="table middle margin-top">
-							<thead>
-							<tr>
-								<th><h6>step</h6></th>
-								<th><h6>source </h6></th>
-								<th><h6>destination</h6></th>
-								<th><h6>date</h6></th>
-								<th><h6>user</h6></th>
-							</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="movement in move.movements" ng-class="{highlite: movement.current}">
-									<td><strong>{{movement.step}}</strong></td>
-									<td><small>{{movement.zones.source.name}}</small></td>
-									<td><small>{{movement.zones.dest.name}}</small></td>
-									<td><small>{{movement.date * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
-									<td><small>{{movement.user.first_name + " " + movement.user.last_name}}</small></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	<div class="row margin-top" ng-if="elm.required">
 		<div class="col-md-12">
 			<h3>conditions</h3>

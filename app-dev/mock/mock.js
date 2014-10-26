@@ -1,12 +1,12 @@
 angular.module('clearApp.mock', ['ngMockE2E'])
 	
 	.run(function($httpBackend, $rootScope, $location, $timeout, Utils) {
-//		var urlPage = $location.search();
-//		urlPage.s = 1; 
-//		$location.search(urlPage);
-//		$timeout(function() {
-//			$rootScope.$broadcast("loginAuto", "yes");
-//		}); 
+		var urlPage = $location.search();
+		urlPage.s = 1; 
+		$location.search(urlPage);
+		$timeout(function() {
+			$rootScope.$broadcast("loginAuto", "yes");
+		}); 
 		
 		if ($location.absUrl().indexOf("s=1") > -1) {
 			$rootScope.static=true;
