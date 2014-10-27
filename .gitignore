@@ -14,3 +14,4 @@ app-tmp/pdf/lscm-clear.pdf.esproj/
 app-tmp/pdf-old/lscm-clear.pdf.old.esproj/
 app-dev/components/
 .sass-cache
+.ftppass
