@@ -12,7 +12,7 @@
 - Install Grunt: http://gruntjs.com/
 - Install Bower: http://bower.io/
 
-For Sass files compilation: 
+#### For Sass files compilation: 
 
 - Install Ruby: for windows, select v. 1.9.3 http://rubyinstaller.org/
 - Install Sass: `$ gem install sass`
@@ -34,26 +34,26 @@ From the directory you just cloned.
 
 At the root of the project, create a file `.ftppass`. Complete the file with your credentials: 
 
-   {
-     "ofon2": {
-       "username": "your_login",
-       "password": "your_password"
-     }
-   }
+    {
+        "ofon2": {
+            "username": "your_login",
+            "password": "your_password"
+        }
+    }
 
 ##  Grunt commands
 
 #### Start local server
 
-   $ grunt serve
+    $ grunt serve
 
 #### Update Npm dependencies (Grunt tasks)
 
-   $ grunt dep
+    $ grunt dep
 
 #### Update project dependencies (Angular, Bootstrap, etc.)
 
-   $ grunt install
+    $ grunt install
 
 #### Compile Sass files
 
@@ -65,4 +65,4 @@ At the root of the project, create a file `.ftppass`. Complete the file with you
 
 #### Deploy production build via ftp
 
-   $ grunt deploy
+    $ grunt deploy
