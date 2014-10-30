@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="772" height="516" viewBox="0 0 772 516">
-
-	<rect id="O" x="1.2" y="383.5" fill="#EBE8E7" width="128" height="128" ng-mouseover="clicked('0')" ng-mouseleave="unclicked('0')"/>
-
-</svg>

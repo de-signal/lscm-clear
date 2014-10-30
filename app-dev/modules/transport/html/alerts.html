@@ -1,0 +1,131 @@
+<div class="header bg-generic bg-inspectionReport">
+	<h1 class="container">
+		<i class="icon i-alert"></i> Alerts
+	</h1>
+</div>
+
+<div class="container">
+	<div class="row" ng-controller="ListCtrl">
+		<div class="col-md-12">
+			<div class="margin-top" ng-hide="loaded" ng-include="'core/html/loader.html'" >
+			</div>
+			
+			<div class="margin-top" ng-show="loaded">
+			
+				<div class="row" ng-if="list.display.filters">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+							    <accordion>
+						    	    <accordion-group>
+						    	    	<accordion-heading>
+						    	    		Filters
+						    	    	</accordion-heading>
+						    			<div class="row">
+						    				<div class="col-md-4">
+						    					<fieldset>
+							    					<legend>Related to </legend>
+							    					<div class="radio" ng-repeat="related_to in filters.values.related_to">		
+								    					<label class="control-label">
+								    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related_to.id}}"> {{related_to.name}} 
+								    					</label>
+								    				</div>
+								    				<div class="form-group" ng-show="list.urlParams.related_to">
+								    					<label>Reference </label>
+								    					<input type="text" ng-model="list.urlParams.related_reference" class="form-control">
+								    				</div>
+								    			</fieldset>
+						    				</div>
+						    				
+						    				<div class="col-md-4">
+						    					<fieldset>
+							    					<legend>User </legend>
+							    					<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users"><option value="">---</option></select>
+							    				</fieldset>
+							    				<fieldset>
+							    				<legend>Status </legend>
+							    					<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses"><option value="">---</option></select>
+							    				</fieldset>
+						    				</div>
+						    				
+						    				<div class="col-md-4" ng-if="filters.date">
+						    					<fieldset>
+						    					<legend>From </legend>
+							    					<div class="input-group">
+							    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.from.value" is-open="$parent.filters.date.from.opened" show-weeks="false" max="filters.date.to.value" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
+							    						<span class="input-group-btn">
+							    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
+							    						</span>
+							    					</div>
+							    				</fieldset>
+							    				<fieldset>
+							    					<legend>To </legend>
+							    					<div class="input-group">
+							    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.to.value" is-open="$parent.filters.date.to.opened" show-weeks="false" min="filters.date.from.value" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
+							    						<span class="input-group-btn">
+							    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
+							    						</span>
+							    					</div>
+							    				</fieldset>
+						    				</div>
+						    			</div><!--/row-->
+						    			<button class="btn btn-block btn-lg" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
+						    	    </accordion-group>
+						        </accordion>
+						    </div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.content}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" ng-repeat="alert in list.elements">
+					<div class="col-md-12">
+						<div class="elements-group margin-top bg-default" ng-class="{info:'bg-info', error:'bg-error', warning:'bg-warning', success:'bg-success'}[alert.status]">
+							<div class="row">
+							
+								<div class="col-md-3">
+									<div class="element">
+										<i class="icon pull-right" ng-class="{true:'i-check', false:'i-cross'}[alert.active]"></i>
+										
+										<h6>related to </h6>
+										<h5><span class="label" ng-class="{order: 'label-order', shipment:'label-shipment', box:'label-box', item:'label-item'}[alert.related.type]">{{alert.related.reference}}</span><a class="btn" ng-href="{{alert.related.type + '/' + alert.related.id}}"><i class="icon i-external-link"></i></a></h5>
+										
+										<h6>by</h6>
+										<p>{{alert.user.first_name + " " + alert.user.last_name }}</p>
+								
+										<h6>date</h6>
+										<p>{{alert.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</p>
+										
+									</div>
+								</div>
+			
+								<div class="col-md-9 aa-text">
+									<h2 class="type-bold">
+										<i class="icon pull-right i-trash icon-link" ng-click='alertModalDelete(list.elements, alert)' ></i> 
+										<i class="icon pull-right icon-link i-edit" ng-click='alertModalEdit(list.elements, alert, $parent.user)'></i>
+										{{alert.name}}</h2>
+									<p class="lead">{{alert.info}}</p>
+								</div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-12">				
+						<div ng-if="list.pagination.pagesCount>1">
+							<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+						</div>
+					</div>
+				</div>
+					
+			</div>
+			
+		</div>
+	</div>
+</div>

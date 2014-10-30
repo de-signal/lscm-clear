@@ -1,0 +1,272 @@
+<div class="header bg-generic bg-inspectionReport">
+	<h1 class="container">
+	<i class="icon pull-right i-add icon-link" ng-click="documentModalUpload(page.type, $parent.user)" alt="Upload file"  ng-if="page.type==='media'"></i>
+	<i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
+</div>
+
+<div class="container">
+	<div class="row" ng-controller="ListCtrl">
+		<div class="col-md-12">
+			<div class="margin-top" ng-hide="loaded" ng-include="'core/html/loader.html'" >
+			</div>
+			
+			<div class="margin-top" ng-show="loaded">
+			<div class="row hide">
+			    <div class="col-md-6">
+			    	<pre><small>
+	list.urlParams: {{list.urlParams | json}}
+			    	</small></pre>
+			    </div>
+			    <div class="col-md-6">
+			    	<pre><small>
+	filters.values: {{filters.date | json}}
+					</small></pre>
+			    </div><!--/col-->
+			</div><!--/row-->
+			
+			<div class="row" ng-if="list.display.filters">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12">
+					    <accordion>
+				    	    <accordion-group>
+				    	    	<accordion-heading>
+				    	    		Filters
+				    	    	</accordion-heading>
+				    			<div class="row">
+				    				<div class="col-md-4">
+				    					<fieldset ng-if="filters.values.related_to">
+					    					<legend>Related to </legend>
+					    					<div class="radio" ng-repeat="related_to in filters.values.related_to">		
+						    					<label class="control-label">
+						    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related_to.id}}"> {{related_to.name}}
+						    					</label>
+						    				</div>
+						    				<div class="form-group" ng-show="list.urlParams.related_to">
+						    					<label>Reference </label>
+						    					<input type="text" ng-model="list.urlParams.related_reference" class="form-control">
+						    				</div>
+						    			</fieldset>
+						    			<fieldset ng-if="filters.values.name">
+						    				<legend>Name </legend>
+						    				<div class="form-group">
+						    					<input type="text" ng-model="list.urlParams.name" class="form-control">
+						    				</div>
+						    			</fieldset>
+						    			<fieldset ng-if="filters.values.related_element">
+						    				<legend>Element</legend>
+						    				<div class="radio" ng-repeat="related_element in filters.values.related_element">		
+						    					<label class="control-label">
+						    						<input type="radio" ng-model="list.urlParams.related_element" value="{{related_element.id}}"> {{related_element.name}}
+						    					</label>
+						    				</div>
+						    				<div class="form-group" ng-show="list.urlParams.related_element">
+						    					<label>Reference </label>
+						    					<input type="text" ng-model="list.urlParams.related_element_reference" class="form-control">
+						    				</div>
+						    			</fieldset>
+				    				</div>
+				    				
+				    				<div class="col-md-4">
+				    					<fieldset>
+					    					<legend>User </legend>
+					    					<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users"><option value="">---</option></select>
+					    				</fieldset>
+					    				<fieldset ng-if="filters.values.locations">
+					    					<legend>Location</legend>
+					    					<select class="form-control" ng-model="list.urlParams.location" ng-options="location.id as location.name for location in filters.values.locations"><option value="">---</option></select>
+					    				</fieldset>
+					    				<fieldset ng-if="filters.values.statuses">
+					    				<legend>Status </legend>
+					    					<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses"><option value="">---</option></select>
+					    				</fieldset>
+					    				<fieldset ng-if="filters.values.collections">
+					    					<legend>Collection </legend>
+					    					<select class="form-control" ng-model="list.urlParams.collection" ng-options="collection.id as collection.name for collection in filters.values.collections"><option value="">---</option></select>
+					    				</fieldset>
+					    				<fieldset ng-if="filters.values.deliveries">
+					    					<legend>Delivery </legend>
+					    					<select class="form-control" ng-model="list.urlParams.delivery" ng-options="delivery.id as delivery.name for delivery in filters.values.deliveries"><option value="">---</option></select>
+					    				</fieldset>
+				    				</div>
+				    				
+				    				<div class="col-md-4" ng-if="filters.date">
+				    					<fieldset>
+				    					<legend>From </legend>
+					    					<div class="input-group">
+					    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.from.value" is-open="$parent.filters.date.from.opened" show-weeks="false" max="filters.date.to.value" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
+					    						<span class="input-group-btn">
+					    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
+					    						</span>
+					    					</div>
+					    				</fieldset>
+					    				<fieldset>
+					    					<legend>To </legend>
+					    					<div class="input-group">
+					    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.to.value" is-open="$parent.filters.date.to.opened" show-weeks="false" min="filters.date.from.value" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
+					    						<span class="input-group-btn">
+					    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
+					    						</span>
+					    					</div>
+					    				</fieldset>
+				    				</div>
+				    			</div><!--/row-->
+				    			<button class="btn btn-block btn-lg" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
+				    	    </accordion-group>
+				        </accordion>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<span class="badge badge-inverse" ng-repeat="badge in filters.badges">{{badge.content}} <i class="icon i-cross pointer" ng-click="badgeRemove(badge.id)"></i></span> 
+					</div>
+				</div>
+			</div>
+		</div>
+				
+			<div class="row">
+				<div class="col-md-12">
+					
+					<table class="table table-condensed" ng-if="page.type==='ncr'">
+						<thead>
+							<tr>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>location</h6></th>
+								<th><h6>created</h6></th>
+								<th><h6>modified</h6></th>
+								<th><h6>status</h6></th>
+								<th><h6>element</h6></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('transport/documents/' + page.type, doc.id)" > 
+								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><small>{{doc.location}}</small></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i></td>
+								<td><span class="label" ng-class="{shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.element.type]">{{doc.element.reference}}</span></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<table class="table table-condensed" ng-if="page.type==='ir'">
+						<thead>
+							<tr>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>location</h6></th>
+								<th><h6>created</h6></th>
+								<th><h6>modified</h6></th>
+								<th><h6>boxes</h6></th>
+								<th colspan="3"><h6>conformity</h6></th>
+								<th><h6>status</h6></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('transport/documents/' + page.type, doc.id)" > 
+								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><small>{{doc.location}}</small></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.dates.modified * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td>{{doc.boxes.length}}</td>
+								<td class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</td>
+								<td class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</td>
+								<td ><i class="icon i-question default"></i> {{doc.conformity.pending}}</td>
+								</td>
+								<td><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[doc.status]" tooltip="{{doc.status}}"></i></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<table class="table table-condensed" ng-if="page.type==='pod'">
+						<thead>
+							<tr>
+								<th><h6>order</h6></th>
+								<th><h6>shipment</h6></th>
+								<th><h6>user</h6></th>
+								<th><h6>created</h6></th>
+								<th><h6>collection</h6></th>
+								<th><h6>delivery</h6></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements" class="pointer over" ng-click="go('transport/documents/' + page.type, doc.id)" > 
+								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
+								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.collection.company.name}}</small></td>
+								<td><small>{{doc.delivery.company.name}}</small></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<table class="table table-condensed" ng-if="page.type==='archive'">
+						<thead>
+						<tr>
+							<th><h6>related to </h6></th>
+							<th><h6>type </h6></th>
+							<th><h6>name</h6></th>
+							<th><h6>created</h6></th>
+							<th><h6>user</h6></th>
+							<th><h6>info</h6></th>
+							<th><h6></h6></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements">
+								<td><span class="label" ng-class="{order: 'label-order', shipment:'label-shipment', box:'label-box', item:'label-item'}[doc.related.type]">{{doc.related.reference}}</span></td>
+								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
+								<td><strong>{{doc.name}}</strong></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><span class="label label-default">{{doc.info}}</span></td>
+								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					
+					<table class="table table-condensed" ng-if="page.type==='media'">
+						<thead>
+						<tr>
+							<th><h6>preview </h6></th>
+							<th><h6>type </h6></th>
+							<th><h6>name</h6></th>
+							<th><h6>created</h6></th>
+							<th><h6>user</h6></th>
+							<th><h6>info</h6></th>
+							<th><h6></h6></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in list.elements">
+								<td><div class="image-wrapper"><img ng-src="{{doc.url_thumb}}" alt="{{doc.name}}"/></div></td>
+								<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.type}}</td>
+								<td><strong>{{doc.name}}</strong></td>
+								<td><small>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</small></td>
+								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
+								<td><span class="label label-default">{{doc.info}}</span></td>
+								<td><a ng-href="{{doc.url}}" class='btn btn-sm'>Download</a></td>
+							</tr>
+						</tbody>
+					</table>
+						
+					<div ng-if="list.pagination.pagesCount>1">
+						<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+	</div>
+</div>
