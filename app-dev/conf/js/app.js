@@ -22,13 +22,9 @@ angular.module('clearApp', [
 		
 		$routeProvider.when('/dashboard', {templateUrl: 'core/html/dashboard.html', controller: 'DashboardCtrl' });
 		
-		$routeProvider.when('/guidelines', {templateUrl: 'partials/guidelines-list.html', controller: 'GuidelinesListCtrl'});
-		
-		$routeProvider.when('/guidelines/process', {templateUrl: 'partials/guidelines-process.html', controller: 'GuidelinesProcessCtrl'});
-		
-		$routeProvider.when('/guidelines/:id', {templateUrl: 'partials/guidelines-operations.html', controller: 'GuidelinesOperationsCtrl'});
-		
 		$routeProvider.when('/user', {templateUrl: 'core/html/user.html', controller: 'UserDetailCtrl'});
+
+		$routeProvider.when('/guidelines', {templateUrl: 'core/html/guidelines.html', controller: 'GuidelinesCtrl'});
 		
 		// Transport section
 		
@@ -57,6 +53,12 @@ angular.module('clearApp', [
 		$routeProvider.when('/transport/:type/', {templateUrl: 'modules/transport/html/elements.html', controller: 'TransportElementsCtrl', reloadOnSearch: false});
 		
 		$routeProvider.when('/transport/:type/:id', {templateUrl: 'modules/transport/html/element.html', controller: 'TransportElementCtrl', reloadOnSearch: false});
+
+		$routeProvider.when('/guidelines/transport', {templateUrl: 'modules/transport/html/guidelines-list.html', controller: 'TransportGuidelinesListCtrl'});
+		
+		$routeProvider.when('/guidelines/transport/process', {templateUrl: 'modules/transport/html/guidelines-process.html', controller: 'TransportGuidelinesProcessCtrl'});
+		
+		$routeProvider.when('/guidelines/transport/:id', {templateUrl: 'modules/transport/html/guidelines-operations.html', controller: 'TransportGuidelinesOperationsCtrl'});
 		
 		// Stock section 
 		

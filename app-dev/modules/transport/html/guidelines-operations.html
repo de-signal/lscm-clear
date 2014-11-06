@@ -1,5 +1,5 @@
 <div class="header bg-generic">
-	<h1 class="container">Guidelines</h1>
+	<h1 class="container">Guidelines: Transport</h1>
 </div>
 
 <div class="container">
@@ -37,7 +37,7 @@
 									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
 									<ul>
 										<li ng-repeat="condition in instruction.relateds[type]">
-											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
 										</li>
 									</ul>
 								</div>
@@ -58,7 +58,7 @@
 									<p>{{step.description}}</p>
 								</div>
 								<div class="col-md-6">
-									<img ng-src="img/guidelines-transport/{{step.img}}" class="img-responsive img-thumbnail">
+									<img ng-src="modules/transport/img/guidelines/{{step.img}}" class="img-responsive img-thumbnail">
 								</div>
 							</div>
 						</div>

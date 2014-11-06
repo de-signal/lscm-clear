@@ -266,96 +266,9 @@ angular.module('clearApp.controllers', [])
 			$scope.listInit(id); 
 		});
 	}])
-	
-	.controller('GuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
-	
-		$scope.$emit("event:sectionUpdate", "sans");
+
+	.controller('GuidelinesCtrl', ['$scope', function($scope) {
 		
-		GuidelinesProcess.query(function(elms) {
-			$scope.elmsProcess = elms;
-		});
-		
-		GuidelinesWeb.get(function(elm) {
-			$scope.elmWeb = elm;
-		});
-		
-		GuidelinesMobile.get(function(elm) {
-			$scope.elmMobile = elm; 
-		});
-	}])
-	
-	.controller('GuidelinesProcessCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesProcess', function($scope, $location, $anchorScroll, $timeout, GuidelinesProcess) {
-	
-		$scope.$emit("event:sectionUpdate", "sans");
-		
-		GuidelinesProcess.query(function(elms) {
-			$scope.elms = elms;
-			$timeout(function() {
-				$anchorScroll();
-			}, 500);
-		});
-		
-		$scope.scrollTo = function(anchor) {
-			$location.hash(anchor);
-			$anchorScroll();
-		}
-		
-		$scope.types = ["order", "shipment", "box", "item"];
-		
-		$scope.display = {
-			"downloads": true,
-			"interactions": true,
-			"updates": true,
-			"updates_mobile": true, 
-			"processing": true 
-				
-		}
-		$scope.location = {
-			"na":true,
-			"vendor":true,
-			"tohub":true,
-			"hub":true,
-			"fromhub":true,
-			"port":true,
-			"toclient":true,
-			"client":true
-		};
-		  
-		$scope.filterFn = function(elm) {
-			if($scope.location[elm.location_id]) {
-				  return true;
-			}
-			return false; 
-		};
-	}])
-	
-	.controller('GuidelinesOperationsCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$routeParams', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, $routeParams, GuidelinesWeb, GuidelinesMobile) {
-	
-		$scope.$emit("event:sectionUpdate", "sans");
-		
-		$scope.types = ["order", "shipment", "box", "item"];
-		var resource; 
-		
-		if ($routeParams.id === 'web') resource = GuidelinesWeb; 
-		if ($routeParams.id === 'mobile') resource = GuidelinesMobile; 
-		
-		resource.get(function(elm) {
-			$scope.elm = elm; 
-			$timeout(function() {
-				$anchorScroll();
-			}, 500);
-		});
-		
-		$scope.scrollTo = function(anchor) {
-			$location.hash(anchor);
-			$anchorScroll();
-		}
-	}])
-	
-	.controller('BugsCtrl', ['$scope', 'Bugs', function($scope, Bugs) {
-		Bugs.query( function(bugs) { 
-			$scope.bugs = bugs;
-		});
 	}])
 	
 	;

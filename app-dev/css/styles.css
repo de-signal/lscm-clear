@@ -1,6 +1,3 @@
-/* @override 
-	http://dev-clear.ofon2.com/app-dev/css/styles.css */
-
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
@@ -1299,16 +1296,16 @@ font-variant: normal;}
 }
 
 .picto_web:before {
-	content:  url(../img/clear_icon_backoffice.svg);	
+	content:  url(../conf/img/guidelines/clear_icon_backoffice.svg);	
 }
 .picto_system:before {
-	content:  url(../img/clear_icon_system.svg);
+	content:  url(../conf/img/guidelines/clear_icon_system.svg);
 }
 .picto_mobile:before {
-	content:  url(../img/clear_icon_operator.svg);	
+	content:  url(../conf/img/guidelines/clear_icon_operator.svg);	
 }
 .picto_inspector:before {
-	content:  url(../img/clear_icon_inspector.svg);	
+	content:  url(../conf/img/guidelines/clear_icon_inspector.svg);	
 }
 
 h5 .badge-parent {
@@ -1326,7 +1323,7 @@ h5 .badge-parent {
 }
 
 .elements-update .element {
-	background:url(../img/guidelines/clear_guideline_arrow_neg_bottom_s.svg) center top no-repeat rgba(223, 223, 215, 0.75);
+	background:url(../conf/img/guidelines/clear_guideline_arrow_neg_bottom_s.svg) center top no-repeat rgba(223, 223, 215, 0.75);
 }
 
 .elements-download .element {
@@ -1334,7 +1331,7 @@ h5 .badge-parent {
 }
 .elements-download .element:after {
 	display: inline-block;
-	background: url(../img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
+	background: url(../conf/img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
 	height: 50px;
 	content: "";
 	position: absolute;
@@ -1348,15 +1345,15 @@ h5 .badge-parent {
 	display: none;
 }
 .plan-left-arrow .bloc1, .plan-right-arrow .bloc1 {
-	background:url(../img/guidelines/clear_guideline_arrow_end_top.svg) center bottom no-repeat;
+	background:url(../conf/img/guidelines/clear_guideline_arrow_end_top.svg) center bottom no-repeat;
 	padding-bottom: 40px;
 }
 
 .plan-left-arrow .bloc2, .plan-right-arrow .bloc2 {
-	background:url(../img/guidelines/clear_guideline_arrow_line_vert.svg) center no-repeat;
+	background:url(../conf/img/guidelines/clear_guideline_arrow_line_vert.svg) center no-repeat;
 }
 .plan-left-arrow .bloc3, .plan-right-arrow .bloc3 {
-	background:url(../img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
+	background:url(../conf/img/guidelines/clear_guideline_arrow_bottom.svg) center bottom no-repeat;
 	height:50px;
 	margin-bottom: 20px;
 }
@@ -1378,23 +1375,23 @@ h5 .badge-parent {
 
 @media (min-width: 992px) {
 	.plan-left-arrow .bloc1 {
-		background:url(../img/guidelines/clear_guideline_arrow_end_left.svg) right 40px no-repeat;
+		background:url(../conf/img/guidelines/clear_guideline_arrow_end_left.svg) right 40px no-repeat;
 	}
 	
 	.plan-left-arrow .bloc2, .plan-right-arrow .bloc2 {
-		background:url(../img/guidelines/clear_guideline_arrow_line.svg) center 40px no-repeat;
+		background:url(../conf/img/guidelines/clear_guideline_arrow_line.svg) center 40px no-repeat;
 	}
 	.plan-left-arrow .bloc3 {
-		background:url(../img/guidelines/clear_guideline_arrow_right.svg) center 40px no-repeat;
+		background:url(../conf/img/guidelines/clear_guideline_arrow_right.svg) center 40px no-repeat;
 		height:130px;
 		margin-bottom: 0;
 	}
 	.plan-right-arrow .bloc1 {
-		background:url(../img/guidelines/clear_guideline_arrow_end_right.svg) left 40px no-repeat;
+		background:url(../conf/img/guidelines/clear_guideline_arrow_end_right.svg) left 40px no-repeat;
 		float: right;
 	}
 	.plan-right-arrow .bloc3 {
-		background:url(../img/guidelines/clear_guideline_arrow_left.svg) center 40px no-repeat;
+		background:url(../conf/img/guidelines/clear_guideline_arrow_left.svg) center 40px no-repeat;
 		float: left;
 		height:130px;
 		margin-bottom: 0;
