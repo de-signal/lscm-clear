@@ -144,10 +144,11 @@ module.exports = function (grunt) {
 						'.htaccess',
 						'*.html',
 						'core/html/{,*/}*.html',
-						'core/json/**/*', 
 						'conf/img/{,*/}*.svg',
 						'modules/transport/html/{,*/}*.html',
-						'modules/stock/html/{,*/}*.html'
+						'modules/stock/html/{,*/}*.html',
+						'modules/transport/json/**/*',
+						'modules/stock/json/**/*'
 					]
 				}, 
 				{
