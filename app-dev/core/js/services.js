@@ -297,7 +297,6 @@ angular.module('clearApp.services', ['ngResource'])
 		return {
 		
 			listReady: function(p, param) {
-				
 				var ready = function(list) {
 					if (list.id && list.conf) {
 						$rootScope.$broadcast('event:listReady_' + list.id, list.conf);
@@ -308,6 +307,7 @@ angular.module('clearApp.services', ['ngResource'])
 					for (var i in param) {
 						lists[param[i]] = {};
 					}
+					console.log('lists: ', lists);
 				} else if (p === 'conf') { 
 					lists[param.id].conf = param;
 					ready(lists[param.id]); 

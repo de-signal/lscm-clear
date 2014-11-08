@@ -5,7 +5,7 @@
 	<h1 class="container capitalize">
 		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDelete(elm, $event)' alt="Delete"></i>
 		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="Tracking"></i>
-		<i class="icon pull-right i-alert-add icon-link" ng-click="modalAlert(elm, '', $parent.user)" alt="Create alert" ></i>
+		<i class="icon pull-right i-alert-add icon-link" ng-click="modalAlert(elm, '', $parent.user)" alt="Create alert" ng-if="display.alerts"></i>
 		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i>
 		 {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
 </div>
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 	
-	<div class="row" ng-repeat="alert in elm.alerts" ng-if="elm.alerts">
+	<div class="row" ng-repeat="alert in elm.alerts" ng-if="elm.alerts && display.alerts">
 		<div class="col-md-12">
 			<div class="elements-group margin-top bg-default" ng-class="{info:'bg-info', error:'bg-error', warning:'bg-warning', success:'bg-success'}[alert.status]">
 				<div class="row">
@@ -147,8 +147,8 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="row margin-top" ng-if="elm.required">
+
+	<div class="row margin-top" ng-if="elm.required && display.conditions">
 		<div class="col-md-12">
 			<h3>conditions</h3>
 			<table class="table middle">
@@ -164,7 +164,7 @@
 					<tr ng-repeat="condition in elm.required">
 						<td><i class="lead icon" condition-icon></i></td>
 						<td><strong>{{condition.name}}</strong></td>
-						<td><span class="label label-default" status="{{elm.status}}"  condition-status editable="{{condition.editable}}" completed="{{condition.completed}}">{{condition.message}}</span></td>
+						<td><span class="label label-default" status="{{elm.status}}"  condition-status editable="{{condition.editable && display.conditions.edit}}" completed="{{condition.completed}}">{{condition.message}}</span></td>
 						<td><button class='btn btn-sm' ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'>Update</button></td>
 					</tr>
 				</tbody>
@@ -173,7 +173,7 @@
 	</div>
 	
 	
-	<div class="row margin-top" ng-if="elm.documents">
+	<div class="row margin-top" ng-if="elm.documents && display.documents">
 		<div class="col-md-12">
 			<h3></i>documents</h3>
 			<table class="table middle">
@@ -184,7 +184,7 @@
 					<th><h6>created</h6></th>
 					<th><h6>user</h6></th>
 					<th><h6>info</h6></th>
-					<th><h6><i class="icon pull-right i-add icon-link" ng-click="modalDocumentUpload(elm, $parent.user)" alt="Upload document" ></h6></th>
+					<th><h6><i class="icon pull-right i-add icon-link" ng-click="modalDocumentUpload(elm, $parent.user)" alt="Upload document" ng-if="display.documents.add"></h6></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -201,7 +201,7 @@
 		</div>
 	</div>
 	
-	<div class="row margin-top">
+	<div class="row margin-top" ng-if="display.documents.schedule">
 		<div class="col-md-12">
 			<h3>schedule</h3>
 			<table class="table table-condensed" ng-init="showCalendar=false">
@@ -230,7 +230,7 @@
 		<div class="col-md-12">
 			<h3>properties</h3>
 			<accordion close-others="false">
-			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup">
+			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup" ng-if="display.properties[group.id]">
 			    	<accordion-heading><i class="icon" ng-class="['i-property-' + group.id]"></i> {{group.name}}
 			    	</accordion-heading>
 					<div class="form-horizontal">

@@ -78,10 +78,9 @@ angular.module('clearApp.controllers', [])
 			}
 		
 		var menusetup = function(user) {
-			$scope.sections = user.sections;
 			var sectionsVisible = 0; 
-			for (var i in $scope.sections) {
-				if ($scope.sections[i]) {
+			for (var i in user.permissions) {
+				if (user.permissions[i]) {
 					sectionsVisible++
 					$scope.menu.current = i; 
 				}
@@ -268,7 +267,7 @@ angular.module('clearApp.controllers', [])
 	}])
 
 	.controller('GuidelinesCtrl', ['$scope', function($scope) {
-		
+		$scope.$emit("event:sectionUpdate", "sans");
 	}])
 	
 	;

@@ -220,7 +220,6 @@ angular.module('clearApp.mock', ['ngMockE2E'])
 			for (var i in resources) {
 				$httpBackend.when('GET', new RegExp('\\' + resources[i].url)).respond(function(method, url, data) {
 					url = url.split('?')[0]; 
-					console.log('url sans: ', url);  
 					var request = new XMLHttpRequest();
 					request.open('GET', resources[Utils.objectIndexbyKey(resources, "url", url)].static, false);
 					request.send(null);

@@ -15,7 +15,8 @@ angular.module('clearApp.controllersTransport', [])
 				"type": "dashboard",
 				"id": "dashboard",  
 				"display": { 
-					"filters" : false
+					"filters" : false, 
+					"conditions": $scope.user.permissions.transport.elements.conditions
 				}, 
 				"urlInit": {
 					"sortBy": "status", 
@@ -125,6 +126,7 @@ angular.module('clearApp.controllersTransport', [])
 			
 			$scope.modalAlert = TransportElement.modalAlert; 
 			$scope.modalAlertDelete = TransportElement.modalAlertDelete;
+			$scope.display = ($scope.user.permissions.transport.element) ? $scope.user.permissions.transport.element[$routeParams.type] : {};
 			
 			E2.get({'format': 'elements', 'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
 				elm.anim = true; 
@@ -153,7 +155,12 @@ angular.module('clearApp.controllersTransport', [])
 				}
 				
 				if (elm.related) {
-					var lists = []
+					var lists = []; 
+					var display = {
+						"filters" : $scope.user.permissions.transport.elements.filters,
+						"modifications": $scope.user.permissions.transport.elements.modifications, 
+						"conditions": $scope.user.permissions.transport.elements.conditions
+					}
 					for (var i in elm.related) {
 						lists.push(elm.related[i].type); 
 					}
@@ -163,6 +170,7 @@ angular.module('clearApp.controllersTransport', [])
 						for (var i in elm.related) {
 							var listId = elm.related[i].type;
 							listsConf[listId] = Utils.clone(config);
+							listsConf[listId].display = display; 
 							listsConf[listId].related = elm.type; 
 							listsConf[listId].related_id = elm.id; 
 							listsConf[listId].type = listId;
@@ -199,18 +207,24 @@ angular.module('clearApp.controllersTransport', [])
 				{"name": "Items", "type": "item", "url": "I"  }
 			];
 			var listsConf = [];
+			var display = {
+				"filters" : $scope.user.permissions.transport.elements.filters,
+				"modifications": $scope.user.permissions.transport.elements.modifications, 
+				"conditions": $scope.user.permissions.transport.elements.conditions
+			}
 			
-			ElmsConf.get( function(config) {	
+			ElmsConf.get( function(config) {
 				for (var i in types) {
 					var listId = types[i].type; 
 					listsConf[listId] = Utils.clone(config); 
 					listsConf[listId].id = listId;
+					listsConf[listId].display = display; 
 					listsConf[listId].type = listId;
 					listsConf[listId].name = types[i].name;
 					listsConf[listId].listCode = types[i].url; 
 					listsConf[listId].resource = E2;
 					ClearUrl.listReady('conf', listsConf[listId]); 
-				}
+				}				
 			});
 		}])
 		
@@ -222,16 +236,23 @@ angular.module('clearApp.controllersTransport', [])
 				ClearUrl.listReady('init', ['searchResult']); 
 				$scope.$broadcast('event:ListInit', 'searchResult');
 			});
+			var display = {
+				"filters" : $scope.user.permissions.transport.elements.filters,
+				"modifications": $scope.user.permissions.transport.elements.modifications, 
+				"conditions": $scope.user.permissions.transport.elements.conditions
+			}
 			
 			$scope.urlSet = function(type) {
 				var listConf = {}; 
 				ElmsConf.get( function(config) {
-					listConf = Utils.clone(config); 
+					listConf = Utils.clone(config);
+					listConf.display = display; 
 					listConf.type = type;
 					listConf.name = types[Utils.objectIndexbyKey(types, "type", type)].name;
 					listConf.id = 'searchResult';
 					listConf.resource = E2;
 					$scope.urlPage = ClearUrl.listsUrlSet({"type": type }, listConf).urlParams;
+//					console.log('listConf: ', listConf);
 					ClearUrl.listReady('conf', listConf);
 					$scope.listShow=true;
 				});
@@ -511,10 +532,11 @@ angular.module('clearApp.controllersTransport', [])
 			ClearUrl.listReady('init', ['documents']); 
 			
 			var type = $routeParams.type; 
-			
 			DocumentsConfig.get( function(config) {
 				var listConf = Utils.clone(config); 
 				listConf.id = "documents";
+				console.log('$scope.user.permissions.transport.documents[type]: ', listConf.display, $scope.user.permissions.transport.documents[type])
+				listConf.display = $scope.user.permissions.transport.documents[type];
 				listConf.type = type;
 				$scope.page = { 'type': type }; 
 				
@@ -719,4 +741,89 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.loaded = true;
 			});
 		}])
+
+			.controller('TransportGuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
+	
+		$scope.$emit("event:sectionUpdate", "sans");
+		
+		GuidelinesProcess.query(function(elms) {
+			$scope.elmsProcess = elms;
+		});
+		
+		GuidelinesWeb.get(function(elm) {
+			$scope.elmWeb = elm;
+		});
+		
+		GuidelinesMobile.get(function(elm) {
+			$scope.elmMobile = elm; 
+		});
+	}])
+	
+	.controller('TransportGuidelinesProcessCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', 'GuidelinesProcess', function($scope, $location, $anchorScroll, $timeout, GuidelinesProcess) {
+	
+		$scope.$emit("event:sectionUpdate", "sans");
+		
+		GuidelinesProcess.query(function(elms) {
+			$scope.elms = elms;
+			$timeout(function() {
+				$anchorScroll();
+			}, 500);
+		});
+		
+		$scope.scrollTo = function(anchor) {
+			$location.hash(anchor);
+			$anchorScroll();
+		}
+		
+		$scope.types = ["order", "shipment", "box", "item"];
+		
+		$scope.display = {
+			"downloads": true,
+			"interactions": true,
+			"updates": true,
+			"updates_mobile": true, 
+			"processing": true 
+				
+		}
+		$scope.location = {
+			"na":true,
+			"vendor":true,
+			"tohub":true,
+			"hub":true,
+			"fromhub":true,
+			"port":true,
+			"toclient":true,
+			"client":true
+		};
+		  
+		$scope.filterFn = function(elm) {
+			if($scope.location[elm.location_id]) {
+				  return true;
+			}
+			return false; 
+		};
+	}])
+	
+	.controller('TransportGuidelinesOperationsCtrl', ['$scope', '$location', '$anchorScroll', '$timeout', '$routeParams', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, $location, $anchorScroll, $timeout, $routeParams, GuidelinesWeb, GuidelinesMobile) {
+	
+		$scope.$emit("event:sectionUpdate", "sans");
+		
+		$scope.types = ["order", "shipment", "box", "item"];
+		var resource; 
+		
+		if ($routeParams.id === 'web') resource = GuidelinesWeb; 
+		if ($routeParams.id === 'mobile') resource = GuidelinesMobile; 
+		
+		resource.get(function(elm) {
+			$scope.elm = elm; 
+			$timeout(function() {
+				$anchorScroll();
+			}, 500);
+		});
+		
+		$scope.scrollTo = function(anchor) {
+			$location.hash(anchor);
+			$anchorScroll();
+		}
+	}])
 		;
