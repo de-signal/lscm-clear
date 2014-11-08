@@ -2,8 +2,189 @@
 	"last_name": "Robert",
 	"first_name": "Henri",
 	"id": 13, 
-	"sections": {
-		"transport": true, 
-		"stock": true
-		}
+	"permissions": 
+	{
+		"transport": {
+			"dashboard": {
+				"shipments": true,
+				"reports": true
+			},
+			"elements": {
+				"filters": false,
+				"modifications": false,
+				"conditions": false
+			},
+			"element": {
+				"order": {
+					"alerts": {
+						"add": true
+					},
+					"conditions": {
+						"edit": true
+					},
+					"documents": {
+						"add": true
+					},
+					"schedule": true,
+					"properties": {
+						"scope-and-delay": {
+							"edit": false
+						},
+						"procurement": {
+							"edit": false
+						},
+						"validation": {
+							"edit": false
+						},
+						"qa-qc": {
+							"edit": false
+						},
+						"comments": {
+							"edit": false
+						},
+						"catalogue": {
+							"edit": false
+						}
+					}
+				},
+				"shipment": {
+					"alerts": {
+						"add": true
+					},
+					"conditions": {
+						"edit": true
+					},
+					"documents": {
+						"add": true
+					},
+					"schedule": true,
+					"properties": {
+						"comments": {
+							"edit": false
+						},
+						"collection": {
+							"edit": false
+						},
+						"shipping": {
+							"edit": false
+						},
+						"transport": {
+							"edit": false
+						},
+						"location": {
+							"edit": false
+						},
+						"procurement": {
+							"edit": false
+						},
+						"qa-qc": {
+							"edit": false
+						}, 
+						"documentation": {
+							"edit": false
+						}
+					}
+				},
+				"box": {
+					"alerts": {
+						"add": true
+					},
+					"conditions": {
+						"edit": true
+					},
+					"documents": {
+						"add": true
+					},
+					"schedule": true,
+					"properties": {
+						"aspect": {
+							"edit": false
+						},
+						"location": {
+							"edit": false
+						},
+						"qa-qc": {
+							"edit": false
+						},
+						"repacking": {
+							"edit": false
+						},
+						"shipping-prehub": {
+							"edit": false
+						},
+						"shipping-posthub": {
+							"edit": false
+						},
+						"scope-and-delay": {
+							"edit": false
+						}
+					}
+				},
+				"item": {
+					"alerts": {
+						"add": true
+					},
+					"conditions": {
+						"edit": true
+					},
+					"documents": {
+						"add": true
+					},
+					"schedule": true,
+					"properties": {
+						"reference": {
+							"edit": false
+						},
+						"location": {
+							"edit": false
+						},
+						"qa-qc": {
+							"edit": false
+						},
+						"repacking": {
+							"edit": false
+						},
+						"shipping": {
+							"edit": false
+						},
+						"catalogue": {
+							"edit": false
+						},
+						"procurement": {
+							"edit": false
+						}
+					}
+				}
+			},
+			"indicators": true,
+			"search": true,
+			"tracking": true,
+			"alerts": {},
+			"documents": {
+				"ir": {
+					"filters": true,
+					"detail": true
+				},
+				"ncr": {
+					"filters": true,
+					"detail": true,
+					"comments": true
+				},
+				"pod": {
+					"filters": true,
+					"detail": true
+				},
+				"archive": {
+					"filters": true
+				},
+				"media": {
+					"filters": true,
+					"add": true
+				}
+			},
+			"addOrder": true
+		},
+		"stock": true,
+		"user": false
+	}
 }

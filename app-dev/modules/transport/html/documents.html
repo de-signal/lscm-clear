@@ -1,6 +1,6 @@
 <div class="header bg-generic bg-inspectionReport">
 	<h1 class="container">
-	<i class="icon pull-right i-add icon-link" ng-click="documentModalUpload(page.type, $parent.user)" alt="Upload file"  ng-if="page.type==='media'"></i>
+	<i class="icon pull-right i-add icon-link" ng-click="documentModalUpload(page.type, $parent.user)" alt="Upload file"  ng-if="page.type==='media' && user.permissions.transport.documents.media.add"></i>
 	<i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
 </div>
 
@@ -141,7 +141,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr  ng-repeat="doc in list.elements" class="pointer over" ng-click="go('transport/documents/' + page.type, doc.id)" > 
+							<tr ng-repeat="doc in list.elements" class="pointer over" ng-click="go('transport/documents/' + page.type, doc.id)" > 
 								<td><span class="label label-order">{{doc.related.order.reference}}</span></td>
 								<td><span class="label label-shipment">{{doc.related.shipment.reference}}</span></td>
 								<td><small>{{doc.user.first_name + " " + doc.user.last_name }}</small></td>
