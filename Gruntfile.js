@@ -23,12 +23,12 @@ module.exports = function (grunt) {
 		devUpdate: {
 			main: {
 				options: {
-					updateType: 'prompt', //just report outdated packages
+					updateType: 'force', //just report outdated packages
 					reportUpdated: true, //don't report already updated packages
-					semver: true, //use package.json semver rules when updating
+					semver: false, //use package.json semver rules when updating
 					packages: { //what packages to check
 						devDependencies: true, //only devDependencies
-						dependencies: false
+						dependencies: true
 					},
 					packageJson: null //find package.json automatically
 				}
