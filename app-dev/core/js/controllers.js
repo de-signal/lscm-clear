@@ -30,8 +30,7 @@ angular.module('clearApp.controllers', [])
 			$scope.loggedIn=true;
 			console.log('connect from cookie: ', $http.defaults.headers.common);
 			E1.get({'type': 'user'}, function(user) { 
-				$scope.user = user;
-				menusetup(user); 
+				userSetup(user); 
 			});
 		} 
 
@@ -53,9 +52,8 @@ angular.module('clearApp.controllers', [])
 						};
 						var userName = user.first_name + ' ' + user.last_name;
 						toaster.pop('success', 'Welcome', userName);
-						$scope.user = user;
+						userSetup(user);
 						authService.loginConfirmed(userName, httpConfig);
-						menusetup(user); 
 					});
 				})
 				.error(function(data, status, headers, config) {
@@ -77,7 +75,8 @@ angular.module('clearApp.controllers', [])
 				});
 			}
 		
-		var menusetup = function(user) {
+		var userSetup = function(user) {
+			$scope.user = user;
 			var sectionsVisible = 0; 
 			for (var i in user.permissions) {
 				if (user.permissions[i]) {
