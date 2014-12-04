@@ -10,9 +10,9 @@
 				"reports": true
 			},
 			"elements": {
-				"filters": false,
-				"modifications": false,
-				"conditions": false
+				"filters": true,
+				"modifications": true,
+				"conditions": true
 			},
 			"element": {
 				"order": {

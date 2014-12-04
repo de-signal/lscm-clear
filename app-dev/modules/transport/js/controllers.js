@@ -5,39 +5,40 @@
 angular.module('clearApp.controllersTransport', [])
 
 	.controller('TransportDashboardCtrl', ['$location', '$scope', '$timeout', '$routeParams', 'E1', 'ClearUrl', 'Utils', function($location, $scope, $timeout, $routeParams, E1, ClearUrl, Utils) {
-			
-			$scope.$emit("event:sectionUpdate", "transport");
-			
-			ClearUrl.listReady('init', ['dashboard']);
-			
-			var listConf = {
-				"resource": E1, 
-				"type": "dashboard",
-				"id": "dashboard",  
-				"display": { 
-					"filters" : false, 
-					"conditions": $scope.user.permissions.transport.elements.conditions
-				}, 
-				"urlInit": {
-					"sortBy": "status", 
-					"sortOrder": "ASC", 
-					"limit": 12
-				}
-			};
-			
-			$timeout(function() {
+
+			var contentLoad = function(user) {
+				var listConf = {
+					"resource": E1, 
+					"type": "dashboard",
+					"id": "dashboard",  
+					"display": { 
+						"filters" : false, 
+						"conditions": user.permissions.transport.elements.conditions
+					}, 
+					"urlInit": {
+						"sortBy": "status", 
+						"sortOrder": "ASC", 
+						"limit": 12
+					}
+				};
+				
 				$scope.$broadcast('event:ListInit', listConf.id);
 				ClearUrl.listReady('conf', listConf);
-			});
+				
+				E1.query({'type': 'report'}, function(docs){
+					$scope.reports = docs;
+				});
+			};
 			
-			E1.query({'type': 'report'}, function(docs){
-				$scope.reports = docs;
+			ClearUrl.listReady('init', ['dashboard']);
+
+			E1.get({'type': 'user'}, function(user) {
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
 			});
 		}])
 		
 		.controller('TransportDashboardTvCtrl', ['$interval', '$rootScope', '$routeParams', '$scope', 'E1', 'E2', 'ClearUrl', function($interval, $rootScope, $routeParams, $scope, E1, E2, ClearUrl) {
-			$scope.loaded = false;
-			$rootScope.tvScreen = true;
 			
 			var listElementsLoad = function() {
 				E1.query({'type': 'dashboard', "sortBy": "status", "sortOrder": "ASC", "limit": 12 }, function(list) {
@@ -46,19 +47,13 @@ angular.module('clearApp.controllersTransport', [])
 					$scope.loaded = true;
 				});
 			}
+			
 			var listEmpty = function() {
 				if ($scope.list) {
 					var n = $scope.list.length;
 					$interval(function() {$scope.list.shift()}, 50, n).then(listElementsLoad);
 				}
-			}	
-			
-			listElementsLoad();
-			$interval(listEmpty, 25000);
-			
-			var alertsQty;
-			var next;
-			$scope.alertCurrent = 1;
+			}
 			
 			var alertsUpdate = function() {
 				E2.query({'type': 'alert', "sortBy": "status", "sortOrder": "ASC", "limit": 12, "active": true }, function(alerts) {
@@ -77,6 +72,17 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.alertCurrent = 0;
 				$interval(function() { $scope.alertCurrent= next}, 3000, 1);
 			}
+			
+			$scope.loaded = false;
+			$rootScope.tvScreen = true;
+			
+			listElementsLoad();
+			$interval(listEmpty, 25000);
+			
+			var alertsQty;
+			var next;
+			$scope.alertCurrent = 1;
+			
 			alertsUpdate(); 
 			$interval(alertsUpdate, 9000);
 		}])
@@ -89,9 +95,74 @@ angular.module('clearApp.controllersTransport', [])
 			}
 		}])
 		
-		.controller('TransportElementCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E2', 'Utils', 'ClearUrl', 'TransportElement', 'ElmsConf', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E2, Utils, ClearUrl, TransportElement, ElmsConf) {
+		.controller('TransportElementCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E1', 'E2', 'Utils', 'ClearUrl', 'TransportElement', 'ElmsConf', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E1, E2, Utils, ClearUrl, TransportElement, ElmsConf) {
 		
-			$scope.$emit("event:sectionUpdate", "transport");
+			var contentLoad = function(user) {
+				
+				E2.get({'format': 'elements', 'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
+					elm.anim = true; 
+					elm = TransportElement.elementUpdate(elm);
+					
+					$scope.elm = elm;
+					$scope.display = user.permissions.transport.element[$routeParams.type];
+					
+					if (elm.timeline) {
+						var timelineAnim = function(i) {
+							if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
+						}
+						var loops = 0;
+						$interval(function() {timelineAnim(loops++)}, 1000, 4); 
+					}
+					
+					if ($location.search().related_type_active) {
+						for (var i in elm.related) {
+							if ($location.search().related_type_active === elm.related[i].type) {
+								$scope.relatedActiveTab[$location.search().related_type_active] = true;
+								break;
+							}
+						}
+						$timeout(function() {
+							$anchorScroll();
+						}, 1000);
+					}
+					
+					if (elm.related) {
+						var lists = []; 
+						var display = {
+							"filters" : user.permissions.transport.elements.filters,
+							"modifications": user.permissions.transport.elements.modifications, 
+							"conditions": user.permissions.transport.elements.conditions
+						}
+						for (var i in elm.related) {
+							lists.push(elm.related[i].type); 
+						}
+						ClearUrl.listReady('init', lists);
+						var listsConf = [];
+						ElmsConf.get(function(config) {
+							for (var i in elm.related) {
+								var listId = elm.related[i].type;
+								listsConf[listId] = Utils.clone(config);
+								listsConf[listId].display = display; 
+								listsConf[listId].related = elm.type; 
+								listsConf[listId].related_id = elm.id; 
+								listsConf[listId].type = listId;
+								listsConf[listId].id = listId;
+								listsConf[listId].name = elm.related[i].name;
+								switch (elm.related[i].type) {
+									case 'order': listsConf[listId].listCode = 'O'; break;
+									case 'shipment': listsConf[listId].listCode = 'S'; break;
+									case 'box': listsConf[listId].listCode = 'B'; break;
+									case 'item': listsConf[listId].listCode = 'I'; break;
+								}
+								listsConf[listId].resource = E2; 
+								ClearUrl.listReady('conf', listsConf[listId]); 
+							}
+						});
+					}
+
+					$scope.loaded = true;
+				});
+			}
 			
 			$scope.loaded = false;
 			$scope.relatedActiveTab = {};
@@ -126,137 +197,89 @@ angular.module('clearApp.controllersTransport', [])
 			
 			$scope.modalAlert = TransportElement.modalAlert; 
 			$scope.modalAlertDelete = TransportElement.modalAlertDelete;
-			$scope.display = ($scope.user.permissions.transport.element) ? $scope.user.permissions.transport.element[$routeParams.type] : {};
+			$scope.modalDocumentUpload = TransportElement.modalDocumentUpload; 
 			
-			E2.get({'format': 'elements', 'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
-				elm.anim = true; 
-				elm = TransportElement.elementUpdate(elm);
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
+			});
+			
+		}])
+		
+		.controller('TransportTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsConf', 'E1', 'E2', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsConf, E1, E2){
+			
+			var contentLoad = function(user) {
 				
-				$scope.elm = elm;
-				
-				if (elm.timeline) {
-					var timelineAnim = function(i) {
-						if (elm.timeline[i].completed) elm.timeline[i].anim = true; 
-					}
-					var loops = 0;
-					$interval(function() {timelineAnim(loops++)}, 1000, 4); 
-				}
-				
-				if ($location.search().related_type_active) {
-					for (var i in elm.related) {
-						if ($location.search().related_type_active === elm.related[i].type) {
-							$scope.relatedActiveTab[$location.search().related_type_active] = true;
-							break;
-						}
-					}
-					$timeout(function() {
-						$anchorScroll();
-					}, 1000);
-				}
-				
-				if (elm.related) {
-					var lists = []; 
+				var types = [	
+					{"name": "Orders", "type": "order", "url": "O" }, 
+					{"name": "Shipments", "type": "shipment", "url": "S" }, 
+					{"name": "Boxes", "type": "box", "url": "B"  }, 
+					{"name": "Items", "type": "item", "url": "I"  }
+				];
+				var listsConf = [];
+			
+				ElmsConf.get( function(config) {
 					var display = {
-						"filters" : $scope.user.permissions.transport.elements.filters,
-						"modifications": $scope.user.permissions.transport.elements.modifications, 
-						"conditions": $scope.user.permissions.transport.elements.conditions
+						"filters" : user.permissions.transport.elements.filters,
+						"modifications": user.permissions.transport.elements.modifications, 
+						"conditions": user.permissions.transport.elements.conditions
 					}
-					for (var i in elm.related) {
-						lists.push(elm.related[i].type); 
-					}
-					ClearUrl.listReady('init', lists);
-					var listsConf = [];
-					ElmsConf.get(function(config) {
-						for (var i in elm.related) {
-							var listId = elm.related[i].type;
-							listsConf[listId] = Utils.clone(config);
-							listsConf[listId].display = display; 
-							listsConf[listId].related = elm.type; 
-							listsConf[listId].related_id = elm.id; 
-							listsConf[listId].type = listId;
-							listsConf[listId].id = listId;
-							listsConf[listId].name = elm.related[i].name;
-							switch (elm.related[i].type) {
-								case 'order': listsConf[listId].listCode = 'O'; break;
-								case 'shipment': listsConf[listId].listCode = 'S'; break;
-								case 'box': listsConf[listId].listCode = 'B'; break;
-								case 'item': listsConf[listId].listCode = 'I'; break;
-							}
-							listsConf[listId].resource = E2; 
-							ClearUrl.listReady('conf', listsConf[listId]); 
+					for (var i in types) {
+						var listId = types[i].type; 
+						listsConf[listId] = Utils.clone(config); 
+						listsConf[listId].id = listId;
+						listsConf[listId].display = display; 
+						listsConf[listId].type = listId;
+						listsConf[listId].name = types[i].name;
+						listsConf[listId].listCode = types[i].url; 
+						listsConf[listId].resource = E2;
+						ClearUrl.listReady('conf', listsConf[listId]); 
+					}				
+				});
+			}
+			
+			ClearUrl.listReady('init', ['order', 'shipment', 'box', 'item']); 
+			
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
+			});
+		}])
+		
+		.controller('TransportSearchCtrl', ['$scope', '$location', '$timeout', 'ClearUrl', 'Utils', 'ElmsConf', 'E1', 'E2', function($scope, $location, $timeout, ClearUrl, Utils, ElmsConf, E1, E2) {
+			
+			var contentLoad = function(user) {
+				
+				$scope.urlSet = function(type) {
+					var listConf = {}; 
+					ElmsConf.get( function(config) {
+						var display = {
+							"filters" : user.permissions.transport.elements.filters,
+							"modifications": user.permissions.transport.elements.modifications, 
+							"conditions": user.permissions.transport.elements.conditions
 						}
+						listConf = Utils.clone(config);
+						listConf.display = display; 
+						listConf.type = type;
+						listConf.name = types[Utils.objectIndexbyKey(types, "type", type)].name;
+						listConf.id = 'searchResult';
+						listConf.resource = E2;
+						$scope.urlPage = ClearUrl.listsUrlSet({"type": type }, listConf).urlParams;
+						ClearUrl.listReady('conf', listConf);
+						$scope.listShow=true;
 					});
 				}
 				
-				$scope.modalDocumentUpload = TransportElement.modalDocumentUpload; 
-				
-				$scope.loaded = true;
-			});	
-		}])
-		
-		.controller('TransportTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsConf', 'E2', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsConf, E2){
-		
-			$scope.$emit("event:sectionUpdate", "transport");
-							
-			ClearUrl.listReady('init', ['order', 'shipment', 'box', 'item']); 
-			
-			var types = [	
-				{"name": "Orders", "type": "order", "url": "O" }, 
-				{"name": "Shipments", "type": "shipment", "url": "S" }, 
-				{"name": "Boxes", "type": "box", "url": "B"  }, 
-				{"name": "Items", "type": "item", "url": "I"  }
-			];
-			var listsConf = [];
-			var display = {
-				"filters" : $scope.user.permissions.transport.elements.filters,
-				"modifications": $scope.user.permissions.transport.elements.modifications, 
-				"conditions": $scope.user.permissions.transport.elements.conditions
-			}
-			
-			ElmsConf.get( function(config) {
-				for (var i in types) {
-					var listId = types[i].type; 
-					listsConf[listId] = Utils.clone(config); 
-					listsConf[listId].id = listId;
-					listsConf[listId].display = display; 
-					listsConf[listId].type = listId;
-					listsConf[listId].name = types[i].name;
-					listsConf[listId].listCode = types[i].url; 
-					listsConf[listId].resource = E2;
-					ClearUrl.listReady('conf', listsConf[listId]); 
-				}				
-			});
-		}])
-		
-		.controller('TransportSearchCtrl', ['$scope', '$location', '$timeout', 'ClearUrl', 'Utils', 'ElmsConf', 'E2', function($scope, $location, $timeout, ClearUrl, Utils, ElmsConf, E2) {
-		
-			$scope.$emit("event:sectionUpdate", "transport");
-			
-			$timeout(function() {
 				ClearUrl.listReady('init', ['searchResult']); 
 				$scope.$broadcast('event:ListInit', 'searchResult');
-			});
-			var display = {
-				"filters" : $scope.user.permissions.transport.elements.filters,
-				"modifications": $scope.user.permissions.transport.elements.modifications, 
-				"conditions": $scope.user.permissions.transport.elements.conditions
+
+				if ($location.search().type) {
+					$scope.urlSet($location.search().type); 
+				} else {
+					$scope.urlPage = {}; 
+					$scope.listShow=false;
+				}
 			}
-			
-			$scope.urlSet = function(type) {
-				var listConf = {}; 
-				ElmsConf.get( function(config) {
-					listConf = Utils.clone(config);
-					listConf.display = display; 
-					listConf.type = type;
-					listConf.name = types[Utils.objectIndexbyKey(types, "type", type)].name;
-					listConf.id = 'searchResult';
-					listConf.resource = E2;
-					$scope.urlPage = ClearUrl.listsUrlSet({"type": type }, listConf).urlParams;
-//					console.log('listConf: ', listConf);
-					ClearUrl.listReady('conf', listConf);
-					$scope.listShow=true;
-				});
-			} 
 			
 			var types = [	
 				{"name": "Orders", "type": "order" }, 
@@ -266,43 +289,55 @@ angular.module('clearApp.controllersTransport', [])
 				{"name": "Items", "type": "item" }
 			];	
 		
-			$scope.types = types; 
+			$scope.types = types; 		
 			
-			if ($location.search().type) {
-				$scope.urlSet($location.search().type); 
-			} else {
-				$scope.urlPage = {}; 
-				$scope.listShow=false;
-			}
-			
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
+			});
 		}])
 			
-		.controller('TransportElementsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ElmsConf', 'E2', function($scope, $routeParams, ClearUrl, Utils, ElmsConf, E2) {
+		.controller('TransportElementsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'Utils', 'ElmsConf','E1', 'E2', function($scope, $routeParams, ClearUrl, Utils, ElmsConf, E1, E2) {
+			
+			var contentLoad = function(user) {
+				
+				ClearUrl.listReady('init', ['elements']);
+				
+				var type = $routeParams.type; 
+									
+				switch (type) {
+					case 'order':		$scope.type = 'order'; 		$scope.name = 'Orders'; 		break;
+					case 'shipment':	$scope.type = 'shipment'; 	$scope.name = 'Shipments'; 		break;
+					case 'shipmentIn': 	$scope.type = 'shipment'; 	$scope.name = 'Shipments in'; 	break;
+					case 'shipmentOut': $scope.type = 'shipment'; 	$scope.name = 'Shipments out'; 	break;
+					case 'box': 		$scope.type = 'box'; 		$scope.name = 'Boxes'; 			break;
+					case 'item': 		$scope.type = 'item'; 		$scope.name = 'Items'; 			break;
+				}	
 		
-			$scope.$emit("event:sectionUpdate", "transport");
-			
-			ClearUrl.listReady('init', ['elements']);
-			
-			var type = $routeParams.type; 
+				ElmsConf.get( function(config) {
+				
+					var display = {
+						"filters" : user.permissions.transport.elements.filters,
+						"modifications": user.permissions.transport.elements.modifications, 
+						"conditions": user.permissions.transport.elements.conditions
+					}
 					
-			switch (type) {
-				case 'order': $scope.type = 'order'; $scope.name = 'Orders'; break;
-				case 'shipment': $scope.type = 'shipment'; $scope.name = 'Shipments'; break;
-				case 'shipmentIn': $scope.type = 'shipment'; $scope.name = 'Shipments in'; break;
-				case 'shipmentOut': $scope.type = 'shipment'; $scope.name = 'Shipments out'; break;
-				case 'box': $scope.type = 'box'; $scope.name = 'Boxes'; break;
-				case 'item': $scope.type = 'item'; $scope.name = 'Items'; break;
-			}	
-	
-			ElmsConf.get( function(config) {
-				var listConf = Utils.clone(config); 
-				listConf.type = type;
-				listConf.name = $scope.name;  
-				listConf.id = "elements";
-				listConf.resource = E2; 
-				$scope.$broadcast('event:ListInit', "elements");
-				ClearUrl.listReady('conf', listConf); 
-			}); 
+					var listConf = Utils.clone(config); 
+					listConf.type = type;
+					listConf.display = display; 
+					listConf.name = $scope.name;  
+					listConf.id = "elements";
+					listConf.resource = E2; 
+					$scope.$broadcast('event:ListInit', "elements");
+					ClearUrl.listReady('conf', listConf); 
+				});
+			} 
+
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
+			});
+
 		}])
 		
 		.controller('TransportElementModalDocumentUploadCtrl', ['$scope', '$upload', 'TransportDocument', 'E2', '$modalInstance', 'elm', 'user', function ($scope, $upload, TransportDocument, E2, $modalInstance, elm, user) {
@@ -525,36 +560,43 @@ angular.module('clearApp.controllersTransport', [])
 			}
 		}])
 		
-		.controller('TransportDocumentsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'TransportDocument', 'Utils', 'DocumentsConfig', 'E2', function($scope, $routeParams, ClearUrl, TransportDocument, Utils, DocumentsConfig, E2) {
+		.controller('TransportDocumentsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'TransportDocument', 'Utils', 'DocumentsConfig', 'E1', 'E2', function($scope, $routeParams, ClearUrl, TransportDocument, Utils, DocumentsConfig, E1, E2) {
+
+			var contentLoad = function(user) {
 			
-			$scope.$emit("event:sectionUpdate", "transport");
+				ClearUrl.listReady('init', ['documents']); 
+				
+				var type = $routeParams.type; 
+				
+				DocumentsConfig.get( function(config) {
+					var listConf = Utils.clone(config); 
+					listConf.id = "documents";
+					listConf.display = user.permissions.transport.documents[type];
+					listConf.type = type;
+					$scope.page = { 'type': type }; 
+					
+					switch (type) {
+						case 'ir': $scope.page.name = 'Inspection reports'; break;
+						case 'ncr': $scope.page.name = 'Non-conformity reports'; break;
+						case 'pod': $scope.page.name = 'Proofs of delivery'; break;
+						case 'archive': $scope.page.name = 'Archives'; break;
+						case 'media': $scope.page.name = 'Medias'; break;		
+					}
+					
+					listConf.resource = E2;
+					
+					$scope.$broadcast('event:ListInit', listConf.id);
+					ClearUrl.listReady('conf', listConf); 
+				});
+				
+			}
 			
-			ClearUrl.listReady('init', ['documents']); 
+			$scope.documentModalUpload = TransportDocument.documentModalUpload;
 			
-			var type = $routeParams.type; 
-			DocumentsConfig.get( function(config) {
-				var listConf = Utils.clone(config); 
-				listConf.id = "documents";
-				console.log('$scope.user.permissions.transport.documents[type]: ', listConf.display, $scope.user.permissions.transport.documents[type])
-				listConf.display = $scope.user.permissions.transport.documents[type];
-				listConf.type = type;
-				$scope.page = { 'type': type }; 
-				
-				switch (type) {
-					case 'ir': $scope.page.name = 'Inspection reports'; break;
-					case 'ncr': $scope.page.name = 'Non-conformity reports'; break;
-					case 'pod': $scope.page.name = 'Proofs of delivery'; break;
-					case 'archive': $scope.page.name = 'Archives'; break;
-					case 'media': $scope.page.name = 'Medias'; break;		
-				}
-				
-				listConf.resource = E2;
-				
-				$scope.$broadcast('event:ListInit', listConf.id);
-				ClearUrl.listReady('conf', listConf); 
+			E1.get({'type': 'user'}, function(user) { 
+				$scope.$emit("event:sectionUpdate", "transport");
+				contentLoad(user);
 			}); 
-			
-			$scope.documentModalUpload = TransportDocument.documentModalUpload; 
 		}])
 		
 		.controller('TransportDocumentModalUploadCtrl', ['$scope', '$upload', 'TransportDocument', 'E2', '$modalInstance', 'type', 'user', function ($scope, $upload, TransportDocument, E2, $modalInstance, type, user) {

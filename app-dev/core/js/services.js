@@ -242,6 +242,7 @@ angular.module('clearApp.services', ['ngResource'])
 			}, 
 			
 			listPropertySave: function(list, idsArray, propertyUpdate, selectGlobal, urlParams) {
+				console.log('stuffs: ', list, idsArray, propertyUpdate, selectGlobal, urlParams); 
 				var elements = []; 
 				var parameters = { 
 					'type': list.type, 
@@ -260,15 +261,15 @@ angular.module('clearApp.services', ['ngResource'])
 				
 				if (selectGlobal) parameters = Utils.collect(parameters, urlParams); 
 
-				E2.updateList(parameters, elements, function(elms, response) {
+				list.resource.updateList(parameters, elements, function(elms, response) {
 					var propertyMessage; 
 					var elementsType = list.elements.length + " " + list.type; 
 					
 					if (response("X-Clear-updatedElements")) elementsType = "on " + response("X-Clear-updatedElements");
 					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Properties updated" + elementsType;
-					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property did not update" + elementsType;
-					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property did not update" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property was not updated" + elementsType;
+					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property was not updated" + elementsType;
 					
 					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
 				}); 
