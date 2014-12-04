@@ -188,6 +188,11 @@ filters.tmp: {{filters.tmp | json}}
 									</div>
 								</div>
 							</div>
+							<div class="row margin-bottom-s" ng-if="filters.tmp.propertyUpdate.infos">
+								<div class="col-md-12">
+									<span class="label" ng-class="{error:'label\-error', warning:'label\-warning', info:'label\-info', success:'label\-success'}[filters.tmp.propertyUpdate.infos_type]">{{filters.tmp.propertyUpdate.infos}}</span>
+								</div>
+							</div>
 							<div class="row">
 							    <div class="col-md-12">
 									<button class="btn btn-block btn-lg btn-default" type="button" ng-click="listPropertySave()" ng-disabled="!filters.tmp.propertyUpdate.value || filters.tmp.ids.length < 1">Modify</button>
