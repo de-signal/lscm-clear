@@ -43,7 +43,9 @@
                 "id": "package_name",
                 "name": "Package name",
                 "type": "text",
-                "group": "Documentation"
+                "group": "Documentation",
+                "infos": "Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.",
+                "infos_type": "warning"
             },
             {
                 "id": "country_of_supply",

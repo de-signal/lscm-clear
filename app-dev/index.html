@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>CLEAR | LSCM</title>
-		<!-- update:include ../app-dev/partials/base.html -->
+		<!-- update:include ../app-dev/core/html/base.html -->
 		<base href="/app-dev/">
 		<!-- /update -->
 		<!-- build:css css/app.css -->
@@ -24,7 +24,7 @@
 		
 			<div class="login-box" ng-hide="loggedIn">
 				<div class="login-logo">
-					<img src="img/clear_logo_type.svg" alt="Cloud Logistics Extranet Application Resource"/>
+					<img src="conf/img/clear_logo_type.svg" alt="Cloud Logistics Extranet Application Resource"/>
 				</div>
 				<form ng-submit="login()" class="form-horizontal" role="form">
 					<div class="form-group">
@@ -67,7 +67,7 @@
 								  <span class="icon-bar"></span>
 								  <span class="icon-bar"></span>
 								</button>
-							<a class="navbar-brand" href="dashboard"><img src="img/clear_logo_type.svg" alt="Clear" /></a>
+							<a class="navbar-brand" href="dashboard"><img src="conf/img/clear_logo_type.svg" alt="Clear" /></a>
 						</div>
 						<div class="navbar-collapse collapse" collapse="isCollapsed">
 							<ul class="nav navbar-nav navbar-right">
@@ -76,31 +76,32 @@
 								<li class="dropdown">
 									<a class="dropdown-toggle" href="#"><i class="icon i-user"></i> <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li><a href="user">{{user.first_name}} {{user.last_name}}</a></li>
+										<li ng-if="user.permissions.user"><a href="user">{{user.first_name}} {{user.last_name}}</a></li>
 										<li><a ng-click="logout()">Logout</a></li>
 									</ul>
 								</li>
 							</ul>
 							<ul class="nav navbar-nav" ng-if="menu.sub.visible">
-								<li ng-if="sections.transport"><a href="transport/dashboard">Transport</a></li>
-								<li ng-if="sections.stock"><a href="stock/warehouses">Stock</a></li>
+								<li ng-if="user.permissions.transport"><a href="transport/dashboard">Transport</a></li>
+								<li ng-if="user.permissions.stock"><a href="stock/warehouses">Stock</a></li>
 							</ul>
 							<hr  ng-if="menu.sub.visible" />
 							<ul class="nav navbar-nav" ng-if="menu.current === 'transport'">
-								<li><a href="transport/tracking">Tracking</a></li>
-								<li><a href="transport/indicators">Indicators</a></li>
-								<li><a href="transport/search">Search</a></li>
-								<li><a href="transport/alerts">Alerts</a></li>
+								<li ng-if="user.permissions.transport.tracking"><a href="transport/tracking">Tracking</a></li>
+								<li ng-if="user.permissions.transport.indicators"><a href="transport/indicators">Indicators</a></li>
+								<li ng-if="user.permissions.transport.search"><a href="transport/search">Search</a></li>
+								<li ng-if="user.permissions.transport.alerts"><a href="transport/alerts">Alerts</a></li>
 								<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li><a href="transport/documents/ir">Inspection reports</a></li>
-										<li><a href="transport/documents/ncr">Non-conformity reports</a></li>
-										<li><a href="transport/documents/pod">Proofs of delivery</a></li>
-										<li><a href="transport/documents/archive">Archives</a></li>
-										<li><a href="transport/documents/media">Medias</a></li>
+										<li ng-if="user.permissions.transport.documents.ir"><a href="transport/documents/ir">Inspection reports</a></li>
+										<li ng-if="user.permissions.transport.documents.ncr"><a href="transport/documents/ncr">Non-conformity reports</a></li>
+										<li ng-if="user.permissions.transport.documents.pod"><a href="transport/documents/pod">Proofs of delivery</a></li>
+										<li ng-if="user.permissions.transport.documents.archive"><a href="transport/documents/archive">Archives</a></li>
+										<li ng-if="user.permissions.transport.documents.media"><a href="transport/documents/media">Medias</a></li>
+										<li><a href="http://dev-clear.ofon2.com/index.php/mergedDocuments/chrono_list">Merge documents</a></li>
 									</ul>
 								</li>
-								<li><a href="transport/add-order">Add order</a></li>
+								<li ng-if="user.permissions.transport.addOrder"><a href="transport/add-order">Add order</a></li>
 							</ul>
 							<ul class="nav navbar-nav" ng-if="menu.current === 'stock'">
 								<li><a href="stock/warehouses">Warehouses</a></li>
@@ -126,14 +127,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<img src="img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
+						<img src="conf/img/clear_logo_footer.jpg" alt="" class="footer-logo"/>
 					</div>
 					<div class="col-md-3">
 						
 					</div>
 					<div class="col-md-3">
 						<p class="margin-top"><small>Cloud Logistics Extranet Application Resource<br />v.<span app-version></span></small> |  <small>&copy; LSCM 2014</small></p>
-						<p class="margin-top"><img src="img/lscm_logo.png" alt="" /></p>
+						<p class="margin-top"><img src="conf/img/lscm_logo.png" alt="" /></p>
 					</div>
 				</div>
 			</div>
@@ -159,17 +160,17 @@
 		<script src="lib/js/angular-mocks.js"></script>
 		<!-- endbuild -->
 		<!-- build:js js/app.js -->
-		<script src="js/app.js"></script>
-		<script src="js/filters.js"></script>
-		<script src="js/services.js"></script>
-		<script src="js/transport/services.js"></script>
-		<script src="js/stock/services.js"></script>
-		<script src="js/controllers.js"></script>
-		<script src="js/transport/controllers.js"></script>
-		<script src="js/stock/controllers.js"></script>
-		<script src="js/directives.js"></script>
-		<script src="js/transport/directives.js"></script>
-		<script src="js/stock/directives.js"></script>
+		<script src="conf/js/app.js"></script>
+		<script src="core/js/filters.js"></script>
+		<script src="core/js/services.js"></script>
+		<script src="modules/transport/js/services.js"></script>
+		<script src="modules/stock/js/services.js"></script>
+		<script src="core/js/controllers.js"></script>
+		<script src="modules/transport/js/controllers.js"></script>
+		<script src="modules/stock/js/controllers.js"></script>
+		<script src="core/js/directives.js"></script>
+		<script src="modules/transport/js/directives.js"></script>
+		<script src="modules/stock/js/directives.js"></script>
 		<!-- endbuild -->
 		<!-- build:remove -->
 		<script src="mock/mock.js"></script>

@@ -143,9 +143,12 @@ module.exports = function (grunt) {
 						'*.{ico,png,txt}',
 						'.htaccess',
 						'*.html',
-						'partials/{,*/}*.html',
-						'json/**/*', 
-						'img/{,*/}*.svg'
+						'core/html/{,*/}*.html',
+						'conf/img/{,*/}*.svg',
+						'modules/transport/html/{,*/}*.html',
+						'modules/stock/html/{,*/}*.html',
+						'modules/transport/json/**/*',
+						'modules/stock/json/**/*'
 					]
 				}, 
 				{
@@ -188,9 +191,13 @@ module.exports = function (grunt) {
 			app: {
 				files: [{
 					expand: true,
-					cwd: 'app-dev/img',
-					src: '{,*/}*.{png,jpg,jpeg,gif}',
-					dest: 'app/img'
+					cwd: 'app-dev',
+					src: [
+						'conf/img/{,*/}*.{png,jpg,jpeg,gif}', 
+						'modules/transport/img/{,*/}*.{png,jpg,jpeg,gif}', 
+						'modules/stock/img/{,*/}*.{png,jpg,jpeg,gif}'
+					],
+					dest: 'app'
 				}]
 			}
 		},
@@ -249,8 +256,8 @@ module.exports = function (grunt) {
 			},
 			dev: {                    
 				options: {
-					sassDir: 'app-dev/scss',
-					specify: 'app-dev/scss/app.scss',
+					sassDir: 'app-dev/core/scss',
+					specify: 'app-dev/core/scss/app.scss',
 					cssDir: 'app-dev/css'
 				}
 			}
@@ -295,11 +302,15 @@ module.exports = function (grunt) {
 		watch: {
 			dev: {
 				options: { livereload: true },
-				files: ['app-dev/js/{,*/}*.js', 'app-dev/partials/{,*/}*.html', 'app-dev/mock/*.js']
+				files: [
+					'app-dev/core/js/{,*/}*.js', 
+					'app-dev/core/html/{,*/}*.html', 
+					'app-dev/mock/*.js'
+				]
 			},
 			css: {
 				options: { livereload: true },
-				files: ['app-dev/scss/*.scss'],
+				files: ['app-dev/core/scss/*.scss'],
 				tasks: ['default'],
 			}
 		},

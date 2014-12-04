@@ -1,0 +1,225 @@
+<div class="header bg-generic">
+	<h1 class="container">Indicators</h1>
+</div>
+
+<div class="container margin-top" ng-hide="loaded" ng-include="'core/html/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>{{charts.figuresOfTheDay.name}}</h3>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="filet">
+				<p class="type-superfat type-item">{{charts.figuresOfTheDay.datas[0].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[0].key}}</p>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="filet">
+				<p class="type-superfat type-item">{{charts.figuresOfTheDay.datas[1].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[1].key}}</p>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="filet">
+				<p class="type-superfat type-item">{{charts.figuresOfTheDay.datas[2].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[2].key}}</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row margin-top-l">
+		<div class="col-md-12">
+			<h3>stock level</h3>
+		</div>
+	</div>
+	
+	<div class="row margin-top">
+		<div class="col-md-6">
+			<div class="filet">
+				<h4>{{charts.shipMonth.name}}</h4>
+				<nvd3-line-chart
+				    	data="charts.shipMonth.datas"
+				        id="{{charts.shipMonth.id}}"
+				        xAxisTickFormat="xAxisTickFormatFunction()"
+				                yAxisTickFormat="yAxisTickFormatFunction()"
+				        showXAxis="true"
+				        showYAxis="true"
+				        interactive="true"
+				                tooltips="true"
+				        tooltipcontent="tooltips.lineChart()">
+				        	<svg></svg>
+				    </nvd3-line-chart>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="filet">
+				<h4>{{charts.pullOutItemMonth.name}}</h4>
+				<nvd3-line-chart
+				    	data="charts.pullOutItemMonth.datas"
+				        id="{{charts.pullOutItemMonth.id}}"
+				        xAxisTickFormat="xAxisTickFormatFunction()"
+				        yAxisTickFormat="yAxisTickFormatFunction()"
+				        showXAxis="true"
+				        showYAxis="true"
+				        interactive="true"
+				        tooltips="true"
+				        tooltipcontent="tooltips.lineChart()">
+				        	<svg></svg>
+				    </nvd3-line-chart>
+			</div>
+		</div>	    
+	   </div>
+		
+		<div class="row margin-top">
+			<div class="col-md-6">
+				<div class="filet">
+					<h4>{{charts.transferPerType.name}}</h4>
+					<nvd3-multi-bar-chart
+						showXAxis="true"
+						showYAxis="true"
+						data="charts.transferPerType.datas" 
+						id="{{charts.transferPerType.id}}" 
+						x="charts.transferPerType.xFunction()"
+						y="charts.transferPerType.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:70,top:0,bottom:20,right:0}"
+						showLegend="true"
+						showLabels="true"
+						interactive="true"
+						tooltips="true"
+						tooltipcontent="tooltips.vBarChart()"
+						staggerLabels="true"
+						><svg></svg>
+					</nvd3-multi-bar-chart>
+				</div>    
+			</div>
+			
+			<div class="col-md-6">
+					<div class="filet">
+					<h4>{{charts.itemsArea.name}}</h4>
+					<nvd3-pie-chart 
+						data="charts.itemsArea.datas" 
+						id="{{charts.itemsArea.id}}" 
+						x="charts.itemsArea.xFunction()"
+						y="charts.itemsArea.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:0,top:0,bottom:0,right:0}"
+						showLabels="true"
+						pieLabelsOutside="true"
+						showValues="true"
+						labelType="value"
+						showLegend="true"
+						tooltips="true"
+						description="charts.itemsArea.descriptionFunction()"
+						tooltipcontent="tooltips.pieChart()"
+						><svg></svg>
+					</nvd3-pie-chart>
+				</div>
+			</div>
+		</div>
+			
+		<div class="row margin-top">
+			<div class="col-md-6">
+				<div class="filet">
+					<h4>{{charts.replenishments.name}}</h4>
+					<nvd3-multi-bar-chart
+						showXAxis="true"
+						showYAxis="true"
+						data="charts.replenishments.datas" 
+						id="{{charts.replenishments.id}}" 
+						x="charts.replenishments.xFunction()"
+						y="charts.replenishments.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:70,top:0,bottom:20,right:0}"
+						showLegend="true"
+						showLabels="true"
+						interactive="true"
+						tooltips="true"
+						tooltipcontent="tooltips.vBarChart()"
+						staggerLabels="true"
+						><svg></svg>
+					</nvd3-multi-bar-chart>
+				</div>    
+			</div>
+			
+			
+		</div>
+		
+		<div class="row margin-top-l">
+			<div class="col-md-12">
+				<h3>commercial value</h3>
+			</div>
+		</div>
+		
+		<div class="row margin-top">
+			<div class="col-md-4">
+				<div class="filet">
+					<h4>{{charts.globalStockValue.name}}</h4>
+					<nvd3-line-chart
+					    	data="charts.globalStockValue.datas"
+					        id="{{charts.globalStockValue.id}}"
+					        xAxisTickFormat="xAxisTickFormatFunction()"
+					                yAxisTickFormat="yAxisTickFormatFunction()"
+					        showXAxis="true"
+					        showYAxis="true"
+					        interactive="true"
+					                tooltips="true">
+					        	<svg></svg>
+					    </nvd3-line-chart>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="filet">
+					<h4>{{charts.osdGlobalValue.name}}</h4>
+					<nvd3-line-chart
+					    	data="charts.osdGlobalValue.datas"
+					        id="{{charts.osdGlobalValue.id}}"
+					        xAxisTickFormat="xAxisTickFormatFunction()"
+					        yAxisTickFormat="yAxisTickFormatFunction()"
+					        showXAxis="true"
+					        showYAxis="true"
+					        interactive="true"
+					        tooltips="true"
+					        tooltipcontent="tooltips.lineChart()">
+					        	<svg></svg>
+					    </nvd3-line-chart>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="filet">
+					<h4>{{charts.revenues.name}}</h4>
+					<nvd3-multi-bar-chart
+						showXAxis="true"
+						showYAxis="true"
+						data="charts.revenues.datas" 
+						id="{{charts.revenues.id}}" 
+						x="charts.revenues.xFunction()"
+						y="charts.revenues.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:70,top:0,bottom:20,right:0}"
+						showLegend="true"
+						showLabels="true"
+						interactive="true"
+						tooltips="true"
+						tooltipcontent="tooltips.vBarChart()"
+						staggerLabels="true"
+						><svg></svg>
+					</nvd3-multi-bar-chart>
+				</div>    
+			</div>
+			
+		</div>
+</div>

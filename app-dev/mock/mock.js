@@ -1,12 +1,12 @@
 angular.module('clearApp.mock', ['ngMockE2E'])
 	
 	.run(function($httpBackend, $rootScope, $location, $timeout, Utils) {
-//		var urlPage = $location.search();
-//		urlPage.s = 1; 
-//		$location.search(urlPage);
-//		$timeout(function() {
-//			$rootScope.$broadcast("loginAuto", "yes");
-//		}); 
+		var urlPage = $location.search();
+		urlPage.s = 1; 
+		$location.search(urlPage);
+		$timeout(function() {
+			$rootScope.$broadcast("loginAuto", "yes");
+		}); 
 		
 		if ($location.absUrl().indexOf("s=1") > -1) {
 			$rootScope.static=true;
@@ -17,21 +17,21 @@ angular.module('clearApp.mock', ['ngMockE2E'])
 				// User
 				{
 					"url": "../index_rest.php/api/clear/v1/user", 
-					"static": "mock/json/user.json"
+					"static": "mock/conf/user.json"
 				}, 
 			
 				// images
 				{
 					"url": "/index_rest.php/api/clear/v1/file/temp_horiz.jpg", 
-					"static": "mock/img/temp_horiz.jpg"
+					"static": "mock/conf/img/temp_horiz.jpg"
 				}, 
 				{
 					"url": "/index_rest.php/api/clear/v1/file/temp_vert.jpg", 
-					"static": "mock/img/temp_vert.jpg"
+					"static": "mock/conf/img/temp_vert.jpg"
 				}, 
 				{
 					"url": "/index_rest.php/api/clear/v1/file/temp_signature.jpg", 
-					"static": "mock/img/temp_vert.jpg"
+					"static": "mock/conf/img/temp_vert.jpg"
 				},
 			
 				// Transport section
@@ -220,7 +220,6 @@ angular.module('clearApp.mock', ['ngMockE2E'])
 			for (var i in resources) {
 				$httpBackend.when('GET', new RegExp('\\' + resources[i].url)).respond(function(method, url, data) {
 					url = url.split('?')[0]; 
-					console.log('url sans: ', url);  
 					var request = new XMLHttpRequest();
 					request.open('GET', resources[Utils.objectIndexbyKey(resources, "url", url)].static, false);
 					request.send(null);
@@ -235,9 +234,7 @@ angular.module('clearApp.mock', ['ngMockE2E'])
 				}
 			);
 		}
-		$httpBackend.whenGET(/partials\/.*/).passThrough();
-		$httpBackend.whenGET(/json\/.*/).passThrough();
-		$httpBackend.whenGET(/img\/.*/).passThrough();
+		$httpBackend.whenGET(/^[^.]+$|\.(?!(html|png|jpg|json|svg)$)([^.]+$)/).passThrough();
 		$httpBackend.whenGET(/.*/).passThrough();
 		$httpBackend.whenPOST(/.*/).passThrough();
 		$httpBackend.whenPUT(/.*/).passThrough();

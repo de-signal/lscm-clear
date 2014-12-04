@@ -1,0 +1,144 @@
+<div class="header bg-generic bg-inspectionReport">
+	<h1 class="container"><i class="icon i-document-ir"></i> Inspection report</h1>
+</div>
+
+<div class="container margin-top" ng-hide="loaded" ng-include="'core/html/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
+
+	<div class="row">
+		<div class="col-md-3">
+	    	<div class="row">
+	    		<div class="col-md-12">
+		    		<div class="filet">
+		    			<h6>order reference</h6>
+		    			<h2><span class="label label-order">{{doc.related.order.reference}}</span><a class="btn" ng-href="order/{{doc.related.order.id}}" alt="Order details"><i class="icon i-external-link"></i></a></h2>
+		    		</div>
+		    	</div>
+	    	</div>
+	    	<div class="row margin-top">
+	    		<div class="col-md-12">
+		    		<div class="filet">
+		    			<h6>shipment reference</h6>
+		    			<h2><span class="label label-shipment">{{doc.related.shipment.reference}}</span><a class="btn" ng-href="shipment/{{doc.related.shipment.id}}" alt="Shipment details"><i class="icon i-external-link"></i></a></h2>
+		    		</div>
+		    	</div>
+	    	</div>
+	    </div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>location</h6>
+						<h2>{{doc.location}}</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>user</h6>
+						<h2>{{doc.user.first_name + " " + doc.user.last_name }}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>created</h6>
+						<h2>{{doc.dates.created * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>closed</h6>
+						<h2>{{doc.dates.closed * 1000 | date:'dd.MM.yy, HH:mm'}}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>Conformity</h6>
+						<h2 class="type-bold">
+							<span class="filet-right"><i class="icon i-check success"></i> {{doc.conformity.true}}</span>
+							<span class="filet-right"><i class="icon i-cross important"></i> {{doc.conformity.false}}</span>
+							<span class="filet-right" ng-if="doc.conformity.pending"><i class="icon i-question default"></i> {{doc.conformity.pending}}</span>
+						</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-top">
+				<div class="col-md-12">
+					<div class="filet">
+						<h6>Non-conformity reports</h6>
+						<h2 class="type-bold">
+							<span ng-show="doc.non_conformity_reports.closed" class="filet-right"><i class="icon i-disc success"></i> {{doc.non_conformity_reports.closed}}</span>
+							<span ng-show="doc.non_conformity_reports.open" class="filet-right"><i class="icon i-disc warning"></i> {{doc.non_conformity_reports.open}}</span>
+							<span ng-show="doc.non_conformity_reports.late" class="filet-right"><i class="icon i-disc important"></i> {{doc.non_conformity_reports.late}}</span>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>document</h3>
+			<table class="table table-condensed">
+				<thead>
+				<tr>
+					<th><h6>type </h6></th><th><h6>name</h6></th><th><h6>info</h6></th><th><h6></h6></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><i class="lead icon i-condition-document"></i>&nbsp;&nbsp;{{doc.document.type}}</td>
+					<td><strong>{{doc.document.name}}</strong></td>
+					<td><span class="label label-default">{{doc.document.info}}</span></td>
+					<td><a ng-href="{{doc.document.url}}" class='btn btn-sm' target="_blank">Download</a></td>
+				</tr>
+				</tbody>
+			</table>			
+		</div>
+	</div>
+
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>inspected boxes</h3>
+			<div class="elements-group margin-top" ng-repeat="box in doc.boxes">
+				<span class="pull-right label label-ncr" ng-show="box.non_conformity_report"><a ng-href="documents/ncr/{{box.non_conformity_report.id}}" alt="Non-conformity report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[box.non_conformity_report.status]"></i></a></span>
+				<h2>{{$index+1}}. <span class="label label-box">{{box.reference}}</span><a class="btn" ng-href="box/{{box.id}}" alt="Box details"><i class="icon i-external-link"></i></a></h2>
+				<div ng-repeat="itemsGroup in box.itemsGroupBy4" class="row">
+				    <div ng-repeat="item in itemsGroup" class="col-md-3">
+				    	<div class="element margin-top">
+				    		<span class="pull-right icon-conform" ng-show="item.conform === 'pending'"><i class="icon i-question default"></i></span>
+					    	<span class="pull-right icon-conform" ng-show="item.conform === true"><i class="icon i-check success"></i></span>
+					    	<span class="pull-right icon-conform" ng-show="!item.conform"><i class="icon i-cross important"></i></span>
+					    	<h6>item</h6>
+					    	<h5><span class="label label-item">{{item.reference}}</span> <a class="btn" ng-href="item/{{item.id}}" alt="Item details"><i class="icon i-external-link"></i></a></h5>
+					    	<span class="pull-right label label-ncr" ng-show="item.non_conformity"><a ng-href="documents/ncr/{{item.non_conformity_report.id}}" alt="Non-conformity report details"><i class="icon i-document-ncr"></i><i class="icon i-disc" ng-class="{late:'important', open:'warning', closed:'success'}[item.non_conformity_report.status]"></i></a></span>
+					    	<h6>description</h6>
+					    	<p>{{item.description}}</p>
+					    	<h6>material</h6>
+					    	<p>{{item.material}}</p>
+					    	<h6>material supplier</h6>
+					    	<p>{{item.material_supplier}}</p>
+					    	<h6>photo</h6>
+					    	<div class="image-wrapper"><a ng-click="open(item)" ng-if="item.image"><img ng-src="{{item.image.thumbResource}}" alt="{{item.image.name}}" /></a></div>
+					    </div>
+				    </div>
+				</div>
+			</div>		
+		</div>
+	</div>
+
+</div>

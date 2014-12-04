@@ -1,0 +1,358 @@
+<div class="header bg-generic">
+	<h1 class="container">Indicators</h1>
+</div>
+
+<div class="container margin-top" ng-hide="loaded" ng-include="'core/html/loader.html'" >
+</div>
+
+<div class="container margin-top" ng-show="loaded">
+	<div class="row margin-top">
+		<div class="col-md-12">
+			<h3>{{charts.figuresOfTheDay.name}}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="filet">
+				<p class="type-superfat type-order">{{charts.figuresOfTheDay.datas[0].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[0].key}}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<p class="type-superfat type-shipment">{{charts.figuresOfTheDay.datas[1].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[1].key}}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<p class="type-superfat type-item">{{charts.figuresOfTheDay.datas[2].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[2].key}}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="filet">
+				<p class="type-superfat type-item">{{charts.figuresOfTheDay.datas[3].value}}</p>
+				<p>{{charts.figuresOfTheDay.datas[3].key}}</p>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row margin-top-l">
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.currentLogisticsExecutionPlan.name}}</h3>
+				<nvd3-pie-chart 
+					data="charts.currentLogisticsExecutionPlan.datas" 
+					id="{{charts.currentLogisticsExecutionPlan.id}}"
+					x="charts.currentLogisticsExecutionPlan.xFunction()"
+					y="charts.currentLogisticsExecutionPlan.yFunction()" 
+					color="colors.brand()"
+					legendcolor="colors.brand()"
+					margin="{left:0,top:0,bottom:0,right:0}"
+					showLabels="true"
+					pieLabelsOutside="true"
+					showValues="true"
+					labelType="value"
+					showLegend="true"
+					tooltips="true"
+					description="charts.currentLogisticsExecutionPlan.descriptionFunction()"
+					tooltipcontent="tooltips.pieChart()"
+					><svg></svg>
+				</nvd3-pie-chart>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.changedLogisticsExecutionPlan.name}}</h3>
+				<nvd3-pie-chart 
+					data="charts.changedLogisticsExecutionPlan.datas" 
+					id="{{charts.changedLogisticsExecutionPlan.id}}" 
+					x="charts.changedLogisticsExecutionPlan.xFunction()"
+					y="charts.changedLogisticsExecutionPlan.yFunction()"
+					color="colors.brand()"
+					legendcolor="colors.brand()"
+					margin="{left:0,top:0,bottom:0,right:0}"
+					showLabels="true"
+					pieLabelsOutside="true"
+					showValues="true"
+					labelType="value"
+					showLegend="true"
+					tooltips="true"
+					tooltipcontent="tooltips.pieChart()"
+					><svg></svg>
+				</nvd3-pie-chart>
+			</div>	    
+		</div>
+		
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.budgetAdjustement.name}}</h3>
+				<nvd3-multi-bar-chart 
+					showXAxis="true"
+					showYAxis="true"
+					data="charts.budgetAdjustement.datas" 
+					id="{{charts.budgetAdjustement.id}}" 
+					x="charts.budgetAdjustement.xFunction()"
+					y="charts.budgetAdjustement.yFunction()"
+					color="colors.brand()"
+					legendcolor="colors.brand()"
+					margin="{left:70,top:0,bottom:0,right:0}"
+					stacked="true"
+					showLegend="true"
+					showLabels="true"
+					interactive="true"
+					tooltips="true"
+					tooltipcontent="tooltips.vBarChart()"
+					><svg></svg>
+				</nvd3-multi-bar-chart>
+			</div>	    
+		</div>
+	</div>
+	
+	<div class="row margin-top-l">
+		<div class="col-md-4">
+			<h3>{{charts.ordersMilestonesDistribution.name}}</h3>
+		</div>
+		
+		<div class="col-md-8">
+			<nvd3-multi-bar-horizontal-chart 
+				data="charts.ordersMilestonesDistribution.datas" 
+				id="{{charts.ordersMilestonesDistribution.id}}" 
+				x="charts.ordersMilestonesDistribution.xFunction()"
+				y="charts.ordersMilestonesDistribution.yFunction()"
+				color="colors.order()"
+	   			legendcolor="colors.order()"
+				margin="{left:50,top:0,bottom:15,right:10}"
+				stacked="true"
+				showLegend="true"
+				showLabels="true"
+				interactive="true"
+				tooltips="true"
+				tooltipcontent="tooltips.hBarChart()"
+				><svg></svg>
+			</nvd3-multi-bar-horizontal-chart>     	    
+		</div>
+	</div>
+	
+	<div class="row margin-top-l">
+		<div class="col-md-4">
+			<h3>{{charts.shipmentsMilestonesDistribution.name}}</h3>
+		</div>
+		
+		<div class="col-md-8">
+			<nvd3-multi-bar-horizontal-chart 
+				data="charts.shipmentsMilestonesDistribution.datas" 
+				id="{{charts.shipmentsMilestonesDistribution.id}}" 
+				x="charts.shipmentsMilestonesDistribution.xFunction()"
+				y="charts.shipmentsMilestonesDistribution.yFunction()"
+				color="colors.shipment()"
+				margin="{left:50,top:0,bottom:15,right:10}"
+				stacked="true"
+				showLegend="true"
+				showLabels="true"
+				interactive="true"
+				tooltips="true"
+				tooltipcontent="tooltips.hBarChart()"
+				><svg></svg>
+			</nvd3-multi-bar-horizontal-chart>     	    
+		</div>
+	</div>
+	
+	<div class="row margin-top-l">
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.ordersScopeOfResponsability.name}}</h3>
+				<nvd3-pie-chart 
+					data="charts.ordersScopeOfResponsability.datas" 
+					id="{{charts.ordersScopeOfResponsability.id}}"
+					x="charts.ordersScopeOfResponsability.xFunction()"
+					y="charts.ordersScopeOfResponsability.yFunction()" 
+					color="colors.order()"
+		   			legendcolor="colors.order()"
+					margin="{left:0,top:0,bottom:0,right:0}"
+					showLabels="true"
+					pieLabelsOutside="true"
+					showValues="true"
+					labelType="value"
+					showLegend="true"
+					tooltips="true"
+					description="charts.ordersScopeOfResponsability.descriptionFunction()"
+					tooltipcontent="tooltips.pieChart()"
+					><svg></svg>
+				</nvd3-pie-chart>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.ordersEvolution.name}}</h3>
+				<nvd3-pie-chart 
+					data="charts.ordersEvolution.datas" 
+					id="{{charts.ordersEvolution.id}}" 
+					x="charts.ordersEvolution.xFunction()"
+					y="charts.ordersEvolution.yFunction()"
+					color="colors.order()"
+		   			legendcolor="colors.order()"
+					margin="{left:0,top:0,bottom:0,right:0}"
+					showLabels="true"
+					pieLabelsOutside="true"
+					showValues="true"
+					labelType="value"
+					showLegend="true"
+					tooltips="true"
+					tooltipcontent="tooltips.pieChart()"
+					><svg></svg>
+				</nvd3-pie-chart>
+			</div>  	    
+		</div>
+		
+		<div class="col-md-4">
+			<div class="filet">
+				<h3>{{charts.ordersMilestones.name}}</h3>
+				<nvd3-pie-chart 
+					data="charts.ordersMilestones.datas" 
+					id="{{charts.ordersMilestones.id}}" 
+					x="charts.ordersMilestones.xFunction()"
+					y="charts.ordersMilestones.yFunction()"
+					color="colors.order()"
+		   			legendcolor="colors.order()"
+					margin="{left:0,top:0,bottom:0,right:0}"
+					showLabels="true"
+					pieLabelsOutside="true"
+					showValues="true"
+					labelType="value"
+					showLegend="true"
+					tooltips="true"
+					tooltipcontent="tooltips.pieChart()"
+					><svg></svg>
+				</nvd3-pie-chart>
+			</div> 	    
+		</div>
+	   </div>
+		
+		<div class="row margin-top-l">
+			<div class="col-md-4">
+					<div class="filet">
+					<h3>{{charts.flowsBreakdown.name}}</h3>
+					<nvd3-pie-chart 
+						data="charts.flowsBreakdown.datas" 
+						id="{{charts.flowsBreakdown.id}}" 
+						x="charts.flowsBreakdown.xFunction()"
+						y="charts.flowsBreakdown.yFunction()"
+						color="colors.shipment()"
+						legendcolor="colors.shipment()"
+						margin="{left:0,top:0,bottom:0,right:0}"
+						showLabels="true"
+						pieLabelsOutside="true"
+						showValues="true"
+						labelType="value"
+						showLegend="true"
+						tooltips="true"
+						description="charts.flowsBreakdown.descriptionFunction()"
+						tooltipcontent="tooltips.pieChart()"
+						><svg></svg>
+					</nvd3-pie-chart>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="filet">
+					<h3>{{charts.transportMode.name}}</h3>
+					<nvd3-pie-chart 
+						data="charts.transportMode.datas" 
+						id="{{charts.transportMode.id}}" 
+						x="charts.transportMode.xFunction()"
+						y="charts.transportMode.yFunction()"
+						color="colors.shipment()"
+						legendcolor="colors.shipment()"
+						margin="{left:0,top:0,bottom:0,right:0}"
+						showLabels="true"
+						pieLabelsOutside="true"
+						showValues="true"
+						labelType="value"
+						showLegend="true"
+						tooltips="true"
+						tooltipcontent="tooltips.pieChart()"
+						><svg></svg>
+					</nvd3-pie-chart>
+				</div>   	    
+			</div>
+			
+			<div class="col-md-4">
+				<div class="filet">
+					<h3>{{charts.greenlightActivity.name}}</h3>
+					<nvd3-multi-bar-chart
+						showXAxis="true"
+						showYAxis="true"
+						data="charts.greenlightActivity.datas" 
+						id="{{charts.greenlightActivity.id}}"
+						x="charts.greenlightActivity.xFunction()"
+						y="charts.greenlightActivity.yFunction()"
+						color="colors.shipment()"
+						legendcolor="colors.shipment()"
+						margin="{left:70,top:0,bottom:0,right:0}"
+						showLegend="true"
+						showLabels="true"
+						pieLabelsOutside="false"
+						labelType="percent"
+						interactive="true"
+						tooltips="true"
+						tooltipcontent="tooltips.vBarChart()"
+						><svg></svg>
+					</nvd3-multi-bar-chart>
+				</div>  	    
+			</div>
+		</div>
+		
+		<div class="row margin-top-l">
+			<div class="col-md-4">
+				<div class="filet">
+					<h3>{{charts.transitPlace.name}}</h3>
+					<nvd3-pie-chart 
+						data="charts.transitPlace.datas" 
+						id="{{charts.transitPlace.id}}" 
+						x="charts.transitPlace.xFunction()"
+						y="charts.transitPlace.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:0,top:0,bottom:0,right:0}"
+						showLabels="true"
+						pieLabelsOutside="true"
+						showValues="true"
+						labelType="value"
+						showLegend="true"
+						tooltips="true"
+						tooltipcontent="tooltips.pieChart()"
+						><svg></svg>
+					</nvd3-pie-chart>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="filet">
+					<h3>{{charts.inspectionActivity.name}}</h3>
+					<nvd3-multi-bar-chart
+						showXAxis="true"
+						showYAxis="true"
+						data="charts.inspectionActivity.datas" 
+						id="{{charts.inspectionActivity.id}}" 
+						x="charts.inspectionActivity.xFunction()"
+						y="charts.inspectionActivity.yFunction()"
+						color="colors.brand()"
+						legendcolor="colors.brand()"
+						margin="{left:70,top:0,bottom:0,right:0}"
+						showLegend="true"
+						showLabels="true"
+						interactive="true"
+						tooltips="true"
+						tooltipcontent="tooltips.vBarChart()"
+						staggerLabels="true"
+						><svg></svg>
+					</nvd3-multi-bar-chart>
+				</div>    
+			</div>
+		</div>
+</div>
