@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="css/app.css"/>
 		<link rel="stylesheet" href="lib/css/loading-bar.css"/>
 		<link rel="stylesheet" href="lib/css/toaster.css"/>
+		<link rel="stylesheet" href="lib/css/angular-motion.css"/>
 		<link rel="stylesheet" href="css/styles.css"/>
 		<!-- endbuild -->
 		
@@ -20,7 +21,7 @@
 
 		<div id="wrap">
 		
-			<toaster-container toaster-options="{'position-class': 'toast-bottom-center'}"> </toaster-container>
+
 		
 			<div class="login-box" ng-hide="loggedIn">
 				<div class="login-logo">
@@ -58,10 +59,10 @@
 			
 			<div ng-if="loggedIn">
 				
-				<div class="navbar navbar-default navbar-fixed-top" ng-init="menuCollapsed = true" ng-hide="tvScreen"  role="navigation">
+				<div class="navbar navbar-default navbar-fixed-top" ng-hide="tvScreen"  role="navigation" bs-collapse>
 					<div class="container">
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse" ng-click="isCollapsed = !isCollapsed">
+							<button type="button" class="navbar-toggle collapsed" bs-collapse-toggle>
 								  <span class="sr-only">Toggle navigation</span>
 								  <span class="icon-bar"></span>
 								  <span class="icon-bar"></span>
@@ -69,12 +70,12 @@
 								</button>
 							<a class="navbar-brand" href="dashboard"><img src="conf/img/clear_logo_type.svg" alt="Clear" /></a>
 						</div>
-						<div class="navbar-collapse collapse" collapse="isCollapsed">
+						<div class="navbar-collapse collapse" bs-collapse-target>
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="guidelines" alt="Guidelines" title="Guidelines"><i class="icon i-help"></i></a>
 								</li>
-								<li class="dropdown">
-									<a class="dropdown-toggle" href="#"><i class="icon i-user"></i> <b class="caret"></b></a>
+								<li class="dropdown" dropdown>
+									<a class="dropdown-toggle" href="#" dropdown-toggle><i class="icon i-user"></i> <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li ng-if="user.permissions.user"><a href="user">{{user.first_name}} {{user.last_name}}</a></li>
 										<li><a ng-click="logout()">Logout</a></li>
@@ -91,7 +92,7 @@
 								<li ng-if="user.permissions.transport.indicators"><a href="transport/indicators">Indicators</a></li>
 								<li ng-if="user.permissions.transport.search"><a href="transport/search">Search</a></li>
 								<li ng-if="user.permissions.transport.alerts"><a href="transport/alerts">Alerts</a></li>
-								<li class="dropdown"><a class="dropdown-toggle">Documents <b class="caret"></b></a>
+								<li class="dropdown" dropdown><a class="dropdown-toggle" dropdown-toggle>Documents <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li ng-if="user.permissions.transport.documents.ir"><a href="transport/documents/ir">Inspection reports</a></li>
 										<li ng-if="user.permissions.transport.documents.ncr"><a href="transport/documents/ncr">Non-conformity reports</a></li>
@@ -141,13 +142,15 @@
 		</footer>
 
 		<!-- build:js js/libs.js -->
-		<script src="lib/js/angular-file-upload-html5-shim.js"></script>
+		<script src="lib/js/angular-file-upload-shim.js"></script>
 		<script src="lib/js/angular.js"></script>
 		<script src="lib/js/angular-route.js"></script>
 		<script src="lib/js/angular-resource.js"></script>
 		<script src="lib/js/angular-cookies.js"></script>
 		<script src="lib/js/angular-animate.js"></script>
-		<script src="lib/js/ui-bootstrap-tpls.js"></script>
+		<script src="lib/js/angular-strap.js"></script>
+		<script src="lib/js/angular-strap.tpl.js"></script>
+		<script src="core/js/modules.js"></script>
 		<script src="lib/js/http-auth-interceptor.js"></script>
 		<script src="lib/js/loading-bar.js"></script>
 		<script src="lib/js/angular-file-upload.js"></script>

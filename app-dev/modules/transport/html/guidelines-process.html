@@ -26,12 +26,18 @@
 	
 	<div class="row margin-top" id="{{elms[0].id}}">
 		<div class="col-md-12">	
-			<accordion close-others="false">
-				<accordion-group>
-					<accordion-heading>
-						Filters
-					</accordion-heading>
-					<div class="row">
+			<div class="panel-group" ng-model="panels.activePanel" bs-collapse>
+				<div class="panel panel-default" ng-repeat="panel in panels">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a bs-collapse-toggle>
+								Filters
+							</a>
+						</h4>
+					</div>
+					<div class="panel-collapse" bs-collapse-target>
+						<div class="panel-body">
+							<div class="row">
 						<div class="col-md-4">
 							<fieldset>
 								<legend>Informations type </legend>
@@ -114,8 +120,10 @@
 							
 						</div>
 					</div><!--/row-->
-				</accordion-group>
-			</accordion>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -176,7 +184,7 @@
 									<div ng-if="!!elm.downloads[type].documents" class="margin-top">
 										<h6>documents</h6>
 										<div ng-repeat="condition in elm.downloads[type].documents">
-											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" bs-tooltip="condition.guideline.name" data-placement="right"></i></a></h5>
 											<p><small>{{condition.description}}</small></p>
 										</div>
 									</div>
@@ -234,7 +242,7 @@
 									<div ng-if="!!elm.updates[type].conditions" class="margin-top">
 										<h6>conditions</h6>
 										<div ng-repeat="condition in elm.updates[type].conditions">
-											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" bs-tooltip="condition.guideline.name" data-placement="right"></i></a></h5>
 											<p><small>{{condition.description}}</small></p>
 										</div>
 									</div>
@@ -262,7 +270,7 @@
 									<div ng-if="!!elm.updates_mobile[type].conditions" class="margin-top">
 										<h6>conditions</h6>
 										<div ng-repeat="condition in elm.updates_mobile[type].conditions">
-											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" bs-tooltip="condition.guideline.name" data-placement="right"></i></a></h5>
 											<p><small>{{condition.description}}</small></p>
 										</div>
 									</div>

@@ -1,11 +1,27 @@
 <div>
 	<div class="modal-header">
-		<h4><h5><span class="label label-item">{{item.reference}}</span></h5></h4>
+		<h4><h5><span class="label label-item"></span></h5></h4>
 	</div>
 	<div class="modal-body">
-		<div class="image-wrapper"><img ng-src="{{item.image.urlResource}}" alt="{{item.image.name}}" /></div>
+		
 	</div>
 	<div class="modal-footer">
 		<button class="btn cancel" ng-click="cancel()">Close</button>
+	</div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">{{item.reference}}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="image-wrapper"><img ng-src="{{item.image.urlResource}}" alt="{{item.image.name}}" /></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+			</div>
+		</div>
 	</div>
 </div>

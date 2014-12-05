@@ -3,9 +3,8 @@
 
 <div class="header" ng-show="loaded" ng-class="{order:'bg\-order', shipment:'bg\-shipment', box:'bg\-box', item:'bg\-item'}[elm.type]">
 	<h1 class="container capitalize">
-		<i class="icon pull-right i-trash icon-link" ng-if="elm.deletable" ng-click='modalDelete(elm, $event)' alt="Delete"></i>
-		<i class="icon pull-right icon-link" ng-class="{true:'i\-tracking\-tracked', false:'i\-tracking\-untracked'}[elm.tracking]" ng-click="trackingToggle(elm, $event); propertySave(elm, 'tracking', elm.tracking)" alt="Tracking"></i>
-		<i class="icon pull-right i-alert-add icon-link" ng-click="modalAlert(elm, '', $parent.user)" alt="Create alert" ng-if="display.alerts"></i>
+		<i class="icon pull-right i-trash icon-link" ng-click='deleteModalOpen($event)' alt="Delete" ng-if="elm.deletable" ></i>
+		<i class="icon pull-right i-alert-add icon-link" ng-click="alertModalOpen()" alt="Create an alert" ng-if="display.alerts"></i>
 		<i class="icon i-element" ng-class="{order:'i\-element\-order', shipment:'i\-element\-shipment', box:'i\-element\-box', item:'i\-element\-item'}[elm.type]"></i>
 		 {{elm.type}} <span ng-if="elm.specifications_shipment">{{elm.specifications_shipment.type}}</span> </h1>
 </div>
@@ -23,7 +22,7 @@
 			<div class="filet">
 				<h6>milestone</h6>
 				<h2 class="type-bold capitalize">{{elm.milestone}}</h2>
-				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" tooltip="{{milestone.name}}" tooltip-placement="top"></i></span>
+				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" bs-tooltip="milestone.name" data-placement="top"></i></span>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -137,8 +136,8 @@
 
 					<div class="col-md-9 aa-text">
 						<h2 class="type-bold">
-							<i class="icon pull-right i-trash icon-link" ng-click='modalAlertDelete(elm, alert)' ></i> 
-							<i class="icon pull-right icon-link i-edit" ng-click='modalAlert(elm, alert, $parent.user)'></i>
+							<i class="icon pull-right i-trash icon-link" ng-click='alertDeleteModalOpen(alert)' ></i> 
+							<i class="icon pull-right icon-link i-edit" ng-click='alertModalOpen(alert)'></i>
 							{{alert.name}}</h2>
 						<p class="lead">{{alert.info}}</p>
 					</div>
@@ -147,7 +146,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row margin-top" ng-if="elm.required && display.conditions">
 		<div class="col-md-12">
 			<h3>conditions</h3>
@@ -161,11 +159,11 @@
 				</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="condition in elm.required">
+					<tr ng-repeat="condition in elm.required" ng-controller="TransportElementModalConditionCtrl">
 						<td><i class="lead icon" condition-icon></i></td>
 						<td><strong>{{condition.name}}</strong></td>
 						<td><span class="label label-default" status="{{elm.status}}"  condition-status editable="{{condition.editable && display.conditions.edit}}" completed="{{condition.completed}}">{{condition.message}}</span></td>
-						<td><button class='btn btn-sm' ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'>Update</button></td>
+						<td><button class='btn btn-sm' ng-click='conditionModalOpen($event)' ng-disabled='!condition.editable'>Update</button></td>
 					</tr>
 				</tbody>
 			</table>			
@@ -184,7 +182,7 @@
 					<th><h6>created</h6></th>
 					<th><h6>user</h6></th>
 					<th><h6>info</h6></th>
-					<th><h6><i class="icon pull-right i-add icon-link" ng-click="modalDocumentUpload(elm, $parent.user)" alt="Upload document" ng-if="display.documents.add"></h6></th>
+					<th><h6><i class="icon pull-right i-add icon-link" ng-click="documentModalOpen()" alt="Upload document" ng-if="display.documents.add"></h6></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -226,62 +224,59 @@
 		</div>
 	</div>
 	
-	<div class="row margin-top">
+	<div class="row margin-top" ng-if="elm.properties">
 		<div class="col-md-12">
 			<h3>properties</h3>
-			<accordion close-others="false">
-			    <accordion-group ng-repeat="group in elm.properties" is-open="group.name===currentGroup" ng-if="display.properties[group.id]">
-			    	<accordion-heading><i class="icon" ng-class="['i-property-' + group.id]"></i> {{group.name}}
-			    	</accordion-heading>
-					<div class="form-horizontal">
-						<div class="form-group" ng-repeat="prop in group.set">
-							<label class="col-xs-4 control-label">{{prop.name}}</label> 
-							<span class="col-xs-4" ng-switch on="prop.type">
-								<div class="input-group" ng-switch-when="text">
-								  <input type="text" class="form-control" ng-model="prop.value" ng-disabled="!prop.editable">
-								  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, prop, group.name)">Save</button></span>
-								</div>
-								<div class="checkbox" ng-switch-when="checkbox">
-									<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)"></label>
-								</div>
-								<select ng-switch-when="select" ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop, group.name)" class="form-control" ng-options="val.id as val.name for val in prop.values">
-								</select>
-								
-								<div class="input-group" ng-switch-when="date">
-									<input type="text" class="form-control" 
-										datepicker-popup="dd.MM.yy HH:mm" 
-										ng-model="prop.date" 
-										is-open="prop.opened" 
-										min="minDate" 
-										date-disabled="calDisabled(date, mode)" 
-										ng-disabled="!prop.editable" 
-										show-weeks="false"
-										ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, prop, group.name)">
-									<span class="input-group-btn"><button class="btn" ng-click="calOpen($event, prop.name)" ng-disabled="!prop.editable"><i class="icon i-condition-date"></i></button></span>
-								</div>
-							</span>
-							<span class="col-xs-4">
-								<div class="margin-top-s"><i class="icon i-infos" tooltip="{{prop.info}}" tooltip-placement="right" ng-if="prop.info"></i></div>
-							</span>
-							
-				    	</div>
+			<div class="panel-group" ng-model="elm.current.property" bs-collapse>
+				<div class="panel panel-default" ng-repeat="group in elm.properties" ng-if="display.properties[group.id]">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a bs-collapse-toggle><i class="icon" ng-class="['i-property-' + group.id]"></i> {{group.name}}</a>
+						</h4>
 					</div>
-			    </accordion-group>
-			  </accordion>
+					<div class="panel-collapse" bs-collapse-target>
+						<div class="panel-body">
+							<div class="form-horizontal">
+								<div class="form-group" ng-repeat="prop in group.set">
+									<label class="col-xs-4 control-label">{{prop.name}}</label> 
+									<span class="col-xs-4" ng-switch on="prop.type">
+										<div class="input-group" ng-switch-when="text">
+										  <input type="text" class="form-control" ng-model="prop.value" ng-disabled="!prop.editable">
+										  <span class="input-group-btn"><button class="btn" type="button" ng-disabled="!prop.editable" ng-click="propertySave(elm, prop)">Save</button></span>
+										</div>
+										<div class="checkbox" ng-switch-when="checkbox">
+											<label><input type="checkbox" ng-model="prop.value" ng-checked="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop)"></label>
+										</div>
+										<select ng-switch-when="select" ng-model="prop.value" ng-disabled="!prop.editable" ng-change="propertySave(elm, prop)" class="form-control" ng-options="val.id as val.name for val in prop.values">
+										</select>
+										<input type="text" ng-switch-when="date" class="form-control" bs-datepicker
+												ng-model="prop.date"
+												ng-disabled="!prop.editable"
+												ng-change="prop.value = dateToTimestamp(prop.date); propertySave(elm, prop)">
+									</span>
+									<span class="col-xs-4">
+										<div class="margin-top-s"><i class="icon i-infos" bs-tooltip="prop.info" data-placement="right" ng-if="prop.info"></i></div>
+									</span>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div><!--/span-->
 	</div><!--/row-->
 	
 	<div class="row margin-top" ng-if="elm.related" id="related">
 		<div class="col-md-12">
 			<h3>related</h3>
-			<tabset>
-			    <tab ng-repeat="related in elm.related" disabled="related.disabled" active="relatedActiveTab[related.type]">
-			        <tab-heading><h4 class="capitalize">{{related.name}} ({{related.quantity}})</h4></tab-heading>
-			        <span ng-controller="ListCtrl">
-			            <span ng-include="'modules/transport/html/elements-tpl-list.html'" onload="listInit(related.type)"></span>
-			        </span>
-			    </tab>
-            </tabset>			
+			<div bs-tabs bs-active-pane="elm.current.related">
+				<div  ng-repeat="related in elm.related" disabled="related.disabled" title="{{related.name}} ({{related.quantity}})" bs-pane>
+			  		<span ng-controller="ListCtrl">
+			      		<span ng-include="'modules/transport/html/elements-tpl-list.html'" onload="listInit(related.type)"></span>
+					</span>
+				</div>
+			</div>			
 		</div>
 	</div>
 	

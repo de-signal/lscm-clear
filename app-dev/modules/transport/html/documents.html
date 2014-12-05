@@ -1,6 +1,6 @@
 <div class="header bg-generic bg-inspectionReport">
 	<h1 class="container">
-	<i class="icon pull-right i-add icon-link" ng-click="documentModalUpload(page.type, $parent.user)" alt="Upload file"  ng-if="page.type==='media' && user.permissions.transport.documents.media.add"></i>
+	<i class="icon pull-right i-add icon-link" ng-click="mediaModalOpen(page.type)" alt="Upload file"  ng-if="page.type==='media' && user.permissions.transport.documents.media.add"></i>
 	<i class="icon" ng-class="{ir: 'i-document-ir', ncr: 'i-document-ncr', pod: 'i-document-pod'}[page.type]"></i> {{page.name}}</h1>
 </div>
 
@@ -28,92 +28,90 @@
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
-					    <accordion>
-				    	    <accordion-group>
-				    	    	<accordion-heading>
-				    	    		Filters
-				    	    	</accordion-heading>
-				    			<div class="row">
-				    				<div class="col-md-4">
-				    					<fieldset ng-if="filters.values.related_to">
-					    					<legend>Related to </legend>
-					    					<div class="radio" ng-repeat="related_to in filters.values.related_to">		
-						    					<label class="control-label">
-						    						<input type="radio" ng-model="list.urlParams.related_to" value="{{related_to.id}}"> {{related_to.name}}
-						    					</label>
-						    				</div>
-						    				<div class="form-group" ng-show="list.urlParams.related_to">
-						    					<label>Reference </label>
-						    					<input type="text" ng-model="list.urlParams.related_reference" class="form-control">
-						    				</div>
-						    			</fieldset>
-						    			<fieldset ng-if="filters.values.name">
-						    				<legend>Name </legend>
-						    				<div class="form-group">
-						    					<input type="text" ng-model="list.urlParams.name" class="form-control">
-						    				</div>
-						    			</fieldset>
-						    			<fieldset ng-if="filters.values.related_element">
-						    				<legend>Element</legend>
-						    				<div class="radio" ng-repeat="related_element in filters.values.related_element">		
-						    					<label class="control-label">
-						    						<input type="radio" ng-model="list.urlParams.related_element" value="{{related_element.id}}"> {{related_element.name}}
-						    					</label>
-						    				</div>
-						    				<div class="form-group" ng-show="list.urlParams.related_element">
-						    					<label>Reference </label>
-						    					<input type="text" ng-model="list.urlParams.related_element_reference" class="form-control">
-						    				</div>
-						    			</fieldset>
-				    				</div>
-				    				
-				    				<div class="col-md-4">
-				    					<fieldset>
-					    					<legend>User </legend>
-					    					<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users"><option value="">---</option></select>
-					    				</fieldset>
-					    				<fieldset ng-if="filters.values.locations">
-					    					<legend>Location</legend>
-					    					<select class="form-control" ng-model="list.urlParams.location" ng-options="location.id as location.name for location in filters.values.locations"><option value="">---</option></select>
-					    				</fieldset>
-					    				<fieldset ng-if="filters.values.statuses">
-					    				<legend>Status </legend>
-					    					<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses"><option value="">---</option></select>
-					    				</fieldset>
-					    				<fieldset ng-if="filters.values.collections">
-					    					<legend>Collection </legend>
-					    					<select class="form-control" ng-model="list.urlParams.collection" ng-options="collection.id as collection.name for collection in filters.values.collections"><option value="">---</option></select>
-					    				</fieldset>
-					    				<fieldset ng-if="filters.values.deliveries">
-					    					<legend>Delivery </legend>
-					    					<select class="form-control" ng-model="list.urlParams.delivery" ng-options="delivery.id as delivery.name for delivery in filters.values.deliveries"><option value="">---</option></select>
-					    				</fieldset>
-				    				</div>
-				    				
-				    				<div class="col-md-4" ng-if="filters.date">
-				    					<fieldset>
-				    					<legend>From </legend>
-					    					<div class="input-group">
-					    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.from.value" is-open="$parent.filters.date.from.opened" show-weeks="false" max="filters.date.to.value" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
-					    						<span class="input-group-btn">
-					    							<button class="btn" ng-click="calOpen($event, 'from')"><i class="icon i-condition-date"></i></button>
-					    						</span>
-					    					</div>
-					    				</fieldset>
-					    				<fieldset>
-					    					<legend>To </legend>
-					    					<div class="input-group">
-					    						<input class="form-control" type="text" datepicker-popup="dd.MM.yy" ng-model="filters.date.to.value" is-open="$parent.filters.date.to.opened" show-weeks="false" min="filters.date.from.value" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
-					    						<span class="input-group-btn">
-					    							<button class="btn" ng-click="calOpen($event, 'to')"><i class="icon i-condition-date"></i></button>
-					    						</span>
-					    					</div>
-					    				</fieldset>
-				    				</div>
-				    			</div><!--/row-->
-				    			<button class="btn btn-block btn-lg" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
-				    	    </accordion-group>
-				        </accordion>
+						<div class="panel-group" ng-model="panels.activePanel" bs-collapse>
+							<div class="panel panel-default" ng-repeat="panel in panels">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a bs-collapse-toggle>
+											Filters
+										</a>
+									</h4>
+								</div>
+								<div class="panel-collapse" bs-collapse-target>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-4">
+												<fieldset ng-if="filters.values.related_to">
+													<legend>Related to </legend>
+													<div class="radio" ng-repeat="related_to in filters.values.related_to">		
+														<label class="control-label">
+															<input type="radio" ng-model="list.urlParams.related_to" value="{{related_to.id}}"> {{related_to.name}}
+														</label>
+													</div>
+													<div class="form-group" ng-show="list.urlParams.related_to">
+														<label>Reference </label>
+														<input type="text" ng-model="list.urlParams.related_reference" class="form-control">
+													</div>
+												</fieldset>
+												<fieldset ng-if="filters.values.name">
+													<legend>Name </legend>
+													<div class="form-group">
+														<input type="text" ng-model="list.urlParams.name" class="form-control">
+													</div>
+												</fieldset>
+												<fieldset ng-if="filters.values.related_element">
+													<legend>Element</legend>
+													<div class="radio" ng-repeat="related_element in filters.values.related_element">		
+														<label class="control-label">
+															<input type="radio" ng-model="list.urlParams.related_element" value="{{related_element.id}}"> {{related_element.name}}
+														</label>
+													</div>
+													<div class="form-group" ng-show="list.urlParams.related_element">
+														<label>Reference </label>
+														<input type="text" ng-model="list.urlParams.related_element_reference" class="form-control">
+													</div>
+												</fieldset>
+											</div>
+											
+											<div class="col-md-4">
+												<fieldset>
+													<legend>User </legend>
+													<select class="form-control" ng-model="list.urlParams.user" ng-options="user.id as user.name for user in filters.values.users"><option value="">---</option></select>
+												</fieldset>
+												<fieldset ng-if="filters.values.locations">
+													<legend>Location</legend>
+													<select class="form-control" ng-model="list.urlParams.location" ng-options="location.id as location.name for location in filters.values.locations"><option value="">---</option></select>
+												</fieldset>
+												<fieldset ng-if="filters.values.statuses">
+												<legend>Status </legend>
+													<select class="form-control" ng-model="list.urlParams.status" ng-options="status.id as status.name for status in filters.values.statuses"><option value="">---</option></select>
+												</fieldset>
+												<fieldset ng-if="filters.values.collections">
+													<legend>Collection </legend>
+													<select class="form-control" ng-model="list.urlParams.collection" ng-options="collection.id as collection.name for collection in filters.values.collections"><option value="">---</option></select>
+												</fieldset>
+												<fieldset ng-if="filters.values.deliveries">
+													<legend>Delivery </legend>
+													<select class="form-control" ng-model="list.urlParams.delivery" ng-options="delivery.id as delivery.name for delivery in filters.values.deliveries"><option value="">---</option></select>
+												</fieldset>
+											</div>
+											
+											<div class="col-md-4" ng-if="filters.date">
+												<fieldset>
+												<legend>From </legend>
+													<input class="form-control" type="text" bs-datepicker ng-model="filters.date.from.value" data-max-date="{{filters.date.to.value}}" ng-change="list.urlParams.from = dateToTimestamp(filters.date.from.value)" />
+												</fieldset>
+												<fieldset>
+													<legend>To </legend>
+													<input class="form-control" type="text"  bs-datepicker ng-model="filters.date.to.value" data-min-date="{{filters.date.from.value}}" ng-change="list.urlParams.to = dateToTimestamp(filters.date.to.value)" />
+												</fieldset>
+											</div>
+										</div><!--/row-->
+										<button class="btn btn-block btn-lg" type="button" ng-click="listQuery(list.urlParams, list.id)">Load</button>
+									</div>
+								</div>
+							</div>
+						</div>
 				    </div>
 				</div>
 				<div class="row">
@@ -261,9 +259,8 @@
 					</table>
 						
 					<div ng-if="list.pagination.pagesCount>1">
-						<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-					</div>
-				</div>
+						<pagination total-items="list.pagination.elementsCount" ng-model="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" ng-change="listPaginate(list.pagination.page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+					</div>				</div>
 			</div>
 			
 		</div>

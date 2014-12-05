@@ -95,16 +95,27 @@ angular.module('clearApp.controllersTransport', [])
 			}
 		}])
 		
-		.controller('TransportElementCtrl', ['$scope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', 'E1', 'E2', 'Utils', 'ClearUrl', 'TransportElement', 'ElmsConf', function($scope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, E1, E2, Utils, ClearUrl, TransportElement, ElmsConf) {
+		.controller('TransportElementCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$interval', '$timeout', '$anchorScroll', '$modal', '$upload', 'E1', 'E2', 'Utils', 'ClearUrl', 'TransportElement', 'ElmsConf', function($scope, $rootScope, $routeParams, $location, $interval, $timeout, $anchorScroll, $modal, $upload, E1, E2, Utils, ClearUrl, TransportElement, ElmsConf) {
 		
 			var contentLoad = function(user) {
 				
 				E2.get({'format': 'elements', 'type': $routeParams.type, "id": $routeParams.id }, function(elm) {
-					elm.anim = true; 
+					elm.anim = true;
+					 
+					elm.current = {
+						"property": -1,
+						"related": 0
+					}; 
+					if ($location.search().related_type_active) {
+						var currentRelated = Utils.objectIndexbyKey(elm.related, "type", $location.search().related_type_active); 
+						elm.current.related = currentRelated;
+						$timeout(function() {
+							$anchorScroll();
+						}, 1000);
+					}
+					
 					elm = TransportElement.elementUpdate(elm);
 					
-					$scope.elm = elm;
-					$scope.display = user.permissions.transport.element[$routeParams.type];
 					
 					if (elm.timeline) {
 						var timelineAnim = function(i) {
@@ -114,17 +125,7 @@ angular.module('clearApp.controllersTransport', [])
 						$interval(function() {timelineAnim(loops++)}, 1000, 4); 
 					}
 					
-					if ($location.search().related_type_active) {
-						for (var i in elm.related) {
-							if ($location.search().related_type_active === elm.related[i].type) {
-								$scope.relatedActiveTab[$location.search().related_type_active] = true;
-								break;
-							}
-						}
-						$timeout(function() {
-							$anchorScroll();
-						}, 1000);
-					}
+					
 					
 					if (elm.related) {
 						var lists = []; 
@@ -160,44 +161,90 @@ angular.module('clearApp.controllersTransport', [])
 						});
 					}
 
+					$scope.elm = elm;
+					$scope.display = user.permissions.transport.element[$routeParams.type];
 					$scope.loaded = true;
 				});
 			}
 			
 			$scope.loaded = false;
-			$scope.relatedActiveTab = {};
-			
-			$scope.modalCondition = TransportElement.modalCondition; 
-			$scope.modalDelete = TransportElement.modalDelete; 
-			$scope.trackingToggle = TransportElement.trackingToggle;
-			$scope.propertySave = function(elm, property, groupName) {
-				TransportElement.propertySave(elm, property, groupName);
-			}
-			$scope.propertiesSave = function(elm, groupName) {
-				TransportElement.propertySave(elm, groupName);
-			}
 			$scope.dateToTimestamp = Utils.dateToTimestamp;
 			
-			$scope.calOpen = function($event, propName) {
-				$event.preventDefault();
-				$event.stopPropagation();
-				
-				var currentProp = function(name) {
-					var props = $scope.elm.properties;
-					for (var group in props) {
-						for (var n in props[group].set) {
-							var prop = props[group].set[n];
-							if (prop.name === name) return prop; 
-						}
-					}
-				}
-				currentProp(propName).opened = true;
-				console.log('currentProp: ', currentProp(propName) );
+			$scope.propertySave = function(elm, property) {		
+				TransportElement.propertySave(elm, property);		
+			}
+			
+// modals
+
+			var alertModal = $modal({scope: $scope, show: false, template: "modules/transport/html/element-modal-alert.html"}); 
+			
+			$scope.alertstatuses = [ "success", "warning", "error" ]; 
+			
+			$scope.alertModalOpen = function(alert) {
+				$scope.alertCurrent = angular.copy(alert); 
+				alertModal.$promise.then(alertModal.show);
 			};
 			
-			$scope.modalAlert = TransportElement.modalAlert; 
-			$scope.modalAlertDelete = TransportElement.modalAlertDelete;
-			$scope.modalDocumentUpload = TransportElement.modalDocumentUpload; 
+			$scope.alertSave = function(alert) {
+				TransportElement.alertSave($scope.elm, alert, $scope.user); 
+				alertModal.$promise.then(alertModal.hide);
+			}
+			
+			var alertDeleteModal = $modal({scope: $scope, show: false, template: "modules/transport/html/element-modal-alert-delete.html"});
+			
+			$scope.alertDeleteModalOpen = function(alert) {
+				$scope.alertCurrent = angular.copy(alert);
+				alertDeleteModal.$promise.then(alertDeleteModal.show);
+			};
+			
+			$scope.alertDelete = function(alert) {
+				TransportElement.alertDelete($scope.elm, alert);
+				alertDeleteModal.$promise.then(alertDeleteModal.hide); 
+			}
+			
+			var documentModal = $modal({scope: $scope, show: false, template: "modules/transport/html/element-modal-document.html"});
+			
+			$scope.documentModalOpen = function() {
+				documentModal.$promise.then(documentModal.show);
+			};
+
+			$scope.documentSave = function(doc) {
+				TransportElement.documentUploadSave(doc, $scope.elm, $scope.user);
+				documentModal.$promise.then(documentModal.hide);
+			}
+			
+			$scope.onFileSelect = function($files) {
+				$scope.doc = {}; 
+				for (var i = 0; i < $files.length; i++) {
+					var file = $files[i];
+					$scope.upload = $upload.upload({
+						url: '/index_rest.php/api/clear/v2/elements/' + $scope.elm.type + '/' + $scope.elm.id + '?documentUpload=file',
+	//				    	    data: {myObj: $scope.myModelObj},
+						file: file,
+					}).progress(function(evt) {
+						$scope.progressShow = true; 
+						$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+					}).success(function(data, status, headers, config) {
+						$scope.doc.value = "fileUpload"; 
+						$scope.doc.id = data.id; 
+						console.log("upload success: ", data);
+					}).error(function(error) {
+						console.log("upload error: ", error);
+					});
+				}
+			};	
+			
+			var deleteModal = $modal({scope: $scope, show: false, template: "modules/transport/html/element-modal-delete.html"});
+			
+			$scope.deleteModalOpen = function() {
+				deleteModal.$promise.then(deleteModal.show);
+			};
+
+			$scope.deleteConfirm = function() { 
+				$scope.elm.$delete({"type": $scope.elm.type, "id": $scope.elm.id });
+				$location.path('transport/tracking');
+				deleteModal.$promise.then(deleteModal.hide);
+			}
 			
 			E1.get({'type': 'user'}, function(user) { 
 				$scope.$emit("event:sectionUpdate", "transport");
@@ -206,7 +253,7 @@ angular.module('clearApp.controllersTransport', [])
 			
 		}])
 		
-		.controller('TransportTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsConf', 'E1', 'E2', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsConf, E1, E2){
+		.controller('TransportTrackingCtrl', ['$scope', '$location', '$routeParams', 'Utils', 'ClearUrl', 'ElmsConf', 'E1', 'E2', '$modal', function($scope, $location, $routeParams, Utils, ClearUrl, ElmsConf, E1, E2, $modal){
 			
 			var contentLoad = function(user) {
 				
@@ -244,6 +291,7 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.$emit("event:sectionUpdate", "transport");
 				contentLoad(user);
 			});
+
 		}])
 		
 		.controller('TransportSearchCtrl', ['$scope', '$location', '$timeout', 'ClearUrl', 'Utils', 'ElmsConf', 'E1', 'E2', function($scope, $location, $timeout, ClearUrl, Utils, ElmsConf, E1, E2) {
@@ -337,52 +385,32 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.$emit("event:sectionUpdate", "transport");
 				contentLoad(user);
 			});
-
-		}])
-		
-		.controller('TransportElementModalDocumentUploadCtrl', ['$scope', '$upload', 'TransportDocument', 'E2', '$modalInstance', 'elm', 'user', function ($scope, $upload, TransportDocument, E2, $modalInstance, elm, user) {
-			$scope.doc = {}; 
 			
-			$scope.onFileSelect = function($files) {
-				for (var i = 0; i < $files.length; i++) {
-					var file = $files[i];
-					$scope.upload = $upload.upload({
-						url: '/index_rest.php/api/clear/v2/elements/' + elm.type + '/' + elm.id + '?documentUpload=file',
-	//				    	    data: {myObj: $scope.myModelObj},
-						file: file,
-					}).progress(function(evt) {
-						$scope.progressShow = true; 
-						$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-					}).success(function(data, status, headers, config) {
-						$scope.doc.value = "fileUpload"; 
-						$scope.doc.id = data.id; 
-						console.log("upload success: ", data);
-					}).error(function(error) {
-						console.log("upload error: ", error);
-					});
-						//.error(...)
-						//.then(success, error, progress); 
-					}
-					// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
-				};		
-			$scope.documentUploadSave = function(doc) {
-				TransportDocument.documentUploadSave(doc, elm, user);
-			}
-			$scope.documentUploadClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.documentUploadCancel = function () {
-				$modalInstance.dismiss('cancel');
-			}
 		}])
 			
-		.controller('TransportElementModalConditionCtrl', ['$scope', '$upload', 'TransportElement', 'ClearUrl', '$modalInstance', 'condition', 'elm', function ($scope, $upload, TransportElement, ClearUrl, $modalInstance, condition, elm) {
+		.controller('TransportElementModalConditionCtrl', ['$scope', '$upload', '$modal', 'TransportElement', 'ClearUrl', function ($scope, $upload, $modal, TransportElement, ClearUrl) {
 		
-			$scope.condition = condition;
-			$scope.elm = elm;
-			console.log('elm: ', elm, '/ elm.name: ', elm.name, '/ condition: ', condition);
-			switch (condition.type) {
+			var elm = $scope.elm;  
+			var condition = $scope.condition;
+			var conditionModal = $modal({scope: $scope, show: false, template: "modules/transport/html/element-modal-condition.html"}); 
+			
+			$scope.conditionModalOpen = function($event) {
+				$event.stopPropagation();
+				$event.preventDefault();
+				conditionModal.$promise.then(conditionModal.show);
+			};
+			$scope.conditionSave = function(elm, condition) { 
+				TransportElement.conditionSave(elm, condition);
+				conditionModal.$promise.then(conditionModal.hide);
+			}
+			
+			$scope.conditionClose = function() {
+				conditionModal.$promise.then(conditionModal.hide);
+			}
+			
+			$scope.go = ClearUrl.go;
+			
+			switch ($scope.condition.type) {
 				case 'upload': 
 					var documentsUploaded = []; 
 					$scope.updateMethod = {}; 
@@ -412,11 +440,8 @@ angular.module('clearApp.controllersTransport', [])
 								$scope.condition.value = "fileUpload"; 
 								console.log(data);
 							});
-								//.error(...)
-								//.then(success, error, progress); 
-							}
-							// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
-						};
+						}
+					};
 					
 				break;
 				case 'checkbox': break;
@@ -430,76 +455,6 @@ angular.module('clearApp.controllersTransport', [])
 				case 'text': break;
 				case 'email': break;
 				case 'link': break;
-			}
-			
-			$scope.conditionSave = function(elm, condition) { 
-				TransportElement.conditionSave(elm, condition);
-				console.log('condition: ', condition, condition.name); 
-			}
-			
-			$scope.conditionClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.conditionCancel = function () {
-				$modalInstance.dismiss('cancel');
-			}
-			
-			$scope.go = ClearUrl.go;
-		}])
-		
-		.controller('TransportElementModalDeleteCtrl', ['$scope', '$location', '$modalInstance', 'elm', function ($scope, $location, $modalInstance, elm) {
-		
-			$scope.elm = elm;
-			
-			$scope.deleteConfirm = function(elm) { 
-				elm.$delete({"type": elm.type, "id": elm.id });
-				$location.path('tracking');
-			}
-			
-			$scope.deleteClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.deleteCancel = function () {
-				$modalInstance.dismiss('cancel');
-			}
-		}])
-		
-		.controller('TransportElementModalAlertCtrl', ['$scope', '$modalInstance', 'Utils', 'TransportElement', 'elm', 'alert', 'user', function ($scope, $modalInstance, Utils, TransportElement, elm, alert, user) {
-			
-			if (alert.id) { 
-				$scope.alert = Utils.clone(alert);
-			}
-			$scope.statuses = [ "success", "warning", "error" ]; 
-			
-			$scope.alertSave = function(alert) {
-				TransportElement.alertSave(elm, alert, user); 
-			}
-			
-			$scope.modalClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.modalCancel = function () {
-				$modalInstance.dismiss('cancel');
-			}
-		}])
-		
-		.controller('ElementModalAlertDeleteCtrl', ['$scope', '$modalInstance', 'TransportElement', 'elm', 'alert', function ($scope, $modalInstance, TransportElement, elm, alert) {
-			
-			$scope.alert = alert;
-			
-			$scope.alertDelete = function(alert) {
-				TransportElement.alertDelete(elm, alert); 
-			}
-			
-			$scope.modalClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.modalCancel = function () {
-				$modalInstance.dismiss('cancel');
 			}
 		}])
 			
@@ -519,48 +474,36 @@ angular.module('clearApp.controllersTransport', [])
 				ClearUrl.listReady('conf', listConf); 
 			});
 			
-			$scope.alertModalEdit = TransportAlert.alertModalEdit; 
-			$scope.alertModalDelete = TransportAlert.alertModalDelete;
-		}])
-		
-		.controller('TransportAlertModalEditCtrl', ['$scope', '$modalInstance', 'TransportAlert', 'Utils', 'alerts', 'alert', 'user', function ($scope, $modalInstance, TransportAlert, Utils, alerts, alert, user) {
-		
-			$scope.alert = Utils.clone(alert);
-			$scope.statuses = [ "success", "warning", "error" ]; 
+			var alertModal = $modal({scope: $scope, show: false, template: "modules/transport/html/alerts-modal-edit.html"}); 
 			
-			$scope.alertSave = function(a) {
-				for (var i in a) {
-					alert[i] = a[i]; 
-				}
-				TransportAlert.alertSave(alert, user); 
-			}
+			$scope.alertstatuses = [ "success", "warning", "error" ]; 
 			
-			$scope.modalClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.modalCancel = function () {
-				$modalInstance.dismiss('cancel');
-			}
-		}])
-		
-		.controller('TransportAlertModalDeleteCtrl', ['$scope', '$modalInstance', 'TransportAlert', 'alerts', 'alert', function ($scope, $modalInstance, TransportAlert, alerts, alert) {
-			$scope.alert = alert;
+			$scope.alertModalOpen = function(alerts, alert) {
+				$scope.alertCurrent = angular.copy(alert); 
+				$scope.alerts = alerts; 
+				alertModal.$promise.then(alertModal.show);
+			};
 			
-			$scope.alertDelete = function(a) {
-				TransportAlert.alertDelete(a, alerts);
+			$scope.alertSave = function(alert) {
+				TransportAlert.alertSave($scope.alerts, alert, $scope.user); 
+				alertModal.$promise.then(alertModal.hide);
 			}
 			
-			$scope.modalClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.modalCancel = function () {
-				$modalInstance.dismiss('cancel');
+			var alertDeleteModal = $modal({scope: $scope, show: false, template: "modules/transport/html/alerts-modal-delete.html"});
+			
+			$scope.alertDeleteModalOpen = function(alerts, alert) {
+				$scope.alertCurrent = angular.copy(alert);
+				$scope.alerts = alerts; 
+				alertDeleteModal.$promise.then(alertDeleteModal.show);
+			};
+			
+			$scope.alertDelete = function(alert) {
+				TransportAlert.alertDelete($scope.alerts, alert);
+				alertDeleteModal.$promise.then(alertDeleteModal.hide); 
 			}
 		}])
 		
-		.controller('TransportDocumentsCtrl', ['$scope', '$routeParams', 'ClearUrl', 'TransportDocument', 'Utils', 'DocumentsConfig', 'E1', 'E2', function($scope, $routeParams, ClearUrl, TransportDocument, Utils, DocumentsConfig, E1, E2) {
+		.controller('TransportDocumentsCtrl', ['$scope', '$routeParams', '$modal', '$upload', 'ClearUrl', 'TransportDocument', 'Utils', 'DocumentsConfig', 'E1', 'E2', function($scope, $routeParams, $modal, $upload, ClearUrl, TransportDocument, Utils, DocumentsConfig, E1, E2) {
 
 			var contentLoad = function(user) {
 			
@@ -591,23 +534,24 @@ angular.module('clearApp.controllersTransport', [])
 				
 			}
 			
-			$scope.documentModalUpload = TransportDocument.documentModalUpload;
-			
 			E1.get({'type': 'user'}, function(user) { 
 				$scope.$emit("event:sectionUpdate", "transport");
 				contentLoad(user);
 			}); 
-		}])
-		
-		.controller('TransportDocumentModalUploadCtrl', ['$scope', '$upload', 'TransportDocument', 'E2', '$modalInstance', 'type', 'user', function ($scope, $upload, TransportDocument, E2, $modalInstance, type, user) {
-			$scope.type = type;
-			$scope.doc = new E2({});
+			
+			var mediaModal = $modal({scope: $scope, show: false, template: "modules/transport/html/documents-modal-upload.html"});
+			
+			$scope.mediaModalOpen = function(type) {
+				$scope.type = type; 
+				$scope.media = new E2({"format": "documents", "type": "media", "id": "new"}); 
+				mediaModal.$promise.then(mediaModal.show);
+			};
 			
 			$scope.onFileSelect = function($files) {
 				for (var i = 0; i < $files.length; i++) {
 					var file = $files[i];
 					$scope.upload = $upload.upload({
-						url: '/index_rest.php/api/clear/v2/documents/'+ type + '?documentUpload=file',
+						url: '/index_rest.php/api/clear/v2/documents/'+ $scope.type + '?documentUpload=file',
 	//				    	    data: {myObj: $scope.myModelObj},
 						file: file,
 					}).progress(function(evt) {
@@ -615,25 +559,17 @@ angular.module('clearApp.controllersTransport', [])
 						$scope.progress = parseInt(100.0 * evt.loaded / evt.total);
 						console.log("upload progress: ", evt);
 					}).success(function(data, status, headers, config) {
-						$scope.doc.value = "documentUpload"; 
-						$scope.doc.id = data.id; 
+						$scope.media.value = "documentUpload"; 
+						$scope.media.id = data.id; 
 						console.log("upload success: ", data);
 					}).error(function(error) {
 						console.log("upload error: ", error);
 					})	
-						//.then(success, error, progress); 
-					}
-					// $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers. 
-				};		
-			$scope.documentUploadSave = function(doc) {
-				TransportDocument.documentUploadSave(doc, type, user);
-			}
-			$scope.documentUploadClose = function() {
-				$modalInstance.close();
-			}
-			 
-			$scope.documentUploadCancel = function () {
-				$modalInstance.dismiss('cancel');
+				}
+			};		
+			$scope.mediaUploadSave = function(media) {
+				TransportDocument.documentUploadSave(media, $scope.type, $scope.user);
+				mediaModal.$promise.then(mediaModal.hide);
 			}
 		}])
 		
@@ -680,30 +616,13 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.doc = doc;
 				$scope.loaded = true;
 			});
-			$scope.open = function (item) {            
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/documents-ir-modal-img.html',
-					controller: 'TransportDocumentsIrModalImgCtrl',
-					resolve: {
-					  item: function () {
-						return item;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-					$scope.selected = selectedItem;
-				}, function () {
-	//                $log.info('Modal dismissed at: ' + new Date());
-				});
-			};
-		}])	
-		
-		.controller('TransportDocumentsIrModalImgCtrl', ['$scope', '$modalInstance', 'item', function ($scope, $modalInstance, item) {	
-		
-			$scope.item = item; 
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
+			
+			var imageModal = $modal({scope: $scope, show: false, template: "modules/transport/html/documents-ir-modal-img.html"});
+			
+			$scope.imageModalOpen = function(item) {
+				$scope.item = item; 
+				imageModal.$promise.then(imageModal.show);
+			}
 		}])
 		
 		.controller('TransportDocumentsNcrCtrl', ['$scope', '$routeParams', 'E2', '$modal', 'ClearToken', function($scope, $routeParams, E2, $modal, ClearToken) {
@@ -720,52 +639,31 @@ angular.module('clearApp.controllersTransport', [])
 				$scope.doc = doc;
 				$scope.loaded = true;
 			});
-			$scope.open = function (doc, user, type) {            
-				if (doc.status != 'closed') {
-					var modalInstance = $modal.open({
-						templateUrl: 'modules/transport/html/documents-ncr-modal-msg.html',
-						controller: 'TransportDocumentsNcrModalMsgCtrl',
-						resolve: {
-						  doc: function () {
-							return doc;
-						  },
-						  user: function () {
-						  	return user;
-						  },
-						  type: function () {
-							return type;
-						  } 
-						}
-					});
-					modalInstance.result.then(function (selectedItem) {
-						$scope.selected = selectedItem;
-					}, function () {
-	//                $log.info('Modal dismissed at: ' + new Date());
-					});
+			
+			var ncrMessageModal = $modal({scope: $scope, show: false, template: "modules/transport/html/documents-ncr-modal-msg.html"});
+			
+			$scope.ncrMessageModalOpen = function(type) {
+				if ($scope.doc.status != 'closed') {
+					$scope.type = type; 
+					if (type=='open') $scope.title = 'Add a comment'; 
+					else $scope.title = 'Close report';
+					$scope.comment = {};
+					ncrMessageModal.$promise.then(ncrMessageModal.show);
 				}
-			}; 
-		}])
-		
-		.controller('TransportDocumentsNcrModalMsgCtrl', ['$scope', '$modalInstance', 'doc', 'user', 'type', function ($scope, $modalInstance, doc, user, type) {
+				
+			};
 			
-			$scope.comment = {};
-			if (type=='open') $scope.title = 'Add a comment'; 
-			else $scope.title = 'Close report'; 
-			
-			$scope.saveNcrMessage = function () {
+			$scope.ncrMessageSave = function () {
 				var now = new Date();
 				var comment_date = Math.floor(now.getTime() / 1000);
 				var comment_message = $scope.comment.message;
-				var comment_user = { "first_name": user.first_name, "last_name": user.last_name, "id": user.id }; 
+				var comment_user = { "first_name": $scope.user.first_name, "last_name": $scope.user.last_name, "id": $scope.user.id }; 
 				
-				doc.comments.push({ "date": comment_date, "status": type, "message": comment_message, "user": comment_user }); 
-				doc.$save({'type': 'ncr', 'id': doc.id, 'update':type, 'format': 'documents' }, function(p, response) {});
-				$modalInstance.close();
+				$scope.doc.comments.push({ "date": comment_date, "status": $scope.type, "message": comment_message, "user": comment_user }); 
+				$scope.doc.$save({'type': 'ncr', 'id': $scope.doc.id, 'update':$scope.type, 'format': 'documents' }, function(p, response) {});
+				ncrMessageModal.$promise.then(ncrMessageModal.hide);
 			};
-			
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
+			 
 		}])
 		
 		.controller('TransportDocumentsPodCtrl', ['$scope', '$routeParams', 'ClearToken', 'E2', function($scope, $routeParams, ClearToken, E2) {
@@ -784,7 +682,7 @@ angular.module('clearApp.controllersTransport', [])
 			});
 		}])
 
-			.controller('TransportGuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
+		.controller('TransportGuidelinesListCtrl', ['$scope', 'GuidelinesProcess', 'GuidelinesWeb', 'GuidelinesMobile', function($scope, GuidelinesProcess, GuidelinesWeb, GuidelinesMobile) {
 	
 		$scope.$emit("event:sectionUpdate", "sans");
 		

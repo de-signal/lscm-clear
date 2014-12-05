@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('clearApp', [ 
 	'ngRoute', 'ngAnimate', 'ngCookies', 
-	'ui.bootstrap', 'angularFileUpload', 'nvd3ChartDirectives', 'toaster', 'chieffancypants.loadingBar', 'http-auth-interceptor', 
+	'mgcrea.ngStrap', 'angularFileUpload', 'nvd3ChartDirectives', 'toaster', 'chieffancypants.loadingBar', 'http-auth-interceptor', 'modules', 
 	'clearApp.filters', 'clearApp.services', 'clearApp.directives', 'clearApp.controllers', 
 	'clearApp.controllersTransport', 'clearApp.servicesTransport', 'clearApp.directivesTransport',
 	'clearApp.controllersStock', 'clearApp.servicesStock', 'clearApp.directivesStock', 
@@ -77,4 +77,11 @@ angular.module('clearApp', [
 		$routeProvider.when('/stock/indicators', {templateUrl: 'modules/stock/html/indicators.html', controller: 'StockIndicatorsCtrl'});
 		
 		$routeProvider.otherwise({redirectTo: '/dashboard'});
-	}]);
+	}])
+	.config(function($datepickerProvider) {
+	  angular.extend($datepickerProvider.defaults, {
+	    dateFormat: 'dd.MM.yy',
+	    autoclose: true, 
+	    useNative: true
+	  });
+	});

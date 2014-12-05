@@ -1,51 +1,49 @@
-// I gather this file is a starting point for the project.
 // Core variables and mixins
-@import "../lib/scss/bootstrap/variables";
-@import "../lib/scss/bootstrap/mixins";
+@import "../../lib/scss/bootstrap/variables";
+@import "../../lib/scss/bootstrap/mixins";
 
 // Reset
-@import "../lib/scss/bootstrap/normalize";
-// @import "../lib/scss/bootstrap/print";
+@import "../../lib/scss/bootstrap/normalize";
+// @import "../../lib/scss/bootstrap/print";
 
 // Core CSS
-@import "../lib/scss/bootstrap/scaffolding";
-@import "../lib/scss/bootstrap/type";
-@import "../lib/scss/bootstrap/code";
-@import "../lib/scss/bootstrap/grid";
-@import "../lib/scss/bootstrap/tables";
-@import "../lib/scss/bootstrap/forms";
-@import "../lib/scss/bootstrap/buttons";
+@import "../../lib/scss/bootstrap/scaffolding";
+@import "../../lib/scss/bootstrap/type";
+@import "../../lib/scss/bootstrap/code";
+@import "../../lib/scss/bootstrap/grid";
+@import "../../lib/scss/bootstrap/tables";
+@import "../../lib/scss/bootstrap/forms";
+@import "../../lib/scss/bootstrap/buttons";
 
 // Components
-@import "../lib/scss/bootstrap/component-animations";
-// @import "../lib/scss/bootstrap/glyphicons";
-@import "../lib/scss/bootstrap/dropdowns";
-@import "../lib/scss/bootstrap/button-groups";
-@import "../lib/scss/bootstrap/input-groups";
-@import "../lib/scss/bootstrap/navs";
-@import "../lib/scss/bootstrap/navbar";
-// @import "../lib/scss/bootstrap/breadcrumbs";
-@import "../lib/scss/bootstrap/pagination";
-@import "../lib/scss/bootstrap/pager";
-@import "../lib/scss/bootstrap/labels";
-@import "../lib/scss/bootstrap/badges";
-// @import "../lib/scss/bootstrap/jumbotron";
-@import "../lib/scss/bootstrap/thumbnails";
-@import "../lib/scss/bootstrap/alerts";
-@import "../lib/scss/bootstrap/progress-bars";
-@import "../lib/scss/bootstrap/media";
-@import "../lib/scss/bootstrap/list-group";
-@import "../lib/scss/bootstrap/panels";
-// @import "../lib/scss/bootstrap/responsive-embed";
-@import "../lib/scss/bootstrap/wells";
-@import "../lib/scss/bootstrap/close";
+@import "../../lib/scss/bootstrap/component-animations";
+// @import "../../lib/scss/bootstrap/glyphicons";
+@import "../../lib/scss/bootstrap/dropdowns";
+@import "../../lib/scss/bootstrap/button-groups";
+@import "../../lib/scss/bootstrap/input-groups";
+@import "../../lib/scss/bootstrap/navs";
+@import "../../lib/scss/bootstrap/navbar";
+// @import "../../lib/scss/bootstrap/breadcrumbs";
+@import "../../lib/scss/bootstrap/pagination";
+@import "../../lib/scss/bootstrap/pager";
+@import "../../lib/scss/bootstrap/labels";
+@import "../../lib/scss/bootstrap/badges";
+// @import "../../lib/scss/bootstrap/jumbotron";
+@import "../../lib/scss/bootstrap/thumbnails";
+@import "../../lib/scss/bootstrap/alerts";
+@import "../../lib/scss/bootstrap/progress-bars";
+@import "../../lib/scss/bootstrap/media";
+@import "../../lib/scss/bootstrap/list-group";
+@import "../../lib/scss/bootstrap/panels";
+@import "../../lib/scss/bootstrap/wells";
+@import "../../lib/scss/bootstrap/close";
 
 // Components w/ JavaScript
-@import "../lib/scss/bootstrap/modals";
-@import "../lib/scss/bootstrap/tooltip";
-@import "../lib/scss/bootstrap/popovers";
-// @import "../lib/scss/bootstrap/carousel";
+@import "../../lib/scss/bootstrap/modals";
+@import "../../lib/scss/bootstrap/tooltip";
+@import "../../lib/scss/bootstrap/popovers";
+@import "../../lib/scss/bootstrap/carousel";
 
 // Utility classes
-@import "../lib/scss/bootstrap/utilities";
-@import "../lib/scss/bootstrap/responsive-utilities";
+@import "../../lib/scss/bootstrap/utilities";
+@import "../../lib/scss/bootstrap/responsive-utilities";
