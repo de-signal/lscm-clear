@@ -22,7 +22,7 @@
 			<div class="filet">
 				<h6>milestone</h6>
 				<h2 class="type-bold capitalize">{{elm.milestone}}</h2>
-				<span ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" bs-tooltip="milestone.name" data-placement="top"></i></span>
+				<span ng-repeat="milestone in elm.milestones'"><i class="grey icon" ng-class="{past:'i\-disc', previous:'i\-disc', current:'i\-disc', future:'i\-circle', next:'i\-circle'}[milestone.step]" bs-tooltip="milestone.name" data-placement="top"></i></span>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -214,7 +214,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="milestone in elm.milestones | orderBy:'statuses[2][1]'" ng-class="{highlite: milestone.step=='current'}" ng-show="milestone.step=='previous' || milestone.step=='next' || milestone.step=='current' || showCalendar">
+					<tr ng-repeat="milestone in elm.milestones'" ng-class="{highlite: milestone.step=='current'}" ng-show="milestone.step=='previous' || milestone.step=='next' || milestone.step=='current' || showCalendar">
 						<td>&nbsp;<i class="icon" step-icon></i></td>
 						<td><span ng-class="{previous:'light', past:'light', next:'ultralight', future:'ultralight', current:'bold'}[milestone.step]" class="capitalize">{{$index + 1}}. {{milestone.name}}</span></td>
 						<td ng-repeat="status in milestone.statuses"><span class="label label-default" status="{{status[2]}}">{{status[1]*1000 | date:'dd.MM.yy' }}</span></td>
