@@ -257,7 +257,7 @@ module.exports = function (grunt) {
 					environment: 'production'
 				}
 			},
-			dev: {                    
+			dev: {
 				options: {
 					sassDir: 'app-dev/core/scss',
 					specify: 'app-dev/core/scss/app.scss',
@@ -265,6 +265,17 @@ module.exports = function (grunt) {
 				}
 			}
 		}, 
+
+		ngAnnotate: {
+	        options: {
+	            singleQuotes: true,
+	        },
+	        app: {
+	            files: {
+	                'app-dev/lib/js/angular-strap.js': ['app-dev/lib/js/angular-strap.js'],
+	            },
+	        }
+	    },
 
 		'ftp-deploy': {
 			app: {
@@ -337,6 +348,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('app', [
 		'clean:app',
+		'ngAnnotate:app',
 		'useminPrepare',
 		'concat:generated',
 		'preprocess:js',
