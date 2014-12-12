@@ -886,8 +886,6 @@ a.accordion-toggle h4, tab-heading h4 {
 
 .nav-tabs > li > a {
   border: 1px solid #bebeb6;
-	padding-top: 0px;
-	padding-bottom: 0px;
 	
 }
 .nav-tabs > li.active > a,

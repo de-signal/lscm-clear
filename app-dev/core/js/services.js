@@ -224,9 +224,9 @@ angular.module('clearApp.services', ['ngResource'])
 			
 			listCleanUrl: function(urlParams) {
 				for (var i in urlParams) {
-				    if (!urlParams[i] || urlParams[i]===null) {
-				     	delete urlParams[i];
-				    }
+					if (!urlParams[i] || urlParams[i]===null) {
+					 	delete urlParams[i];
+					}
 				}
 			},
 			
