@@ -37,7 +37,7 @@
 									<h5><span class="label capitalize" ng-class="{order:'label\-order', shipment:'label\-shipment', box:'label\-box', item:'label\-item'}[type]">{{type}} </span></h5>
 									<ul>
 										<li ng-repeat="condition in instruction.relateds[type]">
-											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" tooltip="{{condition.guideline.name}}" tooltip-placement="right"></i></a></h5>
+											<h5><span class="label label-neutral"><i class="icon" condition-icon></i> {{condition.name}}</span> <a ng-href="guidelines/transport/{{condition.guideline.url.page + '#' + condition.guideline.url.anchor}}" ng-if="!!condition.guideline"><i class="icon i-infos" bs-tooltip="{{condition.guideline.name}}" data-placement="right"></i></a></h5>
 										</li>
 									</ul>
 								</div>

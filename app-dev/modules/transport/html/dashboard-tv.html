@@ -29,9 +29,9 @@
 							<td><small><i class="icon" ng-class="{express:'i\-transportation\-plane', air:'i\-transportation\-plane', sea:'i\-transportation\-boat', haulage:'i\-transportation\-truck'}[elm.mode]"></i></small></td>
 							<td><small>{{elm.milestone}}</small></td>
 							<td><ul class="inline">
-							<li ng-repeat="condition in elm.required">
-							<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
-							</li>
+								<li ng-repeat="condition in elm.required" ng-controller="TransportElementModalConditionCtrl">
+									<span ng-click='conditionModalOpen($event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon bs-tooltip="condition.name"></i></span></span>
+								</li>
 							</ul></td>
 							<td class="limit"><small>{{elm.departure.location}}</small></td>
 							<td><small>{{elm.departure.date * 1000 | date:'dd.MM.yy'}}</small></td>

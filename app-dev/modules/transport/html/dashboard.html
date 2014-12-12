@@ -51,8 +51,8 @@
 						<!--<td><span class="label" status="{{elm.status}}">{{elm.delay}}</span></td>-->
 						<td ng-if="list.display.conditions">
 							<ul class="inline">
-								<li ng-repeat="condition in elm.required">
-									<span ng-click='modalCondition(elm, condition, $event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon tooltip="{{condition.name}}"></i></span></span>
+								<li ng-repeat="condition in elm.required" ng-controller="TransportElementModalConditionCtrl">
+									<span ng-click='conditionModalOpen($event)' ng-disabled='!condition.editable'><span class="btn btn-icon" condition-status-btn><i class="icon" condition-icon bs-tooltip="condition.name"></i></span></span>
 								</li>
 							</ul>
 						</td>
@@ -64,7 +64,7 @@
 				</tbody>
 			</table>
 			<div ng-if="list.pagination.pagesCount>1">
-				<pagination total-items="list.pagination.elementsCount" page="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" on-select-page="listPaginate(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+				<pagination total-items="list.pagination.elementsCount" ng-model="list.pagination.page" max-size="10" items-per-page="list.pagination.itemsPerPage" boundary-links="true" direction-links="false" ng-change="listPaginate(list.pagination.page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 			</div>
 		</div> 	
 	</div>

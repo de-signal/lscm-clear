@@ -1,0 +1,29 @@
+<div class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Upload document</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+						<div class="form-group">
+				<!--				<input type="text" ng-model="myModelObj">-->
+				   			<input type="file" ng-file-select="onFileSelect($files)">
+						</div>
+						<div ng-if="progressShow" class="form-group">
+				<!--				<button ng-click="upload.abort()" class="btn">Cancel Upload</button>-->
+							{{progress}} % loaded.
+						</div>
+						<div class="form-group">
+						    <label >Name</label>
+						    <input class="form-control" ng-model="doc.name">
+						  </div>
+				   	</form>   
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+				<button type="button" class="btn btn-primary" ng-click="documentSave(doc)">Save document</button>
+			</div>
+		</div>
+	</div>
+</div>

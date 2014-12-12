@@ -110,7 +110,8 @@ angular.module('clearApp.services', ['ngResource'])
 						'pagesCount': response("X-Clear-pagesCount"), 
 						'elementsCount': response("X-Clear-elementsCount")
 					} 
-					console.log("pagesCount: " + list.pagination.pagesCount + ", elementsCount: " + list.pagination.elementsCount);
+					
+					console.log("page: ", listConfig.urlParams.page, "pagesCount: ", list.pagination.pagesCount, ", elementsCount: ",list.pagination.elementsCount);
 					for (var i in elements) {
 						if (elements[i].url) {
 							elements[i].url = elements[i].url + '?oauth_token=' + ClearToken.returnToken();
@@ -223,9 +224,9 @@ angular.module('clearApp.services', ['ngResource'])
 			
 			listCleanUrl: function(urlParams) {
 				for (var i in urlParams) {
-				    if (!urlParams[i] || urlParams[i]===null) {
-				     	delete urlParams[i];
-				    }
+					if (!urlParams[i] || urlParams[i]===null) {
+					 	delete urlParams[i];
+					}
 				}
 			},
 			
@@ -352,6 +353,7 @@ angular.module('clearApp.services', ['ngResource'])
 				$rootScope.tvScreen = false;
 				$location.$$search = {};
 				$location.path( url + '/' + id );
+				console.log('related location.path: ', $location.path()); 
 // remove this hack asap
 				if (related) {
 					$location.search('related_type_active', related).hash('related');
