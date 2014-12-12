@@ -1,73 +1,70 @@
-<div class="modal-header">
-	<h3>condition</h3>
-</div>
-<div class="modal-body">
-	<h4><i class="lead icon" condition-icon></i> {{condition.name}}</h4>
-	<div ng-switch on="condition.type">
-		<form ng-switch-when="text">
-			<div class="form-group">
-				<input type="text" ng-model="condition.value" class="form-control">
+<div class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>condition</h3>
 			</div>
-		</form>
-		<div class="checkbox" ng-switch-when="checkbox" >
-			<label>
-				<input type="checkbox" ng-model="condition.value" ng-checked="condition.value"> {{condition.name}}
-			</label>
-		</div>
-		<div ng-switch-when="imi">
-			{{condition.value}}
-		</div>
-		<div ng-switch-when="date">
-			<div ng-model="condition.dt">
-			        <datepicker show-weeks="false"></datepicker>
+			<div class="modal-body">
+				<h4><i class="lead icon" condition-icon></i> {{condition.name}}</h4>
+				<div ng-switch on="condition.type">
+					<form ng-switch-when="text">
+						<div class="form-group">
+							<input type="text" ng-model="condition.value" class="form-control">
+						</div>
+					</form>
+					<div class="checkbox" ng-switch-when="checkbox" >
+						<label>
+							<input type="checkbox" ng-model="condition.value" ng-checked="condition.value"> {{condition.name}}
+						</label>
+					</div>
+					<div ng-switch-when="imi">
+						{{condition.value}}
+					</div>
+					<div ng-switch-when="date">
+						<input class="form-control" type="text" bs-datepicker ng-model="condition.dt" />
+						</div>
+						<button ng-switch-when="email" class="btn btn-large" type="button">Send e-mail</button>
+						
+						<div ng-switch-when="upload">
+							<form ng-if="updateMethod.chooser">
+								<div class="radio">
+									<label>
+										<input type="radio" ng-model="updateMethod.type" value="upload">
+										Upload a new file
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" ng-model="updateMethod.type" value="select">
+										Select file in documents 
+									</label>
+								</div>
+							 </form>
+							<form ng-if="updateMethod.type === 'upload'">
+							<div class="form-group">
+				<!--				<input type="text" ng-model="myModelObj">-->
+							 			<input type="file" ng-file-select="onFileSelect($files)">
+							</div>
+							<div ng-if="progressShow" class="form-group">
+				<!--				<button ng-click="upload.abort()" class="btn">Cancel Upload</button>-->
+								{{progress}} % loaded.
+							</div>
+							 	</form>
+							 	
+							 	<div ng-if="updateMethod.type === 'select'">
+								 	<select ng-model="condition.value" ng-options="document.id as document.name for document in updateMethod.documents">
+								 	</select>
+							 	</div>
+							 	
+						 </div>
+						 
+						 <div ng-switch-when="link"><a class="btn btn-large" href="" ng-click="go('transport/' + elm.type, elm.id, condition.value); conditionClose()">View</a></div>
+				</div>
 			</div>
-			<fieldset disabled>
-			    <div class="form-group">
-			      <label for="disabledTextInput">Selected date</label>
-			      <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ condition.dt | date:'dd.MM.yyyy' }}">
-			    </div>
-			</fieldset>
-        </div>
-        <button ng-switch-when="email" class="btn btn-large" type="button">Send e-mail</button>
-        
-        <div ng-switch-when="upload">
-        	<form ng-if="updateMethod.chooser">
-        		<div class="radio">
-        		  <label>
-        		    <input type="radio" ng-model="updateMethod.type" value="upload">
-        		    Upload a new file
-        		  </label>
-        		</div>
-        		<div class="radio">
-        		  <label>
-        		    <input type="radio" ng-model="updateMethod.type" value="select">
-        		    Select file in documents 
-        		  </label>
-        		</div>
-        	 </form>
-        	<form ng-if="updateMethod.type === 'upload'">
-				<div class="form-group">
-	<!--				<input type="text" ng-model="myModelObj">-->
-	       			<input type="file" ng-file-select="onFileSelect($files)">
-				</div>
-				<div ng-if="progressShow" class="form-group">
-	<!--				<button ng-click="upload.abort()" class="btn">Cancel Upload</button>-->
-					{{progress}} % loaded.
-				</div>
-	       	</form>
-	       	
-	       	<div ng-if="updateMethod.type === 'select'">
-		       	<select ng-model="condition.value" ng-options="document.id as document.name for document in updateMethod.documents">
-		       	</select>
-	       	</div>
-	       	
-	     </div>
-	     
-         <div ng-switch-when="link"><a class="btn btn-large" href="" ng-click="go(elm.type, elm.id, condition.value); conditionClose()">View</a></div>
-         
+			<div class="modal-footer">
+				<button class="btn cancel" ng-click="conditionClose()">Cancel</button>
+				<button class="btn" ng-click="conditionSave(elm, condition)" ng-hide="condition.type==='link' || condition.type==='imi'">Save</button>
+			</div>
+		</div>
 	</div>
-</div>
-<div class="modal-footer">
-	<button class="btn cancel" ng-click="conditionCancel()">Cancel</button>
-	<button class="btn" ng-click="conditionSave(elm, condition); conditionClose()" ng-hide="condition.type==='link' || condition.type==='imi'">Save</button>
 </div>

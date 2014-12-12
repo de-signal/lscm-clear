@@ -41,11 +41,11 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 		return $resource('modules/transport/json/guidelines_mobile.json');
 	}])
 	
-	.factory('TransportElement', ['$rootScope', '$modal', 'ClearToken', 'toaster', 'Utils', function($rootScope, $modal, ClearToken, toaster, Utils){
+	.factory('TransportElement', ['$timeout', 'ClearToken', 'toaster', 'Utils', function($timeout, ClearToken, toaster, Utils){
 		
 		return {
 		
-			elementUpdate: function(elm) {
+			elementUpdate: function(elm, current) {
 				var self = this;
 				self.propertiesDate(elm); 
 				self.elementUpdateUrl(elm); 
@@ -53,6 +53,17 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 				self.elementTimeline(elm);
 				for (var index in elm.charts) {
 					self.colorScaleConfig(elm.charts[index], elm.charts[index].value);
+				}
+				console.log('current ii: ', current); 
+				if (current) {
+					$timeout(function() {
+						elm.current = {
+							"property": current.property, 
+							"related": current.related
+						} 
+					}).then(function() {
+						console.log('current: ', elm.current); 
+					});
 				}
 				return elm;
 			}, 
@@ -75,114 +86,9 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 				return elm;
 			}, 
 			
-			modalDelete: function (elm, $event) {        
-				if ($event.stopPropagation) $event.stopPropagation();
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/element-modal-delete.html',
-					controller: 'TransportElementModalDeleteCtrl',
-					resolve: {
-					  elm: function () {
-						return elm;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//				    $scope.selected = selectedItem;
-				}, function () {
-//                $log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
-			
-			modalCondition: function (elm, condition, $event) {            
-				if ($event.stopPropagation) $event.stopPropagation();
-				if (condition.editable || !condition.completed) {
-					var modalInstance = $modal.open({
-						templateUrl: 'modules/transport/html/element-modal-condition.html',
-						controller: 'TransportElementModalConditionCtrl',
-						resolve: {
-						  condition: function () {
-							return condition;
-						  },
-						  elm: function () {
-							return elm;
-						  }
-							
-						}
-					});
-					modalInstance.result.then(function (selectedItem) {
-	//				    $scope.selected = selectedItem;
-					}, function () {
-	//                $log.info('Modal dismissed at: ' + new Date());
-					});
-				}
-			}, 
-			
-			modalAlert: function(elm, alert, user) {
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/element-modal-alert.html',
-					controller: 'TransportElementModalAlertCtrl',
-					resolve: {
-					  elm: function () {
-						return elm;
-					  }, 
-					  alert: function () {
-					  	return alert;
-					  }, 
-					  user: function () {
-					  	return user;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			},
-			
-			modalAlertDelete: function(elm, alert) {
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/element-modal-alert-delete.html',
-					controller: 'TransportElementModalAlertDeleteCtrl',
-					resolve: {
-					  elm: function () {
-						return elm;
-					  }, 
-					  alert: function () {
-					  	return alert;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
-			
-			modalDocumentUpload: function(elm, user) { 
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/element-modal-document-upload.html',
-					controller: 'TransportElementModalDocumentUploadCtrl',
-					resolve: {
-					  elm: function () {
-					  	return elm;
-					  }, 
-					  user: function () {
-					  	return user;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
-			
 			documentUploadSave: function(doc, elm, user) {
 				var self=this;
-				
+				var current = angular.copy(elm.current);
 				doc.user = { 
 					"first_name": user.first_name, 
 					"last_name": user.last_name, 
@@ -191,8 +97,7 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 				
 				doc.dates = { "created": Utils.dateToTimestamp( new Date()) };  
 				
-				elm.documents.push(doc); 
-				console.log("elm: ", elm); 						
+				elm.documents.push(doc); 					
 				elm.$update({ "documentUpload": doc.id }, function(elm, response) {
 					var toasterMessage; 
 					
@@ -201,19 +106,17 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 					else if (response("X-Clear-updatedDocument")==="error") toasterMessage = "Document did not update";
 					
 					if (response("X-Clear-updatedDocument")) toaster.pop(response("X-Clear-updatedDocument"), toasterMessage, doc.name);
-					console.log("success");
-					elm = self.elementUpdate(elm);
+					console.log("upload succeed");
+					elm = self.elementUpdate(elm, current);
 				}, function() {
-					console.log("error");
+					console.log("upload error");
 					toaster.pop("error", "Nothing updated");
 				});
 			}, 
-			trackingToggle: function(elm, $event) {
-				if ($event.stopPropagation) $event.stopPropagation(); 
-				elm.tracking=!elm.tracking;
-			}, 
+			
 			alertSave: function(elm, alert, user) {
 				var self=this;
+				var current = angular.copy(elm.current);
 				alert.user = { 
 					"first_name": user.first_name, 
 					"name": user.name, 
@@ -245,12 +148,13 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 					
 					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
 					
-					elm = self.elementUpdate(elm);
+					elm = self.elementUpdate(elm, current);
 				});
 			}, 
 			
 			alertDelete: function(elm, alert) {
 				var self=this;
+				var current = angular.copy(elm.current);
 				elm.$update({ 'alertDeleteId': alert.id }, function(elm, response) {
 					var alertMessage; 
 					
@@ -260,30 +164,26 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 					
 					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), alertMessage, alert.name);
 					
-					elm = self.elementUpdate(elm);
+					elm = self.elementUpdate(elm, current);
 				});
 			}, 
 			
-			propertySave: function(elm, property, group) {
+			propertySave: function(elm, property) {
 				var self=this;
-// remove this hack asap. avoid to reference $rootScope in this function
-				$rootScope.currentGroup = group;
-//				
+				var current = angular.copy(elm.current);
 				elm.$update({ 'propertyUpdateId': property.id, 'propertyUpdateVal': property.value }, function(elm, response) {
 					var propertyMessage; 
-					
 					if (response("X-Clear-updatedProperty")==="success") propertyMessage = "Property updated";
 					else if (response("X-Clear-updatedProperty")==="warning") propertyMessage = "Property did not update";
 					else if (response("X-Clear-updatedProperty")==="error") propertyMessage = "Property did not update";
-					
 					if (response("X-Clear-updatedProperty")) toaster.pop(response("X-Clear-updatedProperty"), propertyMessage, property.name);
-					
-					elm = self.elementUpdate(elm);
+					elm = self.elementUpdate(elm, current);
 				});
 			}, 
 			
 			conditionSave: function (elm, condition) {
 				var self=this;
+				if (elm.current) var current = angular.copy(elm.current);
 				
 				elm.$update({ 'requiredId': condition.id, 'requiredValue': condition.value }, function(elm, response) {
 					var conditionMessage, milestoneMessage; 
@@ -299,7 +199,7 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 					if (response("X-Clear-updatedRequired")) toaster.pop(response("X-Clear-updatedRequired"), conditionMessage, condition.name);
 					if (response("X-Clear-updatedMilestone")) toaster.pop(response("X-Clear-updatedMilestone"), milestoneMessage, response("X-Clear-updatedMilestoneName"));
 					console.log("success");  
-					elm = self.elementUpdate(elm);
+					elm = self.elementUpdate(elm, current);
 				}, function(error) {
 					console.log("error: ", error);
 				});
@@ -367,54 +267,11 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 		}
 	}])
 	
-	.factory('TransportAlert', ['$rootScope', '$modal', 'Utils', 'toaster', function($rootScope, $modal, Utils, toaster){
+	.factory('TransportAlert', ['Utils', 'toaster', function(Utils, toaster){
 		
 		return {
-		
-			alertModalEdit: function(alerts, alert, user) { 
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/alerts-modal-edit.html',
-					controller: 'TransportAlertModalEditCtrl',
-					resolve: {
-					  alerts: function () {
-					  	return alerts;
-					  }, 
-					  alert: function () {
-					  	return alert;
-					  }, 
-					  user: function () {
-					  	return user;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
 			
-			alertModalDelete: function(alerts, alert) {
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/alerts-modal-delete.html',
-					controller: 'TransportAlertModalDeleteCtrl',
-					resolve: { 
-					  alerts: function () {
-					  	return alerts;
-					  }, 
-					  alert: function () {
-					  	return alert;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
-			
-			alertSave: function(alert, user) {
+			alertSave: function(alerts, alert, user) {
 				alert.user = { 
 					"first_name": user.first_name, 
 					"last_name": user.name, 
@@ -423,28 +280,32 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 				
 				alert.dates.modified = Utils.dateToTimestamp(new Date());  
 				
-//				var alertIndex = Utils.objectIndexbyKey(alerts, "id", alert.id); 
-//				alerts[alertIndex] = alert; 
+				var alertIndex = Utils.objectIndexbyKey(alerts, "id", alert.id); 
+				alerts[alertIndex] = alert; 
 										
-				alert.$update({ 'type': 'alert' }, function(elm, response) {
+				alert.$update({ 'type': 'alert' }, function(alert, response) {
 					var toasterMessage; 
-					
-					if (response("X-Clear-updatedAlert")==="success") toasterMessage = "Alert update";
-					else if (response("X-Clear-updatedAlert")==="warning") toasterMessage = "Alert did not update";
-					else if (response("X-Clear-updatedAlert")==="error") toasterMessage = "Alert did not update";
+					console.log('alertddd: ', alert ); 
+					if (response("X-Clear-updatedAlert")==="success") toasterMessage = "Alert was updated";
+					else if (response("X-Clear-updatedAlert")==="warning") toasterMessage = "Alert was not updated";
+					else if (response("X-Clear-updatedAlert")==="error") toasterMessage = "Alert was not updated";
 					
 					if (response("X-Clear-updatedAlert")) toaster.pop(response("X-Clear-updatedAlert"), toasterMessage, alert.name);
 				});
 			}, 
 			
-			alertDelete: function(alert, alerts) {
+			alertDelete: function(alerts, alert) {
+			
+				var alertIndex = Utils.objectIndexbyKey(alerts, "id", alert.id); 
+				alerts[alertIndex] = alert; 
+				
 				alert.$delete({"type": "alert"}, function(elm, response) {
 					var toasterMessage; 
 					var toasterResponse = response("X-Clear-updatedAlert"); 
 					
-					if (toasterResponse==="success") toasterMessage = "Deleted alert";
-					else if (toasterResponse==="warning") toasterMessage = "Alert did not deleted";
-					else if (toasterResponse==="error") toasterMessage = "Alert did not deleted";
+					if (toasterResponse==="success") toasterMessage = "Alert was deletd";
+					else if (toasterResponse==="warning") toasterMessage = "Alert was not deleted";
+					else if (toasterResponse==="error") toasterMessage = "Alert was not deleted";
 					
 					if (toasterResponse) toaster.pop(toasterResponse, toasterMessage, alert.name);
 					if (!elm.id) {
@@ -455,29 +316,9 @@ angular.module('clearApp.servicesTransport', ['ngResource'])
 		}
 	}])
 	
-	.factory('TransportDocument', ['$rootScope', '$modal', '$route', 'Utils', 'ClearUrl', 'toaster', function($rootScope, $modal, $route, Utils, ClearUrl, toaster){
+	.factory('TransportDocument', ['$route', 'Utils', 'ClearUrl', 'toaster', function($route, Utils, ClearUrl, toaster){
 		
 		return {
-		
-			documentModalUpload: function(type, user) { 
-				var modalInstance = $modal.open({
-					templateUrl: 'modules/transport/html/documents-modal-upload.html',
-					controller: 'TransportDocumentModalUploadCtrl',
-					resolve: {
-					  type: function () {
-					  	return type;
-					  }, 
-					  user: function () {
-					  	return user;
-					  }
-					}
-				});
-				modalInstance.result.then(function (selectedItem) {
-//					$scope.selected = selectedItem;
-				}, function () {
-//					$log.info('Modal dismissed at: ' + new Date());
-				});
-			}, 
 			
 			documentUploadSave: function(doc, type, user) {
 				doc.user = { 

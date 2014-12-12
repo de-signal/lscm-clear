@@ -114,7 +114,7 @@ angular.module('clearApp.controllers', [])
 		});
 	}])
 	
-	.controller('ListCtrl', ['$scope', 'Utils', 'ClearUrl', 'TransportElement', 'ClearList', function($scope, Utils, ClearUrl, TransportElement, ClearList) {
+	.controller('ListCtrl', ['$scope', 'Utils', 'ClearUrl', 'ClearList', function($scope, Utils, ClearUrl, ClearList) {
 	
 		var list = {}; 
 		
@@ -171,10 +171,6 @@ angular.module('clearApp.controllers', [])
 				$scope.list.urlParams.sortBy = param;
 			}
 			$scope.listQuery($scope.list.urlParams, $scope.list.id); 
-		}
-		
-		$scope.propertySave = function(elm, property, groupName) {
-			TransportElement.propertySave(elm, property, groupName);
 		}
 		
 		$scope.listPaginate = function (page) {
@@ -255,8 +251,6 @@ angular.module('clearApp.controllers', [])
 		}
 		
 		$scope.dateToTimestamp = Utils.dateToTimestamp;
-		$scope.modalCondition = TransportElement.modalCondition; 
-		$scope.trackingToggle = TransportElement.trackingToggle;
 		$scope.go = ClearUrl.go;
 		$scope.loaded = false;
 		

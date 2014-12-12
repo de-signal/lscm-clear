@@ -23,12 +23,12 @@ module.exports = function (grunt) {
 		devUpdate: {
 			main: {
 				options: {
-					updateType: 'prompt', //just report outdated packages
+					updateType: 'force', //just report outdated packages
 					reportUpdated: true, //don't report already updated packages
-					semver: true, //use package.json semver rules when updating
+					semver: false, //use package.json semver rules when updating
 					packages: { //what packages to check
 						devDependencies: true, //only devDependencies
-						dependencies: false
+						dependencies: true
 					},
 					packageJson: null //find package.json automatically
 				}
@@ -99,9 +99,11 @@ module.exports = function (grunt) {
 							'angular-route/angular-route.js', 
 							'angular-resource/angular-resource.js', 
 							'angular-mocks/angular-mocks.js', 
+							'angular-strap/dist/angular-strap.js', 
+							'angular-strap/dist/angular-strap.tpl.js', 
 							'angular-bootstrap/ui-bootstrap-tpls.js',
 							'angular-http-auth/src/http-auth-interceptor.js', 
-							'ng-file-upload/angular-file-upload-html5-shim.js', 
+							'ng-file-upload/angular-file-upload-shim.js', 
 							'ng-file-upload/angular-file-upload.js',
 							'AngularJS-Toaster/toaster.js', 
 							'd3/d3.js', 
@@ -118,18 +120,19 @@ module.exports = function (grunt) {
 						src: [
 							'AngularJS-Toaster/toaster.css',
 							'nvd3/nv.d3.css', 
-							'angular-loading-bar/build/loading-bar.css'
+							'angular-loading-bar/build/loading-bar.css', 
+							'angular-motion/dist/angular-motion.css'
 						],
 						dest: 'app-dev/lib/css',
 						flatten: true
 					}, 
 					{
 						expand: true,
-						cwd: 'app-dev/components/bootstrap-sass/assets/stylesheets/',
+						cwd: 'app-dev/components/bootstrap-sass/lib/',
 						src: [
-							'bootstrap/**'
+							'**'
 						],
-						dest: 'app-dev/lib/scss/'
+						dest: 'app-dev/lib/scss/bootstrap'
 					}
 				]
 			}, 
