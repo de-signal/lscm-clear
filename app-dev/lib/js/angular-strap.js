@@ -722,7 +722,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
   })
 
-  .directive('bsCollapse', function($window, $animate, $collapse) {
+  .directive('bsCollapse', ['$window', '$animate', '$collapse', function($window, $animate, $collapse) {
 
     var defaults = $collapse.defaults;
 
@@ -755,7 +755,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
       }
     };
 
-  })
+  }])
 
   .directive('bsCollapseToggle', function() {
 
@@ -788,7 +788,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
   })
 
-  .directive('bsCollapseTarget', function($animate) {
+  .directive('bsCollapseTarget', ['$animate', function($animate) {
 
     return {
       require: ['^?ngModel', '^bsCollapse'],
@@ -828,7 +828,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
       }
     };
 
-  });
+  }]);
 
 // Source: datepicker.js
 angular.module('mgcrea.ngStrap.datepicker', [
