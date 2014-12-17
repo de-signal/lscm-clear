@@ -901,7 +901,7 @@ a.accordion-toggle h4, tab-heading h4 {
 
 /* datepicker */ 
 
-.dropdown-menu.ng-valid-date {
+.dropdown-menu.datepicker {
 	padding: 5px;
 	margin: 5px 0 0;
 }
@@ -922,10 +922,10 @@ a.accordion-toggle h4, tab-heading h4 {
 
 /* modal datepicker */
 
-.ng-valid-date thead {
+.datepicker thead {
 	background-color: transparent;
 }
-.ng-valid-date  thead th {
+.datepicker  thead th {
 	color: #9e9e8e;
 }
 
