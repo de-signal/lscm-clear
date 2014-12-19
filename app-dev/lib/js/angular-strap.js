@@ -674,31 +674,6 @@ angular.module('mgcrea.ngStrap.collapse', [])
         self.$targets.push(element);
       };
 
-      self.$unregisterToggle = function(element) {
-        var index = self.$toggles.indexOf(element);
-        // remove toggle from $toggles array
-        self.$toggles.splice(index, 1);
-      };
-      self.$unregisterTarget = function(element) {
-        var index = self.$targets.indexOf(element);
-        var activeIndex = self.$targets.$active;
-
-        // remove element from $targets array
-        self.$targets.splice(index, 1);
-
-        if (index < activeIndex) {
-          // we removed a target before the active target, so we need to
-          // decrement the active target index
-          activeIndex--;
-        }
-        else if (index === activeIndex && activeIndex === self.$targets.length) {
-          // we remove the active target and it was the one at the end,
-          // so select the previous one
-          activeIndex--;
-        }
-        self.$setActive(activeIndex);
-      };
-
       self.$targets.$active = !self.$options.startCollapsed ? 0 : -1;
       self.$setActive = $scope.$setActive = function(value) {
         if(!self.$options.disallowToggle) {
@@ -722,7 +697,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
   })
 
-  .directive('bsCollapse', ['$window', '$animate', '$collapse', function($window, $animate, $collapse) {
+  .directive('bsCollapse', ["$window", "$animate", "$collapse", function($window, $animate, $collapse) {
 
     var defaults = $collapse.defaults;
 
@@ -771,12 +746,6 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
         // Push pane to parent bsCollapse controller
         bsCollapseCtrl.$registerToggle(element);
-
-        // remove toggle from collapse controller when toggle is destroyed
-        scope.$on('$destroy', function() {
-          bsCollapseCtrl.$unregisterToggle(element);
-        });
-
         element.on('click', function() {
           var index = attrs.bsCollapseToggle || bsCollapseCtrl.$toggles.indexOf(element);
           bsCollapseCtrl.$setActive(index * 1);
@@ -788,7 +757,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
   })
 
-  .directive('bsCollapseTarget', ['$animate', function($animate) {
+  .directive('bsCollapseTarget', ["$animate", function($animate) {
 
     return {
       require: ['^?ngModel', '^bsCollapse'],
@@ -808,11 +777,6 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
         // Push pane to parent bsCollapse controller
         bsCollapseCtrl.$registerTarget(element);
-
-        // remove pane target from collapse controller when target is destroyed
-        scope.$on('$destroy', function() {
-          bsCollapseCtrl.$unregisterTarget(element);
-        });
 
         function render() {
           var index = bsCollapseCtrl.$targets.indexOf(element);
