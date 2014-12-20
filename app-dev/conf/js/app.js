@@ -78,7 +78,11 @@ angular.module('clearApp', [
 		
 		$routeProvider.otherwise({redirectTo: '/dashboard'});
 	}])
-	.config(['$datepickerProvider', function($datepickerProvider) {
+	.config(['$compileProvider', '$datepickerProvider', function($compileProvider, $datepickerProvider) {
+		// @if DEBUG
+		$compileProvider.debugInfoEnabled(false);
+		// @endif
+	
 		angular.extend($datepickerProvider.defaults, {
 			dateFormat: 'dd.MM.yy',
 			autoclose: true, 
